@@ -1,2 +1,2 @@
-include ':app'
+include ':whynotimagecarousel'
 rootProject.name='Why Not Image Carousel'
