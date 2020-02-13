@@ -2,6 +2,8 @@ package org.imaginativeworld.whynotimagecarousel
 
 import android.content.Context
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -9,16 +11,19 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import me.relex.circleindicator.CircleIndicator2
+import org.jetbrains.annotations.NotNull
+import org.jetbrains.annotations.Nullable
 
-class ImageCarousel(context: Context, attributeSet: AttributeSet) :
-    ConstraintLayout(context, attributeSet) {
-
-    private var attributeSet: AttributeSet? = attributeSet
+class ImageCarousel(
+    @NotNull context: Context,
+    @Nullable private var attributeSet: AttributeSet?
+) : ConstraintLayout(context, attributeSet) {
 
     private lateinit var adapter: CarouselAdapter
 
@@ -47,7 +52,8 @@ class ImageCarousel(context: Context, attributeSet: AttributeSet) :
     private var showIndicator = false
     private var showNavigationButtons = false
     private lateinit var imageScaleType: ImageView.ScaleType
-    private var imageBackgroundColor: Int = -1
+    private lateinit var carouselBackground: Drawable
+    private var imagePlaceholder: Drawable? = null
 
     init {
         initAttributes()
@@ -60,7 +66,8 @@ class ImageCarousel(context: Context, attributeSet: AttributeSet) :
         adapter = CarouselAdapter(
             context,
             null,
-            imageScaleType
+            imageScaleType,
+            imagePlaceholder
         )
     }
 
@@ -79,7 +86,7 @@ class ImageCarousel(context: Context, attributeSet: AttributeSet) :
         // Recycler view
         rvImages.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         rvImages.adapter = adapter
-        rvImages.setBackgroundColor(imageBackgroundColor)
+        rvImages.background = carouselBackground
 
         val pagerSnapHelper = PagerSnapHelper()
         pagerSnapHelper.attachToRecyclerView(rvImages)
@@ -164,11 +171,15 @@ class ImageCarousel(context: Context, attributeSet: AttributeSet) :
                         true
                     )
                 )
-                setImageBackgroundColor(
-                    getColor(
-                        R.styleable.ImageCarousel_imageBackgroundColor,
-                        Color.parseColor("#333333")
-                    )
+                setImageBackground(
+                    getDrawable(
+                        R.styleable.ImageCarousel_carouselBackground
+                    ) ?: ColorDrawable(Color.parseColor("#333333"))
+                )
+                setImagePlaceholder(
+                    getDrawable(
+                        R.styleable.ImageCarousel_imagePlaceholder
+                    ) ?: ContextCompat.getDrawable(context, R.drawable.ic_picture)
                 )
             } finally {
                 recycle()
@@ -257,12 +268,24 @@ class ImageCarousel(context: Context, attributeSet: AttributeSet) :
 
     // ----------------------------------------------------------------
 
-    public fun getImageBackgroundColor(): Int {
-        return imageBackgroundColor
+    public fun getImageBackground(): Drawable {
+        return carouselBackground
     }
 
-    public fun setImageBackgroundColor(@ColorInt color: Int) {
-        this.imageBackgroundColor = color
+    public fun setImageBackground(drawable: Drawable) {
+        this.carouselBackground = drawable
+        invalidate()
+        requestLayout()
+    }
+
+    // ----------------------------------------------------------------
+
+    public fun getImagePlaceholder(): Drawable? {
+        return imagePlaceholder
+    }
+
+    public fun setImagePlaceholder(drawable: Drawable?) {
+        this.imagePlaceholder = drawable
         invalidate()
         requestLayout()
     }

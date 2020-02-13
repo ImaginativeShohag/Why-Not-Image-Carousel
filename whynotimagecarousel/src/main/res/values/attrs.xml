@@ -16,6 +16,7 @@
             <enum name="centerCrop" value="6" />
             <enum name="centerInside" value="7" />
         </attr>
-        <attr name="imageBackgroundColor" format="color"/>
+        <attr name="carouselBackground" format="reference|color" />
+        <attr name="imagePlaceholder" format="reference|color" />
     </declare-styleable>
 </resources>

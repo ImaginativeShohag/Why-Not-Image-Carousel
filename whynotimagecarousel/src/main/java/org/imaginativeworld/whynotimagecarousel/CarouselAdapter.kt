@@ -1,6 +1,7 @@
 package org.imaginativeworld.whynotimagecarousel
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,8 @@ import com.bumptech.glide.Glide
 class CarouselAdapter(
     private val context: Context,
     private val listener: OnObjectListInteractionListener<CarouselItem>? = null,
-    private val imageScaleType: ImageView.ScaleType
+    private val imageScaleType: ImageView.ScaleType,
+    private val imagePlaceholder: Drawable?
 ) : RecyclerView.Adapter<CarouselAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -38,7 +40,7 @@ class CarouselAdapter(
 
         Glide.with(context)
             .load(item.imageUrl)
-            .placeholder(R.drawable.ic_picture)
+            .placeholder(imagePlaceholder)
             .into(holder.img)
 
         listener?.apply {
