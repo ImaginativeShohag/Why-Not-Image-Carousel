@@ -6,27 +6,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.annotation.IdRes
+import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
 class CarouselAdapter(
     private val context: Context,
-    private val listener: OnObjectListInteractionListener<CarouselItem>? = null,
+    @LayoutRes private val itemLayout: Int,
+    @IdRes private val imageViewId: Int,
+    var listener: OnItemClickListener? = null,
     private val imageScaleType: ImageView.ScaleType,
     private val imagePlaceholder: Drawable?
 ) : RecyclerView.Adapter<CarouselAdapter.MyViewHolder>() {
 
-    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var img: ImageView = itemView.findViewById(R.id.img)
+    class MyViewHolder(itemView: View, imageViewId: Int) : RecyclerView.ViewHolder(itemView) {
+        var img: ImageView = itemView.findViewById(imageViewId)
     }
 
     private val dataList: MutableList<CarouselItem> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_carousel, parent, false)
+            .inflate(itemLayout, parent, false)
 
-        return MyViewHolder(view)
+        return MyViewHolder(view, imageViewId)
     }
 
     override fun getItemCount(): Int {
@@ -46,11 +50,11 @@ class CarouselAdapter(
         listener?.apply {
 
             holder.itemView.setOnClickListener {
-                listener.onClick(position, item)
+                this.onClick(position, item)
             }
 
             holder.itemView.setOnLongClickListener {
-                listener.onLongClick(position, item)
+                this.onLongClick(position, item)
 
                 true
             }

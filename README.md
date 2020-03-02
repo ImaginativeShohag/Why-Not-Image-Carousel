@@ -1,2 +1,3 @@
-# Why-Not-Image-Carousel
+# Why Not! Image Carousel!
+
 Simple image carousel view for Android

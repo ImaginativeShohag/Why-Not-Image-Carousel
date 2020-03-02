@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+        android:id="@+id/carousel1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@color/flat_red_1" />
+
+    <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+        android:id="@+id/carousel2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:carouselBackground="@color/white"
+        app:imagePlaceholder="@drawable/ic_wb_cloudy"
+        app:imageScaleType="centerCrop"
+        app:imageViewId="@id/image_view"
+        app:itemLayout="@layout/custom_item_layout"
+        app:nextButtonId="@id/custom_btn_next"
+        app:nextButtonLayout="@layout/custom_next_button_layout"
+        app:previousButtonId="@id/custom_btn_previous"
+        app:previousButtonLayout="@layout/custom_previous_button_layout"
+        app:showBottomShadow="false"
+        app:showCaption="true"
+        app:showIndicator="false"
+        app:showNavigationButtons="true"
+        app:showTopShadow="false" />
+
+</LinearLayout>
