@@ -1,2 +1,2 @@
-include ':whynotimagecarousel'
-rootProject.name='Why Not Image Carousel'
+include ':whynotimagecarousel', ':sample'
+rootProject.name = 'Why Not! Image Carousel!'

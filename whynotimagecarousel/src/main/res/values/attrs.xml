@@ -18,5 +18,13 @@
         </attr>
         <attr name="carouselBackground" format="reference|color" />
         <attr name="imagePlaceholder" format="reference|color" />
+        <attr name="itemLayout" format="reference" />
+        <attr name="imageViewId" format="reference" />
+        <attr name="previousButtonLayout" format="reference" />
+        <attr name="previousButtonId" format="reference" />
+        <attr name="previousButtonMargin" format="dimension" />
+        <attr name="nextButtonLayout" format="reference" />
+        <attr name="nextButtonId" format="reference" />
+        <attr name="nextButtonMargin" format="dimension" />
     </declare-styleable>
 </resources>
