@@ -219,17 +219,11 @@ class ImageCarousel(
 
 
         // Init Margins
-        val previousButtonParams = LayoutParams(
-            LayoutParams.WRAP_CONTENT,
-            LayoutParams.WRAP_CONTENT
-        )
+        val previousButtonParams = previousButtonContainer.layoutParams as ConstraintLayout.LayoutParams
         previousButtonParams.setMargins(previousButtonMargin.toPx(context), 0, 0, 0)
         previousButtonContainer.layoutParams = previousButtonParams
 
-        val nextButtonParams = LayoutParams(
-            LayoutParams.WRAP_CONTENT,
-            LayoutParams.WRAP_CONTENT
-        )
+        val nextButtonParams =  nextButtonContainer.layoutParams as ConstraintLayout.LayoutParams
         nextButtonParams.setMargins(0, 0, nextButtonMargin.toPx(context), 0)
         nextButtonContainer.layoutParams = nextButtonParams
 
