@@ -24,6 +24,7 @@ class CarouselItemDecoration(
             outRect.right =
                 if (width > 0) parent.measuredWidth / 2 - width / 2 else 0
         }
+
         if (parent.getChildLayoutPosition(view) == 0) {
             outRect.left =
                 if (width > 0) parent.measuredWidth / 2 - width / 2 else 0

@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="160dp"
     android:layout_height="match_parent"
-    android:layout_margin="16dp"
+    android:layout_margin="8dp"
     app:cardCornerRadius="8dp"
-    app:cardElevation="8dp">
+    app:cardElevation="4dp">
 
     <ImageView
         android:id="@+id/image_view"

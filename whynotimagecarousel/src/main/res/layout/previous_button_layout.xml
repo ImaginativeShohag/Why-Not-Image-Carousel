@@ -16,7 +16,4 @@
     app:iconGravity="textStart"
     app:iconSize="48dp"
     app:iconTint="@color/white"
-    app:layout_constraintBottom_toBottomOf="@+id/rv_images"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="@+id/rv_images"
     app:rippleColor="@color/white" />

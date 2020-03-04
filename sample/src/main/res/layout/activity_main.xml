@@ -35,6 +35,7 @@
         app:previousButtonId="@id/custom_btn_previous"
         app:previousButtonLayout="@layout/custom_previous_button_layout"
         app:previousButtonMargin="8dp"
+        app:scaleOnScroll="false"
         app:showBottomShadow="false"
         app:showCaption="false"
         app:showIndicator="false"
@@ -44,16 +45,68 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="4dp"
-        android:background="@color/flat_red_1" />
+        android:background="@color/flat_green_1" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+            android:id="@+id/carousel3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:carouselBackground="@color/white"
+            app:carouselType="SHOWCASE"
+            app:imagePlaceholder="@drawable/ic_wb_cloudy"
+            app:imageScaleType="centerCrop"
+            app:imageViewId="@id/image_view"
+            app:itemLayout="@layout/custom_fixed_size_item_layout"
+            app:nextButtonId="@id/custom_btn_next"
+            app:nextButtonLayout="@layout/custom_next_button_layout"
+            app:nextButtonMargin="8dp"
+            app:previousButtonId="@id/custom_btn_previous"
+            app:previousButtonLayout="@layout/custom_previous_button_layout"
+            app:previousButtonMargin="8dp"
+            app:showBottomShadow="false"
+            app:showCaption="true"
+            app:showIndicator="false"
+            app:showNavigationButtons="false"
+            app:showTopShadow="false" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_goto_previous"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Previous" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_goto_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Next" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@color/flat_blue_1" />
 
     <org.imaginativeworld.whynotimagecarousel.ImageCarousel
-        android:id="@+id/carousel3"
+        android:id="@+id/carousel4"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         app:carouselBackground="@color/white"
         app:carouselType="SHOWCASE"
-        app:imagePlaceholder="@drawable/ic_wb_cloudy"
         app:imageScaleType="centerCrop"
         app:imageViewId="@id/image_view"
         app:itemLayout="@layout/custom_fixed_size_item_layout"
@@ -63,10 +116,13 @@
         app:previousButtonId="@id/custom_btn_previous"
         app:previousButtonLayout="@layout/custom_previous_button_layout"
         app:previousButtonMargin="8dp"
+        app:scaleOnScroll="true"
+        app:scalingFactor=".25"
         app:showBottomShadow="false"
         app:showCaption="true"
         app:showIndicator="false"
         app:showNavigationButtons="false"
         app:showTopShadow="false" />
+
 
 </LinearLayout>
