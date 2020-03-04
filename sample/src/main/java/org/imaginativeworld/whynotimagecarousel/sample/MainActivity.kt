@@ -78,5 +78,28 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        // --------------------------------
+        // Sample Three
+        // --------------------------------
+        list.clear()
+
+        for (i in 1..max) {
+            if (i % 2 == 0) {
+                list.add(
+                    CarouselItem(
+                        imageUrl = "https://images.unsplash.com/photo-1569398034126-476b0d96e2d1?w=1080"
+                    )
+                )
+            } else {
+                list.add(
+                    CarouselItem(
+                        imageUrl = "https://images.unsplash.com/photo-1507667522877-ad03f0c7b0e0?w=1080"
+                    )
+                )
+            }
+        }
+
+        carousel3.addData(list)
+
     }
 }

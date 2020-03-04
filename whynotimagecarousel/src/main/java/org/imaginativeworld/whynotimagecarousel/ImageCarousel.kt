@@ -16,13 +16,17 @@ import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.PagerSnapHelper
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.*
 import com.google.android.material.button.MaterialButton
 import me.relex.circleindicator.CircleIndicator2
 import org.jetbrains.annotations.NotNull
 import org.jetbrains.annotations.Nullable
+
+/**
+ * TODO 1# currentItem get set
+ * TODO 2# auto play
+ * TODO 3# on scroll listener
+ */
 
 class ImageCarousel(
     @NotNull context: Context,
@@ -42,6 +46,11 @@ class ImageCarousel(
         ImageView.ScaleType.CENTER_INSIDE
     )
 
+    private val carouselTypeArray = arrayOf(
+        CarouselType.BLOCK,
+        CarouselType.SHOWCASE
+    )
+
     var onItemClickListener: OnItemClickListener? = null
         set(value) {
             field = value
@@ -58,72 +67,56 @@ class ImageCarousel(
     private lateinit var previousButtonContainer: FrameLayout
     private lateinit var nextButtonContainer: FrameLayout
 
-    private var showTopShadow = false
+    var showTopShadow = false
         set(value) {
             field = value
             invalidate()
             requestLayout()
         }
 
-    private var showBottomShadow = false
+    var showBottomShadow = false
         set(value) {
             field = value
             invalidate()
             requestLayout()
         }
 
-    private var showCaption = false
+    var showCaption = false
         set(value) {
             field = value
             invalidate()
             requestLayout()
         }
 
-    private var showIndicator = false
+    var showIndicator = false
         set(value) {
             field = value
             invalidate()
             requestLayout()
         }
 
-    private var showNavigationButtons = false
+    var showNavigationButtons = false
         set(value) {
             field = value
             invalidate()
             requestLayout()
         }
 
-    private var imageScaleType: ImageView.ScaleType = ImageView.ScaleType.CENTER_CROP
+    var imageScaleType: ImageView.ScaleType = ImageView.ScaleType.CENTER_CROP
         set(value) {
             field = value
             invalidate()
             requestLayout()
         }
 
-    private var carouselBackground: Drawable? = null
+    var carouselBackground: Drawable? = null
         set(value) {
             field = value
             invalidate()
             requestLayout()
         }
 
-    private var imagePlaceholder: Drawable? = null
-        set(value) {
-            field = value
-            invalidate()
-            requestLayout()
-        }
-
-    @LayoutRes
-    private var itemLayout: Int = R.layout.item_carousel
-        set(value) {
-            field = value
-            invalidate()
-            requestLayout()
-        }
-
-    @IdRes
-    private var imageViewId: Int = R.id.img
+    var imagePlaceholder: Drawable? = null
         set(value) {
             field = value
             invalidate()
@@ -131,7 +124,7 @@ class ImageCarousel(
         }
 
     @LayoutRes
-    private var previousButtonLayout: Int = R.layout.previous_button_layout
+    var itemLayout: Int = R.layout.item_carousel
         set(value) {
             field = value
             invalidate()
@@ -139,7 +132,23 @@ class ImageCarousel(
         }
 
     @IdRes
-    private var previousButtonId: Int = R.id.btn_next
+    var imageViewId: Int = R.id.img
+        set(value) {
+            field = value
+            invalidate()
+            requestLayout()
+        }
+
+    @LayoutRes
+    var previousButtonLayout: Int = R.layout.previous_button_layout
+        set(value) {
+            field = value
+            invalidate()
+            requestLayout()
+        }
+
+    @IdRes
+    var previousButtonId: Int = R.id.btn_next
         set(value) {
             field = value
             invalidate()
@@ -147,7 +156,7 @@ class ImageCarousel(
         }
 
     @Dimension
-    private var previousButtonMargin: Float = 0F
+    var previousButtonMargin: Float = 0F
         set(value) {
             field = value
             invalidate()
@@ -155,7 +164,7 @@ class ImageCarousel(
         }
 
     @LayoutRes
-    private var nextButtonLayout: Int = R.layout.next_button_layout
+    var nextButtonLayout: Int = R.layout.next_button_layout
         set(value) {
             field = value
             invalidate()
@@ -163,7 +172,7 @@ class ImageCarousel(
         }
 
     @IdRes
-    private var nextButtonId: Int = R.id.btn_previous
+    var nextButtonId: Int = R.id.btn_previous
         set(value) {
             field = value
             invalidate()
@@ -171,7 +180,14 @@ class ImageCarousel(
         }
 
     @Dimension
-    private var nextButtonMargin: Float = 0F
+    var nextButtonMargin: Float = 0F
+        set(value) {
+            field = value
+            invalidate()
+            requestLayout()
+        }
+
+    var carouselType: CarouselType = CarouselType.BLOCK
         set(value) {
             field = value
             invalidate()
@@ -181,20 +197,38 @@ class ImageCarousel(
 
     init {
         initAttributes()
-        initAdapter()
         initViews()
+        initAdapter()
         initListeners()
     }
 
     private fun initAdapter() {
         adapter = CarouselAdapter(
             context,
+            rvImages,
+            carouselType,
             itemLayout,
             imageViewId,
             onItemClickListener,
             imageScaleType,
             imagePlaceholder
         )
+
+        rvImages.adapter = adapter
+
+
+        // Init SnapHelper and Indicator
+        var pagerSnapHelper: SnapHelper? = null
+        if (carouselType == CarouselType.BLOCK) {
+            pagerSnapHelper = PagerSnapHelper()
+        } else if (carouselType == CarouselType.SHOWCASE) {
+            pagerSnapHelper = LinearSnapHelper()
+        }
+        pagerSnapHelper?.apply {
+            attachToRecyclerView(rvImages)
+            indicator.attachToRecyclerView(rvImages, this)
+            adapter.registerAdapterDataObserver(indicator.adapterDataObserver)
+        }
     }
 
     private fun initViews() {
@@ -219,25 +253,19 @@ class ImageCarousel(
 
 
         // Init Margins
-        val previousButtonParams = previousButtonContainer.layoutParams as ConstraintLayout.LayoutParams
+        val previousButtonParams =
+            previousButtonContainer.layoutParams as ConstraintLayout.LayoutParams
         previousButtonParams.setMargins(previousButtonMargin.toPx(context), 0, 0, 0)
         previousButtonContainer.layoutParams = previousButtonParams
 
-        val nextButtonParams =  nextButtonContainer.layoutParams as ConstraintLayout.LayoutParams
+        val nextButtonParams = nextButtonContainer.layoutParams as ConstraintLayout.LayoutParams
         nextButtonParams.setMargins(0, 0, nextButtonMargin.toPx(context), 0)
         nextButtonContainer.layoutParams = nextButtonParams
 
 
         // Recycler view
         rvImages.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        rvImages.adapter = adapter
         rvImages.background = carouselBackground
-
-        val pagerSnapHelper = PagerSnapHelper()
-        pagerSnapHelper.attachToRecyclerView(rvImages)
-
-        indicator.attachToRecyclerView(rvImages, pagerSnapHelper)
-        adapter.registerAdapterDataObserver(indicator.adapterDataObserver)
 
 
         // Init visibility
@@ -364,6 +392,14 @@ class ImageCarousel(
                     R.styleable.ImageCarousel_nextButtonMargin,
                     4F
                 )
+
+                carouselType = carouselTypeArray[
+                        getInteger(
+                            R.styleable.ImageCarousel_carouselType,
+                            CarouselType.BLOCK.ordinal
+                        )
+                ]
+
 
             } finally {
                 recycle()

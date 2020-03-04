@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import android.widget.ImageView
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
@@ -13,6 +14,8 @@ import com.bumptech.glide.Glide
 
 class CarouselAdapter(
     private val context: Context,
+    private val recyclerView: RecyclerView,
+    private val carouselType: CarouselType,
     @LayoutRes private val itemLayout: Int,
     @IdRes private val imageViewId: Int,
     var listener: OnItemClickListener? = null,
@@ -46,6 +49,24 @@ class CarouselAdapter(
             .load(item.imageUrl)
             .placeholder(imagePlaceholder)
             .into(holder.img)
+
+        if(carouselType == CarouselType.SHOWCASE) {
+            // Offset
+            holder.itemView.viewTreeObserver.addOnGlobalLayoutListener(object :
+                ViewTreeObserver.OnGlobalLayoutListener {
+
+                override fun onGlobalLayout() {
+                    if (recyclerView.itemDecorationCount > 0) {
+                        recyclerView.removeItemDecorationAt(0)
+                    }
+
+                    recyclerView.addItemDecoration(CarouselItemDecoration(holder.itemView.width, 0), 0)
+
+                    holder.itemView.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                }
+
+            })
+        }
 
         listener?.apply {
 

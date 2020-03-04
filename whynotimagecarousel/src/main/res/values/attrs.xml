@@ -26,5 +26,9 @@
         <attr name="nextButtonLayout" format="reference" />
         <attr name="nextButtonId" format="reference" />
         <attr name="nextButtonMargin" format="dimension" />
+        <attr name="carouselType" format="enum" >
+            <enum name="BLOCK" value="0" />
+            <enum name="SHOWCASE" value="1" />
+        </attr>
     </declare-styleable>
 </resources>
