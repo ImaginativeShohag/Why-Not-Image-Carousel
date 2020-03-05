@@ -75,7 +75,7 @@ class CarouselAdapter(
         // Init views
         holder.img.scaleType = imageScaleType
 
-        Glide.with(context)
+        Glide.with(context.applicationContext)
             .load(item.imageUrl)
             .placeholder(imagePlaceholder)
             .into(holder.img)
