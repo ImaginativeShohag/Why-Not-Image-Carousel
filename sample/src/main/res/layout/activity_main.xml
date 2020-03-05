@@ -76,22 +76,26 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_goto_previous"
+            style="@style/Widget.App.Button.OutlinedButton.IconOnly"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Previous" />
+            app:backgroundTint="@color/flat_green_2"
+            app:icon="@drawable/ic_arrow_back" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_goto_next"
+            style="@style/Widget.App.Button.OutlinedButton.IconOnly"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Next" />
+            app:backgroundTint="@color/flat_green_2"
+            app:icon="@drawable/ic_arrow_forward" />
 
     </RelativeLayout>
 
@@ -105,6 +109,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        app:autoPlay="true"
+        app:autoPlayDelay="4000"
         app:carouselBackground="@color/white"
         app:carouselType="SHOWCASE"
         app:imageScaleType="centerCrop"
@@ -123,6 +129,5 @@
         app:showIndicator="false"
         app:showNavigationButtons="false"
         app:showTopShadow="false" />
-
 
 </LinearLayout>

@@ -1,10 +1,13 @@
 package org.imaginativeworld.whynotimagecarousel
 
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
+import android.os.Handler
 import android.util.AttributeSet
+import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -21,12 +24,6 @@ import com.google.android.material.button.MaterialButton
 import me.relex.circleindicator.CircleIndicator2
 import org.jetbrains.annotations.NotNull
 import org.jetbrains.annotations.Nullable
-
-/**
- * TODO 1# currentItem get set
- * TODO 2# auto play
- * TODO 3# on scroll listener
- */
 
 class ImageCarousel(
     @NotNull context: Context,
@@ -68,8 +65,13 @@ class ImageCarousel(
     private lateinit var viewBottomShadow: View
     private lateinit var previousButtonContainer: FrameLayout
     private lateinit var nextButtonContainer: FrameLayout
+    private lateinit var snapHelper: SnapHelper
+
+    private var autoPlayHandler: Handler? = null
 
     private var dataSize = 0
+
+    var onScrollListener: CarouselOnScrollListener? = null
 
     /**
      * Get of Set current item position
@@ -79,7 +81,7 @@ class ImageCarousel(
             return indicator.getSnapPosition(recyclerView.layoutManager)
         }
         set(value) {
-            val finalValue = when {
+            val position = when {
                 value >= dataSize -> {
                     -1
                 }
@@ -91,15 +93,18 @@ class ImageCarousel(
                 }
             }
 
-            field = finalValue
+            field = position
 
-            Log.e(TAG, "finalValue: $finalValue")
-
-            if (finalValue != -1) {
-                recyclerView.smoothScrollToPosition(finalValue)
+            if (position != -1) {
+                recyclerView.smoothScrollToPosition(position)
             }
         }
 
+    /**
+     * ****************************************************************
+     * Attributes
+     * ****************************************************************
+     */
     var showTopShadow = false
         set(value) {
             field = value
@@ -251,12 +256,34 @@ class ImageCarousel(
             requestLayout()
         }
 
+    var autoWidthFixing: Boolean = false
+        set(value) {
+            field = value
+            invalidate()
+            requestLayout()
+        }
+
+    var autoPlay: Boolean = false
+        set(value) {
+            field = value
+            invalidate()
+            requestLayout()
+        }
+
+    var autoPlayDelay: Int = 0
+        set(value) {
+            field = value
+            invalidate()
+            requestLayout()
+        }
+
 
     init {
         initAttributes()
         initViews()
         initRecyclerView()
         initListeners()
+        initAutoPlay()
     }
 
     private fun initRecyclerView() {
@@ -269,35 +296,38 @@ class ImageCarousel(
 
 
         // Init other attributes
+        recyclerView.setHasFixedSize(true)
         recyclerView.background = carouselBackground
 
 
         // Set adapter
         adapter = CarouselAdapter(
-            context,
-            recyclerView,
-            carouselType,
-            itemLayout,
-            imageViewId,
-            onItemClickListener,
-            imageScaleType,
-            imagePlaceholder
+            context = context,
+            recyclerView = recyclerView,
+            carouselType = carouselType,
+            autoWidthFixing = autoWidthFixing,
+            itemLayout = itemLayout,
+            imageViewId = imageViewId,
+            listener = onItemClickListener,
+            imageScaleType = imageScaleType,
+            imagePlaceholder = imagePlaceholder
         )
         recyclerView.adapter = adapter
 
 
         // Init SnapHelper and Indicator
-        var pagerSnapHelper: SnapHelper? = null
         if (carouselType == CarouselType.BLOCK) {
-            pagerSnapHelper = PagerSnapHelper()
+            snapHelper = PagerSnapHelper()
         } else if (carouselType == CarouselType.SHOWCASE) {
-            pagerSnapHelper = LinearSnapHelper()
+            snapHelper = LinearSnapHelper()
         }
-        pagerSnapHelper?.apply {
+
+        snapHelper.apply {
             attachToRecyclerView(recyclerView)
             indicator.attachToRecyclerView(recyclerView, this)
             adapter.registerAdapterDataObserver(indicator.adapterDataObserver)
         }
+
     }
 
     private fun initViews() {
@@ -345,38 +375,37 @@ class ImageCarousel(
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
 
-                val position =
-                    indicator.getSnapPosition(this@ImageCarousel.recyclerView.layoutManager)
+                if (showCaption) {
+                    val position = indicator.getSnapPosition(recyclerView.layoutManager)
 
-                Log.d(TAG, "position: $position")
+                    if (position >= 0) {
+                        val dataItem = adapter.getItem(position)
 
-                if (position >= 0) {
-                    val dataItem = adapter.getItem(position)
-
-                    dataItem?.apply {
-                        tvCaption.text = this.caption
+                        dataItem?.apply {
+                            tvCaption.text = this.caption
+                        }
                     }
                 }
+
+                onScrollListener?.onScrolled(recyclerView, dx, dy)
+
+            }
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+
+                val position = indicator.getSnapPosition(recyclerView.layoutManager)
+
+                onScrollListener?.onScrollStateChanged(recyclerView, newState, position)
 
             }
         })
 
         btnPrevious.setOnClickListener {
-            val position = indicator.getSnapPosition(recyclerView.layoutManager)
-
-            if (position > 0) {
-                recyclerView.smoothScrollToPosition(position - 1)
-            }
+            previous()
         }
 
         btnNext.setOnClickListener {
-            recyclerView.adapter?.apply {
-                val position = indicator.getSnapPosition(recyclerView.layoutManager)
-
-                if (position < this.itemCount - 1) {
-                    recyclerView.smoothScrollToPosition(position + 1)
-                }
-            }
+            next()
         }
     }
 
@@ -477,9 +506,46 @@ class ImageCarousel(
                     .15f
                 )
 
+                autoWidthFixing = getBoolean(
+                    R.styleable.ImageCarousel_autoWidthFixing,
+                    true
+                )
+
+                autoPlay = getBoolean(
+                    R.styleable.ImageCarousel_autoPlay,
+                    false
+                )
+
+                autoPlayDelay = getInt(
+                    R.styleable.ImageCarousel_autoPlayDelay,
+                    3000
+                )
+
             } finally {
                 recycle()
             }
+
+        }
+    }
+
+    private fun initAutoPlay() {
+        if (autoPlayHandler == null) {
+            autoPlayHandler = Handler()
+        }
+
+        if (autoPlay) {
+
+            autoPlayHandler?.postDelayed(object : Runnable {
+                override fun run() {
+                    if (currentPosition == dataSize - 1) {
+                        currentPosition = 0
+                    } else {
+                        currentPosition++
+                    }
+
+                    autoPlayHandler?.postDelayed(this, autoPlayDelay.toLong())
+                }
+            }, autoPlayDelay.toLong())
 
         }
     }
@@ -495,17 +561,13 @@ class ImageCarousel(
     // ----------------------------------------------------------------
 
     fun previous() {
-        currentPosition = currentPosition - 1
-
-        Log.e(TAG, "currentPosition: $currentPosition")
+        currentPosition--
     }
 
     // ----------------------------------------------------------------
 
     fun next() {
-        currentPosition = currentPosition + 1
-
-        Log.e(TAG, "currentPosition: $currentPosition")
+        currentPosition++
     }
 
 }

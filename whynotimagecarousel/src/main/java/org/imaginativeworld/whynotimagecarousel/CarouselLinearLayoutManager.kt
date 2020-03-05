@@ -12,7 +12,7 @@ class CarouselLinearLayoutManager(
     reverseLayout: Boolean
 ) : LinearLayoutManager(context, orientation, reverseLayout) {
 
-    var scaleOnScroll = true
+    var scaleOnScroll = false
     var scalingFactor = 0f
 
     override fun onLayoutChildren(recycler: RecyclerView.Recycler?, state: RecyclerView.State?) {

@@ -32,5 +32,8 @@
         </attr>
         <attr name="scaleOnScroll" format="boolean" />
         <attr name="scalingFactor" format="float" />
+        <attr name="autoWidthFixing" format="boolean" />
+        <attr name="autoPlay" format="boolean" />
+        <attr name="autoPlayDelay" format="integer" />
     </declare-styleable>
 </resources>
