@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
+import me.relex.circleindicator.CircleIndicator2
 import org.imaginativeworld.whynotimagecarousel.CarouselItem
 import org.imaginativeworld.whynotimagecarousel.OnItemClickListener
 
@@ -133,6 +134,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         carousel4.addData(list)
+        carousel4.setIndicator(custom_indicator)
 
     }
 }

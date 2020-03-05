@@ -1,16 +1,15 @@
 package org.imaginativeworld.whynotimagecarousel
 
 import android.content.Context
-import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Handler
 import android.util.AttributeSet
-import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewManager
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
@@ -56,9 +55,9 @@ class ImageCarousel(
             adapter.listener = value
         }
 
+    private lateinit var carouselView: View
     private lateinit var recyclerView: RecyclerView
     private lateinit var tvCaption: TextView
-    private lateinit var indicator: CircleIndicator2
     private lateinit var btnPrevious: MaterialButton
     private lateinit var btnNext: MaterialButton
     private lateinit var viewTopShadow: View
@@ -71,6 +70,8 @@ class ImageCarousel(
 
     private var dataSize = 0
 
+    private var indicator: CircleIndicator2? = null
+
     var onScrollListener: CarouselOnScrollListener? = null
 
     /**
@@ -78,7 +79,7 @@ class ImageCarousel(
      */
     var currentPosition = -1
         get() {
-            return indicator.getSnapPosition(recyclerView.layoutManager)
+            return snapHelper.getSnapPosition(recyclerView.layoutManager)
         }
         set(value) {
             val position = when {
@@ -282,6 +283,7 @@ class ImageCarousel(
         initAttributes()
         initViews()
         initRecyclerView()
+        initIndicator()
         initListeners()
         initAutoPlay()
     }
@@ -324,19 +326,16 @@ class ImageCarousel(
 
         snapHelper.apply {
             attachToRecyclerView(recyclerView)
-            indicator.attachToRecyclerView(recyclerView, this)
-            adapter.registerAdapterDataObserver(indicator.adapterDataObserver)
         }
 
     }
 
     private fun initViews() {
 
-        val carouselView = LayoutInflater.from(context).inflate(R.layout.image_carousel, this)
+        carouselView = LayoutInflater.from(context).inflate(R.layout.image_carousel, this)
 
         recyclerView = carouselView.findViewById(R.id.recyclerView)
         tvCaption = carouselView.findViewById(R.id.tv_caption)
-        indicator = carouselView.findViewById(R.id.indicator)
         viewTopShadow = carouselView.findViewById(R.id.view_top_shadow)
         viewBottomShadow = carouselView.findViewById(R.id.view_bottom_shadow)
         previousButtonContainer = carouselView.findViewById(R.id.previous_button_container)
@@ -366,7 +365,6 @@ class ImageCarousel(
         viewTopShadow.visibility = if (showTopShadow) View.VISIBLE else View.GONE
         viewBottomShadow.visibility = if (showBottomShadow) View.VISIBLE else View.GONE
         tvCaption.visibility = if (showCaption) View.VISIBLE else View.GONE
-        indicator.visibility = if (showIndicator) View.VISIBLE else View.GONE
         btnPrevious.visibility = if (showNavigationButtons) View.VISIBLE else View.GONE
         btnNext.visibility = if (showNavigationButtons) View.VISIBLE else View.GONE
     }
@@ -376,7 +374,7 @@ class ImageCarousel(
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
 
                 if (showCaption) {
-                    val position = indicator.getSnapPosition(recyclerView.layoutManager)
+                    val position = snapHelper.getSnapPosition(recyclerView.layoutManager)
 
                     if (position >= 0) {
                         val dataItem = adapter.getItem(position)
@@ -393,7 +391,7 @@ class ImageCarousel(
 
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
 
-                val position = indicator.getSnapPosition(recyclerView.layoutManager)
+                val position = snapHelper.getSnapPosition(recyclerView.layoutManager)
 
                 onScrollListener?.onScrollStateChanged(recyclerView, newState, position)
 
@@ -550,6 +548,32 @@ class ImageCarousel(
         }
     }
 
+    private fun initIndicator() {
+
+        if (showIndicator) {
+
+            // If no custom indicator added, then default indicator will be shown.
+            if (indicator == null) {
+                indicator = carouselView.findViewById(R.id.indicator)
+                Log.e("aaa", "indicator = carouselView.findViewById(R.id.indicator)")
+            }
+
+            indicator?.apply {
+                attachToRecyclerView(recyclerView, snapHelper)
+                adapter.registerAdapterDataObserver(this.adapterDataObserver)
+
+                visibility = View.VISIBLE
+            }
+
+        } else {
+
+            indicator?.visibility = View.GONE
+
+        }
+
+
+    }
+
     // ----------------------------------------------------------------
 
     fun addData(data: List<CarouselItem>) {
@@ -568,6 +592,16 @@ class ImageCarousel(
 
     fun next() {
         currentPosition++
+    }
+
+    fun setIndicator(newIndicator: CircleIndicator2) {
+        indicator?.apply {
+            (parent as ViewManager).removeView(this)
+        }
+
+        this.indicator = newIndicator
+
+        initIndicator()
     }
 
 }

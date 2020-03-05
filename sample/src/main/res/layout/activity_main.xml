@@ -126,8 +126,16 @@
         app:scalingFactor=".25"
         app:showBottomShadow="false"
         app:showCaption="true"
-        app:showIndicator="false"
+        app:showIndicator="true"
         app:showNavigationButtons="false"
         app:showTopShadow="false" />
+
+    <me.relex.circleindicator.CircleIndicator2
+        android:id="@+id/custom_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        app:ci_animator="@animator/scale_with_alpha"
+        app:ci_drawable="@drawable/dot"
+        app:ci_drawable_unselected="@drawable/dot" />
 
 </LinearLayout>
