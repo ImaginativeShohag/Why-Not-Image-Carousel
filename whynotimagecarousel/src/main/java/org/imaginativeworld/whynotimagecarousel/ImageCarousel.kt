@@ -5,7 +5,6 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Handler
-import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -625,14 +624,6 @@ class ImageCarousel(
                 value
             }
         }
-    }
-
-    override fun onSaveInstanceState(): Parcelable? {
-        return super.onSaveInstanceState()
-    }
-
-    override fun onRestoreInstanceState(state: Parcelable?) {
-        super.onRestoreInstanceState(state)
     }
 
     // ----------------------------------------------------------------
