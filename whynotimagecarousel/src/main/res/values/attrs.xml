@@ -2,7 +2,9 @@
 <resources>
     <declare-styleable name="ImageCarousel">
         <attr name="showTopShadow" format="boolean" />
+        <attr name="topShadowAlpha" format="float" />
         <attr name="showBottomShadow" format="boolean" />
+        <attr name="bottomShadowAlpha" format="float" />
         <attr name="showCaption" format="boolean" />
         <attr name="showIndicator" format="boolean" />
         <attr name="showNavigationButtons" format="boolean" />

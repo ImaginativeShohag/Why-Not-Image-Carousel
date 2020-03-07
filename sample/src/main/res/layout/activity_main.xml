@@ -1,64 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <org.imaginativeworld.whynotimagecarousel.ImageCarousel
-        android:id="@+id/carousel1"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:background="@color/flat_red_1" />
-
-    <org.imaginativeworld.whynotimagecarousel.ImageCarousel
-        android:id="@+id/carousel2"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        app:carouselBackground="@color/white"
-        app:carouselType="BLOCK"
-        app:imagePlaceholder="@drawable/ic_wb_cloudy"
-        app:imageScaleType="centerCrop"
-        app:imageViewId="@id/image_view"
-        app:itemLayout="@layout/custom_item_layout"
-        app:nextButtonId="@id/custom_btn_next"
-        app:nextButtonLayout="@layout/custom_next_button_layout"
-        app:nextButtonMargin="8dp"
-        app:previousButtonId="@id/custom_btn_previous"
-        app:previousButtonLayout="@layout/custom_previous_button_layout"
-        app:previousButtonMargin="8dp"
-        app:scaleOnScroll="false"
-        app:showBottomShadow="false"
-        app:showCaption="false"
-        app:showIndicator="false"
-        app:showNavigationButtons="true"
-        app:showTopShadow="false" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:background="@color/flat_green_1" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <org.imaginativeworld.whynotimagecarousel.ImageCarousel
-            android:id="@+id/carousel3"
+            android:id="@+id/carousel1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@color/flat_red_1" />
+
+        <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+            android:id="@+id/carousel2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:carouselBackground="@color/white"
+            app:carouselType="BLOCK"
+            app:imagePlaceholder="@drawable/ic_wb_cloudy"
+            app:imageScaleType="centerCrop"
+            app:imageViewId="@id/image_view"
+            app:itemLayout="@layout/custom_item_layout"
+            app:nextButtonId="@id/custom_btn_next"
+            app:nextButtonLayout="@layout/custom_next_button_layout"
+            app:nextButtonMargin="8dp"
+            app:previousButtonId="@id/custom_btn_previous"
+            app:previousButtonLayout="@layout/custom_previous_button_layout"
+            app:previousButtonMargin="8dp"
+            app:scaleOnScroll="false"
+            app:showBottomShadow="false"
+            app:showCaption="false"
+            app:showIndicator="false"
+            app:showNavigationButtons="true"
+            app:showTopShadow="false" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@color/flat_green_1" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+                android:id="@+id/carousel3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:carouselBackground="@color/white"
+                app:carouselType="SHOWCASE"
+                app:imagePlaceholder="@drawable/ic_wb_cloudy"
+                app:imageScaleType="centerCrop"
+                app:imageViewId="@id/image_view"
+                app:itemLayout="@layout/custom_fixed_size_item_layout"
+                app:nextButtonId="@id/custom_btn_next"
+                app:nextButtonLayout="@layout/custom_next_button_layout"
+                app:nextButtonMargin="8dp"
+                app:previousButtonId="@id/custom_btn_previous"
+                app:previousButtonLayout="@layout/custom_previous_button_layout"
+                app:previousButtonMargin="8dp"
+                app:showBottomShadow="false"
+                app:showCaption="true"
+                app:showIndicator="false"
+                app:showNavigationButtons="false"
+                app:showTopShadow="false" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_goto_previous"
+                style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                app:backgroundTint="@color/flat_green_2"
+                app:icon="@drawable/ic_arrow_back" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_goto_next"
+                style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                app:backgroundTint="@color/flat_green_2"
+                app:icon="@drawable/ic_arrow_forward" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@color/flat_blue_1" />
+
+        <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+            android:id="@+id/carousel4"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:autoPlay="true"
+            app:autoPlayDelay="4000"
             app:carouselBackground="@color/white"
             app:carouselType="SHOWCASE"
-            app:imagePlaceholder="@drawable/ic_wb_cloudy"
             app:imageScaleType="centerCrop"
             app:imageViewId="@id/image_view"
             app:itemLayout="@layout/custom_fixed_size_item_layout"
@@ -68,74 +127,30 @@
             app:previousButtonId="@id/custom_btn_previous"
             app:previousButtonLayout="@layout/custom_previous_button_layout"
             app:previousButtonMargin="8dp"
+            app:scaleOnScroll="true"
+            app:scalingFactor=".25"
             app:showBottomShadow="false"
             app:showCaption="true"
-            app:showIndicator="false"
+            app:showIndicator="true"
             app:showNavigationButtons="false"
             app:showTopShadow="false" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_goto_previous"
-            style="@style/Widget.App.Button.OutlinedButton.IconOnly"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="8dp"
-            app:backgroundTint="@color/flat_green_2"
-            app:icon="@drawable/ic_arrow_back" />
+        <me.relex.circleindicator.CircleIndicator2
+            android:id="@+id/custom_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            app:ci_animator="@animator/scale_with_alpha"
+            app:ci_drawable="@drawable/dot"
+            app:ci_drawable_unselected="@drawable/dot" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_goto_next"
-            style="@style/Widget.App.Button.OutlinedButton.IconOnly"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            app:backgroundTint="@color/flat_green_2"
-            app:icon="@drawable/ic_arrow_forward" />
+    </LinearLayout>
 
-    </RelativeLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_send"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="8dp" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:background="@color/flat_blue_1" />
-
-    <org.imaginativeworld.whynotimagecarousel.ImageCarousel
-        android:id="@+id/carousel4"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        app:autoPlay="false"
-        app:autoPlayDelay="4000"
-        app:carouselBackground="@color/white"
-        app:carouselType="SHOWCASE"
-        app:imageScaleType="centerCrop"
-        app:imageViewId="@id/image_view"
-        app:itemLayout="@layout/custom_fixed_size_item_layout"
-        app:nextButtonId="@id/custom_btn_next"
-        app:nextButtonLayout="@layout/custom_next_button_layout"
-        app:nextButtonMargin="8dp"
-        app:previousButtonId="@id/custom_btn_previous"
-        app:previousButtonLayout="@layout/custom_previous_button_layout"
-        app:previousButtonMargin="8dp"
-        app:scaleOnScroll="true"
-        app:scalingFactor=".25"
-        app:showBottomShadow="false"
-        app:showCaption="true"
-        app:showIndicator="true"
-        app:showNavigationButtons="false"
-        app:showTopShadow="false" />
-
-    <me.relex.circleindicator.CircleIndicator2
-        android:id="@+id/custom_indicator"
-        android:layout_width="match_parent"
-        android:layout_height="32dp"
-        app:ci_animator="@animator/scale_with_alpha"
-        app:ci_drawable="@drawable/dot"
-        app:ci_drawable_unselected="@drawable/dot" />
-
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
