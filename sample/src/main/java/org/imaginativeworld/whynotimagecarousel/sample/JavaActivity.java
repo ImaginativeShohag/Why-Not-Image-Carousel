@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 import org.imaginativeworld.whynotimagecarousel.CarouselItem;
 import org.imaginativeworld.whynotimagecarousel.CarouselOnScrollListener;
@@ -27,17 +28,23 @@ import me.relex.circleindicator.CircleIndicator2;
 
 public class JavaActivity extends AppCompatActivity {
 
+    ExtendedFloatingActionButton fab;
+
+    private boolean isStarted = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_java);
 
+        fab = findViewById(R.id.btn_play);
+
         ImageCarousel carousel = findViewById(R.id.carousel);
 
         carousel.setShowTopShadow(true);
-        carousel.setTopShadowAlpha(0.6f); // 0 to 1
+        carousel.setTopShadowAlpha(0.6f); // 0 to 1, 1 means 100%
         carousel.setShowBottomShadow(true);
-        carousel.setBottomShadowAlpha(0.6f); // 0 to 1
+        carousel.setBottomShadowAlpha(0.6f); // 0 to 1, 1 means 100%
         carousel.setShowCaption(true);
         carousel.setShowIndicator(true);
         carousel.setShowNavigationButtons(true);
@@ -51,16 +58,16 @@ public class JavaActivity extends AppCompatActivity {
         carousel.setImageViewId(org.imaginativeworld.whynotimagecarousel.R.id.img);
         carousel.setPreviousButtonLayout(org.imaginativeworld.whynotimagecarousel.R.layout.previous_button_layout);
         carousel.setPreviousButtonId(org.imaginativeworld.whynotimagecarousel.R.id.btn_previous);
-        carousel.setPreviousButtonMargin(4);
+        carousel.setPreviousButtonMargin(4); // dp value
         carousel.setNextButtonLayout(org.imaginativeworld.whynotimagecarousel.R.layout.next_button_layout);
         carousel.setNextButtonId(org.imaginativeworld.whynotimagecarousel.R.id.btn_next);
-        carousel.setNextButtonMargin(4);
+        carousel.setNextButtonMargin(4); // dp value
         carousel.setCarouselType(CarouselType.BLOCK);
         carousel.setScaleOnScroll(false);
         carousel.setScalingFactor(.15f);
         carousel.setAutoWidthFixing(true);
         carousel.setAutoPlay(false);
-        carousel.setAutoPlayDelay(3000);
+        carousel.setAutoPlayDelay(3000); // Milliseconds
         carousel.setOnScrollListener(new CarouselOnScrollListener() {
             @Override
             public void onScrolled(@NotNull RecyclerView recyclerView, int dx, int dy) {
@@ -127,6 +134,28 @@ public class JavaActivity extends AppCompatActivity {
 
         carousel.addData(list);
 
+        // ----------------------------------------------------------------
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isStarted) {
+
+                    isStarted = false;
+                    carousel.stop();
+
+                    fab.setText("Start");
+
+                } else {
+
+                    isStarted = true;
+                    carousel.start();
+
+                    fab.setText("Stop");
+
+                }
+            }
+        });
 
     }
 }

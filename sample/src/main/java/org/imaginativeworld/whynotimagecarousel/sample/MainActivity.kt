@@ -10,10 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
-import org.imaginativeworld.whynotimagecarousel.CarouselItem
-import org.imaginativeworld.whynotimagecarousel.CarouselOnScrollListener
-import org.imaginativeworld.whynotimagecarousel.CarouselType
-import org.imaginativeworld.whynotimagecarousel.OnItemClickListener
+import org.imaginativeworld.whynotimagecarousel.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,9 +28,9 @@ class MainActivity : AppCompatActivity() {
         // Example One
         // --------------------------------
         carousel1.showTopShadow = true
-        carousel1.topShadowAlpha = 0.6f // 0 to 1
+        carousel1.topShadowAlpha = 0.6f // 0 to 1, 1 means 100%
         carousel1.showBottomShadow = true
-        carousel1.bottomShadowAlpha = 0.6f // 0 to 1
+        carousel1.bottomShadowAlpha = 0.6f // 0 to 1, 1 means 100%
         carousel1.showCaption = true
         carousel1.showIndicator = true
         carousel1.showNavigationButtons = true

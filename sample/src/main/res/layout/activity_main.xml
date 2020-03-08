@@ -149,8 +149,10 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_send"
         android:layout_gravity="bottom|end"
-        android:layout_margin="8dp" />
+        android:layout_margin="8dp"
+        android:src="@drawable/ic_send"
+        app:backgroundTint="@color/flat_red_1"
+        app:tint="@color/white" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

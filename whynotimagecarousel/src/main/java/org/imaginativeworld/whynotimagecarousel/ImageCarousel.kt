@@ -16,6 +16,7 @@ import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.*
 import com.google.android.material.button.MaterialButton
 import me.relex.circleindicator.CircleIndicator2
@@ -50,15 +51,15 @@ class ImageCarousel(
     private lateinit var carouselView: View
     private lateinit var recyclerView: RecyclerView
     private lateinit var tvCaption: TextView
-    private lateinit var btnPrevious: MaterialButton
-    private lateinit var btnNext: MaterialButton
+    private lateinit var btnPrevious: View
+    private lateinit var btnNext: View
     private lateinit var viewTopShadow: View
     private lateinit var viewBottomShadow: View
     private lateinit var previousButtonContainer: FrameLayout
     private lateinit var nextButtonContainer: FrameLayout
     private lateinit var snapHelper: SnapHelper
+    private lateinit var autoPlayHandler: Handler
 
-    private var autoPlayHandler: Handler? = null
     private var data: List<CarouselItem>? = null
     private var dataSize = 0
     private var indicator: CircleIndicator2? = null
@@ -274,19 +275,19 @@ class ImageCarousel(
     var autoPlay: Boolean = false
         set(value) {
             field = value
-            invalidate()
-            requestLayout()
+            // Note: We do not need to invalidate the view for this.
         }
 
     var autoPlayDelay: Int = 0
         set(value) {
             field = value
-            invalidate()
-            requestLayout()
+            // Note: We do not need to invalidate the view for this.
         }
 
 
     init {
+        autoPlayHandler = Handler()
+
         initAttributes()
         initViews()
         initRecyclerView()
@@ -565,14 +566,13 @@ class ImageCarousel(
         }
     }
 
+    /**
+     * Initialize and start/stop auto play based on `autoPlay` value.
+     */
     private fun initAutoPlay() {
-        if (autoPlayHandler == null) {
-            autoPlayHandler = Handler()
-        }
-
         if (autoPlay) {
 
-            autoPlayHandler?.postDelayed(object : Runnable {
+            autoPlayHandler.postDelayed(object : Runnable {
                 override fun run() {
                     if (currentPosition == dataSize - 1) {
                         currentPosition = 0
@@ -580,9 +580,13 @@ class ImageCarousel(
                         currentPosition++
                     }
 
-                    autoPlayHandler?.postDelayed(this, autoPlayDelay.toLong())
+                    autoPlayHandler.postDelayed(this, autoPlayDelay.toLong())
                 }
             }, autoPlayDelay.toLong())
+
+        } else {
+
+            autoPlayHandler.removeCallbacksAndMessages(null)
 
         }
     }
@@ -626,6 +630,12 @@ class ImageCarousel(
         }
     }
 
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+
+        stop()
+    }
+
     // ----------------------------------------------------------------
 
     /**
@@ -636,24 +646,6 @@ class ImageCarousel(
 
         this.data = data
         this.dataSize = data.size
-    }
-
-    // ----------------------------------------------------------------
-
-    /**
-     * Goto previous image.
-     */
-    fun previous() {
-        currentPosition--
-    }
-
-    // ----------------------------------------------------------------
-
-    /**
-     * Goto next image.
-     */
-    fun next() {
-        currentPosition++
     }
 
     // ----------------------------------------------------------------
@@ -677,6 +669,46 @@ class ImageCarousel(
         this.indicator = newIndicator
 
         initIndicator()
+    }
+
+    // ----------------------------------------------------------------
+
+    /**
+     * Goto previous image.
+     */
+    fun previous() {
+        currentPosition--
+    }
+
+    // ----------------------------------------------------------------
+
+    /**
+     * Goto next image.
+     */
+    fun next() {
+        currentPosition++
+    }
+
+    // ----------------------------------------------------------------
+
+    /**
+     * Start auto play.
+     */
+    fun start() {
+        autoPlay = true
+
+        initAutoPlay()
+    }
+
+    // ----------------------------------------------------------------
+
+    /**
+     * Stop auto play.
+     */
+    fun stop() {
+        autoPlay = false
+
+        initAutoPlay()
     }
 
 }

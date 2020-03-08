@@ -52,10 +52,10 @@ class CarouselAdapter(
         /*
          * Bug#1
          * ----------------------------------------------------
-         * If the sum of the two item of recyclerView not greater then the screen width,
-         * then scrollToPosition() function not worked as expected.
-         * So we will check the width of the element and increase the minimum width to fix the
-         * problem.
+         * If the sum of consecutive two items of a RecyclerView is not greater then
+         * the screen width, then the scrollToPosition() function will not work as expected.
+         * So we will check the width of the element and increase the minimum width for
+         * fixing the problem.
          */
         if (autoWidthFixing && carouselType == CarouselType.SHOWCASE) {
             Log.d(TAG, "recyclerView_width: ${recyclerView.width}")
