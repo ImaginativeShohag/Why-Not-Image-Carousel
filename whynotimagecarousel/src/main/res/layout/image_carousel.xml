@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_images"
+        android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -50,24 +50,22 @@
         android:id="@+id/indicator"
         android:layout_width="match_parent"
         android:layout_height="32dp"
-        app:layout_constraintBottom_toBottomOf="@+id/rv_images" />
+        app:layout_constraintBottom_toBottomOf="@+id/recyclerView" />
 
     <FrameLayout
         android:id="@+id/previous_button_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/rv_images"
+        app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/rv_images" />
+        app:layout_constraintTop_toTopOf="@+id/recyclerView" />
 
     <FrameLayout
         android:id="@+id/next_button_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/rv_images"
+        app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/rv_images" />
+        app:layout_constraintTop_toTopOf="@+id/recyclerView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
