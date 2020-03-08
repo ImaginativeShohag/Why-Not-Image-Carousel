@@ -1,13 +1,15 @@
 # Why Not! Image Carousel!
 
-A simple image carousel view for Android.
+An easy, super simple and customizable image carousel view for Android.
 
 [![](https://jitpack.io/v/ImaginativeShohag/Why-Not-Image-Carousel.svg)](https://jitpack.io/#ImaginativeShohag/Why-Not-Image-Carousel)
 [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=21)
 
 ## Preview
 
-(Coming soon...)
+|                                         |                                   |
+| :-------------------------------------: | :-------------------------------: |
+| ![Screenshot](/images/screenshot_1.png) | ![Preview](/images/preview_1.gif) |
 
 ## Usage
 
@@ -346,7 +348,7 @@ carousel.addData(list)
 
 ### Carousel Type
 
-(Image coming soon...)
+![Carousel type](/images/screenshot_carousel_type.png)
 
 `ImageCarousel` has following types:
 
