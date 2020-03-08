@@ -7,7 +7,7 @@ An easy, super simple and customizable image carousel view for Android.
 
 ## Preview
 
-|                                         |                                   |
+|               Screenshot                |              Preview              |
 | :-------------------------------------: | :-------------------------------: |
 | ![Screenshot](/images/screenshot_1.png) | ![Preview](/images/preview_1.gif) |
 
