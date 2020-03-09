@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Handler
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
@@ -14,6 +15,7 @@ import android.widget.TextView
 import androidx.annotation.Dimension
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
+import androidx.annotation.Px
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -210,7 +212,8 @@ class ImageCarousel(
      * Margin dp value.
      */
     @Dimension
-    var previousButtonMargin: Float = 0F
+    @Px
+    var previousButtonMargin: Int = 0
         set(value) {
             field = value
             invalidate()
@@ -237,7 +240,8 @@ class ImageCarousel(
      * Margin dp value.
      */
     @Dimension
-    var nextButtonMargin: Float = 0F
+    @Px
+    var nextButtonMargin: Int = 0
         set(value) {
             field = value
             invalidate()
@@ -509,8 +513,8 @@ class ImageCarousel(
 
                 previousButtonMargin = getDimension(
                     R.styleable.ImageCarousel_previousButtonMargin,
-                    4F
-                )
+                    4.toPx(context).toFloat()
+                ).toInt()
 
                 nextButtonLayout = getResourceId(
                     R.styleable.ImageCarousel_nextButtonLayout,
@@ -524,8 +528,8 @@ class ImageCarousel(
 
                 nextButtonMargin = getDimension(
                     R.styleable.ImageCarousel_nextButtonMargin,
-                    4F
-                )
+                    4.toPx(context).toFloat()
+                ).toInt()
 
                 carouselType = carouselTypeArray[
                         getInteger(
@@ -541,7 +545,7 @@ class ImageCarousel(
 
                 scalingFactor = getFloat(
                     R.styleable.ImageCarousel_scalingFactor,
-                    .15f
+                    .15F
                 )
 
                 autoWidthFixing = getBoolean(

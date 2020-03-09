@@ -1,9 +1,11 @@
 package org.imaginativeworld.whynotimagecarousel.sample;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +20,7 @@ import org.imaginativeworld.whynotimagecarousel.CarouselOnScrollListener;
 import org.imaginativeworld.whynotimagecarousel.CarouselType;
 import org.imaginativeworld.whynotimagecarousel.ImageCarousel;
 import org.imaginativeworld.whynotimagecarousel.OnItemClickListener;
+import org.imaginativeworld.whynotimagecarousel.Utils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -28,7 +31,9 @@ import me.relex.circleindicator.CircleIndicator2;
 
 public class JavaActivity extends AppCompatActivity {
 
-    ExtendedFloatingActionButton fab;
+    private Context context;
+
+    private ExtendedFloatingActionButton fab;
 
     private boolean isStarted = false;
 
@@ -36,6 +41,8 @@ public class JavaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_java);
+
+        context = this;
 
         fab = findViewById(R.id.btn_play);
 
@@ -58,10 +65,10 @@ public class JavaActivity extends AppCompatActivity {
         carousel.setImageViewId(org.imaginativeworld.whynotimagecarousel.R.id.img);
         carousel.setPreviousButtonLayout(org.imaginativeworld.whynotimagecarousel.R.layout.previous_button_layout);
         carousel.setPreviousButtonId(org.imaginativeworld.whynotimagecarousel.R.id.btn_previous);
-        carousel.setPreviousButtonMargin(4); // dp value
+        carousel.setPreviousButtonMargin(Utils.toPx(4, context)); // dp value
         carousel.setNextButtonLayout(org.imaginativeworld.whynotimagecarousel.R.layout.next_button_layout);
         carousel.setNextButtonId(org.imaginativeworld.whynotimagecarousel.R.id.btn_next);
-        carousel.setNextButtonMargin(4); // dp value
+        carousel.setNextButtonMargin(Utils.toPx(4, context)); // dp value
         carousel.setCarouselType(CarouselType.BLOCK);
         carousel.setScaleOnScroll(false);
         carousel.setScalingFactor(.15f);
@@ -139,7 +146,7 @@ public class JavaActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isStarted) {
+                if (isStarted) {
 
                     isStarted = false;
                     carousel.stop();

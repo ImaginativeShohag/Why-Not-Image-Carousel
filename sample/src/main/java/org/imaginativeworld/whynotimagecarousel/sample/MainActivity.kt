@@ -1,5 +1,6 @@
 package org.imaginativeworld.whynotimagecarousel.sample
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -14,9 +15,13 @@ import org.imaginativeworld.whynotimagecarousel.*
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var context: Context
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        context = this
 
         fab.setOnClickListener {
 
@@ -45,11 +50,11 @@ class MainActivity : AppCompatActivity() {
         carousel1.previousButtonLayout =
             org.imaginativeworld.whynotimagecarousel.R.layout.previous_button_layout
         carousel1.previousButtonId = org.imaginativeworld.whynotimagecarousel.R.id.btn_previous
-        carousel1.previousButtonMargin = 4F // dp value
+        carousel1.previousButtonMargin = 4.toPx(context) // dp value
         carousel1.nextButtonLayout =
             org.imaginativeworld.whynotimagecarousel.R.layout.next_button_layout
         carousel1.nextButtonId = org.imaginativeworld.whynotimagecarousel.R.id.btn_next
-        carousel1.nextButtonMargin = 4F // dp value
+        carousel1.nextButtonMargin = 4.toPx(context) // dp value
         carousel1.carouselType = CarouselType.BLOCK
         carousel1.scaleOnScroll = false
         carousel1.scalingFactor = .15f // 0 to 1; 1 means 100
