@@ -5,7 +5,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     signingConfigs {
         debug {
-            storeFile file('/home/dream71/.android/debug.keystore')
+            storeFile file('/home/shohag/.android/debug.keystore')
             storePassword 'android'
             keyPassword 'android'
             keyAlias = 'androiddebugkey'
