@@ -58,15 +58,8 @@ class CarouselAdapter(
          * fixing the problem.
          */
         if (autoWidthFixing && carouselType == CarouselType.SHOWCASE) {
-            Log.d(TAG, "recyclerView_width: ${recyclerView.width}")
-            Log.d(
-                TAG,
-                "holder_itemView_width * 2: ${holder.itemView.layoutParams.width * 2}"
-            )
-
             val containerWidth = recyclerView.width
             if (holder.itemView.layoutParams.width >= 0 && holder.itemView.layoutParams.width * 2 <= containerWidth) {
-                Log.d(TAG, "Fixing Bug#1")
                 holder.itemView.layoutParams.width = (containerWidth / 2) + 1
             }
         }

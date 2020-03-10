@@ -3,14 +3,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    signingConfigs {
-        debug {
-            storeFile file('/home/shohag/.android/debug.keystore')
-            storePassword 'android'
-            keyPassword 'android'
-            keyAlias = 'androiddebugkey'
-        }
-    }
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
@@ -28,7 +20,6 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.debug
         }
     }
     compileOptions {
