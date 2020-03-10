@@ -122,6 +122,8 @@ class CarouselAdapter(
     }
 
     fun addAll(dataList: List<CarouselItem>) {
+        this.dataList.clear()
+
         this.dataList.addAll(dataList)
         notifyDataSetChanged()
     }

@@ -51,19 +51,19 @@ class ImageCarousel(
     private lateinit var carouselView: View
     private lateinit var recyclerView: RecyclerView
     private lateinit var tvCaption: TextView
-    private lateinit var btnPrevious: View
-    private lateinit var btnNext: View
     private lateinit var viewTopShadow: View
     private lateinit var viewBottomShadow: View
     private lateinit var previousButtonContainer: FrameLayout
     private lateinit var nextButtonContainer: FrameLayout
     private lateinit var snapHelper: SnapHelper
 
-    private var autoPlayHandler: Handler = Handler()
+    private var indicator: CircleIndicator2? = null
+    private var btnPrevious: View? = null
+    private var btnNext: View? = null
 
+    private var autoPlayHandler: Handler = Handler()
     private var data: List<CarouselItem>? = null
     private var dataSize = 0
-    private var indicator: CircleIndicator2? = null
 
     var onItemClickListener: OnItemClickListener? = null
         set(value) {
@@ -75,7 +75,7 @@ class ImageCarousel(
     var onScrollListener: CarouselOnScrollListener? = null
 
     /**
-     * Get of set current item position
+     * Get or set current item position
      */
     var currentPosition = -1
         get() {
@@ -152,8 +152,8 @@ class ImageCarousel(
         set(value) {
             field = value
 
-            btnPrevious.visibility = if (showNavigationButtons) View.VISIBLE else View.GONE
-            btnNext.visibility = if (showNavigationButtons) View.VISIBLE else View.GONE
+            btnPrevious?.visibility = if (showNavigationButtons) View.VISIBLE else View.GONE
+            btnNext?.visibility = if (showNavigationButtons) View.VISIBLE else View.GONE
         }
 
     var imageScaleType: ImageView.ScaleType = ImageView.ScaleType.CENTER_CROP
@@ -198,6 +198,8 @@ class ImageCarousel(
         set(value) {
             field = value
 
+            btnPrevious = null
+            previousButtonContainer.removeAllViews()
             LayoutInflater.from(context).apply {
                 inflate(previousButtonLayout, previousButtonContainer, true)
             }
@@ -209,6 +211,10 @@ class ImageCarousel(
             field = value
 
             btnPrevious = carouselView.findViewById(previousButtonId)
+
+            btnPrevious?.setOnClickListener {
+                previous()
+            }
         }
 
     /**
@@ -231,6 +237,8 @@ class ImageCarousel(
         set(value) {
             field = value
 
+            btnNext = null
+            nextButtonContainer.removeAllViews()
             LayoutInflater.from(context).apply {
                 inflate(nextButtonLayout, nextButtonContainer, true)
             }
@@ -242,6 +250,10 @@ class ImageCarousel(
             field = value
 
             btnNext = carouselView.findViewById(nextButtonId)
+
+            btnNext?.setOnClickListener {
+                next()
+            }
         }
 
     /**
@@ -269,7 +281,11 @@ class ImageCarousel(
             }
 
             snapHelper.apply {
-                attachToRecyclerView(recyclerView)
+                try {
+                    attachToRecyclerView(recyclerView)
+                } catch (e: IllegalStateException) {
+                    e.printStackTrace()
+                }
             }
         }
 
@@ -319,52 +335,10 @@ class ImageCarousel(
         initViews()
         initAttributes()
         initAdapter()
-//        initIndicator()
         initListeners()
         initAutoPlay()
     }
 
-    private fun initAdapter() {
-        // Set layout manager
-
-
-        // Init other attributes
-//        recyclerView.setHasFixedSize(true)
-//        recyclerView.background = carouselBackground
-
-
-        // Set adapter
-        adapter = CarouselAdapter(
-            context = context,
-            recyclerView = recyclerView,
-            carouselType = carouselType,
-            autoWidthFixing = autoWidthFixing,
-            itemLayout = itemLayout,
-            imageViewId = imageViewId,
-            listener = onItemClickListener,
-            imageScaleType = imageScaleType,
-            imagePlaceholder = imagePlaceholder
-        )
-        recyclerView.adapter = adapter
-
-        if (showIndicator) {
-            indicator?.apply {
-                adapter?.registerAdapterDataObserver(this.adapterDataObserver)
-            }
-        }
-
-        // Init SnapHelper and Indicator
-//        if (carouselType == CarouselType.BLOCK) {
-//            snapHelper = PagerSnapHelper()
-//        } else if (carouselType == CarouselType.SHOWCASE) {
-//            snapHelper = LinearSnapHelper()
-//        }
-//
-//        snapHelper.apply {
-//            attachToRecyclerView(recyclerView)
-//        }
-
-    }
 
     private fun initViews() {
         carouselView = LayoutInflater.from(context).inflate(R.layout.image_carousel, this)
@@ -383,84 +357,8 @@ class ImageCarousel(
                     scalingFactor = this@ImageCarousel.scalingFactor
                 }
         recyclerView.setHasFixedSize(true)
-
-        // Inflate views
-//        LayoutInflater.from(context).apply {
-//            inflate(previousButtonLayout, previousButtonContainer, true)
-//            inflate(nextButtonLayout, nextButtonContainer, true)
-//        }
-//
-//        btnPrevious = carouselView.findViewById(previousButtonId)
-//        btnNext = carouselView.findViewById(nextButtonId)
-
-
-        // Init Alpha
-//        viewTopShadow.alpha = topShadowAlpha
-//        viewBottomShadow.alpha = bottomShadowAlpha
-
-
-        // Init Margins
-//        val previousButtonParams =
-//            previousButtonContainer.layoutParams as LayoutParams
-//        previousButtonParams.setMargins(previousButtonMargin.toPx(context), 0, 0, 0)
-//        previousButtonContainer.layoutParams = previousButtonParams
-
-//        val nextButtonParams = nextButtonContainer.layoutParams as LayoutParams
-//        nextButtonParams.setMargins(0, 0, nextButtonMargin.toPx(context), 0)
-//        nextButtonContainer.layoutParams = nextButtonParams
-
-
-        // Init visibility
-//        viewTopShadow.visibility = if (showTopShadow) View.VISIBLE else View.GONE
-//        viewBottomShadow.visibility = if (showBottomShadow) View.VISIBLE else View.GONE
-//        tvCaption.visibility = if (showCaption) View.VISIBLE else View.GONE
-//        btnPrevious.visibility = if (showNavigationButtons) View.VISIBLE else View.GONE
-//        btnNext.visibility = if (showNavigationButtons) View.VISIBLE else View.GONE
     }
 
-    private fun initListeners() {
-        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-
-                if (showCaption) {
-                    val position = snapHelper.getSnapPosition(recyclerView.layoutManager)
-
-                    if (position >= 0) {
-                        val dataItem = adapter?.getItem(position)
-
-                        dataItem?.apply {
-                            tvCaption.text = this.caption
-                        }
-                    }
-                }
-
-                onScrollListener?.onScrolled(recyclerView, dx, dy)
-
-            }
-
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-
-                val position = snapHelper.getSnapPosition(recyclerView.layoutManager)
-                val carouselItem = data?.get(position)
-
-                onScrollListener?.onScrollStateChanged(
-                    recyclerView,
-                    newState,
-                    position,
-                    carouselItem
-                )
-
-            }
-        })
-
-        btnPrevious.setOnClickListener {
-            previous()
-        }
-
-        btnNext.setOnClickListener {
-            next()
-        }
-    }
 
     private fun initAttributes() {
         context.theme.obtainStyledAttributes(
@@ -549,8 +447,6 @@ class ImageCarousel(
                     4.toPx(context).toFloat()
                 ).toInt()
 
-                Log.e(TAG, "previousButtonMargin: $previousButtonMargin")
-
                 nextButtonLayout = getResourceId(
                     R.styleable.ImageCarousel_nextButtonLayout,
                     R.layout.next_button_layout
@@ -603,6 +499,66 @@ class ImageCarousel(
         }
     }
 
+
+    private fun initAdapter() {
+        adapter = CarouselAdapter(
+            context = context,
+            recyclerView = recyclerView,
+            carouselType = carouselType,
+            autoWidthFixing = autoWidthFixing,
+            itemLayout = itemLayout,
+            imageViewId = imageViewId,
+            listener = onItemClickListener,
+            imageScaleType = imageScaleType,
+            imagePlaceholder = imagePlaceholder
+        )
+        recyclerView.adapter = adapter
+
+        data?.apply {
+            adapter?.addAll(this)
+        }
+    }
+
+
+    private fun initListeners() {
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+
+                if (showCaption) {
+                    val position = snapHelper.getSnapPosition(recyclerView.layoutManager)
+
+                    if (position >= 0) {
+                        val dataItem = adapter?.getItem(position)
+
+                        dataItem?.apply {
+                            tvCaption.text = this.caption
+                        }
+                    }
+                }
+
+                onScrollListener?.onScrolled(recyclerView, dx, dy)
+
+            }
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+
+                onScrollListener?.apply {
+                    val position = snapHelper.getSnapPosition(recyclerView.layoutManager)
+                    val carouselItem = data?.get(position)
+
+                    onScrollStateChanged(
+                        recyclerView,
+                        newState,
+                        position,
+                        carouselItem
+                    )
+                }
+
+            }
+        })
+    }
+
+
     /**
      * Initialize and start/stop auto play based on `autoPlay` value.
      */
@@ -640,13 +596,12 @@ class ImageCarousel(
             indicator?.apply {
                 attachToRecyclerView(recyclerView, snapHelper)
 
-                adapter?.let {carouselAdapter ->
-
-                    if(carouselAdapter.hasObservers()) {
-//                        carouselAdapter.unregisterAdapterDataObserver()
+                adapter?.let { carouselAdapter ->
+                    try {
+                        carouselAdapter.registerAdapterDataObserver(this.adapterDataObserver)
+                    } catch (e: IllegalStateException) {
+                        e.printStackTrace()
                     }
-
-                    carouselAdapter.registerAdapterDataObserver(this.adapterDataObserver)
                 }
 
                 visibility = View.VISIBLE
@@ -721,7 +676,7 @@ class ImageCarousel(
     // ----------------------------------------------------------------
 
     /**
-     * Goto previous image.
+     * Goto previous item.
      */
     fun previous() {
         currentPosition--
@@ -730,7 +685,7 @@ class ImageCarousel(
     // ----------------------------------------------------------------
 
     /**
-     * Goto next image.
+     * Goto next item.
      */
     fun next() {
         currentPosition++
