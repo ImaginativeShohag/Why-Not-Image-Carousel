@@ -6,7 +6,6 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Handler
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
@@ -329,6 +328,10 @@ class ImageCarousel(
                     e.printStackTrace()
                 }
             }
+
+            indicator?.apply {
+                attachToRecyclerView(recyclerView, snapHelper)
+            }
         }
 
     var scaleOnScroll: Boolean = false
@@ -562,6 +565,14 @@ class ImageCarousel(
 
         data?.apply {
             adapter?.addAll(this)
+        }
+
+        indicator?.apply {
+            try {
+                adapter?.registerAdapterDataObserver(this.adapterDataObserver)
+            } catch (e: IllegalStateException) {
+                e.printStackTrace()
+            }
         }
     }
 

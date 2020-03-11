@@ -21,8 +21,8 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:background="@color/flat_red_1" />
+            android:layout_height="1dp"
+            android:background="#ccc" />
 
         <org.imaginativeworld.whynotimagecarousel.ImageCarousel
             android:id="@+id/carousel2"
@@ -50,8 +50,8 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:background="@color/flat_green_1" />
+            android:layout_height="1dp"
+            android:background="#ccc" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -108,8 +108,8 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:background="@color/flat_blue_1" />
+            android:layout_height="1dp"
+            android:background="#ccc" />
 
         <org.imaginativeworld.whynotimagecarousel.ImageCarousel
             android:id="@+id/carousel4"
