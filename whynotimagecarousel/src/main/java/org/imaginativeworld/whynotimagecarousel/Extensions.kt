@@ -23,9 +23,9 @@ fun Float.toDp(context: Context): Float {
  * This method converts dp unit to equivalent pixels, depending on device density.
  *
  * @param context Context to get resources and device specific display metrics
- * @return A float value to represent px equivalent to dp depending on device density
+ * @return A int value to represent px equivalent to dp depending on device density
  */
-fun Float.toPx(context: Context): Int {
+fun Int.toPx(context: Context): Int {
     return (this * (context.resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)).toInt()
 }
 
