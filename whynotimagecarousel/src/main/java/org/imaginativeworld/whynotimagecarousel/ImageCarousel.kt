@@ -61,6 +61,7 @@ class ImageCarousel(
     private var btnPrevious: View? = null
     private var btnNext: View? = null
 
+    private var isBuiltInIndicator = false
     private var autoPlayHandler: Handler = Handler()
     private var data: List<CarouselItem>? = null
     private var dataSize = 0
@@ -141,11 +142,47 @@ class ImageCarousel(
             tvCaption.visibility = if (showCaption) View.VISIBLE else View.GONE
         }
 
+    @Dimension
+    @Px
+    var captionMargin: Int = 0
+        set(value) {
+            field = value
+
+            val captionMarginParams = tvCaption.layoutParams as LayoutParams
+            captionMarginParams.setMargins(
+                captionMargin.toPx(context),
+                captionMargin.toPx(context),
+                captionMargin.toPx(context),
+                captionMargin.toPx(context)
+            )
+            tvCaption.layoutParams = captionMarginParams
+        }
+
     var showIndicator = false
         set(value) {
             field = value
 
             initIndicator()
+        }
+
+    @Dimension
+    @Px
+    var indicatorMargin: Int = 0
+        set(value) {
+            field = value
+
+            if (isBuiltInIndicator) {
+                indicator?.apply {
+                    val indicatorMarginParams = this.layoutParams as LayoutParams
+                    indicatorMarginParams.setMargins(
+                        indicatorMargin.toPx(context),
+                        indicatorMargin.toPx(context),
+                        indicatorMargin.toPx(context),
+                        indicatorMargin.toPx(context)
+                    )
+                    this.layoutParams = indicatorMarginParams
+                }
+            }
         }
 
     var showNavigationButtons = false
@@ -199,6 +236,7 @@ class ImageCarousel(
             field = value
 
             btnPrevious = null
+
             previousButtonContainer.removeAllViews()
             LayoutInflater.from(context).apply {
                 inflate(previousButtonLayout, previousButtonContainer, true)
@@ -217,18 +255,19 @@ class ImageCarousel(
             }
         }
 
-    /**
-     * Margin dp value.
-     */
     @Dimension
     @Px
     var previousButtonMargin: Int = 0
         set(value) {
             field = value
 
-            val previousButtonParams =
-                previousButtonContainer.layoutParams as LayoutParams
-            previousButtonParams.setMargins(previousButtonMargin.toPx(context), 0, 0, 0)
+            val previousButtonParams = previousButtonContainer.layoutParams as LayoutParams
+            previousButtonParams.setMargins(
+                previousButtonMargin.toPx(context),
+                previousButtonMargin.toPx(context),
+                previousButtonMargin.toPx(context),
+                previousButtonMargin.toPx(context)
+            )
             previousButtonContainer.layoutParams = previousButtonParams
         }
 
@@ -238,6 +277,7 @@ class ImageCarousel(
             field = value
 
             btnNext = null
+
             nextButtonContainer.removeAllViews()
             LayoutInflater.from(context).apply {
                 inflate(nextButtonLayout, nextButtonContainer, true)
@@ -256,9 +296,6 @@ class ImageCarousel(
             }
         }
 
-    /**
-     * Margin dp value.
-     */
     @Dimension
     @Px
     var nextButtonMargin: Int = 0
@@ -266,7 +303,12 @@ class ImageCarousel(
             field = value
 
             val nextButtonParams = nextButtonContainer.layoutParams as LayoutParams
-            nextButtonParams.setMargins(0, 0, nextButtonMargin.toPx(context), 0)
+            nextButtonParams.setMargins(
+                nextButtonMargin.toPx(context),
+                nextButtonMargin.toPx(context),
+                nextButtonMargin.toPx(context),
+                nextButtonMargin.toPx(context)
+            )
             nextButtonContainer.layoutParams = nextButtonParams
         }
 
@@ -318,17 +360,11 @@ class ImageCarousel(
             initAdapter()
         }
 
+    // Note: We do not need to invalidate the view for this.
     var autoPlay: Boolean = false
-        set(value) {
-            field = value
-            // Note: We do not need to invalidate the view for this.
-        }
 
+    // Note: We do not need to invalidate the view for this.
     var autoPlayDelay: Int = 0
-        set(value) {
-            field = value
-            // Note: We do not need to invalidate the view for this.
-        }
 
 
     init {
@@ -395,6 +431,11 @@ class ImageCarousel(
                     true
                 )
 
+                captionMargin = getDimension(
+                    R.styleable.ImageCarousel_captionMargin,
+                    8.toPx(context).toFloat()
+                ).toInt()
+
                 carouselType = carouselTypeArray[
                         getInteger(
                             R.styleable.ImageCarousel_carouselType,
@@ -406,6 +447,11 @@ class ImageCarousel(
                     R.styleable.ImageCarousel_showIndicator,
                     true
                 )
+
+                indicatorMargin = getDimension(
+                    R.styleable.ImageCarousel_indicatorMargin,
+                    0F
+                ).toInt()
 
                 imageScaleType = scaleTypeArray[
                         getInteger(
@@ -591,11 +637,26 @@ class ImageCarousel(
             // If no custom indicator added, then default indicator will be shown.
             if (indicator == null) {
                 indicator = carouselView.findViewById(R.id.indicator)
+                isBuiltInIndicator = true
             }
 
             indicator?.apply {
+                if (isBuiltInIndicator) {
+                    // Indicator margin re-initialize
+                    val indicatorMarginParams = this.layoutParams as LayoutParams
+                    indicatorMarginParams.setMargins(
+                        indicatorMargin.toPx(context),
+                        indicatorMargin.toPx(context),
+                        indicatorMargin.toPx(context),
+                        indicatorMargin.toPx(context)
+                    )
+                    this.layoutParams = indicatorMarginParams
+                }
+
+                // Attach to recyclerview
                 attachToRecyclerView(recyclerView, snapHelper)
 
+                // Observe the adapter
                 adapter?.let { carouselAdapter ->
                     try {
                         carouselAdapter.registerAdapterDataObserver(this.adapterDataObserver)
@@ -666,6 +727,8 @@ class ImageCarousel(
         indicator?.apply {
             // if we remove it form the view, then the caption textView constraint won't work.
             this.visibility = View.GONE
+
+            isBuiltInIndicator = false
         }
 
         this.indicator = newIndicator
