@@ -51,11 +51,13 @@ public class JavaActivity extends AppCompatActivity {
         carousel.setTopShadowAlpha(0.6f); // 0 to 1, 1 means 100%
         carousel.setShowBottomShadow(false);
         carousel.setBottomShadowAlpha(0.6f); // 0 to 1, 1 means 100%
-        carousel.setShowCaption(false);
-        carousel.setShowIndicator(true);
+        carousel.setShowCaption(true);
+        carousel.setCaptionMargin(Utils.toPx(16, context));
+        carousel.setShowIndicator(false);
+        carousel.setIndicatorMargin(0);
         carousel.setShowNavigationButtons(true);
         carousel.setImageScaleType(ImageView.ScaleType.CENTER);
-        carousel.setCarouselBackground(new ColorDrawable(Color.parseColor("#999999")));
+        carousel.setCarouselBackground(new ColorDrawable(Color.parseColor("#aaaaaa")));
         carousel.setImagePlaceholder(ContextCompat.getDrawable(
                 this,
                 R.drawable.ic_wb_cloudy

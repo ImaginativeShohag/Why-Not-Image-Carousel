@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         context = this
 
-        fab.setOnClickListener {
+        btn_java_example.setOnClickListener {
 
             startActivity(Intent(this, JavaActivity::class.java))
 
@@ -86,20 +87,20 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        val list = mutableListOf<CarouselItem>()
+        val listOne = mutableListOf<CarouselItem>()
 
         val max = 10
 
         for (i in 1..max) {
             if (i % 2 == 0) {
-                list.add(
+                listOne.add(
                     CarouselItem(
                         imageUrl = "https://images.unsplash.com/photo-1581357825340-32259110788a?w=1080",
                         caption = "Image $i of $max"
                     )
                 )
             } else {
-                list.add(
+                listOne.add(
                     CarouselItem(
                         imageUrl = "https://images.unsplash.com/photo-1581441117193-63e8f6547081?w=1080",
                         caption = "Image $i of $max"
@@ -108,23 +109,23 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        carousel1.addData(list)
+        carousel1.addData(listOne)
 
 
         // --------------------------------
         // Example Two
         // --------------------------------
-        list.clear()
+        val listTwo = mutableListOf<CarouselItem>()
 
         for (i in 1..max) {
             if (i % 2 == 0) {
-                list.add(
+                listTwo.add(
                     CarouselItem(
                         imageUrl = "https://images.unsplash.com/photo-1569398034126-476b0d96e2d1?w=1080"
                     )
                 )
             } else {
-                list.add(
+                listTwo.add(
                     CarouselItem(
                         imageUrl = "https://images.unsplash.com/photo-1507667522877-ad03f0c7b0e0?w=1080"
                     )
@@ -132,7 +133,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        carousel2.addData(list)
+        carousel2.addData(listTwo)
 
         // Custom click listener
         carousel2.onItemClickListener = object : OnItemClickListener {
@@ -154,25 +155,54 @@ class MainActivity : AppCompatActivity() {
         // --------------------------------
         // Example Three
         // --------------------------------
-        list.clear()
+        val listThree = mutableListOf<CarouselItem>()
 
         for (i in 1..max) {
             if (i % 2 == 0) {
-                list.add(
+                listThree.add(
                     CarouselItem(
-                        imageUrl = "https://images.unsplash.com/photo-1549577434-d7615fd4ceac?w=1080"
+                        imageUrl = "https://images.unsplash.com/photo-1549577434-d7615fd4ceac?w=1080",
+                        caption = "Photo by Jeremy Bishop on Unsplash"
                     )
                 )
             } else {
-                list.add(
+                listThree.add(
                     CarouselItem(
-                        imageUrl = "https://images.unsplash.com/photo-1485038101637-2d4833df1b35?w=1080"
+                        imageUrl = "https://images.unsplash.com/photo-1485038101637-2d4833df1b35?w=1080",
+                        caption = "Photo by Karsten Würth on Unsplash"
                     )
                 )
             }
         }
 
-        carousel3.addData(list)
+        carousel3.addData(listThree)
+
+        custom_caption.isSelected = true
+
+        carousel3.onScrollListener = object : CarouselOnScrollListener {
+
+            override fun onScrollStateChanged(
+                recyclerView: RecyclerView,
+                newState: Int,
+                position: Int,
+                carouselItem: CarouselItem?
+            ) {
+
+                Log.e("aaa", "newState: $newState")
+                Log.e("aaa", "position: $position")
+                Log.e("aaa", "carouselItem: $carouselItem")
+
+                carouselItem?.apply {
+                    custom_caption.text = caption
+                }
+
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                // ...
+            }
+
+        }
 
         // Custom navigation
         btn_goto_previous.setOnClickListener {
@@ -187,17 +217,17 @@ class MainActivity : AppCompatActivity() {
         // --------------------------------
         // Example Four
         // --------------------------------
-        list.clear()
+        val listFour = mutableListOf<CarouselItem>()
 
         for (i in 1..max) {
             if (i % 2 == 0) {
-                list.add(
+                listFour.add(
                     CarouselItem(
                         imageUrl = "https://images.unsplash.com/photo-1560082020-029ec0709721?w=1080"
                     )
                 )
             } else {
-                list.add(
+                listFour.add(
                     CarouselItem(
                         imageUrl = "https://images.unsplash.com/photo-1542144611-13e92d1e1d01?w=1080"
                     )
@@ -205,7 +235,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        carousel4.addData(list)
+        carousel4.addData(listFour)
 
         // Custom indicator
         carousel4.setIndicator(custom_indicator)

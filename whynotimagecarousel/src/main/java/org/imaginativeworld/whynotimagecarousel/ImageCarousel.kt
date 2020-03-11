@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Handler
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
@@ -73,6 +74,11 @@ class ImageCarousel(
         }
 
     var onScrollListener: CarouselOnScrollListener? = null
+        set(value) {
+            field = value
+
+            initOnScrollStateChange()
+        }
 
     /**
      * Get or set current item position
@@ -148,12 +154,7 @@ class ImageCarousel(
             field = value
 
             val captionMarginParams = tvCaption.layoutParams as LayoutParams
-            captionMarginParams.setMargins(
-                captionMargin.toPx(context),
-                captionMargin.toPx(context),
-                captionMargin.toPx(context),
-                captionMargin.toPx(context)
-            )
+            captionMarginParams.goneBottomMargin = captionMargin
             tvCaption.layoutParams = captionMarginParams
         }
 
@@ -174,10 +175,10 @@ class ImageCarousel(
                 indicator?.apply {
                     val indicatorMarginParams = this.layoutParams as LayoutParams
                     indicatorMarginParams.setMargins(
-                        indicatorMargin.toPx(context),
-                        indicatorMargin.toPx(context),
-                        indicatorMargin.toPx(context),
-                        indicatorMargin.toPx(context)
+                        indicatorMargin,
+                        indicatorMargin,
+                        indicatorMargin,
+                        indicatorMargin
                     )
                     this.layoutParams = indicatorMarginParams
                 }
@@ -188,8 +189,10 @@ class ImageCarousel(
         set(value) {
             field = value
 
-            btnPrevious?.visibility = if (showNavigationButtons) View.VISIBLE else View.GONE
-            btnNext?.visibility = if (showNavigationButtons) View.VISIBLE else View.GONE
+            previousButtonContainer.visibility =
+                if (showNavigationButtons) View.VISIBLE else View.GONE
+            nextButtonContainer.visibility =
+                if (showNavigationButtons) View.VISIBLE else View.GONE
         }
 
     var imageScaleType: ImageView.ScaleType = ImageView.ScaleType.CENTER_CROP
@@ -260,12 +263,15 @@ class ImageCarousel(
         set(value) {
             field = value
 
+            Log.e(TAG, "previousButtonMargin: $previousButtonMargin")
+            Log.e(TAG, "16dp --> px: ${16.toPx(context)}")
+
             val previousButtonParams = previousButtonContainer.layoutParams as LayoutParams
             previousButtonParams.setMargins(
-                previousButtonMargin.toPx(context),
-                previousButtonMargin.toPx(context),
-                previousButtonMargin.toPx(context),
-                previousButtonMargin.toPx(context)
+                previousButtonMargin,
+                previousButtonMargin,
+                previousButtonMargin,
+                previousButtonMargin
             )
             previousButtonContainer.layoutParams = previousButtonParams
         }
@@ -303,10 +309,10 @@ class ImageCarousel(
 
             val nextButtonParams = nextButtonContainer.layoutParams as LayoutParams
             nextButtonParams.setMargins(
-                nextButtonMargin.toPx(context),
-                nextButtonMargin.toPx(context),
-                nextButtonMargin.toPx(context),
-                nextButtonMargin.toPx(context)
+                nextButtonMargin,
+                nextButtonMargin,
+                nextButtonMargin,
+                nextButtonMargin
             )
             nextButtonContainer.layoutParams = nextButtonParams
         }
@@ -642,50 +648,40 @@ class ImageCarousel(
     }
 
     private fun initIndicator() {
-
-        if (showIndicator) {
-
-            // If no custom indicator added, then default indicator will be shown.
-            if (indicator == null) {
-                indicator = carouselView.findViewById(R.id.indicator)
-                isBuiltInIndicator = true
-            }
-
-            indicator?.apply {
-                if (isBuiltInIndicator) {
-                    // Indicator margin re-initialize
-                    val indicatorMarginParams = this.layoutParams as LayoutParams
-                    indicatorMarginParams.setMargins(
-                        indicatorMargin.toPx(context),
-                        indicatorMargin.toPx(context),
-                        indicatorMargin.toPx(context),
-                        indicatorMargin.toPx(context)
-                    )
-                    this.layoutParams = indicatorMarginParams
-                }
-
-                // Attach to recyclerview
-                attachToRecyclerView(recyclerView, snapHelper)
-
-                // Observe the adapter
-                adapter?.let { carouselAdapter ->
-                    try {
-                        carouselAdapter.registerAdapterDataObserver(this.adapterDataObserver)
-                    } catch (e: IllegalStateException) {
-                        e.printStackTrace()
-                    }
-                }
-
-                visibility = View.VISIBLE
-            }
-
-        } else {
-
-            indicator?.visibility = View.GONE
-
+        // If no custom indicator added, then default indicator will be shown.
+        if (indicator == null) {
+            indicator = carouselView.findViewById(R.id.indicator)
+            isBuiltInIndicator = true
         }
 
+        indicator?.apply {
+            if (isBuiltInIndicator) {
+                // Indicator margin re-initialize
+                val indicatorMarginParams = this.layoutParams as LayoutParams
+                indicatorMarginParams.setMargins(
+                    indicatorMargin,
+                    indicatorMargin,
+                    indicatorMargin,
+                    indicatorMargin
+                )
+                this.layoutParams = indicatorMarginParams
 
+                // Indicator visibility
+                this.visibility = if (showIndicator) View.VISIBLE else View.GONE
+            }
+
+            // Attach to recyclerview
+            attachToRecyclerView(recyclerView, snapHelper)
+
+            // Observe the adapter
+            adapter?.let { carouselAdapter ->
+                try {
+                    carouselAdapter.registerAdapterDataObserver(this.adapterDataObserver)
+                } catch (e: IllegalStateException) {
+                    e.printStackTrace()
+                }
+            }
+        }
     }
 
     private fun getValueFromZeroToOne(value: Float): Float {
@@ -698,6 +694,19 @@ class ImageCarousel(
             }
             else -> {
                 value
+            }
+        }
+    }
+
+    private fun initOnScrollStateChange() {
+        data?.apply {
+            if (isNotEmpty()) {
+                onScrollListener?.onScrollStateChanged(
+                    recyclerView,
+                    RecyclerView.SCROLL_STATE_IDLE,
+                    0,
+                    this[0]
+                )
             }
         }
     }
@@ -719,6 +728,8 @@ class ImageCarousel(
 
             this@ImageCarousel.data = data
             this@ImageCarousel.dataSize = data.size
+
+            initOnScrollStateChange()
         }
     }
 
