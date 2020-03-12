@@ -6,6 +6,8 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Handler
 import android.util.AttributeSet
+import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
@@ -14,7 +16,6 @@ import android.widget.TextView
 import androidx.annotation.Dimension
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
-import androidx.annotation.Px
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.*
@@ -60,6 +61,7 @@ class ImageCarousel(
     private var btnPrevious: View? = null
     private var btnNext: View? = null
 
+    private var isBuiltInIndicator = false
     private var autoPlayHandler: Handler = Handler()
     private var data: List<CarouselItem>? = null
     private var dataSize = 0
@@ -72,6 +74,11 @@ class ImageCarousel(
         }
 
     var onScrollListener: CarouselOnScrollListener? = null
+        set(value) {
+            field = value
+
+            initOnScrollStateChange()
+        }
 
     /**
      * Get or set current item position
@@ -119,6 +126,16 @@ class ImageCarousel(
             viewTopShadow.alpha = topShadowAlpha
         }
 
+    @Dimension(unit = Dimension.PX)
+    var topShadowHeight: Int = 0
+        set(value) {
+            field = value
+
+            val topShadowParams = viewTopShadow.layoutParams as LayoutParams
+            topShadowParams.height = topShadowHeight
+            viewTopShadow.layoutParams = topShadowParams
+        }
+
     var showBottomShadow = false
         set(value) {
             field = value
@@ -133,11 +150,45 @@ class ImageCarousel(
             viewBottomShadow.alpha = bottomShadowAlpha
         }
 
+    @Dimension(unit = Dimension.PX)
+    var bottomShadowHeight: Int = 0
+        set(value) {
+            field = value
+
+            val bottomShadowParams = viewBottomShadow.layoutParams as LayoutParams
+            bottomShadowParams.height = bottomShadowHeight
+            viewBottomShadow.layoutParams = bottomShadowParams
+        }
+
     var showCaption = false
         set(value) {
             field = value
 
             tvCaption.visibility = if (showCaption) View.VISIBLE else View.GONE
+        }
+
+    @Dimension(unit = Dimension.PX)
+    var captionMargin: Int = 0
+        set(value) {
+            field = value
+
+            val captionMarginParams = tvCaption.layoutParams as LayoutParams
+            captionMarginParams.setMargins(
+                0,
+                0,
+                0,
+                captionMargin
+            )
+            captionMarginParams.goneBottomMargin = captionMargin
+            tvCaption.layoutParams = captionMarginParams
+        }
+
+    @Dimension(unit = Dimension.PX)
+    var captionTextSize: Int = 0
+        set(value) {
+            field = value
+
+            tvCaption.setTextSize(TypedValue.COMPLEX_UNIT_PX, captionTextSize.toFloat())
         }
 
     var showIndicator = false
@@ -147,12 +198,33 @@ class ImageCarousel(
             initIndicator()
         }
 
+    @Dimension(unit = Dimension.PX)
+    var indicatorMargin: Int = 0
+        set(value) {
+            field = value
+
+            if (isBuiltInIndicator) {
+                indicator?.apply {
+                    val indicatorMarginParams = this.layoutParams as LayoutParams
+                    indicatorMarginParams.setMargins(
+                        0,
+                        0,
+                        0,
+                        indicatorMargin
+                    )
+                    this.layoutParams = indicatorMarginParams
+                }
+            }
+        }
+
     var showNavigationButtons = false
         set(value) {
             field = value
 
-            btnPrevious?.visibility = if (showNavigationButtons) View.VISIBLE else View.GONE
-            btnNext?.visibility = if (showNavigationButtons) View.VISIBLE else View.GONE
+            previousButtonContainer.visibility =
+                if (showNavigationButtons) View.VISIBLE else View.GONE
+            nextButtonContainer.visibility =
+                if (showNavigationButtons) View.VISIBLE else View.GONE
         }
 
     var imageScaleType: ImageView.ScaleType = ImageView.ScaleType.CENTER_CROP
@@ -198,6 +270,7 @@ class ImageCarousel(
             field = value
 
             btnPrevious = null
+
             previousButtonContainer.removeAllViews()
             LayoutInflater.from(context).apply {
                 inflate(previousButtonLayout, previousButtonContainer, true)
@@ -216,18 +289,21 @@ class ImageCarousel(
             }
         }
 
-    /**
-     * Margin dp value.
-     */
-    @Dimension
-    @Px
+    @Dimension(unit = Dimension.PX)
     var previousButtonMargin: Int = 0
         set(value) {
             field = value
 
-            val previousButtonParams =
-                previousButtonContainer.layoutParams as LayoutParams
-            previousButtonParams.setMargins(previousButtonMargin.toPx(context), 0, 0, 0)
+            Log.e(TAG, "previousButtonMargin: $previousButtonMargin")
+            Log.e(TAG, "16dp --> px: ${16.dpToPx(context)}")
+
+            val previousButtonParams = previousButtonContainer.layoutParams as LayoutParams
+            previousButtonParams.setMargins(
+                previousButtonMargin,
+                0,
+                0,
+                0
+            )
             previousButtonContainer.layoutParams = previousButtonParams
         }
 
@@ -237,6 +313,7 @@ class ImageCarousel(
             field = value
 
             btnNext = null
+
             nextButtonContainer.removeAllViews()
             LayoutInflater.from(context).apply {
                 inflate(nextButtonLayout, nextButtonContainer, true)
@@ -255,17 +332,18 @@ class ImageCarousel(
             }
         }
 
-    /**
-     * Margin dp value.
-     */
-    @Dimension
-    @Px
+    @Dimension(unit = Dimension.PX)
     var nextButtonMargin: Int = 0
         set(value) {
             field = value
 
             val nextButtonParams = nextButtonContainer.layoutParams as LayoutParams
-            nextButtonParams.setMargins(0, 0, nextButtonMargin.toPx(context), 0)
+            nextButtonParams.setMargins(
+                0,
+                0,
+                nextButtonMargin,
+                0
+            )
             nextButtonContainer.layoutParams = nextButtonParams
         }
 
@@ -321,17 +399,11 @@ class ImageCarousel(
             initAdapter()
         }
 
+    // Note: We do not need to invalidate the view for this.
     var autoPlay: Boolean = false
-        set(value) {
-            field = value
-            // Note: We do not need to invalidate the view for this.
-        }
 
+    // Note: We do not need to invalidate the view for this.
     var autoPlayDelay: Int = 0
-        set(value) {
-            field = value
-            // Note: We do not need to invalidate the view for this.
-        }
 
 
     init {
@@ -360,6 +432,9 @@ class ImageCarousel(
                     scalingFactor = this@ImageCarousel.scalingFactor
                 }
         recyclerView.setHasFixedSize(true)
+
+        // For marquee effect
+        tvCaption.isSelected = true
     }
 
 
@@ -383,6 +458,11 @@ class ImageCarousel(
                     0.6f
                 )
 
+                topShadowHeight = getDimension(
+                    R.styleable.ImageCarousel_topShadowHeight,
+                    32.dpToPx(context).toFloat()
+                ).toInt()
+
                 showBottomShadow = getBoolean(
                     R.styleable.ImageCarousel_showBottomShadow,
                     true
@@ -393,10 +473,25 @@ class ImageCarousel(
                     0.6f
                 )
 
+                bottomShadowHeight = getDimension(
+                    R.styleable.ImageCarousel_bottomShadowHeight,
+                    64.dpToPx(context).toFloat()
+                ).toInt()
+
                 showCaption = getBoolean(
                     R.styleable.ImageCarousel_showCaption,
                     true
                 )
+
+                captionMargin = getDimension(
+                    R.styleable.ImageCarousel_captionMargin,
+                    0.dpToPx(context).toFloat()
+                ).toInt()
+
+                captionTextSize = getDimension(
+                    R.styleable.ImageCarousel_captionTextSize,
+                    14.spToPx(context).toFloat()
+                ).toInt()
 
                 carouselType = carouselTypeArray[
                         getInteger(
@@ -409,6 +504,11 @@ class ImageCarousel(
                     R.styleable.ImageCarousel_showIndicator,
                     true
                 )
+
+                indicatorMargin = getDimension(
+                    R.styleable.ImageCarousel_indicatorMargin,
+                    0F
+                ).toInt()
 
                 imageScaleType = scaleTypeArray[
                         getInteger(
@@ -447,7 +547,7 @@ class ImageCarousel(
 
                 previousButtonMargin = getDimension(
                     R.styleable.ImageCarousel_previousButtonMargin,
-                    4.toPx(context).toFloat()
+                    4.dpToPx(context).toFloat()
                 ).toInt()
 
                 nextButtonLayout = getResourceId(
@@ -462,7 +562,7 @@ class ImageCarousel(
 
                 nextButtonMargin = getDimension(
                     R.styleable.ImageCarousel_nextButtonMargin,
-                    4.toPx(context).toFloat()
+                    4.dpToPx(context).toFloat()
                 ).toInt()
 
                 showNavigationButtons = getBoolean(
@@ -596,35 +696,40 @@ class ImageCarousel(
     }
 
     private fun initIndicator() {
-
-        if (showIndicator) {
-
-            // If no custom indicator added, then default indicator will be shown.
-            if (indicator == null) {
-                indicator = carouselView.findViewById(R.id.indicator)
-            }
-
-            indicator?.apply {
-                attachToRecyclerView(recyclerView, snapHelper)
-
-                adapter?.let { carouselAdapter ->
-                    try {
-                        carouselAdapter.registerAdapterDataObserver(this.adapterDataObserver)
-                    } catch (e: IllegalStateException) {
-                        e.printStackTrace()
-                    }
-                }
-
-                visibility = View.VISIBLE
-            }
-
-        } else {
-
-            indicator?.visibility = View.GONE
-
+        // If no custom indicator added, then default indicator will be shown.
+        if (indicator == null) {
+            indicator = carouselView.findViewById(R.id.indicator)
+            isBuiltInIndicator = true
         }
 
+        indicator?.apply {
+            if (isBuiltInIndicator) {
+                // Indicator margin re-initialize
+                val indicatorMarginParams = this.layoutParams as LayoutParams
+                indicatorMarginParams.setMargins(
+                    indicatorMargin,
+                    indicatorMargin,
+                    indicatorMargin,
+                    indicatorMargin
+                )
+                this.layoutParams = indicatorMarginParams
 
+                // Indicator visibility
+                this.visibility = if (showIndicator) View.VISIBLE else View.GONE
+            }
+
+            // Attach to recyclerview
+            attachToRecyclerView(recyclerView, snapHelper)
+
+            // Observe the adapter
+            adapter?.let { carouselAdapter ->
+                try {
+                    carouselAdapter.registerAdapterDataObserver(this.adapterDataObserver)
+                } catch (e: IllegalStateException) {
+                    e.printStackTrace()
+                }
+            }
+        }
     }
 
     private fun getValueFromZeroToOne(value: Float): Float {
@@ -637,6 +742,19 @@ class ImageCarousel(
             }
             else -> {
                 value
+            }
+        }
+    }
+
+    private fun initOnScrollStateChange() {
+        data?.apply {
+            if (isNotEmpty()) {
+                onScrollListener?.onScrollStateChanged(
+                    recyclerView,
+                    RecyclerView.SCROLL_STATE_IDLE,
+                    0,
+                    this[0]
+                )
             }
         }
     }
@@ -658,6 +776,8 @@ class ImageCarousel(
 
             this@ImageCarousel.data = data
             this@ImageCarousel.dataSize = data.size
+
+            initOnScrollStateChange()
         }
     }
 
@@ -677,6 +797,8 @@ class ImageCarousel(
         indicator?.apply {
             // if we remove it form the view, then the caption textView constraint won't work.
             this.visibility = View.GONE
+
+            isBuiltInIndicator = false
         }
 
         this.indicator = newIndicator

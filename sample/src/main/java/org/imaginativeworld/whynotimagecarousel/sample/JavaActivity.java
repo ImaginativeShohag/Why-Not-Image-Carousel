@@ -49,25 +49,30 @@ public class JavaActivity extends AppCompatActivity {
 
         carousel.setShowTopShadow(false);
         carousel.setTopShadowAlpha(0.6f); // 0 to 1, 1 means 100%
+        carousel.setTopShadowHeight(Utils.dpToPx(32, context)); // px value of dp
         carousel.setShowBottomShadow(false);
         carousel.setBottomShadowAlpha(0.6f); // 0 to 1, 1 means 100%
-        carousel.setShowCaption(false);
-        carousel.setShowIndicator(true);
+        carousel.setBottomShadowHeight(Utils.dpToPx(64, context)); // px value of dp
+        carousel.setShowCaption(true);
+        carousel.setCaptionMargin(Utils.dpToPx(16, context)); // px value of dp
+        carousel.setCaptionTextSize(Utils.spToPx(16, context)); // px value of sp
+        carousel.setShowIndicator(false);
+        carousel.setIndicatorMargin(Utils.dpToPx(0, context)); // px value of dp
         carousel.setShowNavigationButtons(true);
         carousel.setImageScaleType(ImageView.ScaleType.CENTER);
-        carousel.setCarouselBackground(new ColorDrawable(Color.parseColor("#999999")));
+        carousel.setCarouselBackground(new ColorDrawable(Color.parseColor("#333333")));
         carousel.setImagePlaceholder(ContextCompat.getDrawable(
                 this,
-                R.drawable.ic_wb_cloudy
+                R.drawable.ic_wb_cloudy_with_padding
         ));
         carousel.setItemLayout(R.layout.custom_fixed_size_item_layout);
         carousel.setImageViewId(R.id.image_view);
         carousel.setPreviousButtonLayout(R.layout.custom_previous_button_layout);
         carousel.setPreviousButtonId(R.id.custom_btn_previous);
-        carousel.setPreviousButtonMargin(Utils.toPx(8, context)); // dp value
+        carousel.setPreviousButtonMargin(Utils.dpToPx(8, context)); // px value of dp
         carousel.setNextButtonLayout(R.layout.custom_next_button_layout);
         carousel.setNextButtonId(R.id.custom_btn_next);
-        carousel.setNextButtonMargin(Utils.toPx(8, context)); // dp value
+        carousel.setNextButtonMargin(Utils.dpToPx(8, context)); // px value of dp
         carousel.setCarouselType(CarouselType.SHOWCASE);
         carousel.setScaleOnScroll(true);
         carousel.setScalingFactor(.15f);

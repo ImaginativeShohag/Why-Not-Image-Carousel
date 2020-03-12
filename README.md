@@ -3,6 +3,7 @@
 An easy, super simple and customizable image carousel view for Android.
 
 [![](https://jitpack.io/v/ImaginativeShohag/Why-Not-Image-Carousel.svg)](https://jitpack.io/#ImaginativeShohag/Why-Not-Image-Carousel)
+[![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-Why%20Not!%20Image%20Carousel!-green.svg?style=flat )]( https://android-arsenal.com/details/1/8053)
 [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=21)
 
 ## Preview
@@ -38,7 +39,7 @@ dependencies {
     // Optional: Circle Indicator (To fix the xml preview "Missing classes" error)
     implementation 'me.relex:circleindicator:2.1.4'
 
-    implementation 'com.github.ImaginativeShohag:Why-Not-Image-Carousel:v1.0.0'
+    implementation 'com.github.ImaginativeShohag:Why-Not-Image-Carousel:v1.0.2'
 }
 ```
 
@@ -123,10 +124,15 @@ All the custom XML attributes for `ImageCarousel` view with default values are g
     
     app:showTopShadow="true"
     app:topShadowAlpha="0.6"
+    app:topShadowHeight="32dp"
     app:showBottomShadow="true"
     app:bottomShadowAlpha="0.6"
+    app:bottomShadowHeight="64dp"
     app:showCaption="true"
+    app:captionMargin="0dp"
+    app:captionTextSize="14sp"
     app:showIndicator="true"
+    app:indicatorMargin="0dp"
     app:showNavigationButtons="true"
     app:imageScaleType="fitCenter"
     app:carouselBackground="#333333"
@@ -149,21 +155,29 @@ All the custom XML attributes for `ImageCarousel` view with default values are g
 
 ## `ImageCarousel` functions
 
-You can also set all the attributes programmatically. All the functions and their usages given below:
+You can also set all the attributes programmatically. All the functions and their usages given below.
+
+### Kotlin
 
 ```kotlin
-// Kotlin
 val carousel: ImageCarousel = findViewById(R.id.carousel)
 
 // Attributes
 carousel.showTopShadow = true
 carousel.topShadowAlpha = 0.6f // 0 to 1, 1 means 100%
+carousel.topShadowHeight = 32.dpToPx(context) // px value of dp
 
 carousel.showBottomShadow = true
 carousel.bottomShadowAlpha = 0.6f // 0 to 1, 1 means 100%
+carousel.bottomShadowHeight = 64.dpToPx(context) // px value of dp
 
 carousel.showCaption = true
+carousel.captionMargin = 0.dpToPx(context) // px value of dp
+carousel.captionTextSize = 14.spToPx(context) // px value of sp
+
 carousel.showIndicator = true
+carousel.indicatorMargin = 0.dpToPx(context) // px value of dp
+
 carousel.showNavigationButtons = true
 carousel.imageScaleType = ImageView.ScaleType.CENTER_CROP
 carousel.carouselBackground = ColorDrawable(Color.parseColor("#333333"))
@@ -183,11 +197,11 @@ carousel.imageViewId = R.id.img
 // give the View/Button id in "previousButtonId" attribute.
 carousel.previousButtonLayout = R.layout.previous_button_layout
 carousel.previousButtonId = R.id.btn_previous
-carousel.previousButtonMargin = 4F // dp value
+carousel.previousButtonMargin = 4.dpToPx(context) // px value of dp
 
 carousel.nextButtonLayout = R.layout.next_button_layout
 carousel.nextButtonId = R.id.btn_next
-carousel.nextButtonMargin = 4F // dp value
+carousel.nextButtonMargin = 4.dpToPx(context) // px value of dp
 
 carousel.carouselType = CarouselType.BLOCK
 carousel.scaleOnScroll = false
@@ -254,19 +268,27 @@ carousel.setIndicator(customIndicator)
 carousel.addData(list)
 ```
 
+### Java
+
 ```java
-// Java
 ImageCarousel carousel = findViewById(R.id.carousel);
 
 // Attributes
 carousel.setShowTopShadow(true);
 carousel.setTopShadowAlpha(0.6f); // 0 to 1, 1 means 100%
+carousel.setTopShadowHeight(Utils.dpToPx(32, context)); // px value of dp
 
 carousel.setShowBottomShadow(true);
 carousel.setBottomShadowAlpha(0.6f); // 0 to 1, 1 means 100%
+carousel.setBottomShadowHeight(Utils.dpToPx(64, context)); // px value of dp
 
 carousel.setShowCaption(true);
+carousel.setCaptionMargin(Utils.dpToPx(0, context)); // px value of dp
+carousel.setCaptionTextSize(Utils.spToPx(14, context)); // px value of sp
+
 carousel.setShowIndicator(true);
+carousel.setIndicatorMargin(Utils.dpToPx(0, context)); // px value of dp
+
 carousel.setShowNavigationButtons(true);
 carousel.setImageScaleType(ImageView.ScaleType.CENTER);
 carousel.setCarouselBackground(new ColorDrawable(Color.parseColor("#333333")));
@@ -282,11 +304,11 @@ carousel.setImageViewId(R.id.img);
 // See kotlin code for details.
 carousel.setPreviousButtonLayout(R.layout.previous_button_layout);
 carousel.setPreviousButtonId(R.id.btn_previous);
-carousel.setPreviousButtonMargin(4); // dp value
+carousel.setPreviousButtonMargin(Utils.dpToPx(4, context)); // px value of dp
 
 carousel.setNextButtonLayout(R.layout.next_button_layout);
 carousel.setNextButtonId(R.id.btn_next);
-carousel.setNextButtonMargin(4); // dp value
+carousel.setNextButtonMargin(Utils.dpToPx(4, context)); // px value of dp
 
 carousel.setCarouselType(CarouselType.BLOCK);
 carousel.setScaleOnScroll(false);
@@ -346,7 +368,7 @@ carousel.setIndicator(indicator);
 carousel.addData(list)
 ```
 
-### Carousel Type
+## Carousel Type
 
 ![Carousel type](/images/screenshot_carousel_type.png)
 
@@ -369,11 +391,11 @@ Inspired by [CarouselView](https://github.com/jama5262/CarouselView) library.
 
 ## Changelog
 
-### 1.0.0
+### 1.0.0, 1.0.1, 1.0.2
 
 The initial release of the library.
 
-## Licence
+## License
 
 ```
 Copyright 2020 Md. Mahmudul Hasan Shohag

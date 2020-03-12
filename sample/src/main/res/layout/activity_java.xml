@@ -18,7 +18,6 @@
         android:id="@+id/custom_indicator"
         android:layout_width="match_parent"
         android:layout_height="32dp"
-        app:ci_animator="@animator/scale_with_alpha"
         app:ci_drawable="@drawable/dot"
         app:ci_drawable_unselected="@drawable/dot"
         app:layout_constraintTop_toBottomOf="@+id/carousel" />
@@ -33,8 +32,9 @@
         android:layout_marginBottom="8dp"
         app:backgroundTint="@color/flat_green_2"
         app:icon="@drawable/ic_arrow_back"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_play"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/custom_indicator" />
+        app:layout_constraintTop_toTopOf="@+id/btn_play" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_goto_next"
@@ -46,8 +46,9 @@
         android:layout_marginBottom="8dp"
         app:backgroundTint="@color/flat_green_2"
         app:icon="@drawable/ic_arrow_forward"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_play"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/custom_indicator" />
+        app:layout_constraintTop_toTopOf="@+id/btn_play" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/btn_play"
