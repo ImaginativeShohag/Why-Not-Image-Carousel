@@ -3,10 +3,13 @@
     <declare-styleable name="ImageCarousel">
         <attr name="showTopShadow" format="boolean" />
         <attr name="topShadowAlpha" format="float" />
+        <attr name="topShadowHeight" format="dimension" />
         <attr name="showBottomShadow" format="boolean" />
         <attr name="bottomShadowAlpha" format="float" />
+        <attr name="bottomShadowHeight" format="dimension" />
         <attr name="showCaption" format="boolean" />
         <attr name="captionMargin" format="dimension" />
+        <attr name="captionTextSize" format="dimension" />
         <attr name="showIndicator" format="boolean" />
         <attr name="indicatorMargin" format="dimension" />
         <attr name="showNavigationButtons" format="boolean" />

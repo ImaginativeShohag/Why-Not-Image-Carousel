@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable
 import android.os.Handler
 import android.util.AttributeSet
 import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
@@ -15,7 +16,6 @@ import android.widget.TextView
 import androidx.annotation.Dimension
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
-import androidx.annotation.Px
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.*
@@ -126,6 +126,16 @@ class ImageCarousel(
             viewTopShadow.alpha = topShadowAlpha
         }
 
+    @Dimension(unit = Dimension.PX)
+    var topShadowHeight: Int = 0
+        set(value) {
+            field = value
+
+            val topShadowParams = viewTopShadow.layoutParams as LayoutParams
+            topShadowParams.height = topShadowHeight
+            viewTopShadow.layoutParams = topShadowParams
+        }
+
     var showBottomShadow = false
         set(value) {
             field = value
@@ -140,6 +150,16 @@ class ImageCarousel(
             viewBottomShadow.alpha = bottomShadowAlpha
         }
 
+    @Dimension(unit = Dimension.PX)
+    var bottomShadowHeight: Int = 0
+        set(value) {
+            field = value
+
+            val bottomShadowParams = viewBottomShadow.layoutParams as LayoutParams
+            bottomShadowParams.height = bottomShadowHeight
+            viewBottomShadow.layoutParams = bottomShadowParams
+        }
+
     var showCaption = false
         set(value) {
             field = value
@@ -147,15 +167,28 @@ class ImageCarousel(
             tvCaption.visibility = if (showCaption) View.VISIBLE else View.GONE
         }
 
-    @Dimension
-    @Px
+    @Dimension(unit = Dimension.PX)
     var captionMargin: Int = 0
         set(value) {
             field = value
 
             val captionMarginParams = tvCaption.layoutParams as LayoutParams
+            captionMarginParams.setMargins(
+                0,
+                0,
+                0,
+                captionMargin
+            )
             captionMarginParams.goneBottomMargin = captionMargin
             tvCaption.layoutParams = captionMarginParams
+        }
+
+    @Dimension(unit = Dimension.PX)
+    var captionTextSize: Int = 0
+        set(value) {
+            field = value
+
+            tvCaption.setTextSize(TypedValue.COMPLEX_UNIT_PX, captionTextSize.toFloat())
         }
 
     var showIndicator = false
@@ -165,8 +198,7 @@ class ImageCarousel(
             initIndicator()
         }
 
-    @Dimension
-    @Px
+    @Dimension(unit = Dimension.PX)
     var indicatorMargin: Int = 0
         set(value) {
             field = value
@@ -175,9 +207,9 @@ class ImageCarousel(
                 indicator?.apply {
                     val indicatorMarginParams = this.layoutParams as LayoutParams
                     indicatorMarginParams.setMargins(
-                        indicatorMargin,
-                        indicatorMargin,
-                        indicatorMargin,
+                        0,
+                        0,
+                        0,
                         indicatorMargin
                     )
                     this.layoutParams = indicatorMarginParams
@@ -257,21 +289,20 @@ class ImageCarousel(
             }
         }
 
-    @Dimension
-    @Px
+    @Dimension(unit = Dimension.PX)
     var previousButtonMargin: Int = 0
         set(value) {
             field = value
 
             Log.e(TAG, "previousButtonMargin: $previousButtonMargin")
-            Log.e(TAG, "16dp --> px: ${16.toPx(context)}")
+            Log.e(TAG, "16dp --> px: ${16.dpToPx(context)}")
 
             val previousButtonParams = previousButtonContainer.layoutParams as LayoutParams
             previousButtonParams.setMargins(
                 previousButtonMargin,
-                previousButtonMargin,
-                previousButtonMargin,
-                previousButtonMargin
+                0,
+                0,
+                0
             )
             previousButtonContainer.layoutParams = previousButtonParams
         }
@@ -301,18 +332,17 @@ class ImageCarousel(
             }
         }
 
-    @Dimension
-    @Px
+    @Dimension(unit = Dimension.PX)
     var nextButtonMargin: Int = 0
         set(value) {
             field = value
 
             val nextButtonParams = nextButtonContainer.layoutParams as LayoutParams
             nextButtonParams.setMargins(
+                0,
+                0,
                 nextButtonMargin,
-                nextButtonMargin,
-                nextButtonMargin,
-                nextButtonMargin
+                0
             )
             nextButtonContainer.layoutParams = nextButtonParams
         }
@@ -402,6 +432,9 @@ class ImageCarousel(
                     scalingFactor = this@ImageCarousel.scalingFactor
                 }
         recyclerView.setHasFixedSize(true)
+
+        // For marquee effect
+        tvCaption.isSelected = true
     }
 
 
@@ -425,6 +458,11 @@ class ImageCarousel(
                     0.6f
                 )
 
+                topShadowHeight = getDimension(
+                    R.styleable.ImageCarousel_topShadowHeight,
+                    32.dpToPx(context).toFloat()
+                ).toInt()
+
                 showBottomShadow = getBoolean(
                     R.styleable.ImageCarousel_showBottomShadow,
                     true
@@ -435,6 +473,11 @@ class ImageCarousel(
                     0.6f
                 )
 
+                bottomShadowHeight = getDimension(
+                    R.styleable.ImageCarousel_bottomShadowHeight,
+                    64.dpToPx(context).toFloat()
+                ).toInt()
+
                 showCaption = getBoolean(
                     R.styleable.ImageCarousel_showCaption,
                     true
@@ -442,7 +485,12 @@ class ImageCarousel(
 
                 captionMargin = getDimension(
                     R.styleable.ImageCarousel_captionMargin,
-                    8.toPx(context).toFloat()
+                    0.dpToPx(context).toFloat()
+                ).toInt()
+
+                captionTextSize = getDimension(
+                    R.styleable.ImageCarousel_captionTextSize,
+                    14.spToPx(context).toFloat()
                 ).toInt()
 
                 carouselType = carouselTypeArray[
@@ -499,7 +547,7 @@ class ImageCarousel(
 
                 previousButtonMargin = getDimension(
                     R.styleable.ImageCarousel_previousButtonMargin,
-                    4.toPx(context).toFloat()
+                    4.dpToPx(context).toFloat()
                 ).toInt()
 
                 nextButtonLayout = getResourceId(
@@ -514,7 +562,7 @@ class ImageCarousel(
 
                 nextButtonMargin = getDimension(
                     R.styleable.ImageCarousel_nextButtonMargin,
-                    4.toPx(context).toFloat()
+                    4.dpToPx(context).toFloat()
                 ).toInt()
 
                 showNavigationButtons = getBoolean(

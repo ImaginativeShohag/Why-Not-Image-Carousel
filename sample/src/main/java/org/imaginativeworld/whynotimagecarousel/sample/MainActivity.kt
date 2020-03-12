@@ -5,7 +5,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -35,10 +34,15 @@ class MainActivity : AppCompatActivity() {
         // --------------------------------
         carousel1.showTopShadow = true
         carousel1.topShadowAlpha = 0.6f // 0 to 1, 1 means 100%
+        carousel1.topShadowHeight = 32.dpToPx(context) // px value of dp
         carousel1.showBottomShadow = true
         carousel1.bottomShadowAlpha = 0.6f // 0 to 1, 1 means 100%
+        carousel1.bottomShadowHeight = 64.dpToPx(context) // px value of dp
         carousel1.showCaption = true
+        carousel1.captionMargin = 0.dpToPx(context) // px value of dp
+        carousel1.captionTextSize = 14.spToPx(context) // px value of sp
         carousel1.showIndicator = true
+        carousel1.indicatorMargin = 0.dpToPx(context) // px value of dp
         carousel1.showNavigationButtons = true
         carousel1.imageScaleType = ImageView.ScaleType.CENTER_CROP
         carousel1.carouselBackground = ColorDrawable(Color.parseColor("#333333"))
@@ -51,11 +55,11 @@ class MainActivity : AppCompatActivity() {
         carousel1.previousButtonLayout =
             org.imaginativeworld.whynotimagecarousel.R.layout.previous_button_layout
         carousel1.previousButtonId = org.imaginativeworld.whynotimagecarousel.R.id.btn_previous
-        carousel1.previousButtonMargin = 4.toPx(context) // dp value
+        carousel1.previousButtonMargin = 4.dpToPx(context) // px value of dp
         carousel1.nextButtonLayout =
             org.imaginativeworld.whynotimagecarousel.R.layout.next_button_layout
         carousel1.nextButtonId = org.imaginativeworld.whynotimagecarousel.R.id.btn_next
-        carousel1.nextButtonMargin = 4.toPx(context) // dp value
+        carousel1.nextButtonMargin = 4.dpToPx(context) // px value of dp
         carousel1.carouselType = CarouselType.BLOCK
         carousel1.scaleOnScroll = false
         carousel1.scalingFactor = .15f // 0 to 1; 1 means 100
@@ -188,12 +192,10 @@ class MainActivity : AppCompatActivity() {
                 carouselItem: CarouselItem?
             ) {
 
-                Log.e("aaa", "newState: $newState")
-                Log.e("aaa", "position: $position")
-                Log.e("aaa", "carouselItem: $carouselItem")
-
-                carouselItem?.apply {
-                    custom_caption.text = caption
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    carouselItem?.apply {
+                        custom_caption.text = caption
+                    }
                 }
 
             }
