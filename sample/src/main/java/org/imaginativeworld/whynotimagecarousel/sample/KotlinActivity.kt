@@ -10,16 +10,16 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_kotlin.*
 import org.imaginativeworld.whynotimagecarousel.*
 
-class MainActivity : AppCompatActivity() {
+class KotlinActivity : AppCompatActivity() {
 
     private lateinit var context: Context
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_kotlin)
 
         context = this
 
@@ -143,13 +143,13 @@ class MainActivity : AppCompatActivity() {
         carousel2.onItemClickListener = object : OnItemClickListener {
             override fun onClick(position: Int, carouselItem: CarouselItem) {
 
-                Toast.makeText(this@MainActivity, "Clicked!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@KotlinActivity, "Clicked!", Toast.LENGTH_SHORT).show()
 
             }
 
             override fun onLongClick(position: Int, dataObject: CarouselItem) {
 
-                Toast.makeText(this@MainActivity, "Long Clicked!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@KotlinActivity, "Long Clicked!", Toast.LENGTH_SHORT).show()
 
             }
 
@@ -225,13 +225,13 @@ class MainActivity : AppCompatActivity() {
             if (i % 2 == 0) {
                 listFour.add(
                     CarouselItem(
-                        imageUrl = "https://images.unsplash.com/photo-1560082020-029ec0709721?w=1080"
+                        imageDrawable = R.drawable.image_1
                     )
                 )
             } else {
                 listFour.add(
                     CarouselItem(
-                        imageUrl = "https://images.unsplash.com/photo-1542144611-13e92d1e1d01?w=1080"
+                        imageDrawable = R.drawable.image_2
                     )
                 )
             }

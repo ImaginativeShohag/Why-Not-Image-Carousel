@@ -25,8 +25,6 @@ class CarouselAdapter(
     private val imagePlaceholder: Drawable?
 ) : RecyclerView.Adapter<CarouselAdapter.MyViewHolder>() {
 
-    private val TAG = "CarouselAdapter"
-
     class MyViewHolder(itemView: View, imageViewId: Int) : RecyclerView.ViewHolder(itemView) {
         var img: ImageView = itemView.findViewById(imageViewId)
     }
@@ -66,10 +64,17 @@ class CarouselAdapter(
         // Init views
         holder.img.scaleType = imageScaleType
 
-        Glide.with(context.applicationContext)
-            .load(item.imageUrl)
-            .placeholder(imagePlaceholder)
-            .into(holder.img)
+        if (item.imageUrl != null) {
+            Glide.with(context.applicationContext)
+                .load(item.imageUrl)
+                .placeholder(imagePlaceholder)
+                .into(holder.img)
+        } else {
+            Glide.with(context.applicationContext)
+                .load(item.imageDrawable)
+                .placeholder(imagePlaceholder)
+                .into(holder.img)
+        }
 
 
         // Init start and end offsets

@@ -6,7 +6,6 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Handler
 import android.util.AttributeSet
-import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -27,8 +26,6 @@ class ImageCarousel(
     @NotNull context: Context,
     @Nullable private var attributeSet: AttributeSet?
 ) : ConstraintLayout(context, attributeSet) {
-
-    val TAG = "ImageCarousel"
 
     private var adapter: CarouselAdapter? = null
 
@@ -293,9 +290,6 @@ class ImageCarousel(
     var previousButtonMargin: Int = 0
         set(value) {
             field = value
-
-            Log.e(TAG, "previousButtonMargin: $previousButtonMargin")
-            Log.e(TAG, "16dp --> px: ${16.dpToPx(context)}")
 
             val previousButtonParams = previousButtonContainer.layoutParams as LayoutParams
             previousButtonParams.setMargins(

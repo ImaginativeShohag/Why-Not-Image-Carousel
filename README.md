@@ -39,7 +39,7 @@ dependencies {
     // Optional: Circle Indicator (To fix the xml preview "Missing classes" error)
     implementation 'me.relex:circleindicator:2.1.4'
 
-    implementation 'com.github.ImaginativeShohag:Why-Not-Image-Carousel:v1.0.2'
+    implementation 'com.github.ImaginativeShohag:Why-Not-Image-Carousel:v1.1.0'
 }
 ```
 
@@ -68,18 +68,36 @@ val carousel: ImageCarousel = findViewById(R.id.carousel)
 
 val list = mutableListOf<CarouselItem>()
 
+// Image URL with caption
 list.add(
     CarouselItem(
         imageUrl = "https://images.unsplash.com/photo-1532581291347-9c39cf10a73c?w=1080",
         caption = "Photo by Aaron Wu on Unsplash"
     )
 )
+
+// Just image URL
 list.add(
     CarouselItem(
-        imageUrl = "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1080",
-        caption = "Photo by Johannes Plenio on Unsplash"
+        imageUrl = "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1080"
     )
 )
+
+// Image drawable with caption
+list.add(
+    CarouselItem(
+        imageDrawable = R.drawable.image_1,
+        caption = "Photo by Aaron Wu on Unsplash"
+    )
+)
+
+// Just image drawable
+list.add(
+    CarouselItem(
+        imageDrawable = R.drawable.image_2
+    )
+)
+
 // ...
 
 carousel.addData(list)
@@ -91,18 +109,36 @@ ImageCarousel carousel = findViewById(R.id.carousel);
 
 List<CarouselItem> list = new ArrayList<>();
 
+// Image URL with caption
 list.add(
     new CarouselItem(
-        imageUrl = "https://images.unsplash.com/photo-1532581291347-9c39cf10a73c?w=1080",
-        caption = "Photo by Aaron Wu on Unsplash"
+        "https://images.unsplash.com/photo-1532581291347-9c39cf10a73c?w=1080",
+        "Photo by Aaron Wu on Unsplash"
     )
-)
+);
+
+// Just image URL
 list.add(
     new CarouselItem(
-        imageUrl = "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1080",
-        caption = "Photo by Johannes Plenio on Unsplash"
+        "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1080"
     )
-)
+);
+
+// Image drawable with caption
+list.add(
+    new CarouselItem(
+        R.drawable.image_1,
+        "Photo by Aaron Wu on Unsplash"
+    )
+);
+
+// Just image drawable
+list.add(
+    new CarouselItem(
+        R.drawable.image_2
+    )
+);
+
 // ...
 
 carousel.addData(list);
@@ -390,6 +426,10 @@ This library is using the [CircleIndicator](https://github.com/ongakuer/CircleIn
 Inspired by [CarouselView](https://github.com/jama5262/CarouselView) library.
 
 ## Changelog
+
+### 1.1.0
+
+Image drawable support added.
 
 ### 1.0.0, 1.0.1, 1.0.2
 
