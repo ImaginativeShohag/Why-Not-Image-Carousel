@@ -87,7 +87,7 @@ list.add(
 list.add(
     CarouselItem(
         imageDrawable = R.drawable.image_1,
-        caption = "Photo by Aaron Wu on Unsplash"
+        caption = "Photo by Kimiya Oveisi on Unsplash"
     )
 )
 
@@ -128,7 +128,7 @@ list.add(
 list.add(
     new CarouselItem(
         R.drawable.image_1,
-        "Photo by Aaron Wu on Unsplash"
+        "Photo by Kimiya Oveisi on Unsplash"
     )
 );
 
@@ -424,6 +424,7 @@ You can also use the `scaleOnScroll` and `scalingFactor` attributes with this ca
 
 This library is using the [CircleIndicator](https://github.com/ongakuer/CircleIndicator) library for the indicator.
 Inspired by [CarouselView](https://github.com/jama5262/CarouselView) library.
+All the images from [Unsplash](https://unsplash.com).
 
 ## Changelog
 
