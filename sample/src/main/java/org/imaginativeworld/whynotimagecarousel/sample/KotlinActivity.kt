@@ -10,20 +10,23 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.activity_kotlin.*
 import org.imaginativeworld.whynotimagecarousel.*
+import org.imaginativeworld.whynotimagecarousel.sample.databinding.ActivityKotlinBinding
 
 class KotlinActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityKotlinBinding
 
     private lateinit var context: Context
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_kotlin)
+        binding = ActivityKotlinBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         context = this
 
-        btn_java_example.setOnClickListener {
+        binding.btnJavaExample.setOnClickListener {
 
             startActivity(Intent(this, JavaActivity::class.java))
 
@@ -32,41 +35,43 @@ class KotlinActivity : AppCompatActivity() {
         // --------------------------------
         // Example One
         // --------------------------------
-        carousel1.showTopShadow = true
-        carousel1.topShadowAlpha = 0.6f // 0 to 1, 1 means 100%
-        carousel1.topShadowHeight = 32.dpToPx(context) // px value of dp
-        carousel1.showBottomShadow = true
-        carousel1.bottomShadowAlpha = 0.6f // 0 to 1, 1 means 100%
-        carousel1.bottomShadowHeight = 64.dpToPx(context) // px value of dp
-        carousel1.showCaption = true
-        carousel1.captionMargin = 0.dpToPx(context) // px value of dp
-        carousel1.captionTextSize = 14.spToPx(context) // px value of sp
-        carousel1.showIndicator = true
-        carousel1.indicatorMargin = 0.dpToPx(context) // px value of dp
-        carousel1.showNavigationButtons = true
-        carousel1.imageScaleType = ImageView.ScaleType.CENTER_CROP
-        carousel1.carouselBackground = ColorDrawable(Color.parseColor("#333333"))
-        carousel1.imagePlaceholder = ContextCompat.getDrawable(
+        binding.carousel1.showTopShadow = true
+        binding.carousel1.topShadowAlpha = 0.6f // 0 to 1, 1 means 100%
+        binding.carousel1.topShadowHeight = 32.dpToPx(context) // px value of dp
+        binding.carousel1.showBottomShadow = true
+        binding.carousel1.bottomShadowAlpha = 0.6f // 0 to 1, 1 means 100%
+        binding.carousel1.bottomShadowHeight = 64.dpToPx(context) // px value of dp
+        binding.carousel1.showCaption = true
+        binding.carousel1.captionMargin = 0.dpToPx(context) // px value of dp
+        binding.carousel1.captionTextSize = 14.spToPx(context) // px value of sp
+        binding.carousel1.showIndicator = true
+        binding.carousel1.indicatorMargin = 0.dpToPx(context) // px value of dp
+        binding.carousel1.showNavigationButtons = true
+        binding.carousel1.imageScaleType = ImageView.ScaleType.CENTER_CROP
+        binding.carousel1.carouselBackground = ColorDrawable(Color.parseColor("#333333"))
+        binding.carousel1.imagePlaceholder = ContextCompat.getDrawable(
             this,
             org.imaginativeworld.whynotimagecarousel.R.drawable.ic_picture
         )
-        carousel1.itemLayout = org.imaginativeworld.whynotimagecarousel.R.layout.item_carousel
-        carousel1.imageViewId = org.imaginativeworld.whynotimagecarousel.R.id.img
-        carousel1.previousButtonLayout =
+        binding.carousel1.itemLayout =
+            org.imaginativeworld.whynotimagecarousel.R.layout.item_carousel
+        binding.carousel1.imageViewId = org.imaginativeworld.whynotimagecarousel.R.id.img
+        binding.carousel1.previousButtonLayout =
             org.imaginativeworld.whynotimagecarousel.R.layout.previous_button_layout
-        carousel1.previousButtonId = org.imaginativeworld.whynotimagecarousel.R.id.btn_previous
-        carousel1.previousButtonMargin = 4.dpToPx(context) // px value of dp
-        carousel1.nextButtonLayout =
+        binding.carousel1.previousButtonId =
+            org.imaginativeworld.whynotimagecarousel.R.id.btn_previous
+        binding.carousel1.previousButtonMargin = 4.dpToPx(context) // px value of dp
+        binding.carousel1.nextButtonLayout =
             org.imaginativeworld.whynotimagecarousel.R.layout.next_button_layout
-        carousel1.nextButtonId = org.imaginativeworld.whynotimagecarousel.R.id.btn_next
-        carousel1.nextButtonMargin = 4.dpToPx(context) // px value of dp
-        carousel1.carouselType = CarouselType.BLOCK
-        carousel1.scaleOnScroll = false
-        carousel1.scalingFactor = .15f // 0 to 1; 1 means 100
-        carousel1.autoWidthFixing = true
-        carousel1.autoPlay = false
-        carousel1.autoPlayDelay = 3000 // Milliseconds
-        carousel1.onScrollListener = object : CarouselOnScrollListener {
+        binding.carousel1.nextButtonId = org.imaginativeworld.whynotimagecarousel.R.id.btn_next
+        binding.carousel1.nextButtonMargin = 4.dpToPx(context) // px value of dp
+        binding.carousel1.carouselType = CarouselType.BLOCK
+        binding.carousel1.scaleOnScroll = false
+        binding.carousel1.scalingFactor = .15f // 0 to 1; 1 means 100
+        binding.carousel1.autoWidthFixing = true
+        binding.carousel1.autoPlay = false
+        binding.carousel1.autoPlayDelay = 3000 // Milliseconds
+        binding.carousel1.onScrollListener = object : CarouselOnScrollListener {
             override fun onScrollStateChanged(
                 recyclerView: RecyclerView,
                 newState: Int,
@@ -80,7 +85,7 @@ class KotlinActivity : AppCompatActivity() {
                 // ...
             }
         }
-        carousel1.onItemClickListener = object : OnItemClickListener {
+        binding.carousel1.onItemClickListener = object : OnItemClickListener {
             override fun onClick(position: Int, carouselItem: CarouselItem) {
                 // ...
             }
@@ -113,7 +118,7 @@ class KotlinActivity : AppCompatActivity() {
             }
         }
 
-        carousel1.addData(listOne)
+        binding.carousel1.addData(listOne)
 
 
         // --------------------------------
@@ -137,10 +142,10 @@ class KotlinActivity : AppCompatActivity() {
             }
         }
 
-        carousel2.addData(listTwo)
+        binding.carousel2.addData(listTwo)
 
         // Custom click listener
-        carousel2.onItemClickListener = object : OnItemClickListener {
+        binding.carousel2.onItemClickListener = object : OnItemClickListener {
             override fun onClick(position: Int, carouselItem: CarouselItem) {
 
                 Toast.makeText(this@KotlinActivity, "Clicked!", Toast.LENGTH_SHORT).show()
@@ -179,11 +184,11 @@ class KotlinActivity : AppCompatActivity() {
             }
         }
 
-        carousel3.addData(listThree)
+        binding.carousel3.addData(listThree)
 
-        custom_caption.isSelected = true
+        binding.customCaption.isSelected = true
 
-        carousel3.onScrollListener = object : CarouselOnScrollListener {
+        binding.carousel3.onScrollListener = object : CarouselOnScrollListener {
 
             override fun onScrollStateChanged(
                 recyclerView: RecyclerView,
@@ -194,7 +199,7 @@ class KotlinActivity : AppCompatActivity() {
 
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     carouselItem?.apply {
-                        custom_caption.text = caption
+                        binding.customCaption.text = caption
                     }
                 }
 
@@ -207,12 +212,12 @@ class KotlinActivity : AppCompatActivity() {
         }
 
         // Custom navigation
-        btn_goto_previous.setOnClickListener {
-            carousel3.previous()
+        binding.btnGotoPrevious.setOnClickListener {
+            binding.carousel3.previous()
         }
 
-        btn_goto_next.setOnClickListener {
-            carousel3.next()
+        binding.btnGotoNext.setOnClickListener {
+            binding.carousel3.next()
         }
 
 
@@ -237,10 +242,10 @@ class KotlinActivity : AppCompatActivity() {
             }
         }
 
-        carousel4.addData(listFour)
+        binding.carousel4.addData(listFour)
 
         // Custom indicator
-        carousel4.setIndicator(custom_indicator)
+        binding.carousel4.setIndicator(binding.customIndicator)
 
     }
 }

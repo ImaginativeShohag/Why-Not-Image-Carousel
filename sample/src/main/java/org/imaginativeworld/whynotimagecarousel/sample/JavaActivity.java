@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,14 +11,13 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 import org.imaginativeworld.whynotimagecarousel.CarouselItem;
 import org.imaginativeworld.whynotimagecarousel.CarouselOnScrollListener;
 import org.imaginativeworld.whynotimagecarousel.CarouselType;
-import org.imaginativeworld.whynotimagecarousel.ImageCarousel;
 import org.imaginativeworld.whynotimagecarousel.OnItemClickListener;
 import org.imaginativeworld.whynotimagecarousel.Utils;
+import org.imaginativeworld.whynotimagecarousel.sample.databinding.ActivityJavaBinding;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,56 +28,53 @@ import me.relex.circleindicator.CircleIndicator2;
 
 public class JavaActivity extends AppCompatActivity {
 
-    private Context context;
+    private ActivityJavaBinding binding;
 
-    private ExtendedFloatingActionButton fab;
+    private Context context;
 
     private boolean isStarted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_java);
+        binding = ActivityJavaBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         context = this;
 
-        fab = findViewById(R.id.btn_play);
-
-        ImageCarousel carousel = findViewById(R.id.carousel);
-
-        carousel.setShowTopShadow(false);
-        carousel.setTopShadowAlpha(0.6f); // 0 to 1, 1 means 100%
-        carousel.setTopShadowHeight(Utils.dpToPx(32, context)); // px value of dp
-        carousel.setShowBottomShadow(false);
-        carousel.setBottomShadowAlpha(0.6f); // 0 to 1, 1 means 100%
-        carousel.setBottomShadowHeight(Utils.dpToPx(64, context)); // px value of dp
-        carousel.setShowCaption(true);
-        carousel.setCaptionMargin(Utils.dpToPx(16, context)); // px value of dp
-        carousel.setCaptionTextSize(Utils.spToPx(16, context)); // px value of sp
-        carousel.setShowIndicator(false);
-        carousel.setIndicatorMargin(Utils.dpToPx(0, context)); // px value of dp
-        carousel.setShowNavigationButtons(true);
-        carousel.setImageScaleType(ImageView.ScaleType.CENTER);
-        carousel.setCarouselBackground(new ColorDrawable(Color.parseColor("#333333")));
-        carousel.setImagePlaceholder(ContextCompat.getDrawable(
+        binding.carousel.setShowTopShadow(false);
+        binding.carousel.setTopShadowAlpha(0.6f); // 0 to 1, 1 means 100%
+        binding.carousel.setTopShadowHeight(Utils.dpToPx(32, context)); // px value of dp
+        binding.carousel.setShowBottomShadow(false);
+        binding.carousel.setBottomShadowAlpha(0.6f); // 0 to 1, 1 means 100%
+        binding.carousel.setBottomShadowHeight(Utils.dpToPx(64, context)); // px value of dp
+        binding.carousel.setShowCaption(true);
+        binding.carousel.setCaptionMargin(Utils.dpToPx(16, context)); // px value of dp
+        binding.carousel.setCaptionTextSize(Utils.spToPx(16, context)); // px value of sp
+        binding.carousel.setShowIndicator(false);
+        binding.carousel.setIndicatorMargin(Utils.dpToPx(0, context)); // px value of dp
+        binding.carousel.setShowNavigationButtons(true);
+        binding.carousel.setImageScaleType(ImageView.ScaleType.CENTER);
+        binding.carousel.setCarouselBackground(new ColorDrawable(Color.parseColor("#333333")));
+        binding.carousel.setImagePlaceholder(ContextCompat.getDrawable(
                 this,
                 R.drawable.ic_wb_cloudy_with_padding
         ));
-        carousel.setItemLayout(R.layout.custom_fixed_size_item_layout);
-        carousel.setImageViewId(R.id.image_view);
-        carousel.setPreviousButtonLayout(R.layout.custom_previous_button_layout);
-        carousel.setPreviousButtonId(R.id.custom_btn_previous);
-        carousel.setPreviousButtonMargin(Utils.dpToPx(8, context)); // px value of dp
-        carousel.setNextButtonLayout(R.layout.custom_next_button_layout);
-        carousel.setNextButtonId(R.id.custom_btn_next);
-        carousel.setNextButtonMargin(Utils.dpToPx(8, context)); // px value of dp
-        carousel.setCarouselType(CarouselType.SHOWCASE);
-        carousel.setScaleOnScroll(true);
-        carousel.setScalingFactor(.15f);
-        carousel.setAutoWidthFixing(true);
-        carousel.setAutoPlay(false);
-        carousel.setAutoPlayDelay(3000); // Milliseconds
-        carousel.setOnScrollListener(new CarouselOnScrollListener() {
+        binding.carousel.setItemLayout(R.layout.custom_fixed_size_item_layout);
+        binding.carousel.setImageViewId(R.id.image_view);
+        binding.carousel.setPreviousButtonLayout(R.layout.custom_previous_button_layout);
+        binding.carousel.setPreviousButtonId(R.id.custom_btn_previous);
+        binding.carousel.setPreviousButtonMargin(Utils.dpToPx(8, context)); // px value of dp
+        binding.carousel.setNextButtonLayout(R.layout.custom_next_button_layout);
+        binding.carousel.setNextButtonId(R.id.custom_btn_next);
+        binding.carousel.setNextButtonMargin(Utils.dpToPx(8, context)); // px value of dp
+        binding.carousel.setCarouselType(CarouselType.SHOWCASE);
+        binding.carousel.setScaleOnScroll(true);
+        binding.carousel.setScalingFactor(.15f);
+        binding.carousel.setAutoWidthFixing(true);
+        binding.carousel.setAutoPlay(false);
+        binding.carousel.setAutoPlayDelay(3000); // Milliseconds
+        binding.carousel.setOnScrollListener(new CarouselOnScrollListener() {
             @Override
             public void onScrolled(@NotNull RecyclerView recyclerView, int dx, int dy) {
                 // ...
@@ -90,7 +85,7 @@ public class JavaActivity extends AppCompatActivity {
                 // ...
             }
         });
-        carousel.setOnItemClickListener(new OnItemClickListener() {
+        binding.carousel.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onClick(int position, @NotNull CarouselItem carouselItem) {
                 // ...
@@ -103,23 +98,13 @@ public class JavaActivity extends AppCompatActivity {
         });
 
         CircleIndicator2 indicator = findViewById(R.id.custom_indicator);
-        carousel.setIndicator(indicator);
+        binding.carousel.setIndicator(indicator);
 
         MaterialButton previousBtn = findViewById(R.id.btn_goto_previous);
-        previousBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                carousel.previous();
-            }
-        });
+        previousBtn.setOnClickListener(v -> binding.carousel.previous());
 
         MaterialButton nextBtn = findViewById(R.id.btn_goto_next);
-        nextBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                carousel.next();
-            }
-        });
+        nextBtn.setOnClickListener(v -> binding.carousel.next());
 
         List<CarouselItem> list = new ArrayList<>();
 
@@ -143,28 +128,25 @@ public class JavaActivity extends AppCompatActivity {
             }
         }
 
-        carousel.addData(list);
+        binding.carousel.addData(list);
 
         // ----------------------------------------------------------------
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isStarted) {
+        binding.fabPlay.setOnClickListener(v -> {
+            if (isStarted) {
 
-                    isStarted = false;
-                    carousel.stop();
+                isStarted = false;
+                binding.carousel.stop();
 
-                    fab.setText("Start");
+                binding.fabPlay.setText("Start");
 
-                } else {
+            } else {
 
-                    isStarted = true;
-                    carousel.start();
+                isStarted = true;
+                binding.carousel.start();
 
-                    fab.setText("Stop");
+                binding.fabPlay.setText("Stop");
 
-                }
             }
         });
 

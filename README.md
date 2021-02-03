@@ -2,7 +2,8 @@
 
 An easy, super simple and customizable image carousel view for Android.
 
-[![](https://jitpack.io/v/ImaginativeShohag/Why-Not-Image-Carousel.svg)](https://jitpack.io/#ImaginativeShohag/Why-Not-Image-Carousel)
+[![Developer](https://img.shields.io/badge/Maintainer-ImaginativeShohag-green)](https://github.com/ImaginativeShohag)
+[![GitHub release](https://img.shields.io/github/release/ImaginativeShohag/Why-Not-Image-Carousel.svg)](https://github.com/ImaginativeShohag/Oops-No-Internet/releases)
 [![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-Why%20Not!%20Image%20Carousel!-green.svg?style=flat )]( https://android-arsenal.com/details/1/8053)
 [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=21)
 
@@ -16,30 +17,17 @@ An easy, super simple and customizable image carousel view for Android.
 
 ### Dependency
 
-#### Step 1. Add the JitPack repository to your build file
-
-Add it to your root **build.gradle** at the end of repositories:
-
-```groovy
-allprojects {
-    repositories {
-        // ...
-        maven { url 'https://jitpack.io' }
-    }
-}
-```
-
-#### Step 2. Add the dependency
+#### Add the followings to your project level `build.gradle` file.
 
 ```groovy
 dependencies {
-    // Material Components for Android
-    implementation 'com.google.android.material:material:1.1.0'
+    // Material Components for Android. Replace the version with the latest version of Material Components library.
+    implementation 'com.google.android.material:material:1.2.0'
     
     // Optional: Circle Indicator (To fix the xml preview "Missing classes" error)
-    implementation 'me.relex:circleindicator:2.1.4'
+    implementation 'me.relex:circleindicator:2.1.6'
 
-    implementation 'com.github.ImaginativeShohag:Why-Not-Image-Carousel:v1.1.0'
+    implementation 'org.imaginativeworld.whynotimagecarousel:whynotimagecarousel:1.2.1'
 }
 ```
 
@@ -427,6 +415,12 @@ Inspired by [CarouselView](https://github.com/jama5262/CarouselView) library.
 All the images from [Unsplash](https://unsplash.com).
 
 ## Changelog
+
+### 1.2.1
+
+We move our library from **jitpack.io** to **maven** repository. So no need to add any repositories for using the library.
+
+View binding added to the sample. Dependent libraries updated.
 
 ### 1.1.0
 

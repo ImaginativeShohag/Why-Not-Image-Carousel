@@ -124,6 +124,9 @@ class CarouselAdapter(
         }
     }
 
+    /**
+     * Clear previous items and add all given carousel items.
+     */
     fun addAll(dataList: List<CarouselItem>) {
         this.dataList.clear()
 
@@ -131,6 +134,9 @@ class CarouselAdapter(
         notifyDataSetChanged()
     }
 
+    /**
+     * Add a single carousel item with the existing items.
+     */
     fun add(item: CarouselItem) {
         this.dataList.add(item)
         notifyItemInserted(dataList.size - 1)
