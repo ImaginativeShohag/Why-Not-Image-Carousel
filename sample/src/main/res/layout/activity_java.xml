@@ -32,9 +32,9 @@
         android:layout_marginBottom="8dp"
         app:backgroundTint="@color/flat_green_2"
         app:icon="@drawable/ic_arrow_back"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_play"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_play"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btn_play" />
+        app:layout_constraintTop_toTopOf="@+id/fab_play" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_goto_next"
@@ -46,12 +46,12 @@
         android:layout_marginBottom="8dp"
         app:backgroundTint="@color/flat_green_2"
         app:icon="@drawable/ic_arrow_forward"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_play"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_play"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btn_play" />
+        app:layout_constraintTop_toTopOf="@+id/fab_play" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/btn_play"
+        android:id="@+id/fab_play"
         style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
