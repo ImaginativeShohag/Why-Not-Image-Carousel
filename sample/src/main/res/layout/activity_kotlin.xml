@@ -11,39 +11,39 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <org.imaginativeworld.whynotimagecarousel.ImageCarousel
-            android:id="@+id/carousel1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+<!--        <org.imaginativeworld.whynotimagecarousel.ImageCarousel-->
+<!--            android:id="@+id/carousel1"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_weight="1" />-->
 
-        <org.imaginativeworld.whynotimagecarousel.ImageCarousel
-            android:id="@+id/carousel2"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            app:carouselBackground="@color/white"
-            app:carouselType="BLOCK"
-            app:imageScaleType="centerCrop"
-            app:imageViewId="@id/image_view"
-            app:itemLayout="@layout/custom_item_layout"
-            app:nextButtonId="@id/custom_btn_next"
-            app:nextButtonLayout="@layout/custom_next_button_layout"
-            app:nextButtonMargin="24dp"
-            app:previousButtonId="@id/custom_btn_previous"
-            app:previousButtonLayout="@layout/custom_previous_button_layout"
-            app:previousButtonMargin="24dp"
-            app:scaleOnScroll="false"
-            app:showBottomShadow="false"
-            app:showCaption="false"
-            app:showIndicator="false"
-            app:showNavigationButtons="true"
-            app:showTopShadow="false" />
+<!--        <org.imaginativeworld.whynotimagecarousel.ImageCarousel-->
+<!--            android:id="@+id/carousel2"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            app:carouselBackground="@color/white"-->
+<!--            app:carouselType="BLOCK"-->
+<!--            app:imageScaleType="centerCrop"-->
+<!--            app:imageViewId="@id/image_view"-->
+<!--            app:itemLayout="@layout/custom_item_layout"-->
+<!--            app:nextButtonId="@id/custom_btn_next"-->
+<!--            app:nextButtonLayout="@layout/custom_next_button_layout"-->
+<!--            app:nextButtonMargin="24dp"-->
+<!--            app:previousButtonId="@id/custom_btn_previous"-->
+<!--            app:previousButtonLayout="@layout/custom_previous_button_layout"-->
+<!--            app:previousButtonMargin="24dp"-->
+<!--            app:scaleOnScroll="false"-->
+<!--            app:showBottomShadow="false"-->
+<!--            app:showCaption="false"-->
+<!--            app:showIndicator="false"-->
+<!--            app:showNavigationButtons="true"-->
+<!--            app:showTopShadow="false" />-->
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#ccc" />
+<!--        <View-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:background="#ccc" />-->
 
         <org.imaginativeworld.whynotimagecarousel.ImageCarousel
             android:id="@+id/carousel3"
@@ -52,6 +52,7 @@
             android:layout_weight="1"
             app:carouselBackground="@color/white"
             app:carouselType="SHOWCASE"
+            app:carouselGravity="START"
             app:imagePlaceholder="@drawable/ic_wb_cloudy_with_padding"
             app:imageScaleType="centerCrop"
             app:imageViewId="@id/image_view"
@@ -112,49 +113,50 @@
 
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#ccc" />
+<!--        <View-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:background="#ccc" />-->
 
-        <org.imaginativeworld.whynotimagecarousel.ImageCarousel
-            android:id="@+id/carousel4"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            app:autoPlay="true"
-            app:autoPlayDelay="4000"
-            app:carouselBackground="@color/white"
-            app:carouselType="SHOWCASE"
-            app:imageScaleType="centerCrop"
-            app:imageViewId="@id/image_view"
-            app:itemLayout="@layout/custom_fixed_size_item_layout"
-            app:nextButtonId="@id/custom_btn_next"
-            app:nextButtonLayout="@layout/custom_next_button_layout"
-            app:nextButtonMargin="8dp"
-            app:previousButtonId="@id/custom_btn_previous"
-            app:previousButtonLayout="@layout/custom_previous_button_layout"
-            app:previousButtonMargin="8dp"
-            app:scaleOnScroll="true"
-            app:scalingFactor=".25"
-            app:showBottomShadow="false"
-            app:showCaption="true"
-            app:showIndicator="true"
-            app:showNavigationButtons="false"
-            app:showTopShadow="false" />
+<!--        <org.imaginativeworld.whynotimagecarousel.ImageCarousel-->
+<!--            android:id="@+id/carousel4"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            app:autoPlay="true"-->
+<!--            app:autoPlayDelay="4000"-->
+<!--            app:carouselBackground="@color/white"-->
+<!--            app:carouselType="SHOWCASE"-->
+<!--            app:carouselGravity="START"-->
+<!--            app:imageScaleType="centerCrop"-->
+<!--            app:imageViewId="@id/image_view"-->
+<!--            app:itemLayout="@layout/custom_fixed_size_item_layout"-->
+<!--            app:nextButtonId="@id/custom_btn_next"-->
+<!--            app:nextButtonLayout="@layout/custom_next_button_layout"-->
+<!--            app:nextButtonMargin="8dp"-->
+<!--            app:previousButtonId="@id/custom_btn_previous"-->
+<!--            app:previousButtonLayout="@layout/custom_previous_button_layout"-->
+<!--            app:previousButtonMargin="8dp"-->
+<!--            app:scaleOnScroll="true"-->
+<!--            app:scalingFactor=".25"-->
+<!--            app:showBottomShadow="false"-->
+<!--            app:showCaption="true"-->
+<!--            app:showIndicator="true"-->
+<!--            app:showNavigationButtons="false"-->
+<!--            app:showTopShadow="false" />-->
 
-        <me.relex.circleindicator.CircleIndicator2
-            android:id="@+id/custom_indicator"
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
-            app:ci_animator="@animator/scale_with_alpha"
-            app:ci_drawable="@drawable/dot"
-            app:ci_drawable_unselected="@drawable/dot" />
+<!--        <me.relex.circleindicator.CircleIndicator2-->
+<!--            android:id="@+id/custom_indicator"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="32dp"-->
+<!--            app:ci_animator="@animator/scale_with_alpha"-->
+<!--            app:ci_drawable="@drawable/dot"-->
+<!--            app:ci_drawable_unselected="@drawable/dot" />-->
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#ccc" />
+<!--        <View-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:background="#ccc" />-->
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_java_example"

@@ -37,6 +37,10 @@
             <enum name="BLOCK" value="0" />
             <enum name="SHOWCASE" value="1" />
         </attr>
+        <attr name="carouselGravity" format="enum">
+            <enum name="START" value="0" />
+            <enum name="CENTER" value="1" />
+        </attr>
         <attr name="scaleOnScroll" format="boolean" />
         <attr name="scalingFactor" format="float" />
         <attr name="autoWidthFixing" format="boolean" />

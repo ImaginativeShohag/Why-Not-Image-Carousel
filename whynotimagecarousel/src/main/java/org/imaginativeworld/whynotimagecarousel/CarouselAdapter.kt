@@ -12,15 +12,15 @@ import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-
 class CarouselAdapter(
     private val context: Context,
     private val recyclerView: RecyclerView,
     private val carouselType: CarouselType,
+    private val carouselGravity: CarouselGravity,
     private val autoWidthFixing: Boolean,
     @LayoutRes private val itemLayout: Int,
     @IdRes private val imageViewId: Int,
-    var listener: OnItemClickListener? = null,
+    var listener: CarouselListener? = null,
     private val imageScaleType: ImageView.ScaleType,
     private val imagePlaceholder: Drawable?
 ) : RecyclerView.Adapter<CarouselAdapter.MyViewHolder>() {
@@ -55,11 +55,12 @@ class CarouselAdapter(
          */
         if (autoWidthFixing && carouselType == CarouselType.SHOWCASE) {
             val containerWidth = recyclerView.width
-            if (holder.itemView.layoutParams.width >= 0 && holder.itemView.layoutParams.width * 2 <= containerWidth) {
+            if (holder.itemView.layoutParams.width >= 0 &&
+                holder.itemView.layoutParams.width * 2 <= containerWidth
+            ) {
                 holder.itemView.layoutParams.width = (containerWidth / 2) + 1
             }
         }
-
 
         // Init views
         holder.img.scaleType = imageScaleType
@@ -76,30 +77,6 @@ class CarouselAdapter(
                 .into(holder.img)
         }
 
-
-        // Init start and end offsets
-        if (carouselType == CarouselType.SHOWCASE) {
-            holder.itemView.viewTreeObserver.addOnGlobalLayoutListener(
-                object : ViewTreeObserver.OnGlobalLayoutListener {
-
-                    override fun onGlobalLayout() {
-                        if (recyclerView.itemDecorationCount > 0) {
-                            recyclerView.removeItemDecorationAt(0)
-                        }
-
-                        recyclerView.addItemDecoration(
-                            CarouselItemDecoration(
-                                holder.itemView.width,
-                                0
-                            ), 0
-                        )
-
-                        holder.itemView.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                    }
-
-                })
-        }
-
         // Init listeners
         listener?.apply {
 
@@ -112,8 +89,42 @@ class CarouselAdapter(
 
                 true
             }
-
         }
+
+        listener?.onBindView(holder.itemView, item)
+
+        // Init start and end offsets
+//        if (carouselType == CarouselType.SHOWCASE) { // todo is this really necessary?
+        holder.itemView.viewTreeObserver.addOnGlobalLayoutListener(
+            object : ViewTreeObserver.OnGlobalLayoutListener {
+
+                override fun onGlobalLayout() {
+                    if (recyclerView.itemDecorationCount > 0) {
+                        recyclerView.removeItemDecorationAt(0)
+                    }
+
+                    if (carouselGravity == CarouselGravity.START) {
+                        recyclerView.addItemDecoration(
+                            CarouselItemDecoration(
+                                0,
+                                0
+                            ),
+                            0
+                        )
+                    } else {
+                        recyclerView.addItemDecoration(
+                            CarouselItemDecoration(
+                                holder.itemView.width,
+                                0
+                            ),
+                            0
+                        )
+                    }
+
+                    holder.itemView.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                }
+            })
+//        }
     }
 
     fun getItem(position: Int): CarouselItem? {
@@ -141,5 +152,4 @@ class CarouselAdapter(
         this.dataList.add(item)
         notifyItemInserted(dataList.size - 1)
     }
-
 }

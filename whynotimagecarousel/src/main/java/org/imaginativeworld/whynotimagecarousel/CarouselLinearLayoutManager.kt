@@ -3,7 +3,6 @@ package org.imaginativeworld.whynotimagecarousel
 import android.content.Context
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import java.lang.Exception
 import kotlin.math.abs
 import kotlin.math.min
 
@@ -13,6 +12,7 @@ class CarouselLinearLayoutManager(
     reverseLayout: Boolean
 ) : LinearLayoutManager(context, orientation, reverseLayout) {
 
+    var isOffsetStart = false
     var scaleOnScroll = false
     var scalingFactor = 0f
 
@@ -28,6 +28,7 @@ class CarouselLinearLayoutManager(
     ): Int {
         val scrolled = super.scrollHorizontallyBy(dx, recycler, state)
 
+        // If scale on scroll enabled:
         return if (scaleOnScroll) {
 
             try {
@@ -37,7 +38,7 @@ class CarouselLinearLayoutManager(
                         val childWidthHalf = childWidth / 2f
                         val childCenter = child.left + childWidthHalf
 
-                        val parentWidth = width.toFloat()
+                        val parentWidth = if (isOffsetStart) childWidth else width.toFloat()
                         val parentWidthHalf = parentWidth / 2f
 
                         val d0 = 0f
@@ -65,5 +66,4 @@ class CarouselLinearLayoutManager(
             scrolled
         }
     }
-
 }

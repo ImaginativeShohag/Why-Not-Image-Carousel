@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,9 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.button.MaterialButton;
 
 import org.imaginativeworld.whynotimagecarousel.CarouselItem;
+import org.imaginativeworld.whynotimagecarousel.CarouselListener;
 import org.imaginativeworld.whynotimagecarousel.CarouselOnScrollListener;
 import org.imaginativeworld.whynotimagecarousel.CarouselType;
-import org.imaginativeworld.whynotimagecarousel.OnItemClickListener;
 import org.imaginativeworld.whynotimagecarousel.Utils;
 import org.imaginativeworld.whynotimagecarousel.sample.databinding.ActivityJavaBinding;
 import org.jetbrains.annotations.NotNull;
@@ -85,7 +86,12 @@ public class JavaActivity extends AppCompatActivity {
                 // ...
             }
         });
-        binding.carousel.setOnItemClickListener(new OnItemClickListener() {
+        binding.carousel.setCarouselListener(new CarouselListener() {
+            @Override
+            public void onBindView(@NotNull View view, @NotNull CarouselItem item) {
+                // ...
+            }
+
             @Override
             public void onClick(int position, @NotNull CarouselItem carouselItem) {
                 // ...
