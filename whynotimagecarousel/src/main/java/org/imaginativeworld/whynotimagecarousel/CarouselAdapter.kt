@@ -11,6 +11,7 @@ import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.model.GlideUrl
 
 
 class CarouselAdapter(
@@ -64,16 +65,25 @@ class CarouselAdapter(
         // Init views
         holder.img.scaleType = imageScaleType
 
-        if (item.imageUrl != null) {
-            Glide.with(context.applicationContext)
-                .load(item.imageUrl)
-                .placeholder(imagePlaceholder)
-                .into(holder.img)
-        } else {
-            Glide.with(context.applicationContext)
-                .load(item.imageDrawable)
-                .placeholder(imagePlaceholder)
-                .into(holder.img)
+        when {
+            item.imageUrl != null && item.headers == null -> {
+                Glide.with(context.applicationContext)
+                    .load(item.imageUrl)
+                    .placeholder(imagePlaceholder)
+                    .into(holder.img)
+            }
+            item.headers != null -> {
+                Glide.with(context.applicationContext)
+                    .load(GlideUrl(item.imageUrl.toString()){item.headers})
+                    .placeholder(imagePlaceholder)
+                    .into(holder.img)
+            }
+            else -> {
+                Glide.with(context.applicationContext)
+                    .load(item.imageDrawable)
+                    .placeholder(imagePlaceholder)
+                    .into(holder.img)
+            }
         }
 
 
