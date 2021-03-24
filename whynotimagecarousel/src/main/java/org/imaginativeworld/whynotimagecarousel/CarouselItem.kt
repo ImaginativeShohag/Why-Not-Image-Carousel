@@ -14,24 +14,39 @@ data class CarouselItem constructor(
         null,
         null
     )
-    constructor(imageUrl: String? = null, headers: Map<String, String>? = null): this(
+
+    constructor(imageUrl: String? = null, headers: Map<String, String>? = null) : this(
         imageUrl,
         null,
         null,
         headers
     )
+
     constructor(@DrawableRes imageDrawable: Int? = null) : this(
         null,
         imageDrawable,
         null,
         null
     )
+
     constructor(imageUrl: String? = null, caption: String? = null) : this(
         imageUrl,
         null,
         caption,
         null
     )
+
+    constructor(
+        imageUrl: String? = null,
+        caption: String? = null,
+        headers: Map<String, String>? = null
+    ) : this(
+        imageUrl,
+        null,
+        caption,
+        headers
+    )
+
     constructor(@DrawableRes imageDrawable: Int? = null, caption: String? = null) : this(
         null,
         imageDrawable,
