@@ -11,7 +11,7 @@ import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-
+import com.bumptech.glide.load.model.GlideUrl
 
 class CarouselAdapter(
     private val context: Context,
@@ -60,22 +60,29 @@ class CarouselAdapter(
             }
         }
 
-
         // Init views
         holder.img.scaleType = imageScaleType
 
-        if (item.imageUrl != null) {
-            Glide.with(context.applicationContext)
-                .load(item.imageUrl)
-                .placeholder(imagePlaceholder)
-                .into(holder.img)
-        } else {
-            Glide.with(context.applicationContext)
-                .load(item.imageDrawable)
-                .placeholder(imagePlaceholder)
-                .into(holder.img)
+        when {
+            item.imageUrl != null && item.headers == null -> {
+                Glide.with(context.applicationContext)
+                    .load(item.imageUrl)
+                    .placeholder(imagePlaceholder)
+                    .into(holder.img)
+            }
+            item.headers != null -> {
+                Glide.with(context.applicationContext)
+                    .load(GlideUrl(item.imageUrl.toString()) { item.headers })
+                    .placeholder(imagePlaceholder)
+                    .into(holder.img)
+            }
+            else -> {
+                Glide.with(context.applicationContext)
+                    .load(item.imageDrawable)
+                    .placeholder(imagePlaceholder)
+                    .into(holder.img)
+            }
         }
-
 
         // Init start and end offsets
         if (carouselType == CarouselType.SHOWCASE) {
@@ -91,12 +98,12 @@ class CarouselAdapter(
                             CarouselItemDecoration(
                                 holder.itemView.width,
                                 0
-                            ), 0
+                            ),
+                            0
                         )
 
                         holder.itemView.viewTreeObserver.removeOnGlobalLayoutListener(this)
                     }
-
                 })
         }
 
@@ -112,7 +119,6 @@ class CarouselAdapter(
 
                 true
             }
-
         }
     }
 
@@ -141,5 +147,4 @@ class CarouselAdapter(
         this.dataList.add(item)
         notifyItemInserted(dataList.size - 1)
     }
-
 }

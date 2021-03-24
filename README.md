@@ -27,7 +27,7 @@ dependencies {
     // Optional: Circle Indicator (To fix the xml preview "Missing classes" error)
     implementation 'me.relex:circleindicator:2.1.6'
 
-    implementation 'org.imaginativeworld.whynotimagecarousel:whynotimagecarousel:1.2.1'
+    implementation 'org.imaginativeworld.whynotimagecarousel:whynotimagecarousel:1.3.0'
 }
 ```
 
@@ -415,6 +415,45 @@ Inspired by [CarouselView](https://github.com/jama5262/CarouselView) library.
 All the images from [Unsplash](https://unsplash.com).
 
 ## Changelog
+
+### 1.3.0
+
+Header field is added to the `CarouselItem`.
+
+Examples:
+
+```kotlin
+// Kotlin
+val headers = mutableMapOf<String, String>()
+headers["header_key"] = "header_value"
+
+val carouselItem1 = CarouselItem(
+    imageUrl = "https://images.unsplash.com/photo-1549577434-d7615fd4ceac?w=1080",
+    caption = "Photo by Jeremy Bishop on Unsplash",
+    headers = headers
+)
+val carouselItem2 = CarouselItem(
+    imageUrl = "https://images.unsplash.com/photo-1549577434-d7615fd4ceac?w=1080",
+    headers = headers
+)
+```
+
+```java
+// Java
+Map<String, String> headers = new HashMap<>();
+headers.put("header_key", "header_value");
+
+CarouselItem carouselItem1 = new CarouselItem(
+        "https://images.unsplash.com/photo-1549577434-d7615fd4ceac?w=1080",
+        "Photo by Jeremy Bishop on Unsplash",
+        headers
+);
+
+CarouselItem carouselItem2 = new CarouselItem(
+        "https://images.unsplash.com/photo-1549577434-d7615fd4ceac?w=1080",
+        headers
+);
+```
 
 ### 1.2.1
 
