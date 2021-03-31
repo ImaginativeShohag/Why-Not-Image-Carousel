@@ -1,12 +1,10 @@
 package org.imaginativeworld.whynotimagecarousel
 
 import android.graphics.Rect
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
 class CarouselItemDecoration(
-    // For position start, width is the item width.
     private val width: Int,
     private val spacing: Int
 ) : RecyclerView.ItemDecoration() {
@@ -17,7 +15,6 @@ class CarouselItemDecoration(
         parent: RecyclerView,
         state: RecyclerView.State
     ) {
-        Log.e("aaa", "getItemOffsets")
         super.getItemOffsets(outRect, view, parent, state)
 
         outRect.right = if (width > 0) spacing / 2 else spacing
