@@ -5,14 +5,18 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.View
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewbinding.ViewBinding
 import org.imaginativeworld.whynotimagecarousel.*
 import org.imaginativeworld.whynotimagecarousel.sample.databinding.ActivityKotlinBinding
+import org.imaginativeworld.whynotimagecarousel.sample.databinding.CustomFixedSizeItemLayoutBinding
+import org.imaginativeworld.whynotimagecarousel.sample.databinding.CustomFixedSizeItemTwoLayoutBinding
+import org.imaginativeworld.whynotimagecarousel.sample.databinding.CustomItemTwoLayoutBinding
 
 class KotlinActivity : AppCompatActivity() {
 
@@ -31,9 +35,12 @@ class KotlinActivity : AppCompatActivity() {
             startActivity(Intent(this, JavaActivity::class.java))
         }
 
-        // --------------------------------
+        val max = 7
+
+        // ----------------------------------------------------------------
         // Example One
-        // --------------------------------
+        // ----------------------------------------------------------------
+
         binding.carousel1.showTopShadow = true
         binding.carousel1.topShadowAlpha = 0.6f // 0 to 1, 1 means 100%
         binding.carousel1.topShadowHeight = 32.dpToPx(context) // px value of dp
@@ -52,9 +59,6 @@ class KotlinActivity : AppCompatActivity() {
             this,
             org.imaginativeworld.whynotimagecarousel.R.drawable.ic_picture
         )
-        binding.carousel1.itemLayout =
-            org.imaginativeworld.whynotimagecarousel.R.layout.item_carousel
-        binding.carousel1.imageViewId = org.imaginativeworld.whynotimagecarousel.R.id.img
         binding.carousel1.previousButtonLayout =
             org.imaginativeworld.whynotimagecarousel.R.layout.previous_button_layout
         binding.carousel1.previousButtonId =
@@ -84,23 +88,8 @@ class KotlinActivity : AppCompatActivity() {
                 // ...
             }
         }
-        binding.carousel1.carouselListener = object : CarouselListener {
-            override fun onBindView(view: View, item: CarouselItem) {
-                // ...
-            }
-
-            override fun onClick(position: Int, carouselItem: CarouselItem) {
-                // ...
-            }
-
-            override fun onLongClick(position: Int, dataObject: CarouselItem) {
-                // ...
-            }
-        }
 
         val listOne = mutableListOf<CarouselItem>()
-
-        val max = 7
 
         for (i in 1..max) {
             if (i % 2 == 0) {
@@ -120,11 +109,35 @@ class KotlinActivity : AppCompatActivity() {
             }
         }
 
-        binding.carousel1.addData(listOne)
+        binding.carousel1.setData(listOne)
 
-        // --------------------------------
+        // ----------------------------------------------------------------
         // Example Two
-        // --------------------------------
+        // ----------------------------------------------------------------
+
+        // Custom view
+        binding.carousel2.carouselListener = object : CarouselListener {
+            override fun onCreateViewHolder(
+                layoutInflater: LayoutInflater,
+                parent: ViewGroup
+            ): ViewBinding? {
+                return CustomItemTwoLayoutBinding.inflate(layoutInflater, parent, false)
+            }
+
+            override fun onBindViewHolder(
+                binding: ViewBinding,
+                imageScaleType: ImageView.ScaleType,
+                item: CarouselItem
+            ) {
+                val currentBinding = binding as CustomItemTwoLayoutBinding
+
+                currentBinding.imageView.apply {
+                    scaleType = imageScaleType
+
+                    setImage(item, R.drawable.ic_wb_cloudy_with_padding)
+                }
+            }
+        }
         val listTwo = mutableListOf<CarouselItem>()
 
         for (i in 1..max) {
@@ -143,24 +156,36 @@ class KotlinActivity : AppCompatActivity() {
             }
         }
 
-        binding.carousel2.addData(listTwo)
+        binding.carousel2.setData(listTwo)
 
-        // Custom click listener
-        binding.carousel2.carouselListener = object : CarouselListener {
-            override fun onClick(position: Int, carouselItem: CarouselItem) {
+        // ----------------------------------------------------------------
+        // Example Three
+        // ----------------------------------------------------------------
 
-                Toast.makeText(this@KotlinActivity, "Clicked!", Toast.LENGTH_SHORT).show()
+        // Custom view
+        binding.carousel3.carouselListener = object : CarouselListener {
+            override fun onCreateViewHolder(
+                layoutInflater: LayoutInflater,
+                parent: ViewGroup
+            ): ViewBinding? {
+                return CustomFixedSizeItemLayoutBinding.inflate(layoutInflater, parent, false)
             }
 
-            override fun onLongClick(position: Int, dataObject: CarouselItem) {
+            override fun onBindViewHolder(
+                binding: ViewBinding,
+                imageScaleType: ImageView.ScaleType,
+                item: CarouselItem
+            ) {
+                val currentBinding = binding as CustomFixedSizeItemLayoutBinding
 
-                Toast.makeText(this@KotlinActivity, "Long Clicked!", Toast.LENGTH_SHORT).show()
+                currentBinding.imageView.apply {
+                    scaleType = imageScaleType
+
+                    setImage(item, R.drawable.ic_wb_cloudy_with_padding)
+                }
             }
         }
 
-        // --------------------------------
-        // Example Three
-        // --------------------------------
         val listThree = mutableListOf<CarouselItem>()
 
         for (i in 1..max) {
@@ -181,7 +206,9 @@ class KotlinActivity : AppCompatActivity() {
             }
         }
 
-        binding.carousel3.addData(listThree)
+        binding.carousel3.setData(listThree)
+
+        binding.carousel3.currentPosition = 1
 
         binding.customCaption.isSelected = true
 
@@ -215,30 +242,109 @@ class KotlinActivity : AppCompatActivity() {
             binding.carousel3.next()
         }
 
-        // --------------------------------
+        // ----------------------------------------------------------------
         // Example Four
-        // --------------------------------
+        // ----------------------------------------------------------------
+
+        // Custom view
+        binding.carousel4.carouselListener = object : CarouselListener {
+            override fun onCreateViewHolder(
+                layoutInflater: LayoutInflater,
+                parent: ViewGroup
+            ): ViewBinding? {
+                return CustomFixedSizeItemLayoutBinding.inflate(layoutInflater, parent, false)
+            }
+
+            override fun onBindViewHolder(
+                binding: ViewBinding,
+                imageScaleType: ImageView.ScaleType,
+                item: CarouselItem
+            ) {
+                val currentBinding = binding as CustomFixedSizeItemLayoutBinding
+
+                currentBinding.imageView.apply {
+                    scaleType = imageScaleType
+
+                    setImage(item, R.drawable.ic_wb_cloudy_with_padding)
+                }
+            }
+        }
+
         val listFour = mutableListOf<CarouselItem>()
 
         for (i in 1..max) {
             if (i % 2 == 0) {
                 listFour.add(
                     CarouselItem(
-                        imageDrawable = R.drawable.image_1
+                        imageUrl = "https://images.unsplash.com/photo-1618207981235-22a93d2e3ef8?w=1080",
+                        caption = "Smokin' Burger"
                     )
                 )
             } else {
                 listFour.add(
                     CarouselItem(
-                        imageDrawable = R.drawable.image_2
+                        imageUrl = "https://images.unsplash.com/photo-1618346136472-090de27fe8b4?w=1080",
+                        caption = "Beef Masala Curry"
                     )
                 )
             }
         }
 
-        binding.carousel4.addData(listFour)
+        binding.carousel4.setData(listFour)
 
         // Custom indicator
         binding.carousel4.setIndicator(binding.customIndicator)
+
+        // ----------------------------------------------------------------
+        // Example Five
+        // ----------------------------------------------------------------
+
+        // Custom view
+        binding.carousel5.carouselListener = object : CarouselListener {
+            override fun onCreateViewHolder(
+                layoutInflater: LayoutInflater,
+                parent: ViewGroup
+            ): ViewBinding? {
+                return CustomFixedSizeItemTwoLayoutBinding.inflate(layoutInflater, parent, false)
+            }
+
+            override fun onBindViewHolder(
+                binding: ViewBinding,
+                imageScaleType: ImageView.ScaleType,
+                item: CarouselItem
+            ) {
+                val currentBinding = binding as CustomFixedSizeItemTwoLayoutBinding
+
+                currentBinding.textView.text = item.caption ?: ""
+
+                currentBinding.imageView.apply {
+                    scaleType = imageScaleType
+
+                    setImage(item, R.drawable.ic_wb_cloudy_with_padding)
+                }
+            }
+        }
+
+        val listFive = mutableListOf<CarouselItem>()
+
+        for (i in 1..max) {
+            if (i % 2 == 0) {
+                listFive.add(
+                    CarouselItem(
+                        imageDrawable = R.drawable.image_1,
+                        caption = "Smokin' Burger"
+                    )
+                )
+            } else {
+                listFive.add(
+                    CarouselItem(
+                        imageDrawable = R.drawable.image_2,
+                        caption = "Beef Masala Curry"
+                    )
+                )
+            }
+        }
+
+        binding.carousel5.setData(listFive)
     }
 }

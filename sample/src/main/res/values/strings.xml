@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Why Not! Image Carousel! Sample</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Velit egestas dui id ornare arcu odio. Integer enim neque volutpat ac tincidunt vitae semper quis lectus.</string>
+    <string name="lorem_ipsum_2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
 </resources>

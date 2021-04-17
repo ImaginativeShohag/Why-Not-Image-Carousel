@@ -4,12 +4,14 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.View;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewbinding.ViewBinding;
 
 import com.google.android.material.button.MaterialButton;
 
@@ -61,8 +63,8 @@ public class JavaActivity extends AppCompatActivity {
                 this,
                 R.drawable.ic_wb_cloudy_with_padding
         ));
-        binding.carousel.setItemLayout(R.layout.custom_fixed_size_item_layout);
-        binding.carousel.setImageViewId(R.id.image_view);
+//        binding.carousel.setItemLayout(R.layout.custom_fixed_size_item_layout);
+//        binding.carousel.setImageViewId(R.id.image_view);
         binding.carousel.setPreviousButtonLayout(R.layout.custom_previous_button_layout);
         binding.carousel.setPreviousButtonId(R.id.custom_btn_previous);
         binding.carousel.setPreviousButtonMargin(Utils.dpToPx(8, context)); // px value of dp
@@ -88,18 +90,14 @@ public class JavaActivity extends AppCompatActivity {
         });
         binding.carousel.setCarouselListener(new CarouselListener() {
             @Override
-            public void onBindView(@NotNull View view, @NotNull CarouselItem item) {
-                // ...
+            public void onBindViewHolder(@NotNull ViewBinding binding, @NotNull ImageView.ScaleType imageScaleType, @NotNull CarouselItem item) {
+
             }
 
+            @Nullable
             @Override
-            public void onClick(int position, @NotNull CarouselItem carouselItem) {
-                // ...
-            }
-
-            @Override
-            public void onLongClick(int position, @NotNull CarouselItem dataObject) {
-                // ...
+            public ViewBinding onCreateViewHolder(@NotNull LayoutInflater layoutInflater, @NotNull ViewGroup parent) {
+                return null;
             }
         });
 
@@ -134,7 +132,7 @@ public class JavaActivity extends AppCompatActivity {
             }
         }
 
-        binding.carousel.addData(list);
+        binding.carousel.setData(list);
 
         // ----------------------------------------------------------------
 

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".KotlinActivity">
 
     <LinearLayout
@@ -11,150 +12,347 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="32dp"
+            android:text="Why Not! Image Carousel!"
+            android:textAlignment="center"
+            android:textColor="#555"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
         <org.imaginativeworld.whynotimagecarousel.ImageCarousel
             android:id="@+id/carousel1"
             android:layout_width="match_parent"
-            android:layout_height="128dp" />
+            android:layout_height="200dp"
+            app:autoPlay="true"
+            app:autoPlayDelay="4000" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp"
+            android:text="@string/lorem_ipsum"
+            android:textSize="14sp" />
+
+        <!-- ================================================================ -->
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:orientation="horizontal">
+
+                    <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+                        android:id="@+id/carousel2"
+                        android:layout_width="0dp"
+                        android:layout_height="150dp"
+                        android:layout_marginStart="0dp"
+                        android:layout_weight="1"
+                        app:carouselBackground="@color/white"
+                        app:carouselType="BLOCK"
+                        app:imageScaleType="centerCrop"
+                        app:nextButtonId="@id/custom_btn_next"
+                        app:nextButtonLayout="@layout/custom_next_button_layout"
+                        app:nextButtonMargin="16dp"
+                        app:previousButtonId="@id/custom_btn_previous"
+                        app:previousButtonLayout="@layout/custom_previous_button_layout"
+                        app:previousButtonMargin="16dp"
+                        app:scaleOnScroll="false"
+                        app:showBottomShadow="false"
+                        app:showCaption="false"
+                        app:showIndicator="false"
+                        app:showNavigationButtons="true"
+                        app:showTopShadow="false" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingStart="8dp"
+                        android:paddingTop="8dp"
+                        android:paddingEnd="16dp"
+                        android:paddingBottom="8dp"
+                        android:text="@string/lorem_ipsum_2"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/flat_awesome_green_1"
+                    android:paddingStart="8dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="8dp"
+                    android:text="@string/lorem_ipsum"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <!-- ================================================================ -->
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="8dp">
+
+                    <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+                        android:id="@+id/carousel3"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        app:carouselBackground="@android:color/transparent"
+                        app:carouselGravity="CENTER"
+                        app:carouselType="SHOWCASE"
+                        app:imagePlaceholder="@drawable/ic_wb_cloudy_with_padding"
+                        app:imageScaleType="centerCrop"
+                        app:nextButtonId="@id/custom_btn_next"
+                        app:nextButtonLayout="@layout/custom_next_button_layout"
+                        app:nextButtonMargin="8dp"
+                        app:previousButtonId="@id/custom_btn_previous"
+                        app:previousButtonLayout="@layout/custom_previous_button_layout"
+                        app:previousButtonMargin="8dp"
+                        app:showBottomShadow="false"
+                        app:showCaption="false"
+                        app:showIndicator="false"
+                        app:showNavigationButtons="false"
+                        app:showTopShadow="false" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginTop="8dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="8dp"
+                        android:paddingTop="8dp"
+                        android:paddingEnd="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="@string/lorem_ipsum"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginTop="182dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:translationZ="8dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_goto_previous"
+                    style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="8dp"
+                    app:backgroundTint="@color/flat_grey_dark_2"
+                    app:icon="@drawable/ic_arrow_back"
+                    app:iconTint="@color/white" />
+
+                <TextView
+                    android:id="@+id/custom_caption"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:ellipsize="marquee"
+                    android:gravity="center"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
+                    android:textColor="@color/flat_grey_dark_2"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    tools:text="Caption" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_goto_next"
+                    style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="8dp"
+                    app:backgroundTint="@color/flat_grey_dark_2"
+                    app:icon="@drawable/ic_arrow_forward"
+                    app:iconTint="@color/white" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <!-- ================================================================ -->
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="8dp">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp" />
+
+                    <me.relex.circleindicator.CircleIndicator2
+                        android:id="@+id/custom_indicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        app:ci_animator="@animator/scale_with_alpha"
+                        app:ci_drawable="@drawable/dot"
+                        app:ci_drawable_unselected="@drawable/dot" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/flat_pink_1"
+                        android:paddingStart="8dp"
+                        android:paddingTop="8dp"
+                        android:paddingEnd="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="@string/lorem_ipsum"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+                android:id="@+id/carousel4"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="16dp"
+                android:translationZ="8dp"
+                app:autoPlay="true"
+                app:autoPlayDelay="4000"
+                app:carouselBackground="@android:color/transparent"
+                app:carouselGravity="CENTER"
+                app:carouselType="SHOWCASE"
+                app:imageScaleType="centerCrop"
+                app:nextButtonId="@id/custom_btn_next"
+                app:nextButtonLayout="@layout/custom_next_button_layout"
+                app:nextButtonMargin="8dp"
+                app:previousButtonId="@id/custom_btn_previous"
+                app:previousButtonLayout="@layout/custom_previous_button_layout"
+                app:previousButtonMargin="8dp"
+                app:scaleOnScroll="true"
+                app:scalingFactor=".25"
+                app:showBottomShadow="false"
+                app:showCaption="false"
+                app:showIndicator="false"
+                app:showNavigationButtons="false"
+                app:showTopShadow="false" />
+
+        </FrameLayout>
+
+        <!-- ================================================================ -->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingTop="0dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="0dp"
+            android:text="@string/lorem_ipsum_2"
+            android:textSize="14sp" />
 
         <org.imaginativeworld.whynotimagecarousel.ImageCarousel
-            android:id="@+id/carousel2"
+            android:id="@+id/carousel5"
             android:layout_width="match_parent"
-            android:layout_height="128dp"
-            app:carouselBackground="@color/white"
-            app:carouselType="BLOCK"
+            android:layout_height="180dp"
+            android:layout_marginTop="16dp"
+            app:autoWidthFixing="false"
+            app:carouselBackground="@color/background"
+            app:carouselGravity="START"
+            app:carouselType="SHOWCASE"
             app:imageScaleType="centerCrop"
-            app:imageViewId="@id/image_view"
-            app:itemLayout="@layout/custom_item_layout"
-            app:nextButtonId="@id/custom_btn_next"
-            app:nextButtonLayout="@layout/custom_next_button_layout"
-            app:nextButtonMargin="24dp"
-            app:previousButtonId="@id/custom_btn_previous"
-            app:previousButtonLayout="@layout/custom_previous_button_layout"
-            app:previousButtonMargin="24dp"
             app:scaleOnScroll="false"
             app:showBottomShadow="false"
             app:showCaption="false"
             app:showIndicator="false"
-            app:showNavigationButtons="true"
-            app:showTopShadow="false" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#ccc" />
-
-        <org.imaginativeworld.whynotimagecarousel.ImageCarousel
-            android:id="@+id/carousel3"
-            android:layout_width="match_parent"
-            android:layout_height="128dp"
-            app:carouselBackground="@color/white"
-            app:carouselGravity="START"
-            app:carouselType="SHOWCASE"
-            app:imagePlaceholder="@drawable/ic_wb_cloudy_with_padding"
-            app:imageScaleType="centerCrop"
-            app:imageViewId="@id/image_view"
-            app:itemLayout="@layout/custom_fixed_size_item_layout"
-            app:nextButtonId="@id/custom_btn_next"
-            app:nextButtonLayout="@layout/custom_next_button_layout"
-            app:nextButtonMargin="8dp"
-            app:previousButtonId="@id/custom_btn_previous"
-            app:previousButtonLayout="@layout/custom_previous_button_layout"
-            app:previousButtonMargin="8dp"
-            app:showBottomShadow="false"
-            app:showCaption="false"
-            app:showIndicator="false"
             app:showNavigationButtons="false"
             app:showTopShadow="false" />
 
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="32dp"
+            android:text="@string/lorem_ipsum"
+            android:textSize="14sp" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_goto_previous"
-                style="@style/Widget.App.Button.OutlinedButton.IconOnly"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                app:backgroundTint="@color/flat_green_2"
-                app:icon="@drawable/ic_arrow_back"
-                app:iconTint="@color/white" />
-
-            <TextView
-                android:id="@+id/custom_caption"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_weight="1"
-                android:ellipsize="marquee"
-                android:gravity="center"
-                android:marqueeRepeatLimit="marquee_forever"
-                android:singleLine="true"
-                android:textColor="@color/flat_green_2"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                tools:text="Caption" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_goto_next"
-                style="@style/Widget.App.Button.OutlinedButton.IconOnly"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                app:backgroundTint="@color/flat_green_2"
-                app:icon="@drawable/ic_arrow_forward"
-                app:iconTint="@color/white" />
-
-        </LinearLayout>
+        <!-- ================================================================ -->
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#ccc" />
-
-        <org.imaginativeworld.whynotimagecarousel.ImageCarousel
-            android:id="@+id/carousel4"
-            android:layout_width="match_parent"
-            android:layout_height="128dp"
-            app:autoPlay="true"
-            app:autoPlayDelay="4000"
-            app:carouselBackground="@color/white"
-            app:carouselGravity="START"
-            app:carouselType="SHOWCASE"
-            app:imageScaleType="centerCrop"
-            app:imageViewId="@id/image_view"
-            app:itemLayout="@layout/custom_fixed_size_item_layout"
-            app:nextButtonId="@id/custom_btn_next"
-            app:nextButtonLayout="@layout/custom_next_button_layout"
-            app:nextButtonMargin="8dp"
-            app:previousButtonId="@id/custom_btn_previous"
-            app:previousButtonLayout="@layout/custom_previous_button_layout"
-            app:previousButtonMargin="8dp"
-            app:scaleOnScroll="true"
-            app:scalingFactor=".25"
-            app:showBottomShadow="false"
-            app:showCaption="true"
-            app:showIndicator="true"
-            app:showNavigationButtons="false"
-            app:showTopShadow="false" />
-
-        <me.relex.circleindicator.CircleIndicator2
-            android:id="@+id/custom_indicator"
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
-            app:ci_animator="@animator/scale_with_alpha"
-            app:ci_drawable="@drawable/dot"
-            app:ci_drawable_unselected="@drawable/dot" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#ccc" />
+            android:background="#ccc"
+            android:visibility="gone" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_java_example"
@@ -166,6 +364,7 @@
             android:insetBottom="0dp"
             android:text="Java Example"
             android:textColor="@color/white"
+            android:visibility="gone"
             app:backgroundTint="@color/flat_red_1"
             app:cornerRadius="16dp" />
 

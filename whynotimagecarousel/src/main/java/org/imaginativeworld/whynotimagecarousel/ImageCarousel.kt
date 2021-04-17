@@ -28,6 +28,10 @@ class ImageCarousel(
     @Nullable private var attributeSet: AttributeSet?
 ) : ConstraintLayout(context, attributeSet) {
 
+    companion object {
+        const val TAG = "ImageCarousel"
+    }
+
     private var adapter: CarouselAdapter? = null
 
     private val scaleTypeArray = arrayOf(
@@ -251,21 +255,21 @@ class ImageCarousel(
             initAdapter()
         }
 
-    @LayoutRes
-    var itemLayout: Int = R.layout.item_carousel
-        set(value) {
-            field = value
-
-            initAdapter()
-        }
-
-    @IdRes
-    var imageViewId: Int = R.id.img
-        set(value) {
-            field = value
-
-            initAdapter()
-        }
+//    @LayoutRes
+//    var itemLayout: Int = R.layout.item_carousel
+//        set(value) {
+//            field = value
+//
+//            initAdapter()
+//        }
+//
+//    @IdRes
+//    var imageViewId: Int = R.id.img
+//        set(value) {
+//            field = value
+//
+//            initAdapter()
+//        }
 
     @LayoutRes
     var previousButtonLayout: Int = R.layout.previous_button_layout
@@ -371,14 +375,14 @@ class ImageCarousel(
         snapHelper?.attachToRecyclerView(null)
 
         snapHelper = if (carouselType == CarouselType.BLOCK) {
-            Log.e("aaa", "111111")
+            Log.e(TAG, "CarouselType.BLOCK")
             PagerSnapHelper()
         } else { // CarouselType.SHOWCASE
             if (carouselGravity == CarouselGravity.START) {
-                Log.e("aaa", "2222222222")
+                Log.e(TAG, "CarouselGravity.START")
                 LinearStartSnapHelper()
             } else { // CarouselGravity.CENTER
-                Log.e("aaa", "333333333333")
+                Log.e(TAG, "CarouselGravity.CENTER")
                 LinearSnapHelper()
             }
         }
@@ -555,15 +559,15 @@ class ImageCarousel(
                     R.styleable.ImageCarousel_imagePlaceholder
                 ) ?: ContextCompat.getDrawable(context, R.drawable.ic_picture)
 
-                itemLayout = getResourceId(
-                    R.styleable.ImageCarousel_itemLayout,
-                    R.layout.item_carousel
-                )
-
-                imageViewId = getResourceId(
-                    R.styleable.ImageCarousel_imageViewId,
-                    R.id.img
-                )
+//                itemLayout = getResourceId(
+//                    R.styleable.ImageCarousel_itemLayout,
+//                    R.layout.item_carousel
+//                )
+//
+//                imageViewId = getResourceId(
+//                    R.styleable.ImageCarousel_imageViewId,
+//                    R.id.img
+//                )
 
                 previousButtonLayout = getResourceId(
                     R.styleable.ImageCarousel_previousButtonLayout,
@@ -637,8 +641,9 @@ class ImageCarousel(
             carouselType = carouselType,
             carouselGravity = carouselGravity,
             autoWidthFixing = autoWidthFixing,
-            itemLayout = itemLayout,
-            imageViewId = imageViewId,
+//            itemLayout = itemLayout,
+//            imageViewId = imageViewId,
+//            viewBinding = null,
             listener = carouselListener,
             imageScaleType = imageScaleType,
             imagePlaceholder = imagePlaceholder
@@ -646,7 +651,7 @@ class ImageCarousel(
         recyclerView.adapter = adapter
 
         data?.apply {
-            adapter?.addAll(this)
+            adapter?.appendData(this)
         }
 
         indicator?.apply {
@@ -798,11 +803,39 @@ class ImageCarousel(
     // ----------------------------------------------------------------
 
     /**
-     * Add data to the carousel.
+     * Set new data to the carousel. It removes all previous data.
+     */
+    fun setData(data: List<CarouselItem>) {
+        adapter?.apply {
+            replaceData(data)
+
+            this@ImageCarousel.data = data
+            this@ImageCarousel.dataSize = data.size
+
+            initOnScrollStateChange()
+        }
+    }
+
+    /**
+     * Add multiple data to the carousel.
      */
     fun addData(data: List<CarouselItem>) {
         adapter?.apply {
-            addAll(data)
+            appendData(data)
+
+            this@ImageCarousel.data = data
+            this@ImageCarousel.dataSize = data.size
+
+            initOnScrollStateChange()
+        }
+    }
+
+    /**
+     * Add single data to the carousel.
+     */
+    fun addData(item: CarouselItem) {
+        adapter?.apply {
+            val data = appendData(item)
 
             this@ImageCarousel.data = data
             this@ImageCarousel.dataSize = data.size

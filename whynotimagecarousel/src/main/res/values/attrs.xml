@@ -25,8 +25,8 @@
         </attr>
         <attr name="carouselBackground" format="reference|color" />
         <attr name="imagePlaceholder" format="reference|color" />
-        <attr name="itemLayout" format="reference" />
-        <attr name="imageViewId" format="reference" />
+        <!--        <attr name="itemLayout" format="reference" />-->
+        <!--        <attr name="imageViewId" format="reference" />-->
         <attr name="previousButtonLayout" format="reference" />
         <attr name="previousButtonId" format="reference" />
         <attr name="previousButtonMargin" format="dimension" />

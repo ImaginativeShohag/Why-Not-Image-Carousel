@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/custom_btn_previous"
     style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-    android:layout_width="48dp"
-    android:layout_height="48dp"
+    android:layout_width="32dp"
+    android:layout_height="32dp"
     android:insetLeft="0dp"
     android:insetTop="0dp"
     android:insetRight="0dp"
@@ -13,6 +13,6 @@
     app:cornerRadius="48dp"
     app:icon="@drawable/ic_arrow_back"
     app:iconGravity="textStart"
-    app:iconSize="32dp"
+    app:iconSize="24dp"
     app:iconTint="@color/white"
     app:rippleColor="@color/white" />
