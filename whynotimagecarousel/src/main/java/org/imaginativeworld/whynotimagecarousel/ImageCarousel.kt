@@ -1,5 +1,6 @@
 package org.imaginativeworld.whynotimagecarousel
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -9,6 +10,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -423,6 +425,11 @@ class ImageCarousel(
 
     // Note: We do not need to invalidate the view for this.
     var autoPlay: Boolean = false
+        set(value) {
+            field = value
+
+            initAutoPlay()
+        }
 
     // Note: We do not need to invalidate the view for this.
     var autoPlayDelay: Int = 0
@@ -432,6 +439,35 @@ class ImageCarousel(
         initAttributes()
         initAdapter()
         initListeners()
+        initAutoPlay()
+        initTouchListener()
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun initTouchListener() {
+        recyclerView.setOnTouchListener { _, event ->
+            when (event?.action) {
+                MotionEvent.ACTION_UP -> {
+                    if (autoPlay) {
+                        resumeAutoPlay()
+                    }
+                }
+                MotionEvent.ACTION_DOWN -> {
+                    if (autoPlay) {
+                        pauseAutoPlay()
+                    }
+                }
+            }
+
+            false
+        }
+    }
+
+    private fun pauseAutoPlay() {
+        autoPlayHandler.removeCallbacksAndMessages(null)
+    }
+
+    private fun resumeAutoPlay() {
         initAutoPlay()
     }
 
@@ -622,10 +658,11 @@ class ImageCarousel(
             carouselType = carouselType,
             carouselGravity = carouselGravity,
             autoWidthFixing = autoWidthFixing,
-            listener = carouselListener,
             imageScaleType = imageScaleType,
             imagePlaceholder = imagePlaceholder
-        )
+        ).apply {
+            listener = carouselListener
+        }
         recyclerView.adapter = adapter
 
         data?.apply {
@@ -684,8 +721,9 @@ class ImageCarousel(
      * Initialize and start/stop auto play based on `autoPlay` value.
      */
     private fun initAutoPlay() {
-        if (autoPlay) {
+        autoPlayHandler.removeCallbacksAndMessages(null)
 
+        if (autoPlay) {
             autoPlayHandler.postDelayed(
                 object : Runnable {
                     override fun run() {
@@ -700,9 +738,6 @@ class ImageCarousel(
                 },
                 autoPlayDelay.toLong()
             )
-        } else {
-
-            autoPlayHandler.removeCallbacksAndMessages(null)
         }
     }
 
@@ -876,8 +911,6 @@ class ImageCarousel(
      */
     fun start() {
         autoPlay = true
-
-        initAutoPlay()
     }
 
     // ----------------------------------------------------------------
@@ -887,7 +920,5 @@ class ImageCarousel(
      */
     fun stop() {
         autoPlay = false
-
-        initAutoPlay()
     }
 }

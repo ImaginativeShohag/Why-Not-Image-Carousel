@@ -137,26 +137,9 @@
                     android:orientation="vertical"
                     android:paddingTop="8dp">
 
-                    <org.imaginativeworld.whynotimagecarousel.InfiniteImageCarousel
-                        android:id="@+id/carousel3"
+                    <View
                         android:layout_width="match_parent"
-                        android:layout_height="150dp"
-                        app:carouselBackground="@android:color/transparent"
-                        app:carouselGravity="CENTER"
-                        app:carouselType="SHOWCASE"
-                        app:imagePlaceholder="@drawable/ic_wb_cloudy_with_padding"
-                        app:imageScaleType="centerCrop"
-                        app:nextButtonId="@id/custom_btn_next"
-                        app:nextButtonLayout="@layout/custom_next_button_layout"
-                        app:nextButtonMargin="8dp"
-                        app:previousButtonId="@id/custom_btn_previous"
-                        app:previousButtonLayout="@layout/custom_previous_button_layout"
-                        app:previousButtonMargin="8dp"
-                        app:showBottomShadow="false"
-                        app:showCaption="false"
-                        app:showIndicator="false"
-                        app:showNavigationButtons="false"
-                        app:showTopShadow="false" />
+                        android:layout_height="150dp" />
 
                     <View
                         android:layout_width="match_parent"
@@ -176,6 +159,31 @@
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
+
+            <org.imaginativeworld.whynotimagecarousel.InfiniteImageCarousel
+                android:id="@+id/carousel3"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="24dp"
+                android:translationZ="8dp"
+                app:autoPlay="true"
+                app:autoPlayDelay="3000"
+                app:carouselBackground="@android:color/transparent"
+                app:carouselGravity="CENTER"
+                app:carouselType="SHOWCASE"
+                app:imagePlaceholder="@drawable/ic_wb_cloudy_with_padding"
+                app:imageScaleType="centerCrop"
+                app:nextButtonId="@id/custom_btn_next"
+                app:nextButtonLayout="@layout/custom_next_button_layout"
+                app:nextButtonMargin="8dp"
+                app:previousButtonId="@id/custom_btn_previous"
+                app:previousButtonLayout="@layout/custom_previous_button_layout"
+                app:previousButtonMargin="8dp"
+                app:showBottomShadow="false"
+                app:showCaption="false"
+                app:showIndicator="false"
+                app:showNavigationButtons="false"
+                app:showTopShadow="false" />
 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -78,7 +78,7 @@ class KotlinActivity : AppCompatActivity() {
         binding.carousel1.scaleOnScroll = false
         binding.carousel1.scalingFactor = .15f // 0 to 1; 1 means 100
         binding.carousel1.autoWidthFixing = true
-        binding.carousel1.autoPlay = false
+        binding.carousel1.autoPlay = true
         binding.carousel1.autoPlayDelay = 3000 // Milliseconds
         binding.carousel1.onScrollListener = object : CarouselOnScrollListener {
             override fun onScrollStateChanged(

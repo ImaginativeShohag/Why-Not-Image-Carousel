@@ -1,5 +1,6 @@
 package org.imaginativeworld.whynotimagecarousel
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -9,6 +10,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -36,7 +38,7 @@ class InfiniteImageCarousel(
 ) : ConstraintLayout(context, attributeSet) {
 
     companion object {
-        const val TAG = "ImageCarousel"
+        const val TAG = "InfiniteImageCarousel"
     }
 
     private var adapter: InfiniteCarouselAdapter? = null
@@ -390,6 +392,11 @@ class InfiniteImageCarousel(
 
     // Note: We do not need to invalidate the view for this.
     var autoPlay: Boolean = false
+        set(value) {
+            field = value
+
+            initAutoPlay()
+        }
 
     // Note: We do not need to invalidate the view for this.
     var autoPlayDelay: Int = 0
@@ -399,6 +406,35 @@ class InfiniteImageCarousel(
         initAttributes()
         initAdapter()
         initListeners()
+        initAutoPlay()
+        initTouchListener()
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun initTouchListener() {
+        recyclerView.setOnTouchListener { _, event ->
+            when (event?.action) {
+                MotionEvent.ACTION_UP -> {
+                    if (autoPlay) {
+                        resumeAutoPlay()
+                    }
+                }
+                MotionEvent.ACTION_DOWN -> {
+                    if (autoPlay) {
+                        pauseAutoPlay()
+                    }
+                }
+            }
+
+            false
+        }
+    }
+
+    private fun pauseAutoPlay() {
+        autoPlayHandler.removeCallbacksAndMessages(null)
+    }
+
+    private fun resumeAutoPlay() {
         initAutoPlay()
     }
 
@@ -579,10 +615,11 @@ class InfiniteImageCarousel(
             carouselType = carouselType,
             carouselGravity = carouselGravity,
             autoWidthFixing = autoWidthFixing,
-            listener = carouselListener,
             imageScaleType = imageScaleType,
             imagePlaceholder = imagePlaceholder
-        )
+        ).apply {
+            listener = carouselListener
+        }
         recyclerView.adapter = adapter
 
         data?.apply {
@@ -639,8 +676,9 @@ class InfiniteImageCarousel(
      * Initialize and start/stop auto play based on `autoPlay` value.
      */
     private fun initAutoPlay() {
-        if (autoPlay) {
+        autoPlayHandler.removeCallbacksAndMessages(null)
 
+        if (autoPlay) {
             autoPlayHandler.postDelayed(
                 object : Runnable {
                     override fun run() {
@@ -655,9 +693,6 @@ class InfiniteImageCarousel(
                 },
                 autoPlayDelay.toLong()
             )
-        } else {
-
-            autoPlayHandler.removeCallbacksAndMessages(null)
         }
     }
 
@@ -780,8 +815,6 @@ class InfiniteImageCarousel(
      */
     fun start() {
         autoPlay = true
-
-        initAutoPlay()
     }
 
     // ----------------------------------------------------------------
@@ -791,7 +824,5 @@ class InfiniteImageCarousel(
      */
     fun stop() {
         autoPlay = false
-
-        initAutoPlay()
     }
 }
