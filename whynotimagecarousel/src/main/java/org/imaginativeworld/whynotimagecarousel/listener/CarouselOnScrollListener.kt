@@ -1,6 +1,7 @@
-package org.imaginativeworld.whynotimagecarousel
+package org.imaginativeworld.whynotimagecarousel.listener
 
 import androidx.recyclerview.widget.RecyclerView
+import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 
 interface CarouselOnScrollListener {
 
@@ -12,5 +13,4 @@ interface CarouselOnScrollListener {
     ) {}
 
     fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {}
-
 }

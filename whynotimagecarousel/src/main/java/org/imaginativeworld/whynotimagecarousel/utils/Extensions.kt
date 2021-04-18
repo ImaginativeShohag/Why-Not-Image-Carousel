@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.model.GlideUrl
+import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 
 /**
  * This method converts device specific pixels to density independent pixels.

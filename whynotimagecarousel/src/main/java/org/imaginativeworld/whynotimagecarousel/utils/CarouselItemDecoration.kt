@@ -1,4 +1,4 @@
-package org.imaginativeworld.whynotimagecarousel
+package org.imaginativeworld.whynotimagecarousel.utils
 
 import android.graphics.Rect
 import android.view.View

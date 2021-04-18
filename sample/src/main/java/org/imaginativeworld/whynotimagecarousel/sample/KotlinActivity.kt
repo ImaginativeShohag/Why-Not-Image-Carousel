@@ -12,11 +12,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
-import org.imaginativeworld.whynotimagecarousel.*
+import org.imaginativeworld.whynotimagecarousel.dpToPx
+import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener
+import org.imaginativeworld.whynotimagecarousel.listener.CarouselOnScrollListener
+import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
+import org.imaginativeworld.whynotimagecarousel.model.CarouselType
 import org.imaginativeworld.whynotimagecarousel.sample.databinding.ActivityKotlinBinding
 import org.imaginativeworld.whynotimagecarousel.sample.databinding.CustomFixedSizeItemLayoutBinding
 import org.imaginativeworld.whynotimagecarousel.sample.databinding.CustomFixedSizeItemTwoLayoutBinding
 import org.imaginativeworld.whynotimagecarousel.sample.databinding.CustomItemTwoLayoutBinding
+import org.imaginativeworld.whynotimagecarousel.setImage
+import org.imaginativeworld.whynotimagecarousel.spToPx
 
 class KotlinActivity : AppCompatActivity() {
 
@@ -127,7 +133,8 @@ class KotlinActivity : AppCompatActivity() {
             override fun onBindViewHolder(
                 binding: ViewBinding,
                 imageScaleType: ImageView.ScaleType,
-                item: CarouselItem
+                item: CarouselItem,
+                position: Int
             ) {
                 val currentBinding = binding as CustomItemTwoLayoutBinding
 
@@ -159,7 +166,7 @@ class KotlinActivity : AppCompatActivity() {
         binding.carousel2.setData(listTwo)
 
         // ----------------------------------------------------------------
-        // Example Three
+        // Example Three: Example of InfiniteImageCarousel
         // ----------------------------------------------------------------
 
         // Custom view
@@ -174,7 +181,8 @@ class KotlinActivity : AppCompatActivity() {
             override fun onBindViewHolder(
                 binding: ViewBinding,
                 imageScaleType: ImageView.ScaleType,
-                item: CarouselItem
+                item: CarouselItem,
+                position: Int
             ) {
                 val currentBinding = binding as CustomFixedSizeItemLayoutBinding
 
@@ -188,27 +196,58 @@ class KotlinActivity : AppCompatActivity() {
 
         val listThree = mutableListOf<CarouselItem>()
 
-        for (i in 1..max) {
-            if (i % 2 == 0) {
-                listThree.add(
-                    CarouselItem(
-                        imageUrl = "https://images.unsplash.com/photo-1549577434-d7615fd4ceac?w=1080",
-                        caption = "Photo by Jeremy Bishop on Unsplash"
-                    )
-                )
-            } else {
-                listThree.add(
-                    CarouselItem(
-                        imageUrl = "https://images.unsplash.com/photo-1485038101637-2d4833df1b35?w=1080",
-                        caption = "Photo by Karsten Würth on Unsplash"
-                    )
-                )
-            }
-        }
+        listThree.add(
+            CarouselItem(
+                imageUrl = "https://images.unsplash.com/photo-1558364015-0d5ba7a4ba86?w=1080",
+                caption = "Photo by Mae Mu on Unsplash"
+            )
+        )
+        listThree.add(
+            CarouselItem(
+                imageUrl = "https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=1080",
+                caption = "Photo by an_vision on Unsplash"
+            )
+        )
+        listThree.add(
+            CarouselItem(
+                imageUrl = "https://images.unsplash.com/photo-1572635148818-ef6fd45eb394?w=1080",
+                caption = "Photo by Giorgio Trovato on Unsplash"
+            )
+        )
+        listThree.add(
+            CarouselItem(
+                imageUrl = "https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=1080",
+                caption = "Photo by Mae Mu on Unsplash"
+            )
+        )
+        listThree.add(
+            CarouselItem(
+                imageUrl = "https://images.unsplash.com/photo-1589533610925-1cffc309ebaa?w=1080",
+                caption = "Photo by Sahand Babali on Unsplash"
+            )
+        )
+        listThree.add(
+            CarouselItem(
+                imageUrl = "https://images.unsplash.com/photo-1547514701-42782101795e?w=1080",
+                caption = "Photo by Xiaolong Wong on Unsplash"
+            )
+        )
+        listThree.add(
+            CarouselItem(
+                imageUrl = "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=1080",
+                caption = "Photo by Miguel Andrade on Unsplash"
+            )
+        )
+        listThree.add(
+            CarouselItem(
+                imageUrl = "https://images.unsplash.com/photo-1528825871115-3581a5387919?w=1080",
+                caption = "Photo by Charles Deluvio on Unsplash"
+            )
+        )
 
         binding.carousel3.setData(listThree)
 
-        binding.carousel3.currentPosition = 1
+        binding.carousel3.initStartPosition()
 
         binding.customCaption.isSelected = true
 
@@ -258,7 +297,8 @@ class KotlinActivity : AppCompatActivity() {
             override fun onBindViewHolder(
                 binding: ViewBinding,
                 imageScaleType: ImageView.ScaleType,
-                item: CarouselItem
+                item: CarouselItem,
+                position: Int
             ) {
                 val currentBinding = binding as CustomFixedSizeItemLayoutBinding
 
@@ -311,7 +351,8 @@ class KotlinActivity : AppCompatActivity() {
             override fun onBindViewHolder(
                 binding: ViewBinding,
                 imageScaleType: ImageView.ScaleType,
-                item: CarouselItem
+                item: CarouselItem,
+                position: Int
             ) {
                 val currentBinding = binding as CustomFixedSizeItemTwoLayoutBinding
 

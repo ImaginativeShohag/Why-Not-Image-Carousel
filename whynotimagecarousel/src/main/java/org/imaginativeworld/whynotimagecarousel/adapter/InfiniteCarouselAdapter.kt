@@ -1,6 +1,5 @@
-package org.imaginativeworld.whynotimagecarousel
+package org.imaginativeworld.whynotimagecarousel.adapter
 
-import android.content.Context
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,9 +8,14 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import org.imaginativeworld.whynotimagecarousel.databinding.ItemCarouselBinding
+import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener
+import org.imaginativeworld.whynotimagecarousel.model.CarouselGravity
+import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
+import org.imaginativeworld.whynotimagecarousel.model.CarouselType
+import org.imaginativeworld.whynotimagecarousel.setImage
+import org.imaginativeworld.whynotimagecarousel.utils.CarouselItemDecoration
 
-class CarouselAdapter(
-    private val context: Context,
+class InfiniteCarouselAdapter(
     private val recyclerView: RecyclerView,
     private val carouselType: CarouselType,
     private val carouselGravity: CarouselGravity,
@@ -19,7 +23,7 @@ class CarouselAdapter(
     var listener: CarouselListener?,
     private val imageScaleType: ImageView.ScaleType,
     private val imagePlaceholder: Drawable?
-) : RecyclerView.Adapter<CarouselAdapter.MyViewHolder>() {
+) : RecyclerView.Adapter<InfiniteCarouselAdapter.MyViewHolder>() {
 
     class MyViewHolder(val binding: ViewBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -38,11 +42,12 @@ class CarouselAdapter(
     }
 
     override fun getItemCount(): Int {
-        return dataList.size
+        return if (dataList.isEmpty()) 0 else Integer.MAX_VALUE
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val item = dataList[position]
+        val positionInDataList = position % dataList.size
+        val item = dataList[positionInDataList]
 
         /*
          * Bug#1
@@ -69,7 +74,7 @@ class CarouselAdapter(
         }
 
         // Init listeners
-        listener?.onBindViewHolder(holder.binding, imageScaleType, item)
+        listener?.onBindViewHolder(holder.binding, imageScaleType, item, positionInDataList)
 
         // Init start and end offsets
         if (carouselType == CarouselType.SHOWCASE) {
@@ -106,8 +111,8 @@ class CarouselAdapter(
     }
 
     fun getItem(position: Int): CarouselItem? {
-        return if (position < dataList.size) {
-            dataList[position]
+        return if (position < itemCount) {
+            dataList[position % dataList.size]
         } else {
             null
         }
@@ -116,10 +121,10 @@ class CarouselAdapter(
     /**
      * Clear previous items and add all given carousel items.
      */
-    fun replaceData(dataList: List<CarouselItem>): List<CarouselItem> {
+    fun replaceData(newDataList: List<CarouselItem>): List<CarouselItem> {
         this.dataList.clear()
 
-        this.dataList.addAll(dataList)
+        this.dataList.addAll(newDataList)
         notifyDataSetChanged()
 
         return this.dataList
@@ -128,9 +133,11 @@ class CarouselAdapter(
     /**
      * Clear previous items and add all given carousel items.
      */
-    fun appendData(dataList: List<CarouselItem>): List<CarouselItem> {
-        this.dataList.addAll(dataList)
-        notifyDataSetChanged()
+    fun appendData(newDataList: List<CarouselItem>): List<CarouselItem> {
+        val oldSize = this.dataList.size
+
+        this.dataList.addAll(newDataList)
+        notifyItemRangeChanged(oldSize, newDataList.size)
 
         return this.dataList
     }

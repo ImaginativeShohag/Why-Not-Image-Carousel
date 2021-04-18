@@ -32,6 +32,7 @@
         android:layout_marginBottom="8dp"
         app:backgroundTint="@color/flat_green_2"
         app:icon="@drawable/ic_arrow_back"
+        app:iconTint="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/fab_play"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/fab_play" />
@@ -46,6 +47,7 @@
         android:layout_marginBottom="8dp"
         app:backgroundTint="@color/flat_green_2"
         app:icon="@drawable/ic_arrow_forward"
+        app:iconTint="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/fab_play"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/fab_play" />

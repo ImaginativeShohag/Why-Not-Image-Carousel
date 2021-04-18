@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.imaginativeworld.whynotimagecarousel.ImageCarousel">
+    tools:context="org.imaginativeworld.whynotimagecarousel.InfiniteImageCarousel">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -45,15 +45,9 @@
         android:textColor="@color/white"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/indicator"
-        app:layout_goneMarginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
         tools:text="@tools:sample/lorem[5]" />
-
-    <me.relex.circleindicator.CircleIndicator2
-        android:id="@+id/indicator"
-        android:layout_width="match_parent"
-        android:layout_height="32dp"
-        app:layout_constraintBottom_toBottomOf="@+id/recyclerView" />
 
     <FrameLayout
         android:id="@+id/previous_button_container"

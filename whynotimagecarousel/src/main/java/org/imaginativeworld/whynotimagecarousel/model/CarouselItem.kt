@@ -1,4 +1,4 @@
-package org.imaginativeworld.whynotimagecarousel
+package org.imaginativeworld.whynotimagecarousel.model
 
 import androidx.annotation.DrawableRes
 

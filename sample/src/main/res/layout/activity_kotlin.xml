@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="32dp"
-            android:text="Why Not! Image Carousel!"
+            android:text="@string/library_name"
             android:textAlignment="center"
             android:textColor="#555"
             android:textSize="24sp"
@@ -32,9 +32,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="16dp"
+            android:paddingStart="@dimen/horizontal_margin"
             android:paddingTop="8dp"
-            android:paddingEnd="16dp"
+            android:paddingEnd="@dimen/horizontal_margin"
             android:paddingBottom="16dp"
             android:text="@string/lorem_ipsum"
             android:textSize="14sp" />
@@ -44,9 +44,9 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="@dimen/horizontal_margin"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="@dimen/horizontal_margin"
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="8dp">
 
@@ -116,7 +116,6 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-
         <!-- ================================================================ -->
 
         <FrameLayout
@@ -126,9 +125,9 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="@dimen/horizontal_margin"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="@dimen/horizontal_margin"
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="8dp">
 
@@ -138,7 +137,7 @@
                     android:orientation="vertical"
                     android:paddingTop="8dp">
 
-                    <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+                    <org.imaginativeworld.whynotimagecarousel.InfiniteImageCarousel
                         android:id="@+id/carousel3"
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
@@ -211,7 +210,7 @@
                     android:textColor="@color/flat_grey_dark_2"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    tools:text="Caption" />
+                    tools:text="@tools:sample/lorem/random" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_goto_next"
@@ -233,14 +232,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="8dp">
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="@dimen/horizontal_margin"
                 android:layout_marginTop="0dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="@dimen/horizontal_margin"
                 android:layout_marginBottom="16dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="8dp">
@@ -312,9 +311,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="16dp"
+            android:paddingStart="@dimen/horizontal_margin"
             android:paddingTop="0dp"
-            android:paddingEnd="16dp"
+            android:paddingEnd="@dimen/horizontal_margin"
             android:paddingBottom="0dp"
             android:text="@string/lorem_ipsum_2"
             android:textSize="14sp" />
@@ -339,9 +338,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="16dp"
+            android:paddingStart="@dimen/horizontal_margin"
             android:paddingTop="8dp"
-            android:paddingEnd="16dp"
+            android:paddingEnd="@dimen/horizontal_margin"
             android:paddingBottom="32dp"
             android:text="@string/lorem_ipsum"
             android:textSize="14sp" />
@@ -351,8 +350,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#ccc"
-            android:visibility="gone" />
+            android:background="#ccc" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_java_example"
@@ -364,7 +362,6 @@
             android:insetBottom="0dp"
             android:text="Java Example"
             android:textColor="@color/white"
-            android:visibility="gone"
             app:backgroundTint="@color/flat_red_1"
             app:cornerRadius="16dp" />
 

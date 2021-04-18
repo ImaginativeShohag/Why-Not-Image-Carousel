@@ -1,4 +1,4 @@
-package org.imaginativeworld.whynotimagecarousel
+package org.imaginativeworld.whynotimagecarousel.utils
 
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager

@@ -1,4 +1,4 @@
-package org.imaginativeworld.whynotimagecarousel
+package org.imaginativeworld.whynotimagecarousel.model
 
 enum class CarouselType(val value: Int) {
     BLOCK(0),

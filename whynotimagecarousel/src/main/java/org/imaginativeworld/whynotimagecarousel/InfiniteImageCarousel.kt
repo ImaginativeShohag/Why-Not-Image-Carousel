@@ -19,8 +19,7 @@ import androidx.annotation.LayoutRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.*
-import me.relex.circleindicator.CircleIndicator2
-import org.imaginativeworld.whynotimagecarousel.adapter.FiniteCarouselAdapter
+import org.imaginativeworld.whynotimagecarousel.adapter.InfiniteCarouselAdapter
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselOnScrollListener
 import org.imaginativeworld.whynotimagecarousel.model.CarouselGravity
@@ -31,7 +30,7 @@ import org.imaginativeworld.whynotimagecarousel.utils.LinearStartSnapHelper
 import org.jetbrains.annotations.NotNull
 import org.jetbrains.annotations.Nullable
 
-class ImageCarousel(
+class InfiniteImageCarousel(
     @NotNull context: Context,
     @Nullable private var attributeSet: AttributeSet?
 ) : ConstraintLayout(context, attributeSet) {
@@ -40,7 +39,7 @@ class ImageCarousel(
         const val TAG = "ImageCarousel"
     }
 
-    private var adapter: FiniteCarouselAdapter? = null
+    private var adapter: InfiniteCarouselAdapter? = null
 
     private val scaleTypeArray = arrayOf(
         ImageView.ScaleType.MATRIX,
@@ -72,11 +71,9 @@ class ImageCarousel(
     private lateinit var nextButtonContainer: FrameLayout
     private var snapHelper: SnapHelper? = null
 
-    private var indicator: CircleIndicator2? = null
     private var btnPrevious: View? = null
     private var btnNext: View? = null
 
-    private var isBuiltInIndicator = false
     private var autoPlayHandler: Handler = Handler()
     private var data: List<CarouselItem>? = null
     private var dataSize = 0
@@ -104,7 +101,7 @@ class ImageCarousel(
         }
         set(value) {
             val position = when {
-                value >= dataSize -> {
+                value >= Int.MAX_VALUE -> {
                     -1
                 }
                 value < 0 -> {
@@ -204,32 +201,6 @@ class ImageCarousel(
             field = value
 
             tvCaption.setTextSize(TypedValue.COMPLEX_UNIT_PX, captionTextSize.toFloat())
-        }
-
-    var showIndicator = false
-        set(value) {
-            field = value
-
-            initIndicator()
-        }
-
-    @Dimension(unit = Dimension.PX)
-    var indicatorMargin: Int = 0
-        set(value) {
-            field = value
-
-            if (isBuiltInIndicator) {
-                indicator?.apply {
-                    val indicatorMarginParams = this.layoutParams as LayoutParams
-                    indicatorMarginParams.setMargins(
-                        0,
-                        0,
-                        0,
-                        indicatorMargin
-                    )
-                    this.layoutParams = indicatorMarginParams
-                }
-            }
         }
 
     var showNavigationButtons = false
@@ -385,10 +356,6 @@ class ImageCarousel(
             } catch (e: IllegalStateException) {
                 e.printStackTrace()
             }
-
-            indicator?.apply {
-                this.attachToRecyclerView(recyclerView, it)
-            }
         }
     }
 
@@ -398,7 +365,7 @@ class ImageCarousel(
 
             recyclerView.layoutManager?.apply {
                 if (this is CarouselLinearLayoutManager) {
-                    this.scaleOnScroll = this@ImageCarousel.scaleOnScroll
+                    this.scaleOnScroll = this@InfiniteImageCarousel.scaleOnScroll
                 }
             }
         }
@@ -409,7 +376,7 @@ class ImageCarousel(
 
             recyclerView.layoutManager?.apply {
                 if (this is CarouselLinearLayoutManager) {
-                    this.scalingFactor = this@ImageCarousel.scalingFactor
+                    this.scalingFactor = this@InfiniteImageCarousel.scalingFactor
                 }
             }
         }
@@ -436,7 +403,7 @@ class ImageCarousel(
     }
 
     private fun initViews() {
-        carouselView = LayoutInflater.from(context).inflate(R.layout.image_carousel, this)
+        carouselView = LayoutInflater.from(context).inflate(R.layout.infinite_image_carousel, this)
 
         recyclerView = carouselView.findViewById(R.id.recyclerView)
         tvCaption = carouselView.findViewById(R.id.tv_caption)
@@ -448,8 +415,8 @@ class ImageCarousel(
         recyclerView.layoutManager =
             CarouselLinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 .apply {
-                    scaleOnScroll = this@ImageCarousel.scaleOnScroll
-                    scalingFactor = this@ImageCarousel.scalingFactor
+                    scaleOnScroll = this@InfiniteImageCarousel.scaleOnScroll
+                    scalingFactor = this@InfiniteImageCarousel.scalingFactor
                 }
         recyclerView.setHasFixedSize(true)
 
@@ -525,16 +492,6 @@ class ImageCarousel(
                         CarouselGravity.CENTER.ordinal
                     )
                 ]
-
-                showIndicator = getBoolean(
-                    R.styleable.ImageCarousel_showIndicator,
-                    true
-                )
-
-                indicatorMargin = getDimension(
-                    R.styleable.ImageCarousel_indicatorMargin,
-                    0F
-                ).toInt()
 
                 imageScaleType = scaleTypeArray[
                     getInteger(
@@ -617,7 +574,7 @@ class ImageCarousel(
     }
 
     private fun initAdapter() {
-        adapter = FiniteCarouselAdapter(
+        adapter = InfiniteCarouselAdapter(
             recyclerView = recyclerView,
             carouselType = carouselType,
             carouselGravity = carouselGravity,
@@ -630,14 +587,8 @@ class ImageCarousel(
 
         data?.apply {
             adapter?.replaceData(this)
-        }
 
-        indicator?.apply {
-            try {
-                adapter?.registerAdapterDataObserver(this.adapterDataObserver)
-            } catch (e: IllegalStateException) {
-                e.printStackTrace()
-            }
+            recyclerView.scrollToPosition(this.size / 2)
         }
     }
 
@@ -666,7 +617,11 @@ class ImageCarousel(
                     val position = snapHelper?.getSnapPosition(recyclerView.layoutManager) ?: -1
 
                     if (position != -1) {
-                        val carouselItem = data?.get(position)
+                        var carouselItem: CarouselItem? = null
+
+                        data?.let { items ->
+                            carouselItem = items[position % items.size]
+                        }
 
                         onScrollStateChanged(
                             recyclerView,
@@ -689,7 +644,7 @@ class ImageCarousel(
             autoPlayHandler.postDelayed(
                 object : Runnable {
                     override fun run() {
-                        if (currentPosition == dataSize - 1) {
+                        if (currentPosition == Int.MAX_VALUE - 1) {
                             currentPosition = 0
                         } else {
                             currentPosition++
@@ -703,45 +658,6 @@ class ImageCarousel(
         } else {
 
             autoPlayHandler.removeCallbacksAndMessages(null)
-        }
-    }
-
-    private fun initIndicator() {
-        // If no custom indicator added, then default indicator will be shown.
-        if (indicator == null) {
-            indicator = carouselView.findViewById(R.id.indicator)
-            isBuiltInIndicator = true
-        }
-
-        indicator?.apply {
-            if (isBuiltInIndicator) {
-                // Indicator margin re-initialize
-                val indicatorMarginParams = this.layoutParams as LayoutParams
-                indicatorMarginParams.setMargins(
-                    indicatorMargin,
-                    indicatorMargin,
-                    indicatorMargin,
-                    indicatorMargin
-                )
-                this.layoutParams = indicatorMarginParams
-
-                // Indicator visibility
-                this.visibility = if (showIndicator) View.VISIBLE else View.GONE
-            }
-
-            // Attach to recyclerview
-            snapHelper?.let {
-                attachToRecyclerView(recyclerView, it)
-            }
-
-            // Observe the adapter
-            adapter?.let { carouselAdapter ->
-                try {
-                    carouselAdapter.registerAdapterDataObserver(this.adapterDataObserver)
-                } catch (e: IllegalStateException) {
-                    e.printStackTrace()
-                }
-            }
         }
     }
 
@@ -791,8 +707,8 @@ class ImageCarousel(
         adapter?.apply {
             replaceData(data)
 
-            this@ImageCarousel.data = data
-            this@ImageCarousel.dataSize = data.size
+            this@InfiniteImageCarousel.data = data
+            this@InfiniteImageCarousel.dataSize = data.size
 
             initOnScrollStateChange()
         }
@@ -805,8 +721,8 @@ class ImageCarousel(
         adapter?.apply {
             appendData(data)
 
-            this@ImageCarousel.data = data
-            this@ImageCarousel.dataSize = data.size
+            this@InfiniteImageCarousel.data = data
+            this@InfiniteImageCarousel.dataSize = data.size
 
             initOnScrollStateChange()
         }
@@ -819,8 +735,8 @@ class ImageCarousel(
         adapter?.apply {
             val data = appendData(item)
 
-            this@ImageCarousel.data = data
-            this@ImageCarousel.dataSize = data.size
+            this@InfiniteImageCarousel.data = data
+            this@InfiniteImageCarousel.dataSize = data.size
 
             initOnScrollStateChange()
         }
@@ -828,27 +744,15 @@ class ImageCarousel(
 
     // ----------------------------------------------------------------
 
-    /**
-     * @return Current indicator or null.
-     */
-    fun getIndicator(): CircleIndicator2? {
-        return indicator
-    }
+    fun initStartPosition() {
+        val halfSize = Integer.MAX_VALUE / 2
+        val offset = halfSize % (if (dataSize == 0) 1 else dataSize)
 
-    /**
-     * Set custom indicator.
-     */
-    fun setIndicator(newIndicator: CircleIndicator2) {
-        indicator?.apply {
-            // if we remove it form the view, then the caption textView constraint won't work.
-            this.visibility = View.GONE
-
-            isBuiltInIndicator = false
-        }
-
-        this.indicator = newIndicator
-
-        initIndicator()
+        recyclerView.scrollToPosition(halfSize - offset - 1)
+        Handler().postDelayed(
+            { recyclerView.smoothScrollToPosition(halfSize - offset) },
+            100
+        )
     }
 
     // ----------------------------------------------------------------

@@ -15,11 +15,12 @@ import androidx.viewbinding.ViewBinding;
 
 import com.google.android.material.button.MaterialButton;
 
-import org.imaginativeworld.whynotimagecarousel.CarouselItem;
-import org.imaginativeworld.whynotimagecarousel.CarouselListener;
-import org.imaginativeworld.whynotimagecarousel.CarouselOnScrollListener;
-import org.imaginativeworld.whynotimagecarousel.CarouselType;
 import org.imaginativeworld.whynotimagecarousel.Utils;
+import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener;
+import org.imaginativeworld.whynotimagecarousel.listener.CarouselOnScrollListener;
+import org.imaginativeworld.whynotimagecarousel.model.CarouselGravity;
+import org.imaginativeworld.whynotimagecarousel.model.CarouselItem;
+import org.imaginativeworld.whynotimagecarousel.model.CarouselType;
 import org.imaginativeworld.whynotimagecarousel.sample.databinding.ActivityJavaBinding;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -63,16 +64,15 @@ public class JavaActivity extends AppCompatActivity {
                 this,
                 R.drawable.ic_wb_cloudy_with_padding
         ));
-//        binding.carousel.setItemLayout(R.layout.custom_fixed_size_item_layout);
-//        binding.carousel.setImageViewId(R.id.image_view);
         binding.carousel.setPreviousButtonLayout(R.layout.custom_previous_button_layout);
         binding.carousel.setPreviousButtonId(R.id.custom_btn_previous);
         binding.carousel.setPreviousButtonMargin(Utils.dpToPx(8, context)); // px value of dp
         binding.carousel.setNextButtonLayout(R.layout.custom_next_button_layout);
         binding.carousel.setNextButtonId(R.id.custom_btn_next);
         binding.carousel.setNextButtonMargin(Utils.dpToPx(8, context)); // px value of dp
+        binding.carousel.setCarouselGravity(CarouselGravity.CENTER);
         binding.carousel.setCarouselType(CarouselType.SHOWCASE);
-        binding.carousel.setScaleOnScroll(true);
+        binding.carousel.setScaleOnScroll(false);
         binding.carousel.setScalingFactor(.15f);
         binding.carousel.setAutoWidthFixing(true);
         binding.carousel.setAutoPlay(false);
@@ -90,7 +90,7 @@ public class JavaActivity extends AppCompatActivity {
         });
         binding.carousel.setCarouselListener(new CarouselListener() {
             @Override
-            public void onBindViewHolder(@NotNull ViewBinding binding, @NotNull ImageView.ScaleType imageScaleType, @NotNull CarouselItem item) {
+            public void onBindViewHolder(@NotNull ViewBinding binding, @NotNull ImageView.ScaleType imageScaleType, @NotNull CarouselItem item, int position) {
 
             }
 
@@ -112,7 +112,7 @@ public class JavaActivity extends AppCompatActivity {
 
         List<CarouselItem> list = new ArrayList<>();
 
-        int max = 10;
+        int max = 7;
 
         for (int i = 1; i <= max; i++) {
             if (i % 2 == 0) {
