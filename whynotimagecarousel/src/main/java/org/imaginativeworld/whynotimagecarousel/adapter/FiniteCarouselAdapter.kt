@@ -46,6 +46,10 @@ open class FiniteCarouselAdapter(
         return dataList.size
     }
 
+    open fun getRealDataPosition(position: Int): Int {
+        return position
+    }
+
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = getItem(position) ?: return
 

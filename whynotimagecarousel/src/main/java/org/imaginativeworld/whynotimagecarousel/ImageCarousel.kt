@@ -23,6 +23,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.*
 import me.relex.circleindicator.CircleIndicator2
 import org.imaginativeworld.whynotimagecarousel.adapter.FiniteCarouselAdapter
+import org.imaginativeworld.whynotimagecarousel.adapter.InfiniteCarouselAdapter
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselOnScrollListener
 import org.imaginativeworld.whynotimagecarousel.model.CarouselGravity
@@ -106,7 +107,7 @@ class ImageCarousel(
         }
         set(value) {
             val position = when {
-                value >= dataSize -> {
+                value >= Int.MAX_VALUE -> {
                     -1
                 }
                 value < 0 -> {
@@ -365,35 +366,6 @@ class ImageCarousel(
             updateSnapHelper()
         }
 
-    private fun updateSnapHelper() {
-        snapHelper?.attachToRecyclerView(null)
-
-        snapHelper = if (carouselType == CarouselType.BLOCK) {
-            Log.e(TAG, "CarouselType.BLOCK")
-            PagerSnapHelper()
-        } else { // CarouselType.SHOWCASE
-            if (carouselGravity == CarouselGravity.START) {
-                Log.e(TAG, "CarouselGravity.START")
-                LinearStartSnapHelper()
-            } else { // CarouselGravity.CENTER
-                Log.e(TAG, "CarouselGravity.CENTER")
-                LinearSnapHelper()
-            }
-        }
-
-        snapHelper?.also {
-            try {
-                it.attachToRecyclerView(recyclerView)
-            } catch (e: IllegalStateException) {
-                e.printStackTrace()
-            }
-
-            indicator?.apply {
-                this.attachToRecyclerView(recyclerView, it)
-            }
-        }
-    }
-
     var scaleOnScroll: Boolean = false
         set(value) {
             field = value
@@ -423,7 +395,6 @@ class ImageCarousel(
             initAdapter()
         }
 
-    // Note: We do not need to invalidate the view for this.
     var autoPlay: Boolean = false
         set(value) {
             field = value
@@ -431,8 +402,11 @@ class ImageCarousel(
             initAutoPlay()
         }
 
-    // Note: We do not need to invalidate the view for this.
     var autoPlayDelay: Int = 0
+
+    var infiniteCarousel: Boolean = false
+
+    var touchToPause: Boolean = false
 
     init {
         initViews()
@@ -446,15 +420,17 @@ class ImageCarousel(
     @SuppressLint("ClickableViewAccessibility")
     private fun initTouchListener() {
         recyclerView.setOnTouchListener { _, event ->
-            when (event?.action) {
-                MotionEvent.ACTION_UP -> {
-                    if (autoPlay) {
-                        resumeAutoPlay()
+            if (touchToPause) {
+                when (event?.action) {
+                    MotionEvent.ACTION_UP -> {
+                        if (autoPlay) {
+                            resumeAutoPlay()
+                        }
                     }
-                }
-                MotionEvent.ACTION_DOWN -> {
-                    if (autoPlay) {
-                        pauseAutoPlay()
+                    MotionEvent.ACTION_DOWN -> {
+                        if (autoPlay) {
+                            pauseAutoPlay()
+                        }
                     }
                 }
             }
@@ -646,6 +622,16 @@ class ImageCarousel(
                     R.styleable.ImageCarousel_autoPlayDelay,
                     3000
                 )
+
+                infiniteCarousel = getBoolean(
+                    R.styleable.ImageCarousel_infiniteCarousel,
+                    true
+                )
+
+                touchToPause = getBoolean(
+                    R.styleable.ImageCarousel_touchToPause,
+                    true
+                )
             } finally {
                 recycle()
             }
@@ -653,27 +639,39 @@ class ImageCarousel(
     }
 
     private fun initAdapter() {
-        adapter = FiniteCarouselAdapter(
-            recyclerView = recyclerView,
-            carouselType = carouselType,
-            carouselGravity = carouselGravity,
-            autoWidthFixing = autoWidthFixing,
-            imageScaleType = imageScaleType,
-            imagePlaceholder = imagePlaceholder
-        ).apply {
-            listener = carouselListener
+        if (infiniteCarousel) {
+            adapter = InfiniteCarouselAdapter(
+                recyclerView = recyclerView,
+                carouselType = carouselType,
+                carouselGravity = carouselGravity,
+                autoWidthFixing = autoWidthFixing,
+                imageScaleType = imageScaleType,
+                imagePlaceholder = imagePlaceholder
+            ).apply {
+                listener = carouselListener
+            }
+        } else {
+            adapter = FiniteCarouselAdapter(
+                recyclerView = recyclerView,
+                carouselType = carouselType,
+                carouselGravity = carouselGravity,
+                autoWidthFixing = autoWidthFixing,
+                imageScaleType = imageScaleType,
+                imagePlaceholder = imagePlaceholder
+            ).apply {
+                listener = carouselListener
+            }
         }
+
         recyclerView.adapter = adapter
 
         data?.apply {
             adapter?.replaceData(this)
-        }
 
-        indicator?.apply {
-            try {
-                adapter?.registerAdapterDataObserver(this.adapterDataObserver)
-            } catch (e: IllegalStateException) {
-                e.printStackTrace()
+            recyclerView.scrollToPosition(this.size / 2)
+
+            indicator?.apply {
+                this.createIndicators(dataSize, 0)
             }
         }
     }
@@ -682,16 +680,21 @@ class ImageCarousel(
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
 
-                if (showCaption) {
-                    val position = snapHelper?.getSnapPosition(recyclerView.layoutManager) ?: -1
+                val position = snapHelper?.getSnapPosition(recyclerView.layoutManager) ?: -1
 
-                    if (position >= 0) {
-                        val dataItem = adapter?.getItem(position)
+                if (showCaption && position >= 0) {
+                    val dataItem = adapter?.getItem(position)
 
-                        dataItem?.apply {
-                            tvCaption.text = this.caption
-                        }
+                    dataItem?.apply {
+                        tvCaption.text = this.caption
                     }
+                }
+
+                // Change Indicator position
+                indicator?.apply {
+                    val currentRealPosition = adapter?.getRealDataPosition(position) ?: 0
+
+                    animatePageSelected(currentRealPosition)
                 }
 
                 onScrollListener?.onScrolled(recyclerView, dx, dy)
@@ -702,8 +705,8 @@ class ImageCarousel(
                 onScrollListener?.apply {
                     val position = snapHelper?.getSnapPosition(recyclerView.layoutManager) ?: -1
 
-                    if (position != -1) {
-                        val carouselItem = data?.get(position)
+                    if (position >= 0) {
+                        val carouselItem: CarouselItem? = adapter?.getItem(position)
 
                         onScrollStateChanged(
                             recyclerView,
@@ -727,7 +730,7 @@ class ImageCarousel(
             autoPlayHandler.postDelayed(
                 object : Runnable {
                     override fun run() {
-                        if (currentPosition == dataSize - 1) {
+                        if (currentPosition == Int.MAX_VALUE - 1) {
                             currentPosition = 0
                         } else {
                             currentPosition++
@@ -764,19 +767,7 @@ class ImageCarousel(
                 this.visibility = if (showIndicator) View.VISIBLE else View.GONE
             }
 
-            // Attach to recyclerview
-            snapHelper?.let {
-                attachToRecyclerView(recyclerView, it)
-            }
-
-            // Observe the adapter
-            adapter?.let { carouselAdapter ->
-                try {
-                    carouselAdapter.registerAdapterDataObserver(this.adapterDataObserver)
-                } catch (e: IllegalStateException) {
-                    e.printStackTrace()
-                }
-            }
+            this.createIndicators(dataSize, currentPosition)
         }
     }
 
@@ -811,10 +802,40 @@ class ImageCarousel(
         }
     }
 
+    private fun updateSnapHelper() {
+        snapHelper?.attachToRecyclerView(null)
+
+        snapHelper = if (carouselType == CarouselType.BLOCK) {
+            PagerSnapHelper()
+        } else { // CarouselType.SHOWCASE
+            if (carouselGravity == CarouselGravity.START) {
+                LinearStartSnapHelper()
+            } else { // CarouselGravity.CENTER
+                LinearSnapHelper()
+            }
+        }
+
+        snapHelper?.also {
+            try {
+                it.attachToRecyclerView(recyclerView)
+            } catch (e: IllegalStateException) {
+                e.printStackTrace()
+            }
+        }
+    }
+
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
 
         stop()
+    }
+
+    // ----------------------------------------------------------------
+
+    private fun createIndicator() {
+        indicator?.apply {
+            createIndicators(dataSize, currentPosition)
+        }
     }
 
     // ----------------------------------------------------------------
@@ -829,7 +850,11 @@ class ImageCarousel(
             this@ImageCarousel.data = data
             this@ImageCarousel.dataSize = data.size
 
+            createIndicator()
+
             initOnScrollStateChange()
+
+            initStartPositionForInfiniteCarousel()
         }
     }
 
@@ -842,6 +867,8 @@ class ImageCarousel(
 
             this@ImageCarousel.data = data
             this@ImageCarousel.dataSize = data.size
+
+            createIndicator()
 
             initOnScrollStateChange()
         }
@@ -856,6 +883,8 @@ class ImageCarousel(
 
             this@ImageCarousel.data = data
             this@ImageCarousel.dataSize = data.size
+
+            createIndicator()
 
             initOnScrollStateChange()
         }
@@ -884,6 +913,50 @@ class ImageCarousel(
         this.indicator = newIndicator
 
         initIndicator()
+    }
+
+    // ----------------------------------------------------------------
+
+    /**
+     * Initialize the start position for infinite carousel.
+     */
+    fun initStartPositionForInfiniteCarousel() {
+        if (!infiniteCarousel)
+            return
+
+        recyclerView.post {
+            // There is no data! So nothing to do.
+            if (dataSize == 0)
+                return@post
+
+            // For making the view infinite, we create a virtual Integer.MAX_VALUE number of items.
+            // We will find the first item from the middle of the whole virtual list.
+            // 1073741823 is the half of the Integer.MAX_VALUE.
+            val offset = 1073741823 % dataSize
+            val finalPosition = 1073741823 - offset
+
+            val layoutManager = recyclerView.layoutManager
+
+            if (layoutManager is CarouselLinearLayoutManager) {
+                // We assuming that every item will have the same size.
+                // As we cannot get the view from the middle (because the view will not 
+                // be created at the beginning), so we use the first item for getting the width.
+                val view = layoutManager.findViewByPosition(0)
+
+                if (view == null) {
+                    Log.e(
+                        TAG,
+                        "View not found! This can't be happening though."
+                    )
+                    return@post
+                }
+
+                layoutManager.scrollToPositionWithOffset(
+                    finalPosition,
+                    recyclerView.width / 2 - view.width / 2
+                )
+            }
+        }
     }
 
     // ----------------------------------------------------------------

@@ -33,4 +33,8 @@ class InfiniteCarouselAdapter(
             null
         }
     }
+
+    override fun getRealDataPosition(position: Int): Int {
+        return position % dataList.size
+    }
 }

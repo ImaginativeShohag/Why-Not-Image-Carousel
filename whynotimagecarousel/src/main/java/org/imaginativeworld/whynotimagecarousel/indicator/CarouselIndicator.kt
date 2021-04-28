@@ -1,0 +1,3 @@
+package org.imaginativeworld.whynotimagecarousel.indicator
+
+class CarouselIndicator
