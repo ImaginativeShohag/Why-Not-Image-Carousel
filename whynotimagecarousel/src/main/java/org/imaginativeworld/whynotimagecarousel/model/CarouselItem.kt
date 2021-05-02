@@ -8,6 +8,8 @@ data class CarouselItem constructor(
     val caption: String? = null,
     val headers: Map<String, String>?
 ) {
+    constructor() : this(null, null, null, null)
+
     constructor(imageUrl: String? = null) : this(
         imageUrl,
         null,

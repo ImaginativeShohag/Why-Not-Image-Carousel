@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
+    android:scrollbars="none"
     tools:context=".KotlinActivity">
 
     <LinearLayout
@@ -70,9 +71,12 @@
                         android:layout_height="150dp"
                         android:layout_marginStart="0dp"
                         android:layout_weight="1"
-                        app:carouselBackground="@color/white"
+                        app:carouselBackground="@android:color/transparent"
+                        app:carouselPaddingEnd="0dp"
+                        app:carouselPaddingStart="0dp"
                         app:carouselType="BLOCK"
                         app:imageScaleType="centerCrop"
+                        app:infiniteCarousel="false"
                         app:nextButtonId="@id/custom_btn_next"
                         app:nextButtonLayout="@layout/custom_next_button_layout"
                         app:nextButtonMargin="16dp"
@@ -85,7 +89,7 @@
                         app:showIndicator="false"
                         app:showNavigationButtons="true"
                         app:showTopShadow="false"
-                        app:infiniteCarousel="false" />
+                        app:touchToPause="true" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -169,7 +173,6 @@
                 android:translationZ="8dp"
                 app:autoPlay="true"
                 app:autoPlayDelay="3000"
-                app:carouselBackground="@android:color/transparent"
                 app:carouselGravity="CENTER"
                 app:carouselType="SHOWCASE"
                 app:imagePlaceholder="@drawable/ic_wb_cloudy_with_padding"
@@ -296,7 +299,6 @@
                 android:translationZ="8dp"
                 app:autoPlay="true"
                 app:autoPlayDelay="4000"
-                app:carouselBackground="@android:color/transparent"
                 app:carouselGravity="CENTER"
                 app:carouselType="SHOWCASE"
                 app:imageScaleType="centerCrop"
@@ -334,11 +336,52 @@
             android:layout_height="180dp"
             android:layout_marginTop="16dp"
             app:autoWidthFixing="false"
-            app:carouselBackground="@color/background"
             app:carouselGravity="START"
+            app:carouselPaddingEnd="8dp"
+            app:carouselPaddingStart="8dp"
             app:carouselType="SHOWCASE"
             app:imageScaleType="centerCrop"
+            app:infiniteCarousel="false"
             app:scaleOnScroll="false"
+            app:showBottomShadow="false"
+            app:showCaption="false"
+            app:showIndicator="false"
+            app:showNavigationButtons="false"
+            app:showTopShadow="false" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/horizontal_margin"
+            android:paddingTop="8dp"
+            android:paddingEnd="@dimen/horizontal_margin"
+            android:paddingBottom="32dp"
+            android:text="@string/lorem_ipsum"
+            android:textSize="14sp" />
+
+        <!-- ================================================================ -->
+
+        <!-- ================================================================ -->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/horizontal_margin"
+            android:paddingTop="0dp"
+            android:paddingEnd="@dimen/horizontal_margin"
+            android:paddingBottom="0dp"
+            android:text="@string/lorem_ipsum_2"
+            android:textSize="14sp" />
+
+        <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+            android:id="@+id/carousel6"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_marginTop="16dp"
+            app:carouselGravity="START"
+            app:carouselPaddingEnd="8dp"
+            app:carouselPaddingStart="8dp"
+            app:carouselType="SHOWCASE"
             app:showBottomShadow="false"
             app:showCaption="false"
             app:showIndicator="false"

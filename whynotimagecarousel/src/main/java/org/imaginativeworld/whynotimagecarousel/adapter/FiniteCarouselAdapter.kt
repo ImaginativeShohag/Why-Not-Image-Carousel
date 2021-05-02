@@ -78,7 +78,12 @@ open class FiniteCarouselAdapter(
         }
 
         // Init listeners
-        listener?.onBindViewHolder(holder.binding, imageScaleType, item, position)
+        listener?.onBindViewHolder(
+            holder.binding,
+            imageScaleType,
+            item,
+            getRealDataPosition(position)
+        )
 
         // Init start and end offsets
         if (carouselType == CarouselType.SHOWCASE) {

@@ -4,15 +4,18 @@
         <attr name="showTopShadow" format="boolean" />
         <attr name="topShadowAlpha" format="float" />
         <attr name="topShadowHeight" format="dimension" />
+
         <attr name="showBottomShadow" format="boolean" />
         <attr name="bottomShadowAlpha" format="float" />
         <attr name="bottomShadowHeight" format="dimension" />
+
         <attr name="showCaption" format="boolean" />
         <attr name="captionMargin" format="dimension" />
         <attr name="captionTextSize" format="dimension" />
+
         <attr name="showIndicator" format="boolean" />
         <attr name="indicatorMargin" format="dimension" />
-        <attr name="showNavigationButtons" format="boolean" />
+
         <attr name="imageScaleType" format="enum">
             <enum name="matrix" value="0" />
             <enum name="fitXY" value="1" />
@@ -23,22 +26,30 @@
             <enum name="centerCrop" value="6" />
             <enum name="centerInside" value="7" />
         </attr>
+
         <attr name="carouselBackground" format="reference|color" />
         <attr name="imagePlaceholder" format="reference|color" />
+        <attr name="carouselPaddingStart" format="dimension" />
+        <attr name="carouselPaddingEnd" format="dimension" />
+
+        <attr name="showNavigationButtons" format="boolean" />
         <attr name="previousButtonLayout" format="reference" />
         <attr name="previousButtonId" format="reference" />
         <attr name="previousButtonMargin" format="dimension" />
         <attr name="nextButtonLayout" format="reference" />
         <attr name="nextButtonId" format="reference" />
         <attr name="nextButtonMargin" format="dimension" />
+
         <attr name="carouselType" format="enum">
             <enum name="BLOCK" value="0" />
             <enum name="SHOWCASE" value="1" />
         </attr>
+
         <attr name="carouselGravity" format="enum">
             <enum name="START" value="0" />
             <enum name="CENTER" value="1" />
         </attr>
+
         <attr name="scaleOnScroll" format="boolean" />
         <attr name="scalingFactor" format="float" />
         <attr name="autoWidthFixing" format="boolean" />

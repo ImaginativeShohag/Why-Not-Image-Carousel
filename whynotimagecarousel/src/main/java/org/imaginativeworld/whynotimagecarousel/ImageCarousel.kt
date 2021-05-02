@@ -20,6 +20,9 @@ import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 import androidx.recyclerview.widget.*
 import me.relex.circleindicator.CircleIndicator2
 import org.imaginativeworld.whynotimagecarousel.adapter.FiniteCarouselAdapter
@@ -37,7 +40,7 @@ import org.jetbrains.annotations.Nullable
 class ImageCarousel(
     @NotNull context: Context,
     @Nullable private var attributeSet: AttributeSet?
-) : ConstraintLayout(context, attributeSet) {
+) : ConstraintLayout(context, attributeSet), LifecycleObserver {
 
     companion object {
         const val TAG = "ImageCarousel"
@@ -266,6 +269,31 @@ class ImageCarousel(
             initAdapter()
         }
 
+    @Dimension(unit = Dimension.PX)
+    var carouselPaddingStart: Int = 0
+        set(value) {
+            field = value
+
+            updateRecyclerViewPadding()
+        }
+
+    @Dimension(unit = Dimension.PX)
+    var carouselPaddingEnd: Int = 0
+        set(value) {
+            field = value
+
+            updateRecyclerViewPadding()
+        }
+
+    private fun updateRecyclerViewPadding() {
+        recyclerView.setPaddingRelative(
+            carouselPaddingStart,
+            0,
+            carouselPaddingEnd,
+            0
+        )
+    }
+
     @LayoutRes
     var previousButtonLayout: Int = R.layout.previous_button_layout
         set(value) {
@@ -423,14 +451,10 @@ class ImageCarousel(
             if (touchToPause) {
                 when (event?.action) {
                     MotionEvent.ACTION_UP -> {
-                        if (autoPlay) {
-                            resumeAutoPlay()
-                        }
+                        resumeAutoPlay()
                     }
                     MotionEvent.ACTION_DOWN -> {
-                        if (autoPlay) {
-                            pauseAutoPlay()
-                        }
+                        pauseAutoPlay()
                     }
                 }
             }
@@ -439,12 +463,18 @@ class ImageCarousel(
         }
     }
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     private fun pauseAutoPlay() {
-        autoPlayHandler.removeCallbacksAndMessages(null)
+        if (autoPlay) {
+            autoPlayHandler.removeCallbacksAndMessages(null)
+        }
     }
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     private fun resumeAutoPlay() {
-        initAutoPlay()
+        if (autoPlay) {
+            initAutoPlay()
+        }
     }
 
     private fun initViews() {
@@ -525,17 +555,17 @@ class ImageCarousel(
                 ).toInt()
 
                 carouselType = carouselTypeArray[
-                    getInteger(
-                        R.styleable.ImageCarousel_carouselType,
-                        CarouselType.BLOCK.ordinal
-                    )
+                        getInteger(
+                            R.styleable.ImageCarousel_carouselType,
+                            CarouselType.BLOCK.ordinal
+                        )
                 ]
 
                 carouselGravity = carouselGravityArray[
-                    getInteger(
-                        R.styleable.ImageCarousel_carouselGravity,
-                        CarouselGravity.CENTER.ordinal
-                    )
+                        getInteger(
+                            R.styleable.ImageCarousel_carouselGravity,
+                            CarouselGravity.CENTER.ordinal
+                        )
                 ]
 
                 showIndicator = getBoolean(
@@ -549,19 +579,29 @@ class ImageCarousel(
                 ).toInt()
 
                 imageScaleType = scaleTypeArray[
-                    getInteger(
-                        R.styleable.ImageCarousel_imageScaleType,
-                        ImageView.ScaleType.CENTER_CROP.ordinal
-                    )
+                        getInteger(
+                            R.styleable.ImageCarousel_imageScaleType,
+                            ImageView.ScaleType.CENTER_CROP.ordinal
+                        )
                 ]
 
                 carouselBackground = getDrawable(
                     R.styleable.ImageCarousel_carouselBackground
-                ) ?: ColorDrawable(Color.parseColor("#333333"))
+                ) ?: ColorDrawable(Color.parseColor("#00000000"))
 
                 imagePlaceholder = getDrawable(
                     R.styleable.ImageCarousel_imagePlaceholder
                 ) ?: ContextCompat.getDrawable(context, R.drawable.ic_picture)
+
+                carouselPaddingStart = getDimension(
+                    R.styleable.ImageCarousel_carouselPaddingStart,
+                    0F
+                ).toInt()
+
+                carouselPaddingEnd = getDimension(
+                    R.styleable.ImageCarousel_carouselPaddingEnd,
+                    0F
+                ).toInt()
 
                 previousButtonLayout = getResourceId(
                     R.styleable.ImageCarousel_previousButtonLayout,
@@ -680,10 +720,17 @@ class ImageCarousel(
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
 
-                val position = snapHelper?.getSnapPosition(recyclerView.layoutManager) ?: -1
+                val position = snapHelper?.getSnapPosition(recyclerView.layoutManager)
+                    ?: RecyclerView.NO_POSITION
 
-                if (showCaption && position >= 0) {
-                    val dataItem = adapter?.getItem(position)
+                val currentRealPosition =
+                    adapter?.getRealDataPosition(position) ?: RecyclerView.NO_POSITION
+
+                var dataItem: CarouselItem? = null
+
+                // Update the built-in caption
+                if (showCaption && currentRealPosition >= 0) {
+                    dataItem = adapter?.getItem(currentRealPosition)
 
                     dataItem?.apply {
                         tvCaption.text = this.caption
@@ -692,21 +739,25 @@ class ImageCarousel(
 
                 // Change Indicator position
                 indicator?.apply {
-                    val currentRealPosition = adapter?.getRealDataPosition(position) ?: 0
-
                     animatePageSelected(currentRealPosition)
                 }
 
-                onScrollListener?.onScrolled(recyclerView, dx, dy)
+                // Invoke the listener
+                onScrollListener?.onScrolled(recyclerView, dx, dy, currentRealPosition, dataItem)
             }
 
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
 
+                // Invoke the listener
                 onScrollListener?.apply {
-                    val position = snapHelper?.getSnapPosition(recyclerView.layoutManager) ?: -1
+                    val position = snapHelper?.getSnapPosition(recyclerView.layoutManager)
+                        ?: RecyclerView.NO_POSITION
 
-                    if (position >= 0) {
-                        val carouselItem: CarouselItem? = adapter?.getItem(position)
+                    val currentRealPosition =
+                        adapter?.getRealDataPosition(position) ?: RecyclerView.NO_POSITION
+
+                    if (currentRealPosition >= 0) {
+                        val carouselItem: CarouselItem? = adapter?.getItem(currentRealPosition)
 
                         onScrollStateChanged(
                             recyclerView,
@@ -730,6 +781,8 @@ class ImageCarousel(
             autoPlayHandler.postDelayed(
                 object : Runnable {
                     override fun run() {
+                        Log.e(TAG, "autoPlayHandler: run()")
+
                         if (currentPosition == Int.MAX_VALUE - 1) {
                             currentPosition = 0
                         } else {
@@ -951,12 +1004,31 @@ class ImageCarousel(
                     return@post
                 }
 
-                layoutManager.scrollToPositionWithOffset(
-                    finalPosition,
-                    recyclerView.width / 2 - view.width / 2
-                )
+                if (carouselGravity == CarouselGravity.CENTER) {
+                    layoutManager.scrollToPositionWithOffset(
+                        finalPosition,
+                        recyclerView.width / 2 - view.width / 2
+                    )
+                } else { // CarouselGravity.START
+                    layoutManager.scrollToPositionWithOffset(
+                        finalPosition,
+                        0
+                    )
+                }
             }
         }
+    }
+
+    // ----------------------------------------------------------------
+
+    /**
+     * Register ImageCarousel to a lifecycle, so that the auto scroll will pause
+     * when the app is in the background.
+     *
+     * @param lifecycle A LifecycleOwner's lifecycle.
+     */
+    fun registerLifecycle(lifecycle: Lifecycle) {
+        lifecycle.addObserver(this)
     }
 
     // ----------------------------------------------------------------

@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import org.imaginativeworld.whynotimagecarousel.dpToPx
@@ -17,10 +18,7 @@ import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselOnScrollListener
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 import org.imaginativeworld.whynotimagecarousel.model.CarouselType
-import org.imaginativeworld.whynotimagecarousel.sample.databinding.ActivityKotlinBinding
-import org.imaginativeworld.whynotimagecarousel.sample.databinding.CustomFixedSizeItemLayoutBinding
-import org.imaginativeworld.whynotimagecarousel.sample.databinding.CustomFixedSizeItemTwoLayoutBinding
-import org.imaginativeworld.whynotimagecarousel.sample.databinding.CustomItemTwoLayoutBinding
+import org.imaginativeworld.whynotimagecarousel.sample.databinding.*
 import org.imaginativeworld.whynotimagecarousel.setImage
 import org.imaginativeworld.whynotimagecarousel.spToPx
 
@@ -46,6 +44,8 @@ class KotlinActivity : AppCompatActivity() {
         // ----------------------------------------------------------------
 
         binding.carousel1.apply {
+            registerLifecycle(lifecycle)
+
             showTopShadow = true
             topShadowAlpha = 0.6f // 0 to 1, 1 means 100%
             topShadowHeight = 32.dpToPx(context) // px value of dp
@@ -91,7 +91,13 @@ class KotlinActivity : AppCompatActivity() {
                     // ...
                 }
 
-                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                override fun onScrolled(
+                    recyclerView: RecyclerView,
+                    dx: Int,
+                    dy: Int,
+                    position: Int,
+                    carouselItem: CarouselItem?
+                ) {
                     // ...
                 }
             }
@@ -112,6 +118,8 @@ class KotlinActivity : AppCompatActivity() {
             // ----------------------------------------------------------------
             // Example Two: Custom view
             // ----------------------------------------------------------------
+
+            binding.carousel2.registerLifecycle(lifecycle)
 
             // Custom view
             binding.carousel2.carouselListener = object : CarouselListener {
@@ -152,6 +160,8 @@ class KotlinActivity : AppCompatActivity() {
             // ----------------------------------------------------------------
             // Example Three: Custome navigation
             // ----------------------------------------------------------------
+
+            binding.carousel3.registerLifecycle(lifecycle)
 
             // Custom view
             binding.carousel3.carouselListener = object : CarouselListener {
@@ -209,7 +219,13 @@ class KotlinActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                override fun onScrolled(
+                    recyclerView: RecyclerView,
+                    dx: Int,
+                    dy: Int,
+                    position: Int,
+                    carouselItem: CarouselItem?
+                ) {
                     // ...
                 }
             }
@@ -227,13 +243,19 @@ class KotlinActivity : AppCompatActivity() {
             // Example Four: Custom indicator
             // ----------------------------------------------------------------
 
+            binding.carousel4.registerLifecycle(lifecycle)
+
             // Custom view
             binding.carousel4.carouselListener = object : CarouselListener {
                 override fun onCreateViewHolder(
                     layoutInflater: LayoutInflater,
                     parent: ViewGroup
                 ): ViewBinding? {
-                    return CustomFixedSizeItemLayoutBinding.inflate(layoutInflater, parent, false)
+                    return CustomFixedSizeItemThreeLayoutBinding.inflate(
+                        layoutInflater,
+                        parent,
+                        false
+                    )
                 }
 
                 override fun onBindViewHolder(
@@ -242,7 +264,7 @@ class KotlinActivity : AppCompatActivity() {
                     item: CarouselItem,
                     position: Int
                 ) {
-                    val currentBinding = binding as CustomFixedSizeItemLayoutBinding
+                    val currentBinding = binding as CustomFixedSizeItemThreeLayoutBinding
 
                     currentBinding.imageView.apply {
                         scaleType = imageScaleType
@@ -270,6 +292,8 @@ class KotlinActivity : AppCompatActivity() {
             // ----------------------------------------------------------------
             // Example Five: Usage of Drawable
             // ----------------------------------------------------------------
+
+            binding.carousel5.registerLifecycle(lifecycle)
 
             // Custom view
             binding.carousel5.carouselListener = object : CarouselListener {
@@ -314,6 +338,60 @@ class KotlinActivity : AppCompatActivity() {
             }
 
             binding.carousel5.setData(listFive)
+
+            // ----------------------------------------------------------------
+            // Example Six: Carousel without image.
+            // ----------------------------------------------------------------
+
+            binding.carousel6.registerLifecycle(lifecycle)
+
+            val colorsForSix = listOf(
+                R.color.flat_awesome_green_1,
+                R.color.flat_green_1,
+                R.color.flat_blue_1,
+                R.color.flat_pink_1,
+                R.color.flat_yellow_1,
+                R.color.flat_orange_1
+            )
+
+            // Custom view
+            binding.carousel6.carouselListener = object : CarouselListener {
+                override fun onCreateViewHolder(
+                    layoutInflater: LayoutInflater,
+                    parent: ViewGroup
+                ): ViewBinding? {
+                    return ItemCustomFixedSizeItem4LayoutBinding.inflate(
+                        layoutInflater,
+                        parent,
+                        false
+                    )
+                }
+
+                override fun onBindViewHolder(
+                    binding: ViewBinding,
+                    imageScaleType: ImageView.ScaleType,
+                    item: CarouselItem,
+                    position: Int
+                ) {
+                    val currentBinding = binding as ItemCustomFixedSizeItem4LayoutBinding
+
+                    val currentColor =
+                        ResourcesCompat.getColor(resources, colorsForSix[position], null)
+
+                    currentBinding.card.setCardBackgroundColor(currentColor)
+
+                    currentBinding.tvCaption.text = "— ${DataSet.six[position].first}"
+                    currentBinding.tvBody.text = DataSet.six[position].second
+                }
+            }
+
+            val listSix = mutableListOf<CarouselItem>()
+
+            for (item in DataSet.six) {
+                listSix.add(CarouselItem())
+            }
+
+            binding.carousel6.setData(listSix)
         }
     }
 }

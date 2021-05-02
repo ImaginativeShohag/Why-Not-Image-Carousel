@@ -5,4 +5,26 @@
     <color name="colorAccent">#e74c3c</color>
 
     <color name="background">#ecf0f1</color>
+
+    <!-- Colors From: https://flatuicolors.com/palette/defo -->
+    <color name="flat_awesome_green_1">#1abc9c</color>
+    <color name="flat_awesome_green_2">#16a085</color>
+    <color name="flat_green_1">#2ecc71</color>
+    <color name="flat_green_2">#27ae60</color>
+    <color name="flat_blue_1">#3498db</color>
+    <color name="flat_blue_2">#2980b9</color>
+    <color name="flat_pink_1">#9b59b6</color>
+    <color name="flat_pink_2">#8e44ad</color>
+    <color name="flat_grey_dark_1">#34495e</color>
+    <color name="flat_grey_dark_2">#2c3e50</color>
+    <color name="flat_grey_normal_1">#95a5a6</color>
+    <color name="flat_grey_normal_2">#7f8c8d</color>
+    <color name="flat_grey_light_1">#ecf0f1</color>
+    <color name="flat_grey_light_2">#bdc3c7</color>
+    <color name="flat_red_1">#e74c3c</color>
+    <color name="flat_red_2">#c0392b</color>
+    <color name="flat_orange_1">#e67e22</color>
+    <color name="flat_orange_2">#d35400</color>
+    <color name="flat_yellow_1">#f1c40f</color>
+    <color name="flat_yellow_2">#f39c12</color>
 </resources>

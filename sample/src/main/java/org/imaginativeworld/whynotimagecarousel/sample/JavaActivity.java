@@ -46,30 +46,38 @@ public class JavaActivity extends AppCompatActivity {
 
         context = this;
 
+        binding.carousel.registerLifecycle(getLifecycle());
+
         binding.carousel.setShowTopShadow(false);
         binding.carousel.setTopShadowAlpha(0.6f); // 0 to 1, 1 means 100%
         binding.carousel.setTopShadowHeight(Utils.dpToPx(32, context)); // px value of dp
+
         binding.carousel.setShowBottomShadow(false);
         binding.carousel.setBottomShadowAlpha(0.6f); // 0 to 1, 1 means 100%
         binding.carousel.setBottomShadowHeight(Utils.dpToPx(64, context)); // px value of dp
+
         binding.carousel.setShowCaption(true);
         binding.carousel.setCaptionMargin(Utils.dpToPx(16, context)); // px value of dp
         binding.carousel.setCaptionTextSize(Utils.spToPx(16, context)); // px value of sp
+
         binding.carousel.setShowIndicator(false);
         binding.carousel.setIndicatorMargin(Utils.dpToPx(0, context)); // px value of dp
-        binding.carousel.setShowNavigationButtons(true);
+
         binding.carousel.setImageScaleType(ImageView.ScaleType.CENTER);
         binding.carousel.setCarouselBackground(new ColorDrawable(Color.parseColor("#333333")));
         binding.carousel.setImagePlaceholder(ContextCompat.getDrawable(
                 this,
                 R.drawable.ic_wb_cloudy_with_padding
         ));
+
         binding.carousel.setPreviousButtonLayout(R.layout.custom_previous_button_layout);
         binding.carousel.setPreviousButtonId(R.id.custom_btn_previous);
         binding.carousel.setPreviousButtonMargin(Utils.dpToPx(8, context)); // px value of dp
         binding.carousel.setNextButtonLayout(R.layout.custom_next_button_layout);
         binding.carousel.setNextButtonId(R.id.custom_btn_next);
         binding.carousel.setNextButtonMargin(Utils.dpToPx(8, context)); // px value of dp
+        binding.carousel.setShowNavigationButtons(false);
+
         binding.carousel.setCarouselGravity(CarouselGravity.CENTER);
         binding.carousel.setCarouselType(CarouselType.SHOWCASE);
         binding.carousel.setScaleOnScroll(false);
@@ -77,9 +85,14 @@ public class JavaActivity extends AppCompatActivity {
         binding.carousel.setAutoWidthFixing(true);
         binding.carousel.setAutoPlay(false);
         binding.carousel.setAutoPlayDelay(3000); // Milliseconds
+        binding.carousel.setInfiniteCarousel(true);
+        binding.carousel.setTouchToPause(true);
+        binding.carousel.setCarouselPaddingStart(Utils.dpToPx(0, context));
+        binding.carousel.setCarouselPaddingEnd(Utils.dpToPx(0, context));
+
         binding.carousel.setOnScrollListener(new CarouselOnScrollListener() {
             @Override
-            public void onScrolled(@NotNull RecyclerView recyclerView, int dx, int dy) {
+            public void onScrolled(@NotNull RecyclerView recyclerView, int dx, int dy, int position, @Nullable CarouselItem carouselItem) {
                 // ...
             }
 
@@ -91,12 +104,13 @@ public class JavaActivity extends AppCompatActivity {
         binding.carousel.setCarouselListener(new CarouselListener() {
             @Override
             public void onBindViewHolder(@NotNull ViewBinding binding, @NotNull ImageView.ScaleType imageScaleType, @NotNull CarouselItem item, int position) {
-
+                // ...
             }
 
             @Nullable
             @Override
             public ViewBinding onCreateViewHolder(@NotNull LayoutInflater layoutInflater, @NotNull ViewGroup parent) {
+                // ...
                 return null;
             }
         });
@@ -112,24 +126,14 @@ public class JavaActivity extends AppCompatActivity {
 
         List<CarouselItem> list = new ArrayList<>();
 
-        int max = 7;
-
-        for (int i = 1; i <= max; i++) {
-            if (i % 2 == 0) {
-                list.add(
-                        new CarouselItem(
-                                "https://images.unsplash.com/photo-1581357825340-32259110788a?w=1080",
-                                "Image " + i + " of " + max
-                        )
-                );
-            } else {
-                list.add(
-                        new CarouselItem(
-                                "https://images.unsplash.com/photo-1581441117193-63e8f6547081?w=1080",
-                                "Image " + i + " of " + max
-                        )
-                );
-            }
+        int index = 1;
+        for (String item : DataSet.INSTANCE.getOne()) {
+            list.add(
+                    new CarouselItem(
+                            item,
+                            "Image " + index++ + " of " + DataSet.INSTANCE.getOne().size()
+                    )
+            );
         }
 
         binding.carousel.setData(list);
