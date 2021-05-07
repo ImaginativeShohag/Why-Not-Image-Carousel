@@ -270,7 +270,26 @@ class ImageCarousel(
         }
 
     @Dimension(unit = Dimension.PX)
+    var carouselPadding: Int = 0
+        set(value) {
+            field = value
+
+            carouselPaddingStart = value
+            carouselPaddingTop = value
+            carouselPaddingEnd = value
+            carouselPaddingBottom = value
+        }
+
+    @Dimension(unit = Dimension.PX)
     var carouselPaddingStart: Int = 0
+        set(value) {
+            field = value
+
+            updateRecyclerViewPadding()
+        }
+
+    @Dimension(unit = Dimension.PX)
+    var carouselPaddingTop: Int = 0
         set(value) {
             field = value
 
@@ -285,12 +304,20 @@ class ImageCarousel(
             updateRecyclerViewPadding()
         }
 
+    @Dimension(unit = Dimension.PX)
+    var carouselPaddingBottom: Int = 0
+        set(value) {
+            field = value
+
+            updateRecyclerViewPadding()
+        }
+
     private fun updateRecyclerViewPadding() {
         recyclerView.setPaddingRelative(
             carouselPaddingStart,
-            0,
+            carouselPaddingTop,
             carouselPaddingEnd,
-            0
+            carouselPaddingBottom
         )
     }
 
@@ -593,13 +620,28 @@ class ImageCarousel(
                     R.styleable.ImageCarousel_imagePlaceholder
                 ) ?: ContextCompat.getDrawable(context, R.drawable.ic_picture)
 
+                carouselPadding = getDimension(
+                    R.styleable.ImageCarousel_carouselPadding,
+                    0F
+                ).toInt()
+
                 carouselPaddingStart = getDimension(
                     R.styleable.ImageCarousel_carouselPaddingStart,
                     0F
                 ).toInt()
 
+                carouselPaddingTop = getDimension(
+                    R.styleable.ImageCarousel_carouselPaddingTop,
+                    0F
+                ).toInt()
+
                 carouselPaddingEnd = getDimension(
                     R.styleable.ImageCarousel_carouselPaddingEnd,
+                    0F
+                ).toInt()
+
+                carouselPaddingBottom = getDimension(
+                    R.styleable.ImageCarousel_carouselPaddingBottom,
                     0F
                 ).toInt()
 

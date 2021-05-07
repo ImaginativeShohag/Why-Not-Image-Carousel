@@ -29,8 +29,12 @@
 
         <attr name="carouselBackground" format="reference|color" />
         <attr name="imagePlaceholder" format="reference|color" />
+
+        <attr name="carouselPadding" format="dimension" />
         <attr name="carouselPaddingStart" format="dimension" />
+        <attr name="carouselPaddingTop" format="dimension" />
         <attr name="carouselPaddingEnd" format="dimension" />
+        <attr name="carouselPaddingBottom" format="dimension" />
 
         <attr name="showNavigationButtons" format="boolean" />
         <attr name="previousButtonLayout" format="reference" />

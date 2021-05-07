@@ -300,6 +300,8 @@
                 app:autoPlay="true"
                 app:autoPlayDelay="4000"
                 app:carouselGravity="CENTER"
+                app:carouselPaddingBottom="8dp"
+                app:carouselPaddingTop="8dp"
                 app:carouselType="SHOWCASE"
                 app:imageScaleType="centerCrop"
                 app:nextButtonId="@id/custom_btn_next"
