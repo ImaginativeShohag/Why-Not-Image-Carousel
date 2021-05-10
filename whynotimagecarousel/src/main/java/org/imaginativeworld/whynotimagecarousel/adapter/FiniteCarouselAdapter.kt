@@ -53,13 +53,11 @@ open class FiniteCarouselAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = getItem(position) ?: return
 
-        /*
-         * Bug#1
-         * ----------------------------------------------------
-         * If the sum of consecutive two items of a RecyclerView is not greater then
-         * the screen width, then the scrollToPosition() function will not work as expected.
-         * So we will check the width of the element and increase the minimum width for
-         * fixing the problem.
+        /**
+         * If the sum of consecutive two items of a [RecyclerView] is not greater than
+         * the [ImageCarousel] view width, then the [scrollToPosition] method will not work
+         * as expected. So we will check the width of the element and increase the minimum width
+         * for fixing the problem if [autoWidthFixing] is true.
          */
         if (autoWidthFixing && carouselType == CarouselType.SHOWCASE) {
             val containerWidth = recyclerView.width

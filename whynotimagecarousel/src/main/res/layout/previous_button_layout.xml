@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.button.MaterialButton xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/btn_previous"
     style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
     android:layout_width="48dp"
@@ -16,4 +17,5 @@
     app:iconGravity="textStart"
     app:iconSize="48dp"
     app:iconTint="@color/white"
-    app:rippleColor="@color/white" />
+    app:rippleColor="@color/white"
+    tools:viewBindingIgnore="true" />

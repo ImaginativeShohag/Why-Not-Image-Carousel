@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.imaginativeworld.whynotimagecarousel.ImageCarousel">
+    tools:context="org.imaginativeworld.whynotimagecarousel.ImageCarousel"
+    tools:viewBindingIgnore="true">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

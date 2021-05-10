@@ -63,23 +63,32 @@ public class JavaActivity extends AppCompatActivity {
         binding.carousel.setShowIndicator(false);
         binding.carousel.setIndicatorMargin(Utils.dpToPx(0, context)); // px value of dp
 
-        binding.carousel.setImageScaleType(ImageView.ScaleType.CENTER);
+        binding.carousel.setImageScaleType(ImageView.ScaleType.CENTER_CROP);
+
         binding.carousel.setCarouselBackground(new ColorDrawable(Color.parseColor("#333333")));
         binding.carousel.setImagePlaceholder(ContextCompat.getDrawable(
                 this,
                 R.drawable.ic_wb_cloudy_with_padding
         ));
 
+        binding.carousel.setCarouselPadding(Utils.dpToPx(0, context));
+        binding.carousel.setCarouselPaddingStart(Utils.dpToPx(0, context));
+        binding.carousel.setCarouselPaddingTop(Utils.dpToPx(0, context));
+        binding.carousel.setCarouselPaddingEnd(Utils.dpToPx(0, context));
+        binding.carousel.setCarouselPaddingBottom(Utils.dpToPx(0, context));
+
+        binding.carousel.setShowNavigationButtons(false);
         binding.carousel.setPreviousButtonLayout(R.layout.custom_previous_button_layout);
         binding.carousel.setPreviousButtonId(R.id.custom_btn_previous);
         binding.carousel.setPreviousButtonMargin(Utils.dpToPx(8, context)); // px value of dp
         binding.carousel.setNextButtonLayout(R.layout.custom_next_button_layout);
         binding.carousel.setNextButtonId(R.id.custom_btn_next);
         binding.carousel.setNextButtonMargin(Utils.dpToPx(8, context)); // px value of dp
-        binding.carousel.setShowNavigationButtons(false);
+
+        binding.carousel.setCarouselType(CarouselType.SHOWCASE);
 
         binding.carousel.setCarouselGravity(CarouselGravity.CENTER);
-        binding.carousel.setCarouselType(CarouselType.SHOWCASE);
+
         binding.carousel.setScaleOnScroll(false);
         binding.carousel.setScalingFactor(.15f);
         binding.carousel.setAutoWidthFixing(true);
@@ -87,8 +96,6 @@ public class JavaActivity extends AppCompatActivity {
         binding.carousel.setAutoPlayDelay(3000); // Milliseconds
         binding.carousel.setInfiniteCarousel(true);
         binding.carousel.setTouchToPause(true);
-        binding.carousel.setCarouselPaddingStart(Utils.dpToPx(0, context));
-        binding.carousel.setCarouselPaddingEnd(Utils.dpToPx(0, context));
 
         binding.carousel.setOnScrollListener(new CarouselOnScrollListener() {
             @Override

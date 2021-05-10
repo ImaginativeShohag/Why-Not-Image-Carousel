@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Handler
+import android.os.Looper
 import android.util.AttributeSet
 import android.util.Log
 import android.util.TypedValue
@@ -83,7 +84,7 @@ class ImageCarousel(
     private var btnNext: View? = null
 
     private var isBuiltInIndicator = false
-    private var autoPlayHandler: Handler = Handler()
+    private var autoPlayHandler: Handler = Handler(Looper.getMainLooper())
     private var data: List<CarouselItem>? = null
     private var dataSize = 0
 
@@ -443,6 +444,14 @@ class ImageCarousel(
             }
         }
 
+    /**
+     * Auto width fixing.
+     *
+     * If the sum of consecutive two items of a [RecyclerView] is not greater than
+     * the [ImageCarousel] view width, then the [scrollToPosition] method will not work
+     * as expected. So we will check the width of the element and increase the minimum width
+     * for fixing the problem if [autoWidthFixing] is true.
+     */
     var autoWidthFixing: Boolean = false
         set(value) {
             field = value
@@ -814,7 +823,7 @@ class ImageCarousel(
     }
 
     /**
-     * Initialize and start/stop auto play based on `autoPlay` value.
+     * Initialize and start/stop auto play based on [autoPlay] value.
      */
     private fun initAutoPlay() {
         autoPlayHandler.removeCallbacksAndMessages(null)
@@ -823,8 +832,6 @@ class ImageCarousel(
             autoPlayHandler.postDelayed(
                 object : Runnable {
                     override fun run() {
-                        Log.e(TAG, "autoPlayHandler: run()")
-
                         if (currentPosition == Int.MAX_VALUE - 1) {
                             currentPosition = 0
                         } else {
@@ -881,8 +888,7 @@ class ImageCarousel(
     }
 
     /**
-     * This is called because when data added for the first time,
-     * the related view is not changed as expected.
+     * This is called because when data added/updated the ScrollListener is not invoked as expected.
      */
     private fun initOnScrollStateChange() {
         data?.apply {
@@ -936,7 +942,18 @@ class ImageCarousel(
     // ----------------------------------------------------------------
 
     /**
+     * Get carousel [CarouselItem]s.
+     *
+     * @return Return [CarouselItem]s or null if no item added yet.
+     */
+    fun getData(): List<CarouselItem>? {
+        return data
+    }
+
+    /**
      * Set new data to the carousel. It removes all previous data.
+     *
+     * @property data List of [CarouselItem].
      */
     fun setData(data: List<CarouselItem>) {
         adapter?.apply {
@@ -954,10 +971,14 @@ class ImageCarousel(
     }
 
     /**
-     * Add multiple data to the carousel.
+     * Add multiple data to the carousel. It is the same as [setData], but it will not remove
+     * previously added data. It just appends the items to the list.
+     *
+     * @property data List of [CarouselItem].
      */
     fun addData(data: List<CarouselItem>) {
         adapter?.apply {
+            val isFirstTime = this@ImageCarousel.data.isNullOrEmpty()
             appendData(data)
 
             this@ImageCarousel.data = data
@@ -966,11 +987,18 @@ class ImageCarousel(
             createIndicator()
 
             initOnScrollStateChange()
+
+            if (isFirstTime) {
+                initStartPositionForInfiniteCarousel()
+            }
         }
     }
 
     /**
-     * Add single data to the carousel.
+     * Add single data to the carousel. It will not remove previously added data. It just appends
+     * the item to the list.
+     *
+     * @property item Single [CarouselItem].
      */
     fun addData(item: CarouselItem) {
         adapter?.apply {
@@ -1014,6 +1042,8 @@ class ImageCarousel(
 
     /**
      * Initialize the start position for infinite carousel.
+     *
+     * The carousel will auto call this method on [setData] and [addData] (list version).
      */
     fun initStartPositionForInfiniteCarousel() {
         if (!infiniteCarousel)
@@ -1024,9 +1054,9 @@ class ImageCarousel(
             if (dataSize == 0)
                 return@post
 
-            // For making the view infinite, we create a virtual Integer.MAX_VALUE number of items.
+            // To making the view infinite, we create a virtual [Integer.MAX_VALUE] number of items.
             // We will find the first item from the middle of the whole virtual list.
-            // 1073741823 is the half of the Integer.MAX_VALUE.
+            // 1073741823 is half of the [Integer.MAX_VALUE].
             val offset = 1073741823 % dataSize
             val finalPosition = 1073741823 - offset
 
@@ -1034,14 +1064,14 @@ class ImageCarousel(
 
             if (layoutManager is CarouselLinearLayoutManager) {
                 // We assuming that every item will have the same size.
-                // As we cannot get the view from the middle (because the view will not 
-                // be created at the beginning), so we use the first item for getting the width.
+                // As we cannot get the view from the middle (because the view will not be created
+                // until it gets visible), so we use the first item for getting the view width.
                 val view = layoutManager.findViewByPosition(0)
 
                 if (view == null) {
                     Log.e(
                         TAG,
-                        "View not found! This can't be happening though."
+                        "The first view is not found! This can't be happening though."
                     )
                     return@post
                 }
@@ -1065,9 +1095,9 @@ class ImageCarousel(
 
     /**
      * Register ImageCarousel to a lifecycle, so that the auto scroll will pause
-     * when the app is in the background.
+     * when the app is in the background. It is recommended if you enabled auto play.
      *
-     * @param lifecycle A LifecycleOwner's lifecycle.
+     * @param lifecycle A [androidx.lifecycle.LifecycleOwner]'s lifecycle.
      */
     fun registerLifecycle(lifecycle: Lifecycle) {
         lifecycle.addObserver(this)
@@ -1077,6 +1107,8 @@ class ImageCarousel(
 
     /**
      * Goto previous item.
+     *
+     * Note: Sometimes it will not work. See [autoWidthFixing] for details.
      */
     fun previous() {
         currentPosition--
@@ -1086,6 +1118,8 @@ class ImageCarousel(
 
     /**
      * Goto next item.
+     *
+     * Note: Sometimes it will not work. See [autoWidthFixing] for details.
      */
     fun next() {
         currentPosition++

@@ -16,6 +16,7 @@ import androidx.viewbinding.ViewBinding
 import org.imaginativeworld.whynotimagecarousel.dpToPx
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselOnScrollListener
+import org.imaginativeworld.whynotimagecarousel.model.CarouselGravity
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 import org.imaginativeworld.whynotimagecarousel.model.CarouselType
 import org.imaginativeworld.whynotimagecarousel.sample.databinding.*
@@ -49,21 +50,33 @@ class KotlinActivity : AppCompatActivity() {
             showTopShadow = true
             topShadowAlpha = 0.6f // 0 to 1, 1 means 100%
             topShadowHeight = 32.dpToPx(context) // px value of dp
+
             showBottomShadow = true
             bottomShadowAlpha = 0.6f // 0 to 1, 1 means 100%
             bottomShadowHeight = 64.dpToPx(context) // px value of dp
+
             showCaption = true
             captionMargin = 0.dpToPx(context) // px value of dp
             captionTextSize = 14.spToPx(context) // px value of sp
+
             showIndicator = true
             indicatorMargin = 0.dpToPx(context) // px value of dp
-            showNavigationButtons = true
+
             imageScaleType = ImageView.ScaleType.CENTER_CROP
+
             carouselBackground = ColorDrawable(Color.parseColor("#333333"))
             imagePlaceholder = ContextCompat.getDrawable(
                 this@KotlinActivity,
                 org.imaginativeworld.whynotimagecarousel.R.drawable.ic_picture
             )
+
+            carouselPadding = 0.dpToPx(context)
+            carouselPaddingStart = 0.dpToPx(context)
+            carouselPaddingTop = 0.dpToPx(context)
+            carouselPaddingEnd = 0.dpToPx(context)
+            carouselPaddingBottom = 0.dpToPx(context)
+
+            showNavigationButtons = true
             previousButtonLayout =
                 org.imaginativeworld.whynotimagecarousel.R.layout.previous_button_layout
             previousButtonId =
@@ -73,7 +86,11 @@ class KotlinActivity : AppCompatActivity() {
                 org.imaginativeworld.whynotimagecarousel.R.layout.next_button_layout
             nextButtonId = org.imaginativeworld.whynotimagecarousel.R.id.btn_next
             nextButtonMargin = 4.dpToPx(context) // px value of dp
+
             carouselType = CarouselType.BLOCK
+
+            carouselGravity = CarouselGravity.CENTER
+
             scaleOnScroll = false
             scalingFactor = .15f // 0 to 1; 1 means 100
             autoWidthFixing = true
@@ -81,6 +98,7 @@ class KotlinActivity : AppCompatActivity() {
             autoPlayDelay = 3000 // Milliseconds
             infiniteCarousel = true
             touchToPause = true
+
             onScrollListener = object : CarouselOnScrollListener {
                 override fun onScrollStateChanged(
                     recyclerView: RecyclerView,
@@ -108,7 +126,7 @@ class KotlinActivity : AppCompatActivity() {
                 listOne.add(
                     CarouselItem(
                         imageUrl = item,
-                        caption = "Image $index of ${DataSet.one.size}"
+                        caption = "Image ${index + 1} of ${DataSet.one.size}"
                     )
                 )
             }
@@ -127,7 +145,7 @@ class KotlinActivity : AppCompatActivity() {
                     layoutInflater: LayoutInflater,
                     parent: ViewGroup
                 ): ViewBinding? {
-                    return CustomItemTwoLayoutBinding.inflate(layoutInflater, parent, false)
+                    return ItemCustomFixedSizeLayout5Binding.inflate(layoutInflater, parent, false)
                 }
 
                 override fun onBindViewHolder(
@@ -136,7 +154,7 @@ class KotlinActivity : AppCompatActivity() {
                     item: CarouselItem,
                     position: Int
                 ) {
-                    val currentBinding = binding as CustomItemTwoLayoutBinding
+                    val currentBinding = binding as ItemCustomFixedSizeLayout5Binding
 
                     currentBinding.imageView.apply {
                         scaleType = imageScaleType
@@ -158,7 +176,7 @@ class KotlinActivity : AppCompatActivity() {
             binding.carousel2.setData(listTwo)
 
             // ----------------------------------------------------------------
-            // Example Three: Custome navigation
+            // Example Three: Custom navigation
             // ----------------------------------------------------------------
 
             binding.carousel3.registerLifecycle(lifecycle)
@@ -169,7 +187,7 @@ class KotlinActivity : AppCompatActivity() {
                     layoutInflater: LayoutInflater,
                     parent: ViewGroup
                 ): ViewBinding? {
-                    return CustomFixedSizeItemLayoutBinding.inflate(layoutInflater, parent, false)
+                    return ItemCustomFixedSizeLayout1Binding.inflate(layoutInflater, parent, false)
                 }
 
                 override fun onBindViewHolder(
@@ -178,7 +196,7 @@ class KotlinActivity : AppCompatActivity() {
                     item: CarouselItem,
                     position: Int
                 ) {
-                    val currentBinding = binding as CustomFixedSizeItemLayoutBinding
+                    val currentBinding = binding as ItemCustomFixedSizeLayout1Binding
 
                     currentBinding.imageView.apply {
                         scaleType = imageScaleType
@@ -251,7 +269,7 @@ class KotlinActivity : AppCompatActivity() {
                     layoutInflater: LayoutInflater,
                     parent: ViewGroup
                 ): ViewBinding? {
-                    return CustomFixedSizeItemThreeLayoutBinding.inflate(
+                    return ItemCustomFixedSizeLayout3Binding.inflate(
                         layoutInflater,
                         parent,
                         false
@@ -264,7 +282,7 @@ class KotlinActivity : AppCompatActivity() {
                     item: CarouselItem,
                     position: Int
                 ) {
-                    val currentBinding = binding as CustomFixedSizeItemThreeLayoutBinding
+                    val currentBinding = binding as ItemCustomFixedSizeLayout3Binding
 
                     currentBinding.imageView.apply {
                         scaleType = imageScaleType
@@ -301,7 +319,7 @@ class KotlinActivity : AppCompatActivity() {
                     layoutInflater: LayoutInflater,
                     parent: ViewGroup
                 ): ViewBinding? {
-                    return CustomFixedSizeItemTwoLayoutBinding.inflate(
+                    return ItemCustomFixedSizeLayout2Binding.inflate(
                         layoutInflater,
                         parent,
                         false
@@ -314,7 +332,7 @@ class KotlinActivity : AppCompatActivity() {
                     item: CarouselItem,
                     position: Int
                 ) {
-                    val currentBinding = binding as CustomFixedSizeItemTwoLayoutBinding
+                    val currentBinding = binding as ItemCustomFixedSizeLayout2Binding
 
                     currentBinding.textView.text = item.caption ?: ""
 
@@ -360,7 +378,7 @@ class KotlinActivity : AppCompatActivity() {
                     layoutInflater: LayoutInflater,
                     parent: ViewGroup
                 ): ViewBinding? {
-                    return ItemCustomFixedSizeItem4LayoutBinding.inflate(
+                    return ItemCustomFixedSizeLayout4Binding.inflate(
                         layoutInflater,
                         parent,
                         false
@@ -373,7 +391,7 @@ class KotlinActivity : AppCompatActivity() {
                     item: CarouselItem,
                     position: Int
                 ) {
-                    val currentBinding = binding as ItemCustomFixedSizeItem4LayoutBinding
+                    val currentBinding = binding as ItemCustomFixedSizeLayout4Binding
 
                     val currentColor =
                         ResourcesCompat.getColor(resources, colorsForSix[position], null)
