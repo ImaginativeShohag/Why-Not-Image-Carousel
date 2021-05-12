@@ -23,6 +23,7 @@ import org.imaginativeworld.whynotimagecarousel.model.CarouselType
 import org.imaginativeworld.whynotimagecarousel.sample.databinding.*
 import org.imaginativeworld.whynotimagecarousel.setImage
 import org.imaginativeworld.whynotimagecarousel.spToPx
+import kotlin.random.Random
 
 class KotlinActivity : AppCompatActivity() {
 
@@ -342,6 +343,9 @@ class KotlinActivity : AppCompatActivity() {
 
                         setImage(item, R.drawable.ic_wb_cloudy_with_padding)
                     }
+
+                    currentBinding.tvRating.text =
+                        "%.1f (%d)".format(Random.nextDouble(2.0, 5.0), Random.nextInt(500))
                 }
             }
 

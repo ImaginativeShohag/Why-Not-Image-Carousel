@@ -13,7 +13,7 @@
     android:padding="0dp"
     app:backgroundTint="#22000000"
     app:cornerRadius="48dp"
-    app:icon="@drawable/ic_chevron_right_black_24dp"
+    app:icon="@drawable/ic_chevron_right"
     app:iconGravity="textEnd"
     app:iconSize="48dp"
     app:iconTint="@color/white"

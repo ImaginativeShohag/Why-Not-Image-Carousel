@@ -110,17 +110,18 @@ public class JavaActivity extends AppCompatActivity {
                 // ...
             }
         });
-        binding.carousel.setCarouselListener(new CarouselListener() {
-            @Override
-            public void onBindViewHolder(@NotNull ViewBinding binding, @NotNull ImageView.ScaleType imageScaleType, @NotNull CarouselItem item, int position) {
-                // ...
-            }
 
+        binding.carousel.setCarouselListener(new CarouselListener() {
             @Nullable
             @Override
             public ViewBinding onCreateViewHolder(@NotNull LayoutInflater layoutInflater, @NotNull ViewGroup parent) {
                 // ...
                 return null;
+            }
+
+            @Override
+            public void onBindViewHolder(@NotNull ViewBinding binding, @NotNull ImageView.ScaleType imageScaleType, @NotNull CarouselItem item, int position) {
+                // ...
             }
 
             @Override

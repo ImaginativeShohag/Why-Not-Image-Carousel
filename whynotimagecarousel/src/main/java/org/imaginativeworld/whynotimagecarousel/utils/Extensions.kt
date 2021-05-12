@@ -64,7 +64,11 @@ fun SnapHelper.getSnapPosition(layoutManager: RecyclerView.LayoutManager?): Int 
  * @param item The carousel item.
  * @param placeholderDrawableResourceId The id of the resource to use as a placeholder
  */
-fun ImageView.setImage(item: CarouselItem, @DrawableRes placeholderDrawableResourceId: Int?) {
+@JvmOverloads
+fun ImageView.setImage(
+    item: CarouselItem,
+    @DrawableRes placeholderDrawableResourceId: Int? = null
+) {
     when {
         item.imageUrl != null && item.headers == null -> {
             Glide.with(context.applicationContext)
@@ -99,7 +103,7 @@ fun ImageView.setImage(item: CarouselItem, @DrawableRes placeholderDrawableResou
  * @param item The carousel item.
  * @param placeholderDrawable The drawable to display as a placeholder.
  */
-fun ImageView.setImage(item: CarouselItem, placeholderDrawable: Drawable?) {
+fun ImageView.setImage(item: CarouselItem, placeholderDrawable: Drawable? = null) {
     when {
         item.imageUrl != null && item.headers == null -> {
             Glide.with(context.applicationContext)
