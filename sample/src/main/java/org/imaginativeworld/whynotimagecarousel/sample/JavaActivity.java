@@ -26,7 +26,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import me.relex.circleindicator.CircleIndicator2;
 
@@ -120,6 +122,16 @@ public class JavaActivity extends AppCompatActivity {
                 // ...
                 return null;
             }
+
+            @Override
+            public void onLongClick(int position, @NotNull CarouselItem dataObject) {
+                // ...
+            }
+
+            @Override
+            public void onClick(int position, @NotNull CarouselItem carouselItem) {
+                // ...
+            }
         });
 
         CircleIndicator2 indicator = findViewById(R.id.custom_indicator);
@@ -133,12 +145,17 @@ public class JavaActivity extends AppCompatActivity {
 
         List<CarouselItem> list = new ArrayList<>();
 
+        // Dummy header
+        Map<String, String> headers = new HashMap<>();
+        headers.put("header_key", "header_value");
+
         int index = 1;
         for (String item : DataSet.INSTANCE.getOne()) {
             list.add(
                     new CarouselItem(
                             item,
-                            "Image " + index++ + " of " + DataSet.INSTANCE.getOne().size()
+                            "Image " + index++ + " of " + DataSet.INSTANCE.getOne().size(),
+                            headers
                     )
             );
         }

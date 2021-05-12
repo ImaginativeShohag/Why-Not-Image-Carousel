@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -99,26 +100,25 @@ class KotlinActivity : AppCompatActivity() {
             infiniteCarousel = true
             touchToPause = true
 
-            onScrollListener = object : CarouselOnScrollListener {
-                override fun onScrollStateChanged(
-                    recyclerView: RecyclerView,
-                    newState: Int,
-                    position: Int,
-                    carouselItem: CarouselItem?
-                ) {
-                    // ...
+            carouselListener = object : CarouselListener {
+                override fun onClick(position: Int, carouselItem: CarouselItem) {
+                    Toast.makeText(this@KotlinActivity, "You clicked it.", Toast.LENGTH_SHORT)
+                        .show()
                 }
 
-                override fun onScrolled(
-                    recyclerView: RecyclerView,
-                    dx: Int,
-                    dy: Int,
-                    position: Int,
-                    carouselItem: CarouselItem?
-                ) {
-                    // ...
+                override fun onLongClick(position: Int, dataObject: CarouselItem) {
+                    Toast.makeText(
+                        this@KotlinActivity,
+                        "You long clicked it.",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
                 }
             }
+
+            // Dummy header
+            val headers = mutableMapOf<String, String>()
+            headers["header_key"] = "header_value"
 
             val listOne = mutableListOf<CarouselItem>()
 
@@ -126,7 +126,8 @@ class KotlinActivity : AppCompatActivity() {
                 listOne.add(
                     CarouselItem(
                         imageUrl = item,
-                        caption = "Image ${index + 1} of ${DataSet.one.size}"
+                        caption = "Image ${index + 1} of ${DataSet.one.size}",
+                        headers = headers
                     )
                 )
             }

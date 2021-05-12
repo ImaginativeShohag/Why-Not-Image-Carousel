@@ -7,12 +7,50 @@ import androidx.viewbinding.ViewBinding
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 
 interface CarouselListener {
-    fun onCreateViewHolder(layoutInflater: LayoutInflater, parent: ViewGroup): ViewBinding?
+    /**
+     * Inflate custom view here using view binding.
+     * It's mapped with RecyclerView.Adapter#onCreateViewHolder.
+     *
+     * @param layoutInflater for inflating layout.
+     * @param parent the parent of the generated hierarchy.
+     * @return ViewBinding of the custom view.
+     */
+    fun onCreateViewHolder(layoutInflater: LayoutInflater, parent: ViewGroup): ViewBinding? = null
 
+    /**
+     * Bind view with data.
+     * It's mapped with RecyclerView.Adapter#onBindViewHolder.
+     *
+     * @param binding The ViewBinding returned in onCreateViewHolder.
+     * @param imageScaleType selected ImageView.ScaleType provided in imageScaleType attribute.
+     * @param item current CarouselItem item for bind.
+     * @param position current data position.
+     */
     fun onBindViewHolder(
         binding: ViewBinding,
         imageScaleType: ImageView.ScaleType,
         item: CarouselItem,
         position: Int
-    )
+    ) {
+    }
+
+    /**
+     * When an item view is clicked it will be invoked.
+     *
+     * Note: It will not work for the custom layout.
+     *
+     * @param position Data item position.
+     * @param carouselItem Data item of the clicked view.
+     */
+    fun onClick(position: Int, carouselItem: CarouselItem) {}
+
+    /**
+     * When an item view is long clicked it will be invoked.
+     *
+     * Note: It will not work for the custom layout.
+     *
+     * @param position Data item position.
+     * @param carouselItem Data item of the long clicked view.
+     */
+    fun onLongClick(position: Int, dataObject: CarouselItem) {}
 }

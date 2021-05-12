@@ -51,14 +51,13 @@ open class FiniteCarouselAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val item = getItem(position) ?: return
+        val realItemPosition = getRealDataPosition(position)
+        val item = getItem(realItemPosition) ?: return
 
-        /**
-         * If the sum of consecutive two items of a [RecyclerView] is not greater than
-         * the [ImageCarousel] view width, then the [scrollToPosition] method will not work
-         * as expected. So we will check the width of the element and increase the minimum width
-         * for fixing the problem if [autoWidthFixing] is true.
-         */
+        // If the sum of consecutive two items of a RecyclerView is not greater than
+        // the ImageCarousel view width, then the scrollToPosition() method will not work
+        // as expected. So we will check the width of the element and increase the minimum width
+        // for fixing the problem if autoWidthFixing is true.
         if (autoWidthFixing && carouselType == CarouselType.SHOWCASE) {
             val containerWidth = recyclerView.width
             if (holder.itemView.layoutParams.width >= 0 &&
@@ -73,6 +72,18 @@ open class FiniteCarouselAdapter(
             holder.binding.img.scaleType = imageScaleType
 
             holder.binding.img.setImage(item, imagePlaceholder)
+
+            listener?.apply {
+                holder.itemView.setOnClickListener {
+                    this.onClick(realItemPosition, item)
+                }
+
+                holder.itemView.setOnLongClickListener {
+                    this.onLongClick(realItemPosition, item)
+
+                    true
+                }
+            }
         }
 
         // Init listeners
@@ -80,7 +91,7 @@ open class FiniteCarouselAdapter(
             holder.binding,
             imageScaleType,
             item,
-            getRealDataPosition(position)
+            realItemPosition
         )
 
         // Init start and end offsets

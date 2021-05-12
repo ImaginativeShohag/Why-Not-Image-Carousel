@@ -1,3 +1,0 @@
-package org.imaginativeworld.whynotimagecarousel.indicator
-
-class BaseCircleIndicator

@@ -1,6 +1,5 @@
 package org.imaginativeworld.whynotimagecarousel
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -478,25 +477,21 @@ class ImageCarousel(
         initAdapter()
         initListeners()
         initAutoPlay()
-        initTouchListener()
     }
 
-    @SuppressLint("ClickableViewAccessibility")
-    private fun initTouchListener() {
-        recyclerView.setOnTouchListener { _, event ->
-            if (touchToPause) {
-                when (event?.action) {
-                    MotionEvent.ACTION_UP -> {
-                        resumeAutoPlay()
-                    }
-                    MotionEvent.ACTION_DOWN -> {
-                        pauseAutoPlay()
-                    }
+    override fun onInterceptTouchEvent(event: MotionEvent?): Boolean {
+        if (touchToPause) {
+            when (event?.action) {
+                MotionEvent.ACTION_UP -> {
+                    resumeAutoPlay()
+                }
+                MotionEvent.ACTION_DOWN -> {
+                    pauseAutoPlay()
                 }
             }
-
-            false
         }
+
+        return super.onInterceptTouchEvent(event)
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
