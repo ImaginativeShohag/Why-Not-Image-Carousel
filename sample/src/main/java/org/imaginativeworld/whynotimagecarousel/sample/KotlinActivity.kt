@@ -69,7 +69,7 @@ class KotlinActivity : AppCompatActivity() {
             carouselBackground = ColorDrawable(Color.parseColor("#333333"))
             imagePlaceholder = ContextCompat.getDrawable(
                 this@KotlinActivity,
-                org.imaginativeworld.whynotimagecarousel.R.drawable.ic_picture
+                org.imaginativeworld.whynotimagecarousel.R.drawable.carousel_default_placeholder
             )
 
             carouselPadding = 0.dpToPx(context)
@@ -203,7 +203,9 @@ class KotlinActivity : AppCompatActivity() {
                     currentBinding.imageView.apply {
                         scaleType = imageScaleType
 
-                        setImage(item, R.drawable.ic_wb_cloudy_with_padding)
+                        // carousel_default_placeholder is the default placeholder comes with
+                        // the library.
+                        setImage(item, R.drawable.carousel_default_placeholder)
                     }
                 }
             }

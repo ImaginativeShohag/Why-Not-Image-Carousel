@@ -71,7 +71,11 @@ open class FiniteCarouselAdapter(
         if (holder.binding is ItemCarouselBinding) {
             holder.binding.img.scaleType = imageScaleType
 
-            holder.binding.img.setImage(item, imagePlaceholder)
+            if (imagePlaceholder != null) {
+                holder.binding.img.setImage(item, imagePlaceholder)
+            } else {
+                holder.binding.img.setImage(item)
+            }
 
             listener?.apply {
                 holder.itemView.setOnClickListener {

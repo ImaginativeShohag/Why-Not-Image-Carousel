@@ -622,7 +622,7 @@ class ImageCarousel(
 
                 imagePlaceholder = getDrawable(
                     R.styleable.ImageCarousel_imagePlaceholder
-                ) ?: ContextCompat.getDrawable(context, R.drawable.ic_picture)
+                ) ?: ContextCompat.getDrawable(context, R.drawable.carousel_default_placeholder)
 
                 carouselPadding = getDimension(
                     R.styleable.ImageCarousel_carouselPadding,
