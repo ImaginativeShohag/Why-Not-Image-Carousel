@@ -2,7 +2,6 @@ package org.imaginativeworld.whynotimagecarousel.listener
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.viewbinding.ViewBinding
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 
@@ -22,17 +21,10 @@ interface CarouselListener {
      * It's mapped with RecyclerView.Adapter#onBindViewHolder.
      *
      * @param binding The ViewBinding returned in onCreateViewHolder.
-     * @param imageScaleType selected ImageView.ScaleType provided in imageScaleType attribute.
      * @param item current CarouselItem item for bind.
      * @param position current data position.
      */
-    fun onBindViewHolder(
-        binding: ViewBinding,
-        imageScaleType: ImageView.ScaleType,
-        item: CarouselItem,
-        position: Int
-    ) {
-    }
+    fun onBindViewHolder(binding: ViewBinding, item: CarouselItem, position: Int) {}
 
     /**
      * When an item view is clicked it will be invoked.
@@ -52,5 +44,5 @@ interface CarouselListener {
      * @param position Data item position.
      * @param carouselItem Data item of the long clicked view.
      */
-    fun onLongClick(position: Int, dataObject: CarouselItem) {}
+    fun onLongClick(position: Int, carouselItem: CarouselItem) {}
 }

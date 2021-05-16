@@ -12,8 +12,8 @@ import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener
 import org.imaginativeworld.whynotimagecarousel.model.CarouselGravity
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 import org.imaginativeworld.whynotimagecarousel.model.CarouselType
-import org.imaginativeworld.whynotimagecarousel.setImage
 import org.imaginativeworld.whynotimagecarousel.utils.CarouselItemDecoration
+import org.imaginativeworld.whynotimagecarousel.utils.setImage
 
 open class FiniteCarouselAdapter(
     private val recyclerView: RecyclerView,
@@ -93,7 +93,6 @@ open class FiniteCarouselAdapter(
         // Init listeners
         listener?.onBindViewHolder(
             holder.binding,
-            imageScaleType,
             item,
             realItemPosition
         )

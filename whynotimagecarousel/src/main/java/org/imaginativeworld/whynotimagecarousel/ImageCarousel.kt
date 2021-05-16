@@ -32,8 +32,7 @@ import org.imaginativeworld.whynotimagecarousel.listener.CarouselOnScrollListene
 import org.imaginativeworld.whynotimagecarousel.model.CarouselGravity
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 import org.imaginativeworld.whynotimagecarousel.model.CarouselType
-import org.imaginativeworld.whynotimagecarousel.utils.CarouselLinearLayoutManager
-import org.imaginativeworld.whynotimagecarousel.utils.LinearStartSnapHelper
+import org.imaginativeworld.whynotimagecarousel.utils.*
 import org.jetbrains.annotations.NotNull
 import org.jetbrains.annotations.Nullable
 

@@ -45,7 +45,7 @@ dependencies {
 
 Add the view `org.imaginativeworld.whynotimagecarousel.ImageCarousel` in your layout:
 
-```
+```xml
 <org.imaginativeworld.whynotimagecarousel.ImageCarousel
     android:id="@+id/carousel"
     android:layout_width="match_parent"
@@ -218,9 +218,9 @@ All the custom XML attributes for `ImageCarousel` view with default values are g
     app:touchToPause="true" />
 ```
 
-## `ImageCarousel` functions
+## `ImageCarousel` methods
 
-You can also set all the attributes programmatically. All the functions and their usages given below.
+You can also set all the attributes programmatically. All the methods and their usages given below.
 
 ### Kotlin
 
@@ -448,7 +448,6 @@ carousel.setCarouselListener(new CarouselListener() {
     @Override
     public ViewBinding onCreateViewHolder(@NotNull LayoutInflater layoutInflater, @NotNull ViewGroup parent) {
         // ...
-        return null;
     }
     
     @Override

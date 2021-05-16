@@ -1,6 +1,6 @@
 @file:JvmName("Utils")
 
-package org.imaginativeworld.whynotimagecarousel
+package org.imaginativeworld.whynotimagecarousel.utils
 
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -64,55 +64,28 @@ fun SnapHelper.getSnapPosition(layoutManager: RecyclerView.LayoutManager?): Int 
  * @param item The carousel item.
  */
 fun ImageView.setImage(item: CarouselItem) {
-    when {
-        item.imageUrl != null && item.headers == null -> {
-            Glide.with(context.applicationContext)
-                .load(item.imageUrl)
-                .into(this)
-        }
-        item.headers != null -> {
-            Glide.with(context.applicationContext)
-                .load(GlideUrl(item.imageUrl.toString()) { item.headers })
-                .into(this)
-        }
-        else -> {
-            Glide.with(context.applicationContext)
-                .load(item.imageDrawable)
-                .into(this)
-        }
-    }
+    this.setImage(
+        item = item,
+        placeholderDrawable = null,
+        placeholderDrawableResourceId = null,
+    )
 }
 
 /**
  * Set image to the carouse image view.
  *
  * @param item The carousel item.
- * @param placeholderDrawableResourceId The id of the resource to use as a placeholder
+ * @param placeholderDrawableResourceId The id of the resource to use as a placeholder.
  */
 fun ImageView.setImage(
     item: CarouselItem,
     @DrawableRes placeholderDrawableResourceId: Int
 ) {
-    when {
-        item.imageUrl != null && item.headers == null -> {
-            Glide.with(context.applicationContext)
-                .load(item.imageUrl)
-                .placeholder(placeholderDrawableResourceId)
-                .into(this)
-        }
-        item.headers != null -> {
-            Glide.with(context.applicationContext)
-                .load(GlideUrl(item.imageUrl.toString()) { item.headers })
-                .placeholder(placeholderDrawableResourceId)
-                .into(this)
-        }
-        else -> {
-            Glide.with(context.applicationContext)
-                .load(item.imageDrawable)
-                .placeholder(placeholderDrawableResourceId)
-                .into(this)
-        }
-    }
+    this.setImage(
+        item = item,
+        placeholderDrawable = null,
+        placeholderDrawableResourceId = placeholderDrawableResourceId,
+    )
 }
 
 /**
@@ -121,25 +94,52 @@ fun ImageView.setImage(
  * @param item The carousel item.
  * @param placeholderDrawable The drawable to display as a placeholder.
  */
-fun ImageView.setImage(item: CarouselItem, placeholderDrawable: Drawable) {
-    when {
+fun ImageView.setImage(
+    item: CarouselItem,
+    placeholderDrawable: Drawable? = null,
+) {
+    this.setImage(
+        item = item,
+        placeholderDrawable = placeholderDrawable,
+        placeholderDrawableResourceId = null,
+    )
+}
+
+/**
+ * Set image to the carouse image view.
+ *
+ * @param item The carousel item.
+ * @param placeholderDrawable The drawable to display as a placeholder.
+ * @param placeholderDrawableResourceId The id of the resource to use as a placeholder.
+ */
+private fun ImageView.setImage(
+    item: CarouselItem,
+    placeholderDrawable: Drawable? = null,
+    @DrawableRes placeholderDrawableResourceId: Int? = null
+) {
+    val glide = Glide.with(context.applicationContext)
+
+    var requestBuilder = when {
         item.imageUrl != null && item.headers == null -> {
-            Glide.with(context.applicationContext)
-                .load(item.imageUrl)
-                .placeholder(placeholderDrawable)
-                .into(this)
+            glide.load(item.imageUrl)
         }
         item.headers != null -> {
-            Glide.with(context.applicationContext)
-                .load(GlideUrl(item.imageUrl.toString()) { item.headers })
-                .placeholder(placeholderDrawable)
-                .into(this)
+            glide.load(GlideUrl(item.imageUrl.toString()) { item.headers })
         }
         else -> {
-            Glide.with(context.applicationContext)
-                .load(item.imageDrawable)
-                .placeholder(placeholderDrawable)
-                .into(this)
+            glide.load(item.imageDrawable)
         }
     }
+
+    requestBuilder = when {
+        placeholderDrawable != null -> {
+            requestBuilder.placeholder(placeholderDrawable)
+        }
+        placeholderDrawableResourceId != null -> {
+            requestBuilder.placeholder(placeholderDrawableResourceId)
+        }
+        else -> requestBuilder
+    }
+
+    requestBuilder.into(this)
 }

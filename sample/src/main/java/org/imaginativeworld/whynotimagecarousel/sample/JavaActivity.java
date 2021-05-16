@@ -15,13 +15,13 @@ import androidx.viewbinding.ViewBinding;
 
 import com.google.android.material.button.MaterialButton;
 
-import org.imaginativeworld.whynotimagecarousel.Utils;
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener;
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselOnScrollListener;
 import org.imaginativeworld.whynotimagecarousel.model.CarouselGravity;
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem;
 import org.imaginativeworld.whynotimagecarousel.model.CarouselType;
 import org.imaginativeworld.whynotimagecarousel.sample.databinding.ActivityJavaBinding;
+import org.imaginativeworld.whynotimagecarousel.utils.Utils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -120,12 +120,12 @@ public class JavaActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onBindViewHolder(@NotNull ViewBinding binding, @NotNull ImageView.ScaleType imageScaleType, @NotNull CarouselItem item, int position) {
+            public void onBindViewHolder(@NotNull ViewBinding binding, @NotNull CarouselItem item, int position) {
                 // ...
             }
 
             @Override
-            public void onLongClick(int position, @NotNull CarouselItem dataObject) {
+            public void onLongClick(int position, @NotNull CarouselItem carouselItem) {
                 // ...
             }
 

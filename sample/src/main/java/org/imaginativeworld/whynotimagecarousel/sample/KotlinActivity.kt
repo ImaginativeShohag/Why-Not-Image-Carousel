@@ -14,15 +14,15 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
-import org.imaginativeworld.whynotimagecarousel.dpToPx
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselOnScrollListener
 import org.imaginativeworld.whynotimagecarousel.model.CarouselGravity
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 import org.imaginativeworld.whynotimagecarousel.model.CarouselType
 import org.imaginativeworld.whynotimagecarousel.sample.databinding.*
-import org.imaginativeworld.whynotimagecarousel.setImage
-import org.imaginativeworld.whynotimagecarousel.spToPx
+import org.imaginativeworld.whynotimagecarousel.utils.dpToPx
+import org.imaginativeworld.whynotimagecarousel.utils.setImage
+import org.imaginativeworld.whynotimagecarousel.utils.spToPx
 import kotlin.random.Random
 
 class KotlinActivity : AppCompatActivity() {
@@ -107,7 +107,7 @@ class KotlinActivity : AppCompatActivity() {
                         .show()
                 }
 
-                override fun onLongClick(position: Int, dataObject: CarouselItem) {
+                override fun onLongClick(position: Int, carouselItem: CarouselItem) {
                     Toast.makeText(
                         this@KotlinActivity,
                         "You long clicked it.",
@@ -152,7 +152,6 @@ class KotlinActivity : AppCompatActivity() {
 
                 override fun onBindViewHolder(
                     binding: ViewBinding,
-                    imageScaleType: ImageView.ScaleType,
                     item: CarouselItem,
                     position: Int
                 ) {
@@ -194,7 +193,6 @@ class KotlinActivity : AppCompatActivity() {
 
                 override fun onBindViewHolder(
                     binding: ViewBinding,
-                    imageScaleType: ImageView.ScaleType,
                     item: CarouselItem,
                     position: Int
                 ) {
@@ -282,7 +280,6 @@ class KotlinActivity : AppCompatActivity() {
 
                 override fun onBindViewHolder(
                     binding: ViewBinding,
-                    imageScaleType: ImageView.ScaleType,
                     item: CarouselItem,
                     position: Int
                 ) {
@@ -332,7 +329,6 @@ class KotlinActivity : AppCompatActivity() {
 
                 override fun onBindViewHolder(
                     binding: ViewBinding,
-                    imageScaleType: ImageView.ScaleType,
                     item: CarouselItem,
                     position: Int
                 ) {
@@ -394,7 +390,6 @@ class KotlinActivity : AppCompatActivity() {
 
                 override fun onBindViewHolder(
                     binding: ViewBinding,
-                    imageScaleType: ImageView.ScaleType,
                     item: CarouselItem,
                     position: Int
                 ) {
