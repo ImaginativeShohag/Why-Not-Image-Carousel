@@ -43,14 +43,14 @@ class KotlinActivity : AppCompatActivity() {
         }
 
         // ----------------------------------------------------------------
-        // Example One: All properties & attributes
+        // Example One: All methods/attributes & header
         // ----------------------------------------------------------------
 
         binding.carousel1.apply {
             registerLifecycle(lifecycle)
 
             showTopShadow = true
-            topShadowAlpha = 0.6f // 0 to 1, 1 means 100%
+            topShadowAlpha = 0.15f // 0 to 1, 1 means 100%
             topShadowHeight = 32.dpToPx(context) // px value of dp
 
             showBottomShadow = true
@@ -361,7 +361,7 @@ class KotlinActivity : AppCompatActivity() {
             binding.carousel5.setData(listFive)
 
             // ----------------------------------------------------------------
-            // Example Six: Carousel without image.
+            // Example Six: Carousel without image
             // ----------------------------------------------------------------
 
             binding.carousel6.registerLifecycle(lifecycle)

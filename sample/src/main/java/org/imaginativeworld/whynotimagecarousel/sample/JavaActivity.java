@@ -54,12 +54,12 @@ public class JavaActivity extends AppCompatActivity {
         binding.carousel.setTopShadowAlpha(0.6f); // 0 to 1, 1 means 100%
         binding.carousel.setTopShadowHeight(Utils.dpToPx(32, context)); // px value of dp
 
-        binding.carousel.setShowBottomShadow(false);
-        binding.carousel.setBottomShadowAlpha(0.6f); // 0 to 1, 1 means 100%
-        binding.carousel.setBottomShadowHeight(Utils.dpToPx(64, context)); // px value of dp
+        binding.carousel.setShowBottomShadow(true);
+        binding.carousel.setBottomShadowAlpha(0.7f); // 0 to 1, 1 means 100%
+        binding.carousel.setBottomShadowHeight(Utils.dpToPx(48, context)); // px value of dp
 
         binding.carousel.setShowCaption(true);
-        binding.carousel.setCaptionMargin(Utils.dpToPx(16, context)); // px value of dp
+        binding.carousel.setCaptionMargin(Utils.dpToPx(8, context)); // px value of dp
         binding.carousel.setCaptionTextSize(Utils.spToPx(16, context)); // px value of sp
 
         binding.carousel.setShowIndicator(false);
