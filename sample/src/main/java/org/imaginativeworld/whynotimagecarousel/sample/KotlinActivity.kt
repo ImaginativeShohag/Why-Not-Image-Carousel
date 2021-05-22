@@ -5,13 +5,25 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
-import org.imaginativeworld.whynotimagecarousel.*
-import org.imaginativeworld.whynotimagecarousel.sample.databinding.ActivityKotlinBinding
+import androidx.viewbinding.ViewBinding
+import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener
+import org.imaginativeworld.whynotimagecarousel.listener.CarouselOnScrollListener
+import org.imaginativeworld.whynotimagecarousel.model.CarouselGravity
+import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
+import org.imaginativeworld.whynotimagecarousel.model.CarouselType
+import org.imaginativeworld.whynotimagecarousel.sample.databinding.*
+import org.imaginativeworld.whynotimagecarousel.utils.dpToPx
+import org.imaginativeworld.whynotimagecarousel.utils.setImage
+import org.imaginativeworld.whynotimagecarousel.utils.spToPx
+import kotlin.random.Random
 
 class KotlinActivity : AppCompatActivity() {
 
@@ -27,225 +39,379 @@ class KotlinActivity : AppCompatActivity() {
         context = this
 
         binding.btnJavaExample.setOnClickListener {
-
             startActivity(Intent(this, JavaActivity::class.java))
-
         }
 
-        // --------------------------------
-        // Example One
-        // --------------------------------
-        binding.carousel1.showTopShadow = true
-        binding.carousel1.topShadowAlpha = 0.6f // 0 to 1, 1 means 100%
-        binding.carousel1.topShadowHeight = 32.dpToPx(context) // px value of dp
-        binding.carousel1.showBottomShadow = true
-        binding.carousel1.bottomShadowAlpha = 0.6f // 0 to 1, 1 means 100%
-        binding.carousel1.bottomShadowHeight = 64.dpToPx(context) // px value of dp
-        binding.carousel1.showCaption = true
-        binding.carousel1.captionMargin = 0.dpToPx(context) // px value of dp
-        binding.carousel1.captionTextSize = 14.spToPx(context) // px value of sp
-        binding.carousel1.showIndicator = true
-        binding.carousel1.indicatorMargin = 0.dpToPx(context) // px value of dp
-        binding.carousel1.showNavigationButtons = true
-        binding.carousel1.imageScaleType = ImageView.ScaleType.CENTER_CROP
-        binding.carousel1.carouselBackground = ColorDrawable(Color.parseColor("#333333"))
-        binding.carousel1.imagePlaceholder = ContextCompat.getDrawable(
-            this,
-            org.imaginativeworld.whynotimagecarousel.R.drawable.ic_picture
-        )
-        binding.carousel1.itemLayout =
-            org.imaginativeworld.whynotimagecarousel.R.layout.item_carousel
-        binding.carousel1.imageViewId = org.imaginativeworld.whynotimagecarousel.R.id.img
-        binding.carousel1.previousButtonLayout =
-            org.imaginativeworld.whynotimagecarousel.R.layout.previous_button_layout
-        binding.carousel1.previousButtonId =
-            org.imaginativeworld.whynotimagecarousel.R.id.btn_previous
-        binding.carousel1.previousButtonMargin = 4.dpToPx(context) // px value of dp
-        binding.carousel1.nextButtonLayout =
-            org.imaginativeworld.whynotimagecarousel.R.layout.next_button_layout
-        binding.carousel1.nextButtonId = org.imaginativeworld.whynotimagecarousel.R.id.btn_next
-        binding.carousel1.nextButtonMargin = 4.dpToPx(context) // px value of dp
-        binding.carousel1.carouselType = CarouselType.BLOCK
-        binding.carousel1.scaleOnScroll = false
-        binding.carousel1.scalingFactor = .15f // 0 to 1; 1 means 100
-        binding.carousel1.autoWidthFixing = true
-        binding.carousel1.autoPlay = false
-        binding.carousel1.autoPlayDelay = 3000 // Milliseconds
-        binding.carousel1.onScrollListener = object : CarouselOnScrollListener {
-            override fun onScrollStateChanged(
-                recyclerView: RecyclerView,
-                newState: Int,
-                position: Int,
-                carouselItem: CarouselItem?
-            ) {
-                // ...
+        // ----------------------------------------------------------------
+        // Example One: All methods/attributes & header
+        // ----------------------------------------------------------------
+
+        binding.carousel1.apply {
+            registerLifecycle(lifecycle)
+
+            showTopShadow = true
+            topShadowAlpha = 0.15f // 0 to 1, 1 means 100%
+            topShadowHeight = 32.dpToPx(context) // px value of dp
+
+            showBottomShadow = true
+            bottomShadowAlpha = 0.6f // 0 to 1, 1 means 100%
+            bottomShadowHeight = 64.dpToPx(context) // px value of dp
+
+            showCaption = true
+            captionMargin = 0.dpToPx(context) // px value of dp
+            captionTextSize = 14.spToPx(context) // px value of sp
+
+            showIndicator = true
+            indicatorMargin = 0.dpToPx(context) // px value of dp
+
+            imageScaleType = ImageView.ScaleType.CENTER_CROP
+
+            carouselBackground = ColorDrawable(Color.parseColor("#333333"))
+            imagePlaceholder = ContextCompat.getDrawable(
+                this@KotlinActivity,
+                org.imaginativeworld.whynotimagecarousel.R.drawable.carousel_default_placeholder
+            )
+
+            carouselPadding = 0.dpToPx(context)
+            carouselPaddingStart = 0.dpToPx(context)
+            carouselPaddingTop = 0.dpToPx(context)
+            carouselPaddingEnd = 0.dpToPx(context)
+            carouselPaddingBottom = 0.dpToPx(context)
+
+            showNavigationButtons = true
+            previousButtonLayout =
+                org.imaginativeworld.whynotimagecarousel.R.layout.previous_button_layout
+            previousButtonId =
+                org.imaginativeworld.whynotimagecarousel.R.id.btn_previous
+            previousButtonMargin = 4.dpToPx(context) // px value of dp
+            nextButtonLayout =
+                org.imaginativeworld.whynotimagecarousel.R.layout.next_button_layout
+            nextButtonId = org.imaginativeworld.whynotimagecarousel.R.id.btn_next
+            nextButtonMargin = 4.dpToPx(context) // px value of dp
+
+            carouselType = CarouselType.BLOCK
+
+            carouselGravity = CarouselGravity.CENTER
+
+            scaleOnScroll = false
+            scalingFactor = .15f // 0 to 1; 1 means 100
+            autoWidthFixing = true
+            autoPlay = true
+            autoPlayDelay = 3000 // Milliseconds
+            infiniteCarousel = true
+            touchToPause = true
+
+            carouselListener = object : CarouselListener {
+                override fun onClick(position: Int, carouselItem: CarouselItem) {
+                    Toast.makeText(this@KotlinActivity, "You clicked it.", Toast.LENGTH_SHORT)
+                        .show()
+                }
+
+                override fun onLongClick(position: Int, carouselItem: CarouselItem) {
+                    Toast.makeText(
+                        this@KotlinActivity,
+                        "You long clicked it.",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                }
             }
 
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                // ...
-            }
-        }
-        binding.carousel1.onItemClickListener = object : OnItemClickListener {
-            override fun onClick(position: Int, carouselItem: CarouselItem) {
-                // ...
-            }
+            // Dummy header
+            val headers = mutableMapOf<String, String>()
+            headers["header_key"] = "header_value"
 
-            override fun onLongClick(position: Int, dataObject: CarouselItem) {
-                // ...
-            }
+            val listOne = mutableListOf<CarouselItem>()
 
-        }
-
-        val listOne = mutableListOf<CarouselItem>()
-
-        val max = 10
-
-        for (i in 1..max) {
-            if (i % 2 == 0) {
+            for ((index, item) in DataSet.one.withIndex()) {
                 listOne.add(
                     CarouselItem(
-                        imageUrl = "https://images.unsplash.com/photo-1581357825340-32259110788a?w=1080",
-                        caption = "Image $i of $max"
-                    )
-                )
-            } else {
-                listOne.add(
-                    CarouselItem(
-                        imageUrl = "https://images.unsplash.com/photo-1581441117193-63e8f6547081?w=1080",
-                        caption = "Image $i of $max"
+                        imageUrl = item,
+                        caption = "Image ${index + 1} of ${DataSet.one.size}",
+                        headers = headers
                     )
                 )
             }
-        }
 
-        binding.carousel1.addData(listOne)
+            binding.carousel1.setData(listOne)
 
+            // ----------------------------------------------------------------
+            // Example Two: Custom view
+            // ----------------------------------------------------------------
 
-        // --------------------------------
-        // Example Two
-        // --------------------------------
-        val listTwo = mutableListOf<CarouselItem>()
+            binding.carousel2.registerLifecycle(lifecycle)
 
-        for (i in 1..max) {
-            if (i % 2 == 0) {
+            // Custom view
+            binding.carousel2.carouselListener = object : CarouselListener {
+                override fun onCreateViewHolder(
+                    layoutInflater: LayoutInflater,
+                    parent: ViewGroup
+                ): ViewBinding? {
+                    return ItemCustomFixedSizeLayout5Binding.inflate(layoutInflater, parent, false)
+                }
+
+                override fun onBindViewHolder(
+                    binding: ViewBinding,
+                    item: CarouselItem,
+                    position: Int
+                ) {
+                    val currentBinding = binding as ItemCustomFixedSizeLayout5Binding
+
+                    currentBinding.imageView.apply {
+                        scaleType = imageScaleType
+
+                        setImage(item, R.drawable.ic_wb_cloudy_with_padding)
+                    }
+                }
+            }
+            val listTwo = mutableListOf<CarouselItem>()
+
+            for (item in DataSet.two) {
                 listTwo.add(
                     CarouselItem(
-                        imageUrl = "https://images.unsplash.com/photo-1569398034126-476b0d96e2d1?w=1080"
-                    )
-                )
-            } else {
-                listTwo.add(
-                    CarouselItem(
-                        imageUrl = "https://images.unsplash.com/photo-1507667522877-ad03f0c7b0e0?w=1080"
+                        imageUrl = item
                     )
                 )
             }
-        }
 
-        binding.carousel2.addData(listTwo)
+            binding.carousel2.setData(listTwo)
 
-        // Custom click listener
-        binding.carousel2.onItemClickListener = object : OnItemClickListener {
-            override fun onClick(position: Int, carouselItem: CarouselItem) {
+            // ----------------------------------------------------------------
+            // Example Three: Custom navigation
+            // ----------------------------------------------------------------
 
-                Toast.makeText(this@KotlinActivity, "Clicked!", Toast.LENGTH_SHORT).show()
+            binding.carousel3.registerLifecycle(lifecycle)
 
+            // Custom view
+            binding.carousel3.carouselListener = object : CarouselListener {
+                override fun onCreateViewHolder(
+                    layoutInflater: LayoutInflater,
+                    parent: ViewGroup
+                ): ViewBinding? {
+                    return ItemCustomFixedSizeLayout1Binding.inflate(layoutInflater, parent, false)
+                }
+
+                override fun onBindViewHolder(
+                    binding: ViewBinding,
+                    item: CarouselItem,
+                    position: Int
+                ) {
+                    val currentBinding = binding as ItemCustomFixedSizeLayout1Binding
+
+                    currentBinding.imageView.apply {
+                        scaleType = imageScaleType
+
+                        // carousel_default_placeholder is the default placeholder comes with
+                        // the library.
+                        setImage(item, R.drawable.carousel_default_placeholder)
+                    }
+                }
             }
 
-            override fun onLongClick(position: Int, dataObject: CarouselItem) {
+            val listThree = mutableListOf<CarouselItem>()
 
-                Toast.makeText(this@KotlinActivity, "Long Clicked!", Toast.LENGTH_SHORT).show()
-
-            }
-
-        }
-
-
-        // --------------------------------
-        // Example Three
-        // --------------------------------
-        val listThree = mutableListOf<CarouselItem>()
-
-        for (i in 1..max) {
-            if (i % 2 == 0) {
+            for (item in DataSet.three) {
                 listThree.add(
                     CarouselItem(
-                        imageUrl = "https://images.unsplash.com/photo-1549577434-d7615fd4ceac?w=1080",
-                        caption = "Photo by Jeremy Bishop on Unsplash"
-                    )
-                )
-            } else {
-                listThree.add(
-                    CarouselItem(
-                        imageUrl = "https://images.unsplash.com/photo-1485038101637-2d4833df1b35?w=1080",
-                        caption = "Photo by Karsten Würth on Unsplash"
+                        imageUrl = item.first,
+                        caption = item.second
                     )
                 )
             }
-        }
 
-        binding.carousel3.addData(listThree)
+            binding.carousel3.setData(listThree)
 
-        binding.customCaption.isSelected = true
+            binding.customCaption.isSelected = true
 
-        binding.carousel3.onScrollListener = object : CarouselOnScrollListener {
+            binding.carousel3.onScrollListener = object : CarouselOnScrollListener {
 
-            override fun onScrollStateChanged(
-                recyclerView: RecyclerView,
-                newState: Int,
-                position: Int,
-                carouselItem: CarouselItem?
-            ) {
+                override fun onScrollStateChanged(
+                    recyclerView: RecyclerView,
+                    newState: Int,
+                    position: Int,
+                    carouselItem: CarouselItem?
+                ) {
 
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    carouselItem?.apply {
-                        binding.customCaption.text = caption
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                        carouselItem?.apply {
+                            binding.customCaption.text = caption
+                        }
                     }
                 }
 
+                override fun onScrolled(
+                    recyclerView: RecyclerView,
+                    dx: Int,
+                    dy: Int,
+                    position: Int,
+                    carouselItem: CarouselItem?
+                ) {
+                    // ...
+                }
             }
 
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                // ...
+            // Custom navigation
+            binding.btnGotoPrevious.setOnClickListener {
+                binding.carousel3.previous()
             }
 
-        }
+            binding.btnGotoNext.setOnClickListener {
+                binding.carousel3.next()
+            }
 
-        // Custom navigation
-        binding.btnGotoPrevious.setOnClickListener {
-            binding.carousel3.previous()
-        }
+            // ----------------------------------------------------------------
+            // Example Four: Custom indicator
+            // ----------------------------------------------------------------
 
-        binding.btnGotoNext.setOnClickListener {
-            binding.carousel3.next()
-        }
+            binding.carousel4.registerLifecycle(lifecycle)
 
+            // Custom view
+            binding.carousel4.carouselListener = object : CarouselListener {
+                override fun onCreateViewHolder(
+                    layoutInflater: LayoutInflater,
+                    parent: ViewGroup
+                ): ViewBinding? {
+                    return ItemCustomFixedSizeLayout3Binding.inflate(
+                        layoutInflater,
+                        parent,
+                        false
+                    )
+                }
 
-        // --------------------------------
-        // Example Four
-        // --------------------------------
-        val listFour = mutableListOf<CarouselItem>()
+                override fun onBindViewHolder(
+                    binding: ViewBinding,
+                    item: CarouselItem,
+                    position: Int
+                ) {
+                    val currentBinding = binding as ItemCustomFixedSizeLayout3Binding
 
-        for (i in 1..max) {
-            if (i % 2 == 0) {
+                    currentBinding.imageView.apply {
+                        scaleType = imageScaleType
+
+                        setImage(item, R.drawable.ic_wb_cloudy_with_padding)
+                    }
+                }
+            }
+
+            val listFour = mutableListOf<CarouselItem>()
+
+            for (item in DataSet.four) {
                 listFour.add(
                     CarouselItem(
-                        imageDrawable = R.drawable.image_1
-                    )
-                )
-            } else {
-                listFour.add(
-                    CarouselItem(
-                        imageDrawable = R.drawable.image_2
+                        imageUrl = item
                     )
                 )
             }
+
+            binding.carousel4.setData(listFour)
+
+            // Custom indicator
+            binding.carousel4.setIndicator(binding.customIndicator)
+
+            // ----------------------------------------------------------------
+            // Example Five: Usage of Drawable
+            // ----------------------------------------------------------------
+
+            binding.carousel5.registerLifecycle(lifecycle)
+
+            // Custom view
+            binding.carousel5.carouselListener = object : CarouselListener {
+                override fun onCreateViewHolder(
+                    layoutInflater: LayoutInflater,
+                    parent: ViewGroup
+                ): ViewBinding? {
+                    return ItemCustomFixedSizeLayout2Binding.inflate(
+                        layoutInflater,
+                        parent,
+                        false
+                    )
+                }
+
+                override fun onBindViewHolder(
+                    binding: ViewBinding,
+                    item: CarouselItem,
+                    position: Int
+                ) {
+                    val currentBinding = binding as ItemCustomFixedSizeLayout2Binding
+
+                    currentBinding.textView.text = item.caption ?: ""
+
+                    currentBinding.imageView.apply {
+                        scaleType = imageScaleType
+
+                        setImage(item, R.drawable.ic_wb_cloudy_with_padding)
+                    }
+
+                    currentBinding.tvRating.text =
+                        "%.1f (%d)".format(Random.nextDouble(2.0, 5.0), Random.nextInt(500))
+                }
+            }
+
+            val listFive = mutableListOf<CarouselItem>()
+
+            for (item in DataSet.five) {
+                listFive.add(
+                    CarouselItem(
+                        imageDrawable = item.first,
+                        caption = item.second
+                    )
+                )
+            }
+
+            binding.carousel5.setData(listFive)
+
+            // ----------------------------------------------------------------
+            // Example Six: Carousel without image
+            // ----------------------------------------------------------------
+
+            binding.carousel6.registerLifecycle(lifecycle)
+
+            val colorsForSix = listOf(
+                R.color.flat_awesome_green_1,
+                R.color.flat_green_1,
+                R.color.flat_blue_1,
+                R.color.flat_pink_1,
+                R.color.flat_yellow_1,
+                R.color.flat_orange_1
+            )
+
+            // Custom view
+            binding.carousel6.carouselListener = object : CarouselListener {
+                override fun onCreateViewHolder(
+                    layoutInflater: LayoutInflater,
+                    parent: ViewGroup
+                ): ViewBinding? {
+                    return ItemCustomFixedSizeLayout4Binding.inflate(
+                        layoutInflater,
+                        parent,
+                        false
+                    )
+                }
+
+                override fun onBindViewHolder(
+                    binding: ViewBinding,
+                    item: CarouselItem,
+                    position: Int
+                ) {
+                    val currentBinding = binding as ItemCustomFixedSizeLayout4Binding
+
+                    val currentColor =
+                        ResourcesCompat.getColor(resources, colorsForSix[position], null)
+
+                    currentBinding.card.setCardBackgroundColor(currentColor)
+
+                    currentBinding.tvCaption.text = "— ${DataSet.six[position].first}"
+                    currentBinding.tvBody.text = DataSet.six[position].second
+                }
+            }
+
+            val listSix = mutableListOf<CarouselItem>()
+
+            for (item in DataSet.six) {
+                listSix.add(CarouselItem())
+            }
+
+            binding.carousel6.setData(listSix)
         }
-
-        binding.carousel4.addData(listFour)
-
-        // Custom indicator
-        binding.carousel4.setIndicator(binding.customIndicator)
-
     }
 }

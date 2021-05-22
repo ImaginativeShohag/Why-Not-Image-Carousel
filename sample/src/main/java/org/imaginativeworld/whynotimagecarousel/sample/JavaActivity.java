@@ -4,25 +4,31 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewbinding.ViewBinding;
 
 import com.google.android.material.button.MaterialButton;
 
-import org.imaginativeworld.whynotimagecarousel.CarouselItem;
-import org.imaginativeworld.whynotimagecarousel.CarouselOnScrollListener;
-import org.imaginativeworld.whynotimagecarousel.CarouselType;
-import org.imaginativeworld.whynotimagecarousel.OnItemClickListener;
-import org.imaginativeworld.whynotimagecarousel.Utils;
+import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener;
+import org.imaginativeworld.whynotimagecarousel.listener.CarouselOnScrollListener;
+import org.imaginativeworld.whynotimagecarousel.model.CarouselGravity;
+import org.imaginativeworld.whynotimagecarousel.model.CarouselItem;
+import org.imaginativeworld.whynotimagecarousel.model.CarouselType;
 import org.imaginativeworld.whynotimagecarousel.sample.databinding.ActivityJavaBinding;
+import org.imaginativeworld.whynotimagecarousel.utils.Utils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import me.relex.circleindicator.CircleIndicator2;
 
@@ -42,41 +48,60 @@ public class JavaActivity extends AppCompatActivity {
 
         context = this;
 
+        binding.carousel.registerLifecycle(getLifecycle());
+
         binding.carousel.setShowTopShadow(false);
         binding.carousel.setTopShadowAlpha(0.6f); // 0 to 1, 1 means 100%
         binding.carousel.setTopShadowHeight(Utils.dpToPx(32, context)); // px value of dp
-        binding.carousel.setShowBottomShadow(false);
-        binding.carousel.setBottomShadowAlpha(0.6f); // 0 to 1, 1 means 100%
-        binding.carousel.setBottomShadowHeight(Utils.dpToPx(64, context)); // px value of dp
+
+        binding.carousel.setShowBottomShadow(true);
+        binding.carousel.setBottomShadowAlpha(0.7f); // 0 to 1, 1 means 100%
+        binding.carousel.setBottomShadowHeight(Utils.dpToPx(48, context)); // px value of dp
+
         binding.carousel.setShowCaption(true);
-        binding.carousel.setCaptionMargin(Utils.dpToPx(16, context)); // px value of dp
+        binding.carousel.setCaptionMargin(Utils.dpToPx(8, context)); // px value of dp
         binding.carousel.setCaptionTextSize(Utils.spToPx(16, context)); // px value of sp
+
         binding.carousel.setShowIndicator(false);
         binding.carousel.setIndicatorMargin(Utils.dpToPx(0, context)); // px value of dp
-        binding.carousel.setShowNavigationButtons(true);
-        binding.carousel.setImageScaleType(ImageView.ScaleType.CENTER);
+
+        binding.carousel.setImageScaleType(ImageView.ScaleType.CENTER_CROP);
+
         binding.carousel.setCarouselBackground(new ColorDrawable(Color.parseColor("#333333")));
         binding.carousel.setImagePlaceholder(ContextCompat.getDrawable(
                 this,
                 R.drawable.ic_wb_cloudy_with_padding
         ));
-        binding.carousel.setItemLayout(R.layout.custom_fixed_size_item_layout);
-        binding.carousel.setImageViewId(R.id.image_view);
+
+        binding.carousel.setCarouselPadding(Utils.dpToPx(0, context));
+        binding.carousel.setCarouselPaddingStart(Utils.dpToPx(0, context));
+        binding.carousel.setCarouselPaddingTop(Utils.dpToPx(0, context));
+        binding.carousel.setCarouselPaddingEnd(Utils.dpToPx(0, context));
+        binding.carousel.setCarouselPaddingBottom(Utils.dpToPx(0, context));
+
+        binding.carousel.setShowNavigationButtons(false);
         binding.carousel.setPreviousButtonLayout(R.layout.custom_previous_button_layout);
         binding.carousel.setPreviousButtonId(R.id.custom_btn_previous);
         binding.carousel.setPreviousButtonMargin(Utils.dpToPx(8, context)); // px value of dp
         binding.carousel.setNextButtonLayout(R.layout.custom_next_button_layout);
         binding.carousel.setNextButtonId(R.id.custom_btn_next);
         binding.carousel.setNextButtonMargin(Utils.dpToPx(8, context)); // px value of dp
+
         binding.carousel.setCarouselType(CarouselType.SHOWCASE);
-        binding.carousel.setScaleOnScroll(true);
+
+        binding.carousel.setCarouselGravity(CarouselGravity.CENTER);
+
+        binding.carousel.setScaleOnScroll(false);
         binding.carousel.setScalingFactor(.15f);
         binding.carousel.setAutoWidthFixing(true);
         binding.carousel.setAutoPlay(false);
         binding.carousel.setAutoPlayDelay(3000); // Milliseconds
+        binding.carousel.setInfiniteCarousel(true);
+        binding.carousel.setTouchToPause(true);
+
         binding.carousel.setOnScrollListener(new CarouselOnScrollListener() {
             @Override
-            public void onScrolled(@NotNull RecyclerView recyclerView, int dx, int dy) {
+            public void onScrolled(@NotNull RecyclerView recyclerView, int dx, int dy, int position, @Nullable CarouselItem carouselItem) {
                 // ...
             }
 
@@ -85,14 +110,27 @@ public class JavaActivity extends AppCompatActivity {
                 // ...
             }
         });
-        binding.carousel.setOnItemClickListener(new OnItemClickListener() {
+
+        binding.carousel.setCarouselListener(new CarouselListener() {
+            @Nullable
             @Override
-            public void onClick(int position, @NotNull CarouselItem carouselItem) {
+            public ViewBinding onCreateViewHolder(@NotNull LayoutInflater layoutInflater, @NotNull ViewGroup parent) {
+                // ...
+                return null;
+            }
+
+            @Override
+            public void onBindViewHolder(@NotNull ViewBinding binding, @NotNull CarouselItem item, int position) {
                 // ...
             }
 
             @Override
-            public void onLongClick(int position, @NotNull CarouselItem dataObject) {
+            public void onLongClick(int position, @NotNull CarouselItem carouselItem) {
+                // ...
+            }
+
+            @Override
+            public void onClick(int position, @NotNull CarouselItem carouselItem) {
                 // ...
             }
         });
@@ -108,27 +146,22 @@ public class JavaActivity extends AppCompatActivity {
 
         List<CarouselItem> list = new ArrayList<>();
 
-        int max = 10;
+        // Dummy header
+        Map<String, String> headers = new HashMap<>();
+        headers.put("header_key", "header_value");
 
-        for (int i = 1; i <= max; i++) {
-            if (i % 2 == 0) {
-                list.add(
-                        new CarouselItem(
-                                "https://images.unsplash.com/photo-1581357825340-32259110788a?w=1080",
-                                "Image " + i + " of " + max
-                        )
-                );
-            } else {
-                list.add(
-                        new CarouselItem(
-                                "https://images.unsplash.com/photo-1581441117193-63e8f6547081?w=1080",
-                                "Image " + i + " of " + max
-                        )
-                );
-            }
+        int index = 1;
+        for (String item : DataSet.INSTANCE.getOne()) {
+            list.add(
+                    new CarouselItem(
+                            item,
+                            "Image " + index++ + " of " + DataSet.INSTANCE.getOne().size(),
+                            headers
+                    )
+            );
         }
 
-        binding.carousel.addData(list);
+        binding.carousel.setData(list);
 
         // ----------------------------------------------------------------
 
