@@ -58,6 +58,9 @@ Use the `CarouselItem` class for data item. Initialize the `ImageCarousel` with 
 // Kotlin
 val carousel: ImageCarousel = findViewById(R.id.carousel)
 
+// Register lifecycle. For activity this will be lifecycle/getLifecycle() and for fragment it will be viewLifecycleOwner/getViewLifecycleOwner().
+carousel.registerLifecycle(lifecycle)
+
 val list = mutableListOf<CarouselItem>()
 
 // Image URL with caption
@@ -109,6 +112,9 @@ carousel.setData(list)
 ```java
 // Java
 ImageCarousel carousel = findViewById(R.id.carousel);
+
+// Register lifecycle. For activity this will be lifecycle/getLifecycle() and for fragments it will be viewLifecycleOwner/getViewLifecycleOwner().
+carousel.registerLifecycle(getLifecycle());
 
 List<CarouselItem> list = new ArrayList<>();
 
@@ -356,7 +362,7 @@ carousel.stop()
 val customIndicator: CircleIndicator2 = findViewById(R.id.custom_indicator)
 carousel.setIndicator(customIndicator)
 
-// For activity this will be lifecycle/getLifecycle() and for fragments it will be viewLifecycleOwner/getViewLifecycleOwner().
+// For activity this will be lifecycle/getLifecycle() and for fragment it will be viewLifecycleOwner/getViewLifecycleOwner().
 carousel.registerLifecycle(lifecycle)
 
 // ...
@@ -491,6 +497,26 @@ carousel.registerLifecycle(lifecycle)
 carousel.setData(list)
 ```
 
+## Register Lifecycle
+
+`ImageCarousel` is a [lifecycle-aware component](https://developer.android.com/topic/libraries/architecture/lifecycle). You can use the `registerLifecycle()` method to register a lifecycle. For activity the parameter will be `lifecycle`/`getLifecycle()` and for fragment it will be `viewLifecycleOwner`/`getViewLifecycleOwner()`.
+
+It is recommended to register `ImageCarousel` to a lifecycle, so that the auto-play/scroll will pause when the app is in the background and resume when the app is resumed.
+
+It is also used to correctly initialize the infinite carousel when the app is in the background.
+
+So it is recommended if you enabled `autoPlay` & `infiniteCarousel`.
+
+## Infinite Carousel
+
+[image]
+
+The library is now supported infinite carousel. An infinite carousel means looping the item view infinitely. This feature is enabled by default. You can disable it by setting `infiniteCarousel` to `false`.
+
+## Indicator
+
+The carousel is bundled with a default indicator. We used the [CircleIndicator](https://github.com/ongakuer/CircleIndicator) library for the indicator. You can use all the customization supported by the library in our carousel. You can get the default indicator by the `getIndicator()` method. If you wish to add your custom indicator, then just use the `CircleIndicator2` from the [CircleIndicator](https://github.com/ongakuer/CircleIndicator) library and set the view using the `setIndicator(indicator)` method. For details usage see the [sample](/sample).
+
 ## Custom View
 
 The carousel supports the view-binding for the custom view. `CarouselListener` has two methods `onCreateViewHolder()` and `onBindViewHolder()` for adding a custom view to the carousel. If you use the `RecyclerView.Adapter` then you should remember the names of the methods. Both are mapped with the same methods in the `RecyclerView.Adapter`.
@@ -552,7 +578,7 @@ binding.carousel.setCarouselListener(new CarouselListener() {
 });
 ```
 
-Using custom view, you can create any type of carousel, even a carousel without any image! See the [sample](/sample) app for some example.
+**Using custom view, you can create any type of carousel, even a carousel without any image!** See the [sample](/sample) app for some example.
 
 ## Carousel Type (`carouselType`)
 

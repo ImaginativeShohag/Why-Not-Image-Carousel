@@ -4,11 +4,11 @@ Change Log
 ## Version 2.0.0 *(2021-05-17)* 🚀
 
 * 🆕 Previous boring custom layout system removed. And view-binding supported custom layout system added. See `CarouselListener` in the sample app for details. 🎉
-* 🆕 The carousel is now supported Infinite ∞ looping 🥳! It's default now. You can disable it by setting `infiniteCarousel` to `false`.
+* 🆕 The carousel is now supported Infinite ∞ looping (Infinite Carousel) 🥳! It's default now. You can disable it by setting `infiniteCarousel` to `false`.
 * 🆕 Carousel now supports touch-to-pause auto-play. It is default now. You can disable it by setting `touchToPause` to `false`. 🎊
 * 🆕 `carouselGravity` attribute added. So you can set carousel item view gravity `START` if you want.
 * 🆕 Carousel padding attributes added. You can use `carouselPadding`, `carouselPaddingStart`, `carouselPaddingTop`, `carouselPaddingEnd`, and `carouselPaddingBottom` to set carousel padding.
-* 🆕 The `ImageCarousel` is now a lifecycle component. You can register any lifecycle with `registerLifecycle()` method. It is recommended if you enable `autoPlay`. So that when the application is in the pause state, the carousel will be paused and resumed on the app resume.
+* 🆕 The `ImageCarousel` is now a lifecycle component. You can register any lifecycle with `registerLifecycle()` method. It is recommended if you enable `autoPlay` and `infiniteCarousel`. So that when the application is in the pause state, the carousel will be paused and resumed on the app resume. It is also used to correctly initialize the infinite carousel when the app is in the background.
 * 🆕 You can now use `setData()` to set `CarouselItem` list. And `addData()` to add single or multiple items to the carousel. If you set/add data only once, then you can continue using `addData()` method.
 * 🆕 You can now get the carousel items using `getData()` method.
 * 🆕 Sample app re-designed. Various use cases and inspiring 💡 examples are added. 😎

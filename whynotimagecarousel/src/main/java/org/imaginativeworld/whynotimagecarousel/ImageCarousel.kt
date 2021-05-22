@@ -86,6 +86,8 @@ class ImageCarousel(
     private var data: List<CarouselItem>? = null
     private var dataSize = 0
 
+    private var isCarouselCentered = false
+
     var carouselListener: CarouselListener? = null
         set(value) {
             field = value
@@ -481,7 +483,7 @@ class ImageCarousel(
     override fun onInterceptTouchEvent(event: MotionEvent?): Boolean {
         if (touchToPause) {
             when (event?.action) {
-                MotionEvent.ACTION_UP -> {
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                     resumeAutoPlay()
                 }
                 MotionEvent.ACTION_DOWN -> {
@@ -504,6 +506,10 @@ class ImageCarousel(
     private fun resumeAutoPlay() {
         if (autoPlay) {
             initAutoPlay()
+        }
+
+        if (infiniteCarousel && !isCarouselCentered && dataSize != 0) {
+            initStartPositionForInfiniteCarousel()
         }
     }
 
@@ -585,17 +591,17 @@ class ImageCarousel(
                 ).toInt()
 
                 carouselType = carouselTypeArray[
-                        getInteger(
-                            R.styleable.ImageCarousel_carouselType,
-                            CarouselType.BLOCK.ordinal
-                        )
+                    getInteger(
+                        R.styleable.ImageCarousel_carouselType,
+                        CarouselType.BLOCK.ordinal
+                    )
                 ]
 
                 carouselGravity = carouselGravityArray[
-                        getInteger(
-                            R.styleable.ImageCarousel_carouselGravity,
-                            CarouselGravity.CENTER.ordinal
-                        )
+                    getInteger(
+                        R.styleable.ImageCarousel_carouselGravity,
+                        CarouselGravity.CENTER.ordinal
+                    )
                 ]
 
                 showIndicator = getBoolean(
@@ -609,10 +615,10 @@ class ImageCarousel(
                 ).toInt()
 
                 imageScaleType = scaleTypeArray[
-                        getInteger(
-                            R.styleable.ImageCarousel_imageScaleType,
-                            ImageView.ScaleType.CENTER_CROP.ordinal
-                        )
+                    getInteger(
+                        R.styleable.ImageCarousel_imageScaleType,
+                        ImageView.ScaleType.CENTER_CROP.ordinal
+                    )
                 ]
 
                 carouselBackground = getDrawable(
@@ -960,6 +966,8 @@ class ImageCarousel(
 
             initOnScrollStateChange()
 
+            isCarouselCentered = false
+
             initStartPositionForInfiniteCarousel()
         }
     }
@@ -983,6 +991,8 @@ class ImageCarousel(
             initOnScrollStateChange()
 
             if (isFirstTime) {
+                isCarouselCentered = false
+
                 initStartPositionForInfiniteCarousel()
             }
         }
@@ -1065,7 +1075,7 @@ class ImageCarousel(
                 if (view == null) {
                     Log.e(
                         TAG,
-                        "The first view is not found! This can't be happening though."
+                        "The first view is not found! Maybe the app is in the background."
                     )
                     return@post
                 }
@@ -1088,8 +1098,10 @@ class ImageCarousel(
     // ----------------------------------------------------------------
 
     /**
-     * Register ImageCarousel to a lifecycle, so that the auto scroll will pause
-     * when the app is in the background. It is recommended if you enabled auto play.
+     * Register ImageCarousel to a lifecycle, so that the auto-play/scroll will pause when the
+     * app is in the background. It is also used to correctly initialize the infinite carousel
+     * when the app is in the background. It is recommended if you enabled auto-play & infinite
+     * carousel.
      *
      * @param lifecycle A [androidx.lifecycle.LifecycleOwner]'s lifecycle.
      */
