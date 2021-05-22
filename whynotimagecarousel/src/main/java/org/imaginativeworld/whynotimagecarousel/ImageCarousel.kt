@@ -507,7 +507,10 @@ class ImageCarousel(
         if (autoPlay) {
             initAutoPlay()
         }
+    }
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    private fun onResumeCheckForStartPositionForInfiniteCarousel() {
         if (infiniteCarousel && !isCarouselCentered && dataSize != 0) {
             initStartPositionForInfiniteCarousel()
         }
@@ -1091,6 +1094,8 @@ class ImageCarousel(
                         0
                     )
                 }
+
+                isCarouselCentered = true
             }
         }
     }
