@@ -22,6 +22,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.recyclerview.widget.*
 import me.relex.circleindicator.CircleIndicator2
@@ -1112,6 +1113,17 @@ class ImageCarousel(
      */
     fun registerLifecycle(lifecycle: Lifecycle) {
         lifecycle.addObserver(this)
+    }
+
+    /**
+     * It receives lifecycle owner as a parameter, especially for fragments.
+     *
+     * @see [registerLifecycle] for details.
+     *
+     * @param lifecycleOwner A [androidx.lifecycle.LifecycleOwner]
+     */
+    fun registerLifecycle(lifecycleOwner: LifecycleOwner) {
+        lifecycleOwner.lifecycle.addObserver(this)
     }
 
     // ----------------------------------------------------------------

@@ -26,10 +26,10 @@ dependencies {
     // Material Components for Android. Replace the version with the latest version of Material Components library.
     implementation 'com.google.android.material:material:1.3.0'
     
-    // Optional: Circle Indicator (To fix the xml preview "Missing classes" error)
+    // Circle Indicator (To fix the xml preview "Missing classes" error)
     implementation 'me.relex:circleindicator:2.1.6'
 
-    implementation 'org.imaginativeworld.whynotimagecarousel:whynotimagecarousel:2.0.1'
+    implementation 'org.imaginativeworld.whynotimagecarousel:whynotimagecarousel:2.0.2'
 }
 ```
 
