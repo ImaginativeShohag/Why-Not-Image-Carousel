@@ -1,7 +1,12 @@
 Change Log
 ==========
 
-## Version 2.0.0, 2.0.1 *(2021-05-22)* 🚀
+## Version 2.0.2 *(2021-05-31)* 🚀
+
+* 🆕 `registerLifecycle(lifecycleOwner: LifecycleOwner)` method added.
+* 🛠️ Java sample converted into a `Fragment` example.
+
+## Version 2.0.0, 2.0.1 *(2021-05-22)*
 
 * 🆕 Previous boring custom layout system removed. And view-binding supported custom layout system added. See `CarouselListener` in the sample app for details. 🎉
 * 🆕 The carousel is now supported Infinite ∞ looping (Infinite Carousel) 🥳! It's default now. You can disable it by setting `infiniteCarousel` to `false`.
