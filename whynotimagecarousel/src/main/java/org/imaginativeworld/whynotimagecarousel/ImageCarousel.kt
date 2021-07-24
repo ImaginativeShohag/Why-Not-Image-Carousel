@@ -817,7 +817,7 @@ class ImageCarousel(
                         onScrollStateChanged(
                             recyclerView,
                             newState,
-                            position,
+                            currentRealPosition,
                             carouselItem
                         )
                     }
