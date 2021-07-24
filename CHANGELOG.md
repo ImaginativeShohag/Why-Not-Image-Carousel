@@ -1,7 +1,11 @@
 Change Log
 ==========
 
-## Version 2.0.2 *(2021-05-31)* 🚀
+## Version 2.0.3 *(2021-07-25)* 🚀
+
+* 🐞 Fixed: wrong `position` value in `onScrollStateChanged` listener.
+
+## Version 2.0.2 *(2021-05-31)*
 
 * 🆕 `registerLifecycle(lifecycleOwner: LifecycleOwner)` method added.
 * 🛠️ Java sample converted into a `Fragment` example.
