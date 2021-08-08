@@ -518,7 +518,7 @@ class ImageCarousel(
         initAutoPlay()
     }
 
-    override fun onInterceptTouchEvent(event: MotionEvent?): Boolean {
+    override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
         if (touchToPause) {
             when (event?.action) {
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
@@ -530,7 +530,7 @@ class ImageCarousel(
             }
         }
 
-        return super.onInterceptTouchEvent(event)
+        return super.dispatchTouchEvent(event)
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
