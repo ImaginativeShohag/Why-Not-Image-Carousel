@@ -42,6 +42,11 @@ class KotlinActivity : AppCompatActivity() {
             startActivity(Intent(this, JavaActivity::class.java))
         }
 
+        binding.btnJavaExample.setOnLongClickListener {
+            startActivity(Intent(this, TestActivity::class.java))
+            true
+        }
+
         // ----------------------------------------------------------------
         // Example One: All methods/attributes & header
         // ----------------------------------------------------------------
@@ -103,14 +108,18 @@ class KotlinActivity : AppCompatActivity() {
 
             carouselListener = object : CarouselListener {
                 override fun onClick(position: Int, carouselItem: CarouselItem) {
-                    Toast.makeText(this@KotlinActivity, "You clicked it.", Toast.LENGTH_SHORT)
+                    Toast.makeText(
+                        this@KotlinActivity,
+                        "You clicked at position ${position + 1}.",
+                        Toast.LENGTH_SHORT
+                    )
                         .show()
                 }
 
                 override fun onLongClick(position: Int, carouselItem: CarouselItem) {
                     Toast.makeText(
                         this@KotlinActivity,
-                        "You long clicked it.",
+                        "You long clicked at position ${position + 1}.",
                         Toast.LENGTH_SHORT
                     )
                         .show()
@@ -231,7 +240,6 @@ class KotlinActivity : AppCompatActivity() {
                     position: Int,
                     carouselItem: CarouselItem?
                 ) {
-
                     if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                         carouselItem?.apply {
                             binding.customCaption.text = caption

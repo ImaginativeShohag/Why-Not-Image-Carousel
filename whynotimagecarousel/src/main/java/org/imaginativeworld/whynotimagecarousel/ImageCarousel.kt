@@ -44,6 +44,7 @@ class ImageCarousel(
 
     companion object {
         const val TAG = "ImageCarousel"
+        const val NO_POSITION = -1
     }
 
     private var adapter: FiniteCarouselAdapter? = null
@@ -104,9 +105,45 @@ class ImageCarousel(
         }
 
     /**
-     * Get or set current item position
+     * Get or set current item position.
      */
-    var currentPosition = -1
+    var currentPosition = NO_POSITION
+        get() {
+            return if (currentVirtualPosition == NO_POSITION) NO_POSITION
+            else currentVirtualPosition % dataSize
+        }
+        set(value) {
+            val position = when {
+                value >= dataSize -> {
+                    if (dataSize > 0) dataSize - 1 else NO_POSITION
+                }
+                value < 0 -> {
+                    if (dataSize > 0) 0 else NO_POSITION
+                }
+                else -> {
+                    value
+                }
+            }
+
+            field = position
+
+            if (position != NO_POSITION && dataSize != 0) {
+                val lastRealPosition = currentVirtualPosition % dataSize
+
+                if (lastRealPosition > position) {
+                    currentVirtualPosition -= (lastRealPosition - position)
+                } else if (lastRealPosition < position) {
+                    currentVirtualPosition += (position - lastRealPosition)
+                }
+            }
+        }
+
+    /**
+     * Get or set current item position.
+     *
+     * Note: This will be the virtual position for infinite scroll.
+     */
+    var currentVirtualPosition = -1
         get() {
             return snapHelper?.getSnapPosition(recyclerView.layoutManager) ?: -1
         }
@@ -125,7 +162,7 @@ class ImageCarousel(
 
             field = position
 
-            if (position != -1) {
+            if (position != -1 && dataSize != 0) {
                 recyclerView.smoothScrollToPosition(position)
             }
         }
@@ -595,17 +632,17 @@ class ImageCarousel(
                 ).toInt()
 
                 carouselType = carouselTypeArray[
-                    getInteger(
-                        R.styleable.ImageCarousel_carouselType,
-                        CarouselType.BLOCK.ordinal
-                    )
+                        getInteger(
+                            R.styleable.ImageCarousel_carouselType,
+                            CarouselType.BLOCK.ordinal
+                        )
                 ]
 
                 carouselGravity = carouselGravityArray[
-                    getInteger(
-                        R.styleable.ImageCarousel_carouselGravity,
-                        CarouselGravity.CENTER.ordinal
-                    )
+                        getInteger(
+                            R.styleable.ImageCarousel_carouselGravity,
+                            CarouselGravity.CENTER.ordinal
+                        )
                 ]
 
                 showIndicator = getBoolean(
@@ -619,10 +656,10 @@ class ImageCarousel(
                 ).toInt()
 
                 imageScaleType = scaleTypeArray[
-                    getInteger(
-                        R.styleable.ImageCarousel_imageScaleType,
-                        ImageView.ScaleType.CENTER_CROP.ordinal
-                    )
+                        getInteger(
+                            R.styleable.ImageCarousel_imageScaleType,
+                            ImageView.ScaleType.CENTER_CROP.ordinal
+                        )
                 ]
 
                 carouselBackground = getDrawable(
@@ -836,10 +873,10 @@ class ImageCarousel(
             autoPlayHandler.postDelayed(
                 object : Runnable {
                     override fun run() {
-                        if (currentPosition == Int.MAX_VALUE - 1) {
-                            currentPosition = 0
+                        if (currentVirtualPosition == Int.MAX_VALUE - 1) {
+                            currentVirtualPosition = 0
                         } else {
-                            currentPosition++
+                            currentVirtualPosition++
                         }
 
                         autoPlayHandler.postDelayed(this, autoPlayDelay.toLong())
@@ -873,7 +910,7 @@ class ImageCarousel(
                 this.visibility = if (showIndicator) View.VISIBLE else View.GONE
             }
 
-            this.createIndicators(dataSize, currentPosition)
+            this.createIndicators(dataSize, currentVirtualPosition)
         }
     }
 
@@ -939,7 +976,7 @@ class ImageCarousel(
 
     private fun createIndicator() {
         indicator?.apply {
-            createIndicators(dataSize, currentPosition)
+            createIndicators(dataSize, currentVirtualPosition)
         }
     }
 
@@ -1134,7 +1171,7 @@ class ImageCarousel(
      * Note: Sometimes it will not work. See [autoWidthFixing] for details.
      */
     fun previous() {
-        currentPosition--
+        currentVirtualPosition--
     }
 
     // ----------------------------------------------------------------
@@ -1145,7 +1182,7 @@ class ImageCarousel(
      * Note: Sometimes it will not work. See [autoWidthFixing] for details.
      */
     fun next() {
-        currentPosition++
+        currentVirtualPosition++
     }
 
     // ----------------------------------------------------------------
