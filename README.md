@@ -24,12 +24,12 @@ An easy, super simple and customizable image carousel view for Android.
 ```groovy
 dependencies {
     // Material Components for Android. Replace the version with the latest version of Material Components library.
-    implementation 'com.google.android.material:material:1.3.0'
-    
+    implementation 'com.google.android.material:material:1..0'
+
     // Circle Indicator (To fix the xml preview "Missing classes" error)
     implementation 'me.relex:circleindicator:2.1.6'
 
-    implementation 'org.imaginativeworld.whynotimagecarousel:whynotimagecarousel:2.0.3'
+    implementation 'org.imaginativeworld.whynotimagecarousel:whynotimagecarousel:2.0.4'
 }
 ```
 

@@ -1,7 +1,16 @@
 Change Log
 ==========
 
-## Version 2.0.3 *(2021-07-25)* 🚀
+## Version 2.0.4 *(2021-08-08)* 🚀
+
+* 🐞
+  Fixed [#43](https://github.com/ImaginativeShohag/Why-Not-Image-Carousel/issues/43): `currentPosition`
+  will now give real data position. For virtual data position in `infiniteCarousel`
+  use `currentVirtualPosition`.
+* 🐞 Fixed [#45](https://github.com/ImaginativeShohag/Why-Not-Image-Carousel/issues/45): `autoPlay`
+  will now work after slide.
+
+## Version 2.0.3 *(2021-07-25)*
 
 * 🐞 Fixed: wrong `position` value in `onScrollStateChanged` listener.
 
