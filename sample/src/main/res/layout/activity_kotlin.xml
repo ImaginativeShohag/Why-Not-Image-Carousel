@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             app:autoPlay="true"
-            app:autoPlayDelay="4000" />
+            app:autoPlayDelay="3000" />
 
         <TextView
             android:layout_width="match_parent"
