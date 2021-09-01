@@ -374,7 +374,7 @@ class ImageCarousel(
         }
 
     @IdRes
-    var previousButtonId: Int = R.id.btn_next
+    var previousButtonId: Int = R.id.btn_previous
         set(value) {
             field = value
 
@@ -414,7 +414,7 @@ class ImageCarousel(
         }
 
     @IdRes
-    var nextButtonId: Int = R.id.btn_previous
+    var nextButtonId: Int = R.id.btn_next
         set(value) {
             field = value
 
