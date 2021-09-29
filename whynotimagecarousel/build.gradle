@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.17.0'
+        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.18.0'
         classpath 'org.jetbrains.dokka:dokka-gradle-plugin:1.4.30'
     }
 }
@@ -51,7 +51,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.6.0'
 
     implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
     // Glide
