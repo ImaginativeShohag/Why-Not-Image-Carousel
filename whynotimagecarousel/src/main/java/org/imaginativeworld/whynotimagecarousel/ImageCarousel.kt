@@ -44,7 +44,7 @@ class ImageCarousel(
 
     companion object {
         const val TAG = "ImageCarousel"
-        const val NO_POSITION = -1
+        const val NO_POSITION = RecyclerView.NO_POSITION
     }
 
     private var adapter: FiniteCarouselAdapter? = null
@@ -813,10 +813,10 @@ class ImageCarousel(
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
 
                 val position = snapHelper?.getSnapPosition(recyclerView.layoutManager)
-                    ?: RecyclerView.NO_POSITION
+                    ?: NO_POSITION
 
                 val currentRealPosition =
-                    adapter?.getRealDataPosition(position) ?: RecyclerView.NO_POSITION
+                    adapter?.getRealDataPosition(position) ?: NO_POSITION
 
                 var dataItem: CarouselItem? = null
 
@@ -843,10 +843,10 @@ class ImageCarousel(
                 // Invoke the listener
                 onScrollListener?.apply {
                     val position = snapHelper?.getSnapPosition(recyclerView.layoutManager)
-                        ?: RecyclerView.NO_POSITION
+                        ?: NO_POSITION
 
                     val currentRealPosition =
-                        adapter?.getRealDataPosition(position) ?: RecyclerView.NO_POSITION
+                        adapter?.getRealDataPosition(position) ?: NO_POSITION
 
                     if (currentRealPosition >= 0) {
                         val carouselItem: CarouselItem? = adapter?.getItem(currentRealPosition)
@@ -1010,6 +1010,10 @@ class ImageCarousel(
             isCarouselCentered = false
 
             initStartPositionForInfiniteCarousel()
+
+            if (data.isEmpty()) {
+                tvCaption.text = ""
+            }
         }
     }
 
@@ -1022,10 +1026,10 @@ class ImageCarousel(
     fun addData(data: List<CarouselItem>) {
         adapter?.apply {
             val isFirstTime = this@ImageCarousel.data.isNullOrEmpty()
-            appendData(data)
+            val latestData = appendData(data)
 
-            this@ImageCarousel.data = data
-            this@ImageCarousel.dataSize = data.size
+            this@ImageCarousel.data = latestData
+            this@ImageCarousel.dataSize = latestData.size
 
             createIndicator()
 
@@ -1047,14 +1051,21 @@ class ImageCarousel(
      */
     fun addData(item: CarouselItem) {
         adapter?.apply {
-            val data = appendData(item)
+            val isFirstTime = this@ImageCarousel.data.isNullOrEmpty()
+            val latestData = appendData(item)
 
-            this@ImageCarousel.data = data
-            this@ImageCarousel.dataSize = data.size
+            this@ImageCarousel.data = latestData
+            this@ImageCarousel.dataSize = latestData.size
 
             createIndicator()
 
             initOnScrollStateChange()
+
+            if (isFirstTime) {
+                isCarouselCentered = false
+
+                initStartPositionForInfiniteCarousel()
+            }
         }
     }
 

@@ -3,6 +3,7 @@ package org.imaginativeworld.whynotimagecarousel.adapter
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import org.imaginativeworld.whynotimagecarousel.ImageCarousel
 import org.imaginativeworld.whynotimagecarousel.model.CarouselGravity
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 import org.imaginativeworld.whynotimagecarousel.model.CarouselType
@@ -35,6 +36,7 @@ class InfiniteCarouselAdapter(
     }
 
     override fun getRealDataPosition(position: Int): Int {
+        if (dataList.size == 0) return ImageCarousel.NO_POSITION
         return position % dataList.size
     }
 }

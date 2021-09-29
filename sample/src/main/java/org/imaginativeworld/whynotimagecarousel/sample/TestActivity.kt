@@ -16,6 +16,36 @@ class TestActivity : AppCompatActivity() {
 
         // --------------------------------
 
+        val listOne = mutableListOf<CarouselItem>()
+
+        for ((index, item) in DataSet.one.withIndex()) {
+            listOne.add(
+                CarouselItem(
+                    imageUrl = item,
+                    caption = "Image ${index + 1} of ${DataSet.one.size}",
+                )
+            )
+        }
+
+        binding.carousel1.setData(listOne)
+
+        // --------------------------------
+
+        val listTwo = mutableListOf<CarouselItem>()
+
+        for ((index, item) in DataSet.one.withIndex()) {
+            listTwo.add(
+                CarouselItem(
+                    imageUrl = item,
+                    caption = "Image ${index + 1} of ${DataSet.one.size}",
+                )
+            )
+        }
+
+        binding.carousel2.setData(listOne)
+
+        // --------------------------------
+
         binding.btnPreviousAll.setOnClickListener {
             binding.carousel1.currentPosition--
             binding.carousel2.currentPosition--
@@ -24,6 +54,35 @@ class TestActivity : AppCompatActivity() {
         binding.btnNextAll.setOnClickListener {
             binding.carousel1.currentPosition++
             binding.carousel2.currentPosition++
+        }
+
+        // --------------------------------
+
+        binding.btnSingleAppend.setOnClickListener {
+            val item = CarouselItem(
+                imageUrl = DataSet.three[1].first,
+                caption = DataSet.three[1].second,
+            )
+
+            binding.carousel1.addData(item)
+            binding.carousel2.addData(item)
+        }
+
+        binding.btnMultiAppend.setOnClickListener {
+            binding.carousel1.addData(listOne)
+            binding.carousel2.addData(listOne)
+        }
+
+        // --------------------------------
+
+        binding.btnLoadData.setOnClickListener {
+            binding.carousel1.setData(listOne)
+            binding.carousel2.setData(listOne)
+        }
+
+        binding.btnClearData.setOnClickListener {
+            binding.carousel1.setData(emptyList())
+            binding.carousel2.setData(emptyList())
         }
 
         // --------------------------------
@@ -64,33 +123,5 @@ class TestActivity : AppCompatActivity() {
         }
 
         // --------------------------------
-
-        val listOne = mutableListOf<CarouselItem>()
-
-        for ((index, item) in DataSet.one.withIndex()) {
-            listOne.add(
-                CarouselItem(
-                    imageUrl = item,
-                    caption = "Image ${index + 1} of ${DataSet.one.size}",
-                )
-            )
-        }
-
-        binding.carousel1.setData(listOne)
-
-        // --------------------------------
-
-        val listTwo = mutableListOf<CarouselItem>()
-
-        for ((index, item) in DataSet.one.withIndex()) {
-            listTwo.add(
-                CarouselItem(
-                    imageUrl = item,
-                    caption = "Image ${index + 1} of ${DataSet.one.size}",
-                )
-            )
-        }
-
-        binding.carousel2.setData(listOne)
     }
 }
