@@ -1,7 +1,14 @@
 Change Log
 ==========
 
-## Version 2.0.4 *(2021-08-08)* 🚀
+## Version 2.0.5 *(2021-09-30)* 🚀
+
+* 🐞 Fixed [#50](https://github.com/ImaginativeShohag/Why-Not-Image-Carousel/issues/#50): Fixed a
+  crash when dataset changed.
+* 🐞 Fixed some bugs related to data insert.
+* ⬆ Kotlin and other libs upgraded to the latest version.
+
+## Version 2.0.4 *(2021-08-08)*
 
 * 🐞
   Fixed [#43](https://github.com/ImaginativeShohag/Why-Not-Image-Carousel/issues/43): `currentPosition`
@@ -32,9 +39,12 @@ Change Log
 * 🆕 Sample app re-designed. Various use cases and inspiring 💡 examples are added. 😎
 * ⚠️ `OnItemClickListener` renamed to `CarouselListener` and two new method (`onCreateViewHolder()` and `onBindViewHolder()`) added for the latest custom view feature. `setOnItemClickListener()` also renamed to `setCarouselListener()`.
 * ⚠️ `CarouselListener` (previously `OnItemClickListener`) package changed from `org.imaginativeworld.whynotimagecarousel` to `org.imaginativeworld.whynotimagecarousel.listener`.
-* ⚠️ `CarouselItem` package changed from `org.imaginativeworld.whynotimagecarousel` to `org.imaginativeworld.whynotimagecarousel.model`.
-* 🛠️ New parameters `position` and `carouselItem` add to `onScrolled` method in  `CarouselOnScrollListener`.
-* 🛠️ The default carousel background changed to transparent. You can always change the background of the carousel using `carouselBackground`. The previous value was `#333333`.
+* ⚠️ `CarouselItem` package changed from `org.imaginativeworld.whynotimagecarousel`
+  to `org.imaginativeworld.whynotimagecarousel.model`.
+* ️🛠 New parameters `position` and `carouselItem` add to `onScrolled` method
+  in  `CarouselOnScrollListener`.
+* 🛠️ The default carousel background changed to transparent. You can always change the background
+  of the carousel using `carouselBackground`. The previous value was `#333333`.
 * 🛠️ Left and right navigation default button icon replaced with a rounded chevron icon.
 
 ## Version 1.3.0 *(2021-03-25)*

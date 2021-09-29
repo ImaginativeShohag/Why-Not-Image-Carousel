@@ -1,5 +1,6 @@
 package org.imaginativeworld.whynotimagecarousel.adapter
 
+import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -142,6 +143,7 @@ open class FiniteCarouselAdapter(
     /**
      * Clear previous items and add all given carousel items.
      */
+    @SuppressLint("NotifyDataSetChanged")
     fun replaceData(newDataList: List<CarouselItem>): List<CarouselItem> {
         this.dataList.clear()
 
@@ -152,13 +154,13 @@ open class FiniteCarouselAdapter(
     }
 
     /**
-     * Clear previous items and add all given carousel items.
+     * Append all given carousel items with the existing items.
      */
     fun appendData(newDataList: List<CarouselItem>): List<CarouselItem> {
         val oldSize = this.dataList.size
 
         this.dataList.addAll(newDataList)
-        notifyItemRangeChanged(oldSize, newDataList.size)
+        notifyItemRangeInserted(oldSize, newDataList.size)
 
         return this.dataList
     }

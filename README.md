@@ -29,7 +29,7 @@ dependencies {
     // Circle Indicator (To fix the xml preview "Missing classes" error)
     implementation 'me.relex:circleindicator:2.1.6'
 
-    implementation 'org.imaginativeworld.whynotimagecarousel:whynotimagecarousel:2.0.4'
+    implementation 'org.imaginativeworld.whynotimagecarousel:whynotimagecarousel:2.0.5'
 }
 ```
 
