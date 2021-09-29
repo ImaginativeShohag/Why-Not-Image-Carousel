@@ -3,7 +3,7 @@ Change Log
 
 ## Version 2.0.5 *(2021-09-30)* 🚀
 
-* 🐞 Fixed [#50](https://github.com/ImaginativeShohag/Why-Not-Image-Carousel/issues/#50): Fixed a
+* 🐞 Fixed [#50](https://github.com/ImaginativeShohag/Why-Not-Image-Carousel/issues/50): Fixed a
   crash when dataset changed.
 * 🐞 Fixed some bugs related to data insert.
 * ⬆ Kotlin and other libs upgraded to the latest version.
