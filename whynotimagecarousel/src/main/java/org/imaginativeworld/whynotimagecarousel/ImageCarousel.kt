@@ -20,11 +20,14 @@ import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.OnLifecycleEvent
-import androidx.recyclerview.widget.*
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.PagerSnapHelper
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SnapHelper
 import me.relex.circleindicator.CircleIndicator2
 import org.imaginativeworld.whynotimagecarousel.adapter.FiniteCarouselAdapter
 import org.imaginativeworld.whynotimagecarousel.adapter.InfiniteCarouselAdapter
@@ -33,14 +36,18 @@ import org.imaginativeworld.whynotimagecarousel.listener.CarouselOnScrollListene
 import org.imaginativeworld.whynotimagecarousel.model.CarouselGravity
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 import org.imaginativeworld.whynotimagecarousel.model.CarouselType
-import org.imaginativeworld.whynotimagecarousel.utils.*
+import org.imaginativeworld.whynotimagecarousel.utils.CarouselLinearLayoutManager
+import org.imaginativeworld.whynotimagecarousel.utils.LinearStartSnapHelper
+import org.imaginativeworld.whynotimagecarousel.utils.dpToPx
+import org.imaginativeworld.whynotimagecarousel.utils.getSnapPosition
+import org.imaginativeworld.whynotimagecarousel.utils.spToPx
 import org.jetbrains.annotations.NotNull
 import org.jetbrains.annotations.Nullable
 
 class ImageCarousel(
     @NotNull context: Context,
     @Nullable private var attributeSet: AttributeSet?
-) : ConstraintLayout(context, attributeSet), LifecycleObserver {
+) : ConstraintLayout(context, attributeSet), DefaultLifecycleObserver {
 
     companion object {
         const val TAG = "ImageCarousel"
@@ -533,24 +540,15 @@ class ImageCarousel(
         return super.dispatchTouchEvent(event)
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     private fun pauseAutoPlay() {
         if (autoPlay) {
             autoPlayHandler.removeCallbacksAndMessages(null)
         }
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     private fun resumeAutoPlay() {
         if (autoPlay) {
             initAutoPlay()
-        }
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    private fun onResumeCheckForStartPositionForInfiniteCarousel() {
-        if (infiniteCarousel && !isCarouselCentered && dataSize != 0) {
-            initStartPositionForInfiniteCarousel()
         }
     }
 
@@ -632,17 +630,17 @@ class ImageCarousel(
                 ).toInt()
 
                 carouselType = carouselTypeArray[
-                        getInteger(
-                            R.styleable.ImageCarousel_carouselType,
-                            CarouselType.BLOCK.ordinal
-                        )
+                    getInteger(
+                        R.styleable.ImageCarousel_carouselType,
+                        CarouselType.BLOCK.ordinal
+                    )
                 ]
 
                 carouselGravity = carouselGravityArray[
-                        getInteger(
-                            R.styleable.ImageCarousel_carouselGravity,
-                            CarouselGravity.CENTER.ordinal
-                        )
+                    getInteger(
+                        R.styleable.ImageCarousel_carouselGravity,
+                        CarouselGravity.CENTER.ordinal
+                    )
                 ]
 
                 showIndicator = getBoolean(
@@ -656,10 +654,10 @@ class ImageCarousel(
                 ).toInt()
 
                 imageScaleType = scaleTypeArray[
-                        getInteger(
-                            R.styleable.ImageCarousel_imageScaleType,
-                            ImageView.ScaleType.CENTER_CROP.ordinal
-                        )
+                    getInteger(
+                        R.styleable.ImageCarousel_imageScaleType,
+                        ImageView.ScaleType.CENTER_CROP.ordinal
+                    )
                 ]
 
                 carouselBackground = getDrawable(
@@ -976,7 +974,7 @@ class ImageCarousel(
 
     private fun createIndicator() {
         indicator?.apply {
-            createIndicators(dataSize, currentVirtualPosition)
+            createIndicators(dataSize, 0)
         }
     }
 
@@ -1212,5 +1210,22 @@ class ImageCarousel(
      */
     fun stop() {
         autoPlay = false
+    }
+
+    // ----------------------------------------------------------------
+    // Lifecycle events
+    // ----------------------------------------------------------------
+
+    override fun onPause(owner: LifecycleOwner) {
+        pauseAutoPlay()
+    }
+
+    override fun onResume(owner: LifecycleOwner) {
+        resumeAutoPlay()
+
+        // Check for start position for InfiniteCarousel
+        if (infiniteCarousel && !isCarouselCentered && dataSize != 0) {
+            initStartPositionForInfiniteCarousel()
+        }
     }
 }
