@@ -1,7 +1,14 @@
 Change Log
 ==========
 
-## Version 2.0.5 *(2021-09-30)* 🚀
+## Version 2.0.6 *(2022-01-11)* 🚀
+
+* 🐞 Fixed [#72](https://github.com/ImaginativeShohag/Why-Not-Image-Carousel/issues/72): Indicator
+  will now indicate first item after data replace.
+* ⬆ Updated deprecated lifecycle code.
+* ⬆ Kotlin and other libs upgraded to the latest version.
+
+## Version 2.0.5 *(2021-09-30)*
 
 * 🐞 Fixed [#50](https://github.com/ImaginativeShohag/Why-Not-Image-Carousel/issues/50): Fixed a
   crash when dataset changed.
