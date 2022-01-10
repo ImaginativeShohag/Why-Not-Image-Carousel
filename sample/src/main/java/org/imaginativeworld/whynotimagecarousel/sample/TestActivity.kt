@@ -42,7 +42,7 @@ class TestActivity : AppCompatActivity() {
             )
         }
 
-        binding.carousel2.setData(listOne)
+        binding.carousel2.setData(listTwo)
 
         // --------------------------------
 
@@ -69,15 +69,15 @@ class TestActivity : AppCompatActivity() {
         }
 
         binding.btnMultiAppend.setOnClickListener {
-            binding.carousel1.addData(listOne)
-            binding.carousel2.addData(listOne)
+            binding.carousel1.addData(listOne.take(3))
+            binding.carousel2.addData(listTwo.take(3))
         }
 
         // --------------------------------
 
         binding.btnLoadData.setOnClickListener {
             binding.carousel1.setData(listOne)
-            binding.carousel2.setData(listOne)
+            binding.carousel2.setData(listTwo)
         }
 
         binding.btnClearData.setOnClickListener {
