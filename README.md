@@ -5,7 +5,7 @@
 An easy, super simple and customizable image carousel view for Android.
 
 [![Developer](https://img.shields.io/badge/Maintainer-ImaginativeShohag-green)](https://github.com/ImaginativeShohag)
-[![GitHub release](https://img.shields.io/github/release/ImaginativeShohag/Why-Not-Image-Carousel.svg)](https://github.com/ImaginativeShohag/Oops-No-Internet/releases)
+[![GitHub release](https://img.shields.io/github/release/ImaginativeShohag/Why-Not-Image-Carousel.svg)](https://github.com/ImaginativeShohag/Why-Not-Image-Carousel/releases)
 [![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-Why%20Not!%20Image%20Carousel!-green.svg?style=flat )]( https://android-arsenal.com/details/1/8053)
 [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=21)
 
