@@ -25,4 +25,11 @@
         <item name="cornerSize">16dp</item>
     </style>
 
+    <style name="SmallButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
 </resources>
