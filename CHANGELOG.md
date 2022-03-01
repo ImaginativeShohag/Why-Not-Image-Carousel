@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-## Version 2.1.0 *(2022-02-25)* 🚀
+## Version 2.1.0 *(2022-03-01)* 🚀
 
 * 🐞 Fixed [#74](https://github.com/ImaginativeShohag/Why-Not-Image-Carousel/issues/74):
   Changing `infiniteCarousel` attribute now will call `initAdapter()`.
@@ -13,18 +13,18 @@ data can create undesirable issues.
 Example code:
 
 ```kotlin
-// Clear existing data
+// Step 1: Clear existing data
 carousel.setData(emptyList())
 
-// Change infiniteCarousel
+// Step 2: Change infiniteCarousel
 carousel.infiniteCarousel = true // or false
 
-// Finally, set data
+// Step 3: Finally, set data
 carousel.setData(itemList) // itemList is List<CarouselItem>
 ```
 
 * ⬆ Dependencies upgraded to the latest version.
-* 🆕 Some instrumented test added.
+* 🆕 Some instrumented tests were added.
 
 ## Version 2.0.6 *(2022-01-11)*
 
