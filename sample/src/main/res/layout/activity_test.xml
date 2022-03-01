@@ -17,9 +17,34 @@
         android:id="@+id/carousel2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_weight="1"
         app:infiniteCarousel="false" />
+
+    <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+        android:id="@+id/carousel3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        app:carouselType="SHOWCASE"
+        app:scaleOnScroll="true"
+        app:scalingFactor=".25"
+        app:showBottomShadow="false"
+        app:showTopShadow="false" />
+
+    <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+        android:id="@+id/carousel4"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        app:carouselType="SHOWCASE"
+        app:infiniteCarousel="false"
+        app:scaleOnScroll="true"
+        app:scalingFactor=".25"
+        app:showBottomShadow="false"
+        app:showTopShadow="false" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,6 +54,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_previous_all"
+            style="@style/SmallButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -38,6 +64,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_next_all"
+            style="@style/SmallButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -54,7 +81,36 @@
         android:orientation="horizontal">
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_load_data"
+            style="@style/SmallButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:text="Load" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_clear_data"
+            style="@style/SmallButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:text="Clear" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_single_append"
+            style="@style/SmallButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -64,6 +120,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_multi_append"
+            style="@style/SmallButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -80,22 +137,80 @@
         android:orientation="horizontal">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_load_data"
+            android:id="@+id/btn_change_to_finite"
+            style="@style/SmallButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
-            android:text="Load" />
+            android:text="Finite Carousel" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_clear_data"
+            android:id="@+id/btn_change_to_infinite"
+            style="@style/SmallButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
             android:layout_weight="1"
-            android:text="Clear" />
+            android:text="Infinite Carousel" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_scale_on_scroll"
+            style="@style/SmallButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:text="Scale on scroll" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_not_scale_on_scroll"
+            style="@style/SmallButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:text="No scale on scroll" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_gravity_start"
+            style="@style/SmallButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:text="Gravity: Start" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_gravity_center"
+            style="@style/SmallButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:text="Gravity: Center" />
 
     </LinearLayout>
 
@@ -108,72 +223,72 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_1"
+            style="@style/SmallButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
-            android:padding="0dp"
             android:text="1" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_2"
+            style="@style/SmallButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
-            android:padding="0dp"
             android:text="2" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_3"
+            style="@style/SmallButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
-            android:padding="0dp"
             android:text="3" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_4"
+            style="@style/SmallButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
-            android:padding="0dp"
             android:text="4" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_5"
+            style="@style/SmallButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
-            android:padding="0dp"
             android:text="5" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_6"
+            style="@style/SmallButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
-            android:padding="0dp"
             android:text="6" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_7"
+            style="@style/SmallButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
             android:layout_weight="1"
-            android:padding="0dp"
             android:text="7" />
 
     </LinearLayout>

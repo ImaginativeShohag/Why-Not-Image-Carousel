@@ -514,6 +514,11 @@ class ImageCarousel(
     var autoPlayDelay: Int = 0
 
     var infiniteCarousel: Boolean = false
+        set(value) {
+            field = value
+
+            initAdapter()
+        }
 
     var touchToPause: Boolean = false
 
