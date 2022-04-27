@@ -23,24 +23,16 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.LinearSnapHelper
-import androidx.recyclerview.widget.PagerSnapHelper
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.SnapHelper
+import androidx.recyclerview.widget.*
 import me.relex.circleindicator.CircleIndicator2
 import org.imaginativeworld.whynotimagecarousel.adapter.FiniteCarouselAdapter
 import org.imaginativeworld.whynotimagecarousel.adapter.InfiniteCarouselAdapter
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselOnScrollListener
 import org.imaginativeworld.whynotimagecarousel.model.CarouselGravity
-import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 import org.imaginativeworld.whynotimagecarousel.model.CarouselType
-import org.imaginativeworld.whynotimagecarousel.utils.CarouselLinearLayoutManager
-import org.imaginativeworld.whynotimagecarousel.utils.LinearStartSnapHelper
-import org.imaginativeworld.whynotimagecarousel.utils.dpToPx
-import org.imaginativeworld.whynotimagecarousel.utils.getSnapPosition
-import org.imaginativeworld.whynotimagecarousel.utils.spToPx
+import org.imaginativeworld.whynotimagecarousel.model.NewCarouselItem
+import org.imaginativeworld.whynotimagecarousel.utils.*
 import org.jetbrains.annotations.NotNull
 import org.jetbrains.annotations.Nullable
 
@@ -92,7 +84,7 @@ class ImageCarousel(
 
     private var isBuiltInIndicator = false
     private var autoPlayHandler: Handler = Handler(Looper.getMainLooper())
-    private var data: List<CarouselItem>? = null
+    private var data: List<NewCarouselItem>? = null
     private var dataSize = 0
 
     private var isCarouselCentered = false
@@ -635,17 +627,17 @@ class ImageCarousel(
                 ).toInt()
 
                 carouselType = carouselTypeArray[
-                    getInteger(
-                        R.styleable.ImageCarousel_carouselType,
-                        CarouselType.BLOCK.ordinal
-                    )
+                        getInteger(
+                            R.styleable.ImageCarousel_carouselType,
+                            CarouselType.BLOCK.ordinal
+                        )
                 ]
 
                 carouselGravity = carouselGravityArray[
-                    getInteger(
-                        R.styleable.ImageCarousel_carouselGravity,
-                        CarouselGravity.CENTER.ordinal
-                    )
+                        getInteger(
+                            R.styleable.ImageCarousel_carouselGravity,
+                            CarouselGravity.CENTER.ordinal
+                        )
                 ]
 
                 showIndicator = getBoolean(
@@ -659,10 +651,10 @@ class ImageCarousel(
                 ).toInt()
 
                 imageScaleType = scaleTypeArray[
-                    getInteger(
-                        R.styleable.ImageCarousel_imageScaleType,
-                        ImageView.ScaleType.CENTER_CROP.ordinal
-                    )
+                        getInteger(
+                            R.styleable.ImageCarousel_imageScaleType,
+                            ImageView.ScaleType.CENTER_CROP.ordinal
+                        )
                 ]
 
                 carouselBackground = getDrawable(
@@ -821,7 +813,7 @@ class ImageCarousel(
                 val currentRealPosition =
                     adapter?.getRealDataPosition(position) ?: NO_POSITION
 
-                var dataItem: CarouselItem? = null
+                var dataItem: NewCarouselItem? = null
 
                 // Update the built-in caption
                 if (showCaption && currentRealPosition >= 0) {
@@ -852,7 +844,7 @@ class ImageCarousel(
                         adapter?.getRealDataPosition(position) ?: NO_POSITION
 
                     if (currentRealPosition >= 0) {
-                        val carouselItem: CarouselItem? = adapter?.getItem(currentRealPosition)
+                        val carouselItem: NewCarouselItem? = adapter?.getItem(currentRealPosition)
 
                         onScrollStateChanged(
                             recyclerView,
@@ -990,7 +982,7 @@ class ImageCarousel(
      *
      * @return Return [CarouselItem]s or null if no item added yet.
      */
-    fun getData(): List<CarouselItem>? {
+    fun getData(): List<NewCarouselItem>? {
         return data
     }
 
@@ -999,7 +991,7 @@ class ImageCarousel(
      *
      * @property data List of [CarouselItem].
      */
-    fun setData(data: List<CarouselItem>) {
+    fun setData(data: List<NewCarouselItem>) {
         adapter?.apply {
             replaceData(data)
 
@@ -1026,7 +1018,7 @@ class ImageCarousel(
      *
      * @property data List of [CarouselItem].
      */
-    fun addData(data: List<CarouselItem>) {
+    fun addData(data: List<NewCarouselItem>) {
         adapter?.apply {
             val isFirstTime = this@ImageCarousel.data.isNullOrEmpty()
             val latestData = appendData(data)
@@ -1052,7 +1044,7 @@ class ImageCarousel(
      *
      * @property item Single [CarouselItem].
      */
-    fun addData(item: CarouselItem) {
+    fun addData(item: NewCarouselItem) {
         adapter?.apply {
             val isFirstTime = this@ImageCarousel.data.isNullOrEmpty()
             val latestData = appendData(item)

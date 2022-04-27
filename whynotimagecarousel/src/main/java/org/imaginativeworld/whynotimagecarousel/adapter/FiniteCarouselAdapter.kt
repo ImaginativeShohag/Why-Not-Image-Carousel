@@ -11,8 +11,8 @@ import androidx.viewbinding.ViewBinding
 import org.imaginativeworld.whynotimagecarousel.databinding.ItemCarouselBinding
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener
 import org.imaginativeworld.whynotimagecarousel.model.CarouselGravity
-import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 import org.imaginativeworld.whynotimagecarousel.model.CarouselType
+import org.imaginativeworld.whynotimagecarousel.model.NewCarouselItem
 import org.imaginativeworld.whynotimagecarousel.utils.CarouselItemDecoration
 import org.imaginativeworld.whynotimagecarousel.utils.setImage
 
@@ -29,7 +29,7 @@ open class FiniteCarouselAdapter(
 
     class MyViewHolder(val binding: ViewBinding) : RecyclerView.ViewHolder(binding.root)
 
-    protected val dataList: MutableList<CarouselItem> = mutableListOf()
+    protected val dataList: MutableList<NewCarouselItem> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding = listener?.onCreateViewHolder(
@@ -132,7 +132,7 @@ open class FiniteCarouselAdapter(
         }
     }
 
-    open fun getItem(position: Int): CarouselItem? {
+    open fun getItem(position: Int): NewCarouselItem? {
         return if (position < dataList.size) {
             dataList[position]
         } else {
@@ -144,7 +144,7 @@ open class FiniteCarouselAdapter(
      * Clear previous items and add all given carousel items.
      */
     @SuppressLint("NotifyDataSetChanged")
-    fun replaceData(newDataList: List<CarouselItem>): List<CarouselItem> {
+    fun replaceData(newDataList: List<NewCarouselItem>): List<NewCarouselItem> {
         this.dataList.clear()
 
         this.dataList.addAll(newDataList)
@@ -156,7 +156,7 @@ open class FiniteCarouselAdapter(
     /**
      * Append all given carousel items with the existing items.
      */
-    fun appendData(newDataList: List<CarouselItem>): List<CarouselItem> {
+    fun appendData(newDataList: List<NewCarouselItem>): List<NewCarouselItem> {
         val oldSize = this.dataList.size
 
         this.dataList.addAll(newDataList)
@@ -168,7 +168,7 @@ open class FiniteCarouselAdapter(
     /**
      * Add a single carousel item with the existing items.
      */
-    fun appendData(item: CarouselItem): List<CarouselItem> {
+    fun appendData(item: NewCarouselItem): List<NewCarouselItem> {
         this.dataList.add(item)
         notifyItemInserted(dataList.size - 1)
 

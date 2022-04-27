@@ -5,8 +5,8 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import org.imaginativeworld.whynotimagecarousel.ImageCarousel
 import org.imaginativeworld.whynotimagecarousel.model.CarouselGravity
-import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 import org.imaginativeworld.whynotimagecarousel.model.CarouselType
+import org.imaginativeworld.whynotimagecarousel.model.NewCarouselItem
 
 class InfiniteCarouselAdapter(
     recyclerView: RecyclerView,
@@ -27,7 +27,7 @@ class InfiniteCarouselAdapter(
         return if (dataList.isEmpty()) 0 else Integer.MAX_VALUE
     }
 
-    override fun getItem(position: Int): CarouselItem? {
+    override fun getItem(position: Int): NewCarouselItem? {
         return if (position < itemCount) {
             dataList[position % dataList.size]
         } else {
