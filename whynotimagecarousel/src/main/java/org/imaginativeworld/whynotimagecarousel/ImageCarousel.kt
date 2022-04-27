@@ -23,24 +23,16 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.LinearSnapHelper
-import androidx.recyclerview.widget.PagerSnapHelper
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.SnapHelper
+import androidx.recyclerview.widget.*
 import me.relex.circleindicator.CircleIndicator2
 import org.imaginativeworld.whynotimagecarousel.adapter.FiniteCarouselAdapter
 import org.imaginativeworld.whynotimagecarousel.adapter.InfiniteCarouselAdapter
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselOnScrollListener
 import org.imaginativeworld.whynotimagecarousel.model.CarouselGravity
-import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 import org.imaginativeworld.whynotimagecarousel.model.CarouselType
-import org.imaginativeworld.whynotimagecarousel.utils.CarouselLinearLayoutManager
-import org.imaginativeworld.whynotimagecarousel.utils.LinearStartSnapHelper
-import org.imaginativeworld.whynotimagecarousel.utils.dpToPx
-import org.imaginativeworld.whynotimagecarousel.utils.getSnapPosition
-import org.imaginativeworld.whynotimagecarousel.utils.spToPx
+import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
+import org.imaginativeworld.whynotimagecarousel.utils.*
 import org.jetbrains.annotations.NotNull
 import org.jetbrains.annotations.Nullable
 
@@ -635,17 +627,17 @@ class ImageCarousel(
                 ).toInt()
 
                 carouselType = carouselTypeArray[
-                    getInteger(
-                        R.styleable.ImageCarousel_carouselType,
-                        CarouselType.BLOCK.ordinal
-                    )
+                        getInteger(
+                            R.styleable.ImageCarousel_carouselType,
+                            CarouselType.BLOCK.ordinal
+                        )
                 ]
 
                 carouselGravity = carouselGravityArray[
-                    getInteger(
-                        R.styleable.ImageCarousel_carouselGravity,
-                        CarouselGravity.CENTER.ordinal
-                    )
+                        getInteger(
+                            R.styleable.ImageCarousel_carouselGravity,
+                            CarouselGravity.CENTER.ordinal
+                        )
                 ]
 
                 showIndicator = getBoolean(
@@ -659,10 +651,10 @@ class ImageCarousel(
                 ).toInt()
 
                 imageScaleType = scaleTypeArray[
-                    getInteger(
-                        R.styleable.ImageCarousel_imageScaleType,
-                        ImageView.ScaleType.CENTER_CROP.ordinal
-                    )
+                        getInteger(
+                            R.styleable.ImageCarousel_imageScaleType,
+                            ImageView.ScaleType.CENTER_CROP.ordinal
+                        )
                 ]
 
                 carouselBackground = getDrawable(

@@ -11,8 +11,8 @@ import androidx.viewbinding.ViewBinding
 import org.imaginativeworld.whynotimagecarousel.databinding.ItemCarouselBinding
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener
 import org.imaginativeworld.whynotimagecarousel.model.CarouselGravity
-import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 import org.imaginativeworld.whynotimagecarousel.model.CarouselType
+import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 import org.imaginativeworld.whynotimagecarousel.utils.CarouselItemDecoration
 import org.imaginativeworld.whynotimagecarousel.utils.setImage
 
