@@ -1,58 +1,62 @@
 package org.imaginativeworld.whynotimagecarousel.model
 
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import androidx.annotation.DrawableRes
 
-data class CarouselItem constructor(
-    val imageUrl: String? = null,
-    @DrawableRes val imageDrawable: Int? = null,
+class CarouselItem private constructor(
+    internal val imageType: CarouselItemImage<*>,
     val caption: String? = null,
-    val headers: Map<String, String>?
+    val headers: Map<String, String>? = null
 ) {
-    constructor() : this(null, null, null, null)
-
-    constructor(imageUrl: String? = null) : this(
-        imageUrl,
-        null,
-        null,
-        null
-    )
-
-    constructor(imageUrl: String? = null, headers: Map<String, String>? = null) : this(
-        imageUrl,
-        null,
-        null,
-        headers
-    )
-
-    constructor(@DrawableRes imageDrawable: Int? = null) : this(
-        null,
-        imageDrawable,
-        null,
-        null
-    )
-
-    constructor(imageUrl: String? = null, caption: String? = null) : this(
-        imageUrl,
-        null,
-        caption,
-        null
-    )
+    val image = imageType.image
 
     constructor(
-        imageUrl: String? = null,
+        drawable: Drawable,
         caption: String? = null,
         headers: Map<String, String>? = null
     ) : this(
-        imageUrl,
-        null,
-        caption,
-        headers
+        imageType = DrawableImageType(image = drawable),
+        caption = caption,
+        headers = headers
     )
 
-    constructor(@DrawableRes imageDrawable: Int? = null, caption: String? = null) : this(
-        null,
-        imageDrawable,
-        caption,
-        null
+    constructor(
+        @DrawableRes drawableRes: Int,
+        caption: String? = null,
+        headers: Map<String, String>? = null
+    ) : this(
+        imageType = DrawableResImageType(image = drawableRes),
+        caption = caption,
+        headers = headers
+    )
+
+    constructor(
+        bitmap: Bitmap,
+        caption: String? = null,
+        headers: Map<String, String>? = null
+    ) : this(
+        imageType = BitmapImageType(image = bitmap),
+        caption = caption,
+        headers = headers
+    )
+
+    constructor(
+        imageUrl: String,
+        caption: String? = null,
+        headers: Map<String, String>? = null
+    ) : this(
+        imageType = UrlImageType(image = imageUrl),
+        caption = caption,
+        headers = headers
+    )
+
+    constructor(
+        caption: String,
+        headers: Map<String, String>? = null
+    ) : this(
+        imageType = StringCaptionImageType(image = caption),
+        caption = caption,
+        headers = headers
     )
 }

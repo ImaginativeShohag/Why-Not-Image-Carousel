@@ -5,8 +5,8 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import org.imaginativeworld.whynotimagecarousel.ImageCarousel
 import org.imaginativeworld.whynotimagecarousel.model.CarouselGravity
-import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 import org.imaginativeworld.whynotimagecarousel.model.CarouselType
+import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 
 class InfiniteCarouselAdapter(
     recyclerView: RecyclerView,

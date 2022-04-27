@@ -364,11 +364,12 @@ class KotlinActivity : AppCompatActivity() {
 
         val listFive = mutableListOf<CarouselItem>()
 
+
         for (item in DataSet.five) {
             listFive.add(
                 CarouselItem(
-                    imageDrawable = item.first,
-                    caption = item.second
+                    item.first,
+                    item.second
                 )
             )
         }
@@ -423,7 +424,7 @@ class KotlinActivity : AppCompatActivity() {
         val listSix = mutableListOf<CarouselItem>()
 
         for (item in DataSet.six) {
-            listSix.add(CarouselItem())
+            listSix.add(CarouselItem(item.second))
         }
 
         binding.carousel6.setData(listSix)

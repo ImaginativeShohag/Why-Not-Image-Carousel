@@ -1,18 +1,16 @@
 buildscript {
     repositories {
+        google()
         mavenCentral()
     }
-    dependencies {
-        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.19.0'
-        classpath 'org.jetbrains.dokka:dokka-gradle-plugin:1.6.10'
-    }
 }
-
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
-apply plugin: "com.vanniktech.maven.publish"
-apply plugin: "org.jetbrains.dokka"
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id "org.jetbrains.dokka" version "1.6.21"
+    id 'maven-publish'
+}
 
 android {
     compileSdkVersion 31
@@ -61,4 +59,18 @@ dependencies {
 
     // Circle Indicator
     implementation 'me.relex:circleindicator:2.1.6'
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+
+                groupId = 'com.github.simoneraffaelli'
+                artifactId = 'Why-Not-Image-Carousel'
+                version = '0.0.0'
+            }
+        }
+    }
 }
