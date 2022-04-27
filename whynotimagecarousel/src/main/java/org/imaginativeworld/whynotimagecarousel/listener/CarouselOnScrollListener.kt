@@ -1,7 +1,7 @@
 package org.imaginativeworld.whynotimagecarousel.listener
 
 import androidx.recyclerview.widget.RecyclerView
-import org.imaginativeworld.whynotimagecarousel.model.NewCarouselItem
+import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 
 /**
  * @see androidx.recyclerview.widget.RecyclerView.OnScrollListener
@@ -20,7 +20,7 @@ interface CarouselOnScrollListener {
         recyclerView: RecyclerView,
         newState: Int,
         position: Int,
-        carouselItem: NewCarouselItem?
+        carouselItem: CarouselItem?
     ) {
     }
 
@@ -42,7 +42,7 @@ interface CarouselOnScrollListener {
         dx: Int,
         dy: Int,
         position: Int,
-        carouselItem: NewCarouselItem?
+        carouselItem: CarouselItem?
     ) {
     }
 }

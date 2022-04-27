@@ -4,7 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import androidx.annotation.DrawableRes
 
-class NewCarouselItem private constructor(
+class CarouselItem private constructor(
     internal val imageType: CarouselItemImage<*>,
     val caption: String? = null,
     val headers: Map<String, String>? = null
@@ -47,6 +47,15 @@ class NewCarouselItem private constructor(
         headers: Map<String, String>? = null
     ) : this(
         imageType = UrlImageType(image = imageUrl),
+        caption = caption,
+        headers = headers
+    )
+
+    constructor(
+        caption: String,
+        headers: Map<String, String>? = null
+    ) : this(
+        imageType = StringCaptionImageType(image = caption),
         caption = caption,
         headers = headers
     )

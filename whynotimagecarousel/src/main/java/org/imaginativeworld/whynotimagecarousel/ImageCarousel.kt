@@ -31,7 +31,7 @@ import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselOnScrollListener
 import org.imaginativeworld.whynotimagecarousel.model.CarouselGravity
 import org.imaginativeworld.whynotimagecarousel.model.CarouselType
-import org.imaginativeworld.whynotimagecarousel.model.NewCarouselItem
+import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 import org.imaginativeworld.whynotimagecarousel.utils.*
 import org.jetbrains.annotations.NotNull
 import org.jetbrains.annotations.Nullable
@@ -84,7 +84,7 @@ class ImageCarousel(
 
     private var isBuiltInIndicator = false
     private var autoPlayHandler: Handler = Handler(Looper.getMainLooper())
-    private var data: List<NewCarouselItem>? = null
+    private var data: List<CarouselItem>? = null
     private var dataSize = 0
 
     private var isCarouselCentered = false
@@ -813,7 +813,7 @@ class ImageCarousel(
                 val currentRealPosition =
                     adapter?.getRealDataPosition(position) ?: NO_POSITION
 
-                var dataItem: NewCarouselItem? = null
+                var dataItem: CarouselItem? = null
 
                 // Update the built-in caption
                 if (showCaption && currentRealPosition >= 0) {
@@ -844,7 +844,7 @@ class ImageCarousel(
                         adapter?.getRealDataPosition(position) ?: NO_POSITION
 
                     if (currentRealPosition >= 0) {
-                        val carouselItem: NewCarouselItem? = adapter?.getItem(currentRealPosition)
+                        val carouselItem: CarouselItem? = adapter?.getItem(currentRealPosition)
 
                         onScrollStateChanged(
                             recyclerView,
@@ -982,7 +982,7 @@ class ImageCarousel(
      *
      * @return Return [CarouselItem]s or null if no item added yet.
      */
-    fun getData(): List<NewCarouselItem>? {
+    fun getData(): List<CarouselItem>? {
         return data
     }
 
@@ -991,7 +991,7 @@ class ImageCarousel(
      *
      * @property data List of [CarouselItem].
      */
-    fun setData(data: List<NewCarouselItem>) {
+    fun setData(data: List<CarouselItem>) {
         adapter?.apply {
             replaceData(data)
 
@@ -1018,7 +1018,7 @@ class ImageCarousel(
      *
      * @property data List of [CarouselItem].
      */
-    fun addData(data: List<NewCarouselItem>) {
+    fun addData(data: List<CarouselItem>) {
         adapter?.apply {
             val isFirstTime = this@ImageCarousel.data.isNullOrEmpty()
             val latestData = appendData(data)
@@ -1044,7 +1044,7 @@ class ImageCarousel(
      *
      * @property item Single [CarouselItem].
      */
-    fun addData(item: NewCarouselItem) {
+    fun addData(item: CarouselItem) {
         adapter?.apply {
             val isFirstTime = this@ImageCarousel.data.isNullOrEmpty()
             val latestData = appendData(item)

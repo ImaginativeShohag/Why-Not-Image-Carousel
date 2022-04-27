@@ -12,6 +12,7 @@ import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestBuilder
 import org.imaginativeworld.whynotimagecarousel.model.*
 
 /**
@@ -57,45 +58,38 @@ fun SnapHelper.getSnapPosition(layoutManager: RecyclerView.LayoutManager?): Int 
     return layoutManager.getPosition(snapView)
 }
 
-fun ImageView.setImage(
-    item: NewCarouselItem
-) {
-    val glide = Glide.with(context.applicationContext)
-    when (item.imageType) {
+private fun loadImage(ctx: Context, item: CarouselItem): RequestBuilder<*>? {
+    val glide = Glide.with(ctx.applicationContext)
+    return when (item.imageType) {
         is DrawableImageType -> glide.load(item.image)
         is BitmapImageType -> glide.load(item.image)
         is DrawableResImageType -> glide.load(item.image)
         is UrlImageType -> glide.load(item.image)
+        is StringCaptionImageType -> null
     }
-        .into(this)
 }
 
 fun ImageView.setImage(
-    item: NewCarouselItem,
+    item: CarouselItem
+) {
+    loadImage(context, item)
+        ?.into(this)
+}
+
+fun ImageView.setImage(
+    item: CarouselItem,
     @DrawableRes placeholderRes: Int
 ) {
-    val glide = Glide.with(context.applicationContext)
-    when (item.imageType) {
-        is DrawableImageType -> glide.load(item.image)
-        is BitmapImageType -> glide.load(item.image)
-        is DrawableResImageType -> glide.load(item.image)
-        is UrlImageType -> glide.load(item.image)
-    }
-        .placeholder(placeholderRes)
-        .into(this)
+    loadImage(context, item)
+        ?.placeholder(placeholderRes)
+        ?.into(this)
 }
 
 fun ImageView.setImage(
-    item: NewCarouselItem,
+    item: CarouselItem,
     placeholder: Drawable
 ) {
-    val glide = Glide.with(context.applicationContext)
-    when (item.imageType) {
-        is DrawableImageType -> glide.load(item.image)
-        is BitmapImageType -> glide.load(item.image)
-        is DrawableResImageType -> glide.load(item.image)
-        is UrlImageType -> glide.load(item.image)
-    }
-        .placeholder(placeholder)
-        .into(this)
+    loadImage(context, item)
+        ?.placeholder(placeholder)
+        ?.into(this)
 }

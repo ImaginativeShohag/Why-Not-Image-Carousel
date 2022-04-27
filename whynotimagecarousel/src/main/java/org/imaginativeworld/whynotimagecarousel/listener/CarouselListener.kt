@@ -3,7 +3,7 @@ package org.imaginativeworld.whynotimagecarousel.listener
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
-import org.imaginativeworld.whynotimagecarousel.model.NewCarouselItem
+import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 
 interface CarouselListener {
     /**
@@ -24,7 +24,7 @@ interface CarouselListener {
      * @param item current CarouselItem item for bind.
      * @param position current data position.
      */
-    fun onBindViewHolder(binding: ViewBinding, item: NewCarouselItem, position: Int) {}
+    fun onBindViewHolder(binding: ViewBinding, item: CarouselItem, position: Int) {}
 
     /**
      * When an item view is clicked it will be invoked.
@@ -34,7 +34,7 @@ interface CarouselListener {
      * @param position Data item position.
      * @param carouselItem Data item of the clicked view.
      */
-    fun onClick(position: Int, carouselItem: NewCarouselItem) {}
+    fun onClick(position: Int, carouselItem: CarouselItem) {}
 
     /**
      * When an item view is long clicked it will be invoked.
@@ -44,5 +44,5 @@ interface CarouselListener {
      * @param position Data item position.
      * @param carouselItem Data item of the long clicked view.
      */
-    fun onLongClick(position: Int, carouselItem: NewCarouselItem) {}
+    fun onLongClick(position: Int, carouselItem: CarouselItem) {}
 }
