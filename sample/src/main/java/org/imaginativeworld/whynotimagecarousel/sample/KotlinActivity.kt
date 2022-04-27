@@ -368,9 +368,9 @@ class KotlinActivity : AppCompatActivity() {
 
         for (item in DataSet.five) {
             listFive.add(
-                CarouselItem(
-                    imageDrawable = item.first,
-                    caption = item.second
+                NewCarouselItem(
+                    item.first,
+                    item.second
                 )
             )
         }
@@ -425,7 +425,8 @@ class KotlinActivity : AppCompatActivity() {
         val listSix = mutableListOf<NewCarouselItem>()
 
         for (item in DataSet.six) {
-            listSix.add(CarouselItem())
+            //listSix.add(NewCarouselItem())
+            //TODO: manage item without images?
         }
 
         binding.carousel6.setData(listSix)
