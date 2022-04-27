@@ -66,10 +66,8 @@ afterEvaluate {
         publications {
             release(MavenPublication) {
                 from components.release
-
                 groupId = 'com.github.simoneraffaelli'
                 artifactId = 'Why-Not-Image-Carousel'
-                version = '0.0.0'
             }
         }
     }
