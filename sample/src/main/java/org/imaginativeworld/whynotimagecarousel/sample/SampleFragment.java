@@ -21,7 +21,7 @@ import com.google.android.material.button.MaterialButton;
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener;
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselOnScrollListener;
 import org.imaginativeworld.whynotimagecarousel.model.CarouselGravity;
-import org.imaginativeworld.whynotimagecarousel.model.CarouselItem;
+import org.imaginativeworld.whynotimagecarousel.model.NewCarouselItem;
 import org.imaginativeworld.whynotimagecarousel.model.CarouselType;
 import org.imaginativeworld.whynotimagecarousel.sample.databinding.FragmentSampleBinding;
 import org.imaginativeworld.whynotimagecarousel.utils.Utils;
@@ -109,12 +109,12 @@ public class SampleFragment extends Fragment {
 
         binding.carousel.setOnScrollListener(new CarouselOnScrollListener() {
             @Override
-            public void onScrolled(@NotNull RecyclerView recyclerView, int dx, int dy, int position, @org.jetbrains.annotations.Nullable CarouselItem carouselItem) {
+            public void onScrolled(@NotNull RecyclerView recyclerView, int dx, int dy, int position, @org.jetbrains.annotations.Nullable NewCarouselItem NewCarouselItem) {
                 // ...
             }
 
             @Override
-            public void onScrollStateChanged(@NotNull RecyclerView recyclerView, int newState, int position, @org.jetbrains.annotations.Nullable CarouselItem carouselItem) {
+            public void onScrollStateChanged(@NotNull RecyclerView recyclerView, int newState, int position, @org.jetbrains.annotations.Nullable NewCarouselItem NewCarouselItem) {
                 // ...
             }
         });
@@ -128,17 +128,17 @@ public class SampleFragment extends Fragment {
             }
 
             @Override
-            public void onBindViewHolder(@NotNull ViewBinding binding, @NotNull CarouselItem item, int position) {
+            public void onBindViewHolder(@NotNull ViewBinding binding, @NotNull NewCarouselItem item, int position) {
                 // ...
             }
 
             @Override
-            public void onLongClick(int position, @NotNull CarouselItem carouselItem) {
+            public void onLongClick(int position, @NotNull NewCarouselItem NewCarouselItem) {
                 // ...
             }
 
             @Override
-            public void onClick(int position, @NotNull CarouselItem carouselItem) {
+            public void onClick(int position, @NotNull NewCarouselItem NewCarouselItem) {
                 // ...
             }
         });
@@ -152,7 +152,7 @@ public class SampleFragment extends Fragment {
         MaterialButton nextBtn = binding.btnGotoNext;
         nextBtn.setOnClickListener(v -> binding.carousel.next());
 
-        List<CarouselItem> list = new ArrayList<>();
+        List<NewCarouselItem> list = new ArrayList<>();
 
         // Dummy header
         Map<String, String> headers = new HashMap<>();
@@ -161,7 +161,7 @@ public class SampleFragment extends Fragment {
         int index = 1;
         for (String item : DataSet.INSTANCE.getOne()) {
             list.add(
-                    new CarouselItem(
+                    new NewCarouselItem(
                             item,
                             "Image " + index++ + " of " + DataSet.INSTANCE.getOne().size(),
                             headers

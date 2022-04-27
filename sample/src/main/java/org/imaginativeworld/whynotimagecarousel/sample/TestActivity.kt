@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener
 import org.imaginativeworld.whynotimagecarousel.model.CarouselGravity
-import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
+import org.imaginativeworld.whynotimagecarousel.model.NewCarouselItem
 import org.imaginativeworld.whynotimagecarousel.sample.databinding.ActivityTestBinding
 import org.imaginativeworld.whynotimagecarousel.sample.databinding.ItemCustomFixedSizeLayout3Binding
 import org.imaginativeworld.whynotimagecarousel.utils.setImage
@@ -24,11 +24,11 @@ class TestActivity : AppCompatActivity() {
 
         // --------------------------------
 
-        val listOne = mutableListOf<CarouselItem>()
+        val listOne = mutableListOf<NewCarouselItem>()
 
         for ((index, item) in DataSet.one.withIndex()) {
             listOne.add(
-                CarouselItem(
+                NewCarouselItem(
                     imageUrl = item,
                     caption = "Image ${index + 1} of ${DataSet.one.size}",
                 )
@@ -37,11 +37,11 @@ class TestActivity : AppCompatActivity() {
 
         // --------------------------------
 
-        val listTwo = mutableListOf<CarouselItem>()
+        val listTwo = mutableListOf<NewCarouselItem>()
 
         for ((index, item) in DataSet.one.withIndex()) {
             listTwo.add(
-                CarouselItem(
+                NewCarouselItem(
                     imageUrl = item,
                     caption = "Image ${index + 1} of ${DataSet.one.size}",
                 )
@@ -64,7 +64,7 @@ class TestActivity : AppCompatActivity() {
 
             override fun onBindViewHolder(
                 binding: ViewBinding,
-                item: CarouselItem,
+                item: NewCarouselItem,
                 position: Int
             ) {
                 val currentBinding = binding as ItemCustomFixedSizeLayout3Binding
@@ -77,11 +77,11 @@ class TestActivity : AppCompatActivity() {
             }
         }
 
-        val listThree = mutableListOf<CarouselItem>()
+        val listThree = mutableListOf<NewCarouselItem>()
 
         for ((index, item) in DataSet.one.withIndex()) {
             listThree.add(
-                CarouselItem(
+                NewCarouselItem(
                     imageUrl = item,
                     caption = "Image ${index + 1} of ${DataSet.one.size}",
                 )
@@ -104,7 +104,7 @@ class TestActivity : AppCompatActivity() {
 
             override fun onBindViewHolder(
                 binding: ViewBinding,
-                item: CarouselItem,
+                item: NewCarouselItem,
                 position: Int
             ) {
                 val currentBinding = binding as ItemCustomFixedSizeLayout3Binding
@@ -117,11 +117,11 @@ class TestActivity : AppCompatActivity() {
             }
         }
 
-        val listFour = mutableListOf<CarouselItem>()
+        val listFour = mutableListOf<NewCarouselItem>()
 
         for ((index, item) in DataSet.one.withIndex()) {
             listFour.add(
-                CarouselItem(
+                NewCarouselItem(
                     imageUrl = item,
                     caption = "Image ${index + 1} of ${DataSet.one.size}",
                 )
@@ -147,7 +147,7 @@ class TestActivity : AppCompatActivity() {
         // --------------------------------
 
         binding.btnSingleAppend.setOnClickListener {
-            val item = CarouselItem(
+            val item = NewCarouselItem(
                 imageUrl = DataSet.three[1].first,
                 caption = DataSet.three[1].second,
             )

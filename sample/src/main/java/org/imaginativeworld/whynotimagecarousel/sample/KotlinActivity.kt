@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -18,7 +19,7 @@ import kotlin.random.Random
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselOnScrollListener
 import org.imaginativeworld.whynotimagecarousel.model.CarouselGravity
-import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
+import org.imaginativeworld.whynotimagecarousel.model.NewCarouselItem
 import org.imaginativeworld.whynotimagecarousel.model.CarouselType
 import org.imaginativeworld.whynotimagecarousel.sample.databinding.ActivityKotlinBinding
 import org.imaginativeworld.whynotimagecarousel.sample.databinding.ItemCustomFixedSizeLayout1Binding
@@ -112,7 +113,7 @@ class KotlinActivity : AppCompatActivity() {
             touchToPause = true
 
             carouselListener = object : CarouselListener {
-                override fun onClick(position: Int, carouselItem: CarouselItem) {
+                override fun onClick(position: Int, NewCarouselItem: NewCarouselItem) {
                     Toast.makeText(
                         this@KotlinActivity,
                         "You clicked at position ${position + 1}.",
@@ -121,7 +122,7 @@ class KotlinActivity : AppCompatActivity() {
                         .show()
                 }
 
-                override fun onLongClick(position: Int, carouselItem: CarouselItem) {
+                override fun onLongClick(position: Int, NewCarouselItem: NewCarouselItem) {
                     Toast.makeText(
                         this@KotlinActivity,
                         "You long clicked at position ${position + 1}.",
@@ -136,11 +137,11 @@ class KotlinActivity : AppCompatActivity() {
         val headers = mutableMapOf<String, String>()
         headers["header_key"] = "header_value"
 
-        val listOne = mutableListOf<CarouselItem>()
+        val listOne = mutableListOf<NewCarouselItem>()
 
         for ((index, item) in DataSet.one.withIndex()) {
             listOne.add(
-                CarouselItem(
+                NewCarouselItem(
                     imageUrl = item,
                     caption = "Image ${index + 1} of ${DataSet.one.size}",
                     headers = headers
@@ -167,7 +168,7 @@ class KotlinActivity : AppCompatActivity() {
 
             override fun onBindViewHolder(
                 binding: ViewBinding,
-                item: CarouselItem,
+                item: NewCarouselItem,
                 position: Int
             ) {
                 val currentBinding = binding as ItemCustomFixedSizeLayout5Binding
@@ -180,11 +181,11 @@ class KotlinActivity : AppCompatActivity() {
             }
         }
 
-        val listTwo = mutableListOf<CarouselItem>()
+        val listTwo = mutableListOf<NewCarouselItem>()
 
         for (item in DataSet.two) {
             listTwo.add(
-                CarouselItem(
+                NewCarouselItem(
                     imageUrl = item
                 )
             )
@@ -209,7 +210,7 @@ class KotlinActivity : AppCompatActivity() {
 
             override fun onBindViewHolder(
                 binding: ViewBinding,
-                item: CarouselItem,
+                item: NewCarouselItem,
                 position: Int
             ) {
                 val currentBinding = binding as ItemCustomFixedSizeLayout1Binding
@@ -224,11 +225,11 @@ class KotlinActivity : AppCompatActivity() {
             }
         }
 
-        val listThree = mutableListOf<CarouselItem>()
+        val listThree = mutableListOf<NewCarouselItem>()
 
         for (item in DataSet.three) {
             listThree.add(
-                CarouselItem(
+                NewCarouselItem(
                     imageUrl = item.first,
                     caption = item.second
                 )
@@ -245,10 +246,10 @@ class KotlinActivity : AppCompatActivity() {
                 recyclerView: RecyclerView,
                 newState: Int,
                 position: Int,
-                carouselItem: CarouselItem?
+                NewCarouselItem: NewCarouselItem?
             ) {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    carouselItem?.apply {
+                    NewCarouselItem?.apply {
                         binding.customCaption.text = caption
                     }
                 }
@@ -259,7 +260,7 @@ class KotlinActivity : AppCompatActivity() {
                 dx: Int,
                 dy: Int,
                 position: Int,
-                carouselItem: CarouselItem?
+                NewCarouselItem: NewCarouselItem?
             ) {
                 // ...
             }
@@ -295,7 +296,7 @@ class KotlinActivity : AppCompatActivity() {
 
             override fun onBindViewHolder(
                 binding: ViewBinding,
-                item: CarouselItem,
+                item: NewCarouselItem,
                 position: Int
             ) {
                 val currentBinding = binding as ItemCustomFixedSizeLayout3Binding
@@ -308,11 +309,11 @@ class KotlinActivity : AppCompatActivity() {
             }
         }
 
-        val listFour = mutableListOf<CarouselItem>()
+        val listFour = mutableListOf<NewCarouselItem>()
 
         for (item in DataSet.four) {
             listFour.add(
-                CarouselItem(
+                NewCarouselItem(
                     imageUrl = item
                 )
             )
@@ -344,7 +345,7 @@ class KotlinActivity : AppCompatActivity() {
 
             override fun onBindViewHolder(
                 binding: ViewBinding,
-                item: CarouselItem,
+                item: NewCarouselItem,
                 position: Int
             ) {
                 val currentBinding = binding as ItemCustomFixedSizeLayout2Binding
@@ -362,7 +363,8 @@ class KotlinActivity : AppCompatActivity() {
             }
         }
 
-        val listFive = mutableListOf<CarouselItem>()
+        val listFive = mutableListOf<NewCarouselItem>()
+
 
         for (item in DataSet.five) {
             listFive.add(
@@ -405,7 +407,7 @@ class KotlinActivity : AppCompatActivity() {
 
             override fun onBindViewHolder(
                 binding: ViewBinding,
-                item: CarouselItem,
+                item: NewCarouselItem,
                 position: Int
             ) {
                 val currentBinding = binding as ItemCustomFixedSizeLayout4Binding
@@ -420,7 +422,7 @@ class KotlinActivity : AppCompatActivity() {
             }
         }
 
-        val listSix = mutableListOf<CarouselItem>()
+        val listSix = mutableListOf<NewCarouselItem>()
 
         for (item in DataSet.six) {
             listSix.add(CarouselItem())
