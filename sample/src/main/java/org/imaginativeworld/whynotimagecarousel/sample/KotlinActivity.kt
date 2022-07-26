@@ -14,7 +14,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
-import kotlin.random.Random
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselOnScrollListener
 import org.imaginativeworld.whynotimagecarousel.model.CarouselGravity
@@ -29,6 +28,7 @@ import org.imaginativeworld.whynotimagecarousel.sample.databinding.ItemCustomFix
 import org.imaginativeworld.whynotimagecarousel.utils.dpToPx
 import org.imaginativeworld.whynotimagecarousel.utils.setImage
 import org.imaginativeworld.whynotimagecarousel.utils.spToPx
+import kotlin.random.Random
 
 class KotlinActivity : AppCompatActivity() {
 

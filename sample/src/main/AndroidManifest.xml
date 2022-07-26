@@ -20,6 +20,7 @@
         </activity>
         <activity android:name=".JavaActivity" />
         <activity android:name=".TestActivity" />
+        <activity android:name=".rough.RecyclerViewActivity" />
     </application>
 
 </manifest>
