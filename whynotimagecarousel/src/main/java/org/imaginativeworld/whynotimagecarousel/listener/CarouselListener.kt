@@ -1,5 +1,6 @@
 package org.imaginativeworld.whynotimagecarousel.listener
 
+import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
@@ -34,7 +35,7 @@ interface CarouselListener {
      * @param position Data item position.
      * @param carouselItem Data item of the clicked view.
      */
-    fun onClick(position: Int, carouselItem: CarouselItem) {}
+    fun onClick(position: Int, carouselItem: CarouselItem,bitmap: Bitmap) {}
 
     /**
      * When an item view is long clicked it will be invoked.

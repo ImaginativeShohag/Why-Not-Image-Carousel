@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.ImageView
+import androidx.core.graphics.drawable.toBitmap
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import org.imaginativeworld.whynotimagecarousel.databinding.ItemCarouselBinding
@@ -80,7 +81,10 @@ open class FiniteCarouselAdapter(
 
             listener?.apply {
                 holder.itemView.setOnClickListener {
-                    this.onClick(realItemPosition, item)
+
+                    val drawable = holder.binding.img.drawable
+                    val bitmap = drawable.toBitmap()
+                    this.onClick(realItemPosition, item, bitmap)
                 }
 
                 holder.itemView.setOnLongClickListener {
