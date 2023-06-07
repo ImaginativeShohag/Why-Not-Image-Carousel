@@ -116,8 +116,11 @@ class ImageCarousel(
      */
     var currentPosition = NO_POSITION
         get() {
-            return if (currentVirtualPosition == NO_POSITION) NO_POSITION
-            else currentVirtualPosition % dataSize
+            return if (currentVirtualPosition == NO_POSITION) {
+                NO_POSITION
+            } else {
+                currentVirtualPosition % dataSize
+            }
         }
         set(value) {
             val position = when {
@@ -586,9 +589,7 @@ class ImageCarousel(
             0,
             0
         ).apply {
-
             try {
-
                 showTopShadow = getBoolean(
                     R.styleable.ImageCarousel_showTopShadow,
                     true
@@ -814,7 +815,6 @@ class ImageCarousel(
     private fun initListeners() {
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-
                 val position = snapHelper?.getSnapPosition(recyclerView.layoutManager)
                     ?: NO_POSITION
 
@@ -842,7 +842,6 @@ class ImageCarousel(
             }
 
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-
                 // Invoke the listener
                 onScrollListener?.apply {
                     val position = snapHelper?.getSnapPosition(recyclerView.layoutManager)
@@ -1105,13 +1104,15 @@ class ImageCarousel(
      * The carousel will auto call this method on [setData] and [addData] (list version).
      */
     fun initStartPositionForInfiniteCarousel() {
-        if (!infiniteCarousel)
+        if (!infiniteCarousel) {
             return
+        }
 
         recyclerView.post {
             // There is no data! So nothing to do.
-            if (dataSize == 0)
+            if (dataSize == 0) {
                 return@post
+            }
 
             // To making the view infinite, we create a virtual [Integer.MAX_VALUE] number of items.
             // We will find the first item from the middle of the whole virtual list.
