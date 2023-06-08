@@ -511,7 +511,7 @@ So it is recommended if you enabled `autoPlay` & `infiniteCarousel`.
 
 ![Infinite Carousel](images/infinite_carousel.gif)
 
-The library is now supported infinite carousel. An infinite carousel means looping the item view infinitely. This feature is enabled by default. You can disable it by setting `infiniteCarousel` to `false`.
+The library now supports an infinite carousel, which means that the item view is looped infinitely. This feature is enabled by default, but you can disable it by setting the `infiniteCarousel` property to `false`.
 
 ## Indicator
 
