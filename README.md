@@ -509,7 +509,7 @@ So it is recommended if you enabled `autoPlay` & `infiniteCarousel`.
 
 ## Infinite Carousel
 
-[image]
+![Infinite Carousel](images/infinite_carousel.gif)
 
 The library now supports an infinite carousel, which means that the item view is looped infinitely. This feature is enabled by default, but you can disable it by setting the `infiniteCarousel` property to `false`.
 
@@ -529,7 +529,7 @@ carousel.carouselListener = object : CarouselListener {
     override fun onCreateViewHolder(
         layoutInflater: LayoutInflater,
         parent: ViewGroup
-    ): ViewBinding? {
+    ): ViewBinding {
         // Here, our XML layout file name is custom_item_layout.xml. So our view binding generated class name is CustomItemLayoutBinding.
         return CustomItemLayoutBinding.inflate(layoutInflater, parent, false)
     }

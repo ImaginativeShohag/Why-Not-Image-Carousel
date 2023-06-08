@@ -17,17 +17,19 @@ class CarouselItemDecoration(
     ) {
         super.getItemOffsets(outRect, view, parent, state)
 
+        val currentChildLayoutPosition = parent.getChildLayoutPosition(view)
+
         outRect.right = if (width > 0) spacing / 2 else spacing
         outRect.left = if (width > 0) spacing / 2 else 0
 
         // First Item
-        if (parent.getChildLayoutPosition(view) == 0) {
+        if (currentChildLayoutPosition == 0) {
             outRect.left =
                 if (width > 0) parent.measuredWidth / 2 - width / 2 else 0
         }
 
         // Last Item
-        if (state.itemCount - 1 == parent.getChildLayoutPosition(view)) {
+        if (state.itemCount - 1 == currentChildLayoutPosition) {
             outRect.right =
                 if (width > 0) parent.measuredWidth / 2 - width / 2 else 0
         }

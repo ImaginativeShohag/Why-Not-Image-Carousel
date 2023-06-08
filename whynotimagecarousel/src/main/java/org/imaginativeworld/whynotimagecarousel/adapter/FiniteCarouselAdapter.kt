@@ -128,7 +128,8 @@ open class FiniteCarouselAdapter(
 
                         holder.itemView.viewTreeObserver.removeOnGlobalLayoutListener(this)
                     }
-                })
+                }
+            )
         }
     }
 

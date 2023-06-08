@@ -3,13 +3,13 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 31
-    buildToolsVersion "31.0.0"
+    namespace 'org.imaginativeworld.whynotimagecarousel.sample'
+    compileSdkVersion 33
 
     defaultConfig {
         applicationId "org.imaginativeworld.whynotimagecarousel.sample"
         minSdkVersion 21
-        targetSdkVersion 31
+        targetSdkVersion 33
         versionCode 1
         versionName project.properties['VERSION_NAME']
 
@@ -42,17 +42,17 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test:core-ktx:1.4.0'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation "androidx.test:runner:1.4.0"
-    androidTestImplementation "androidx.test:rules:1.4.0"
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.4.0'
+    androidTestImplementation 'androidx.test:core-ktx:1.5.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation "androidx.test:runner:1.5.2"
+    androidTestImplementation "androidx.test:rules:1.5.0"
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.5.1'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     // Why Not! Image Carousel! Library
     implementation project(':whynotimagecarousel')
@@ -60,18 +60,18 @@ dependencies {
     // implementation "org.imaginativeworld.whynotimagecarousel:whynotimagecarousel:x.x.x"
 
     // Material Components
-    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'com.google.android.material:material:1.9.0'
 
     // Circle Indicator
     implementation 'me.relex:circleindicator:2.1.6'
 
     // Glide
-    implementation 'com.github.bumptech.glide:glide:4.13.1'
-    kapt 'com.github.bumptech.glide:compiler:4.13.1'
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
+    kapt 'com.github.bumptech.glide:compiler:4.15.1'
 
     // Fragment
-    implementation "androidx.fragment:fragment-ktx:1.4.1"
+    implementation "androidx.fragment:fragment-ktx:1.5.7"
 
     // debugImplementation because LeakCanary should only run in debug builds.
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.8.1'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.9.1'
 }
