@@ -1,6 +1,7 @@
 package org.imaginativeworld.whynotimagecarousel.sample;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -138,7 +139,7 @@ public class SampleFragment extends Fragment {
             }
 
             @Override
-            public void onClick(int position, @NotNull CarouselItem carouselItem) {
+            public void onClick(int position, @NotNull CarouselItem carouselItem, @NotNull Bitmap bitmap) {
                 // ...
             }
         });

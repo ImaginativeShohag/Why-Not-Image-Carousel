@@ -2,6 +2,7 @@ package org.imaginativeworld.whynotimagecarousel.sample
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -112,10 +113,10 @@ class KotlinActivity : AppCompatActivity() {
             touchToPause = true
 
             carouselListener = object : CarouselListener {
-                override fun onClick(position: Int, carouselItem: CarouselItem) {
+                override fun onClick(position: Int, carouselItem: CarouselItem, bitmap: Bitmap) {
                     Toast.makeText(
                         this@KotlinActivity,
-                        "You clicked at position ${position + 1}.",
+                        "You clicked at position ${position + 1}.\nBitmap- ${bitmap.byteCount}",
                         Toast.LENGTH_SHORT
                     )
                         .show()

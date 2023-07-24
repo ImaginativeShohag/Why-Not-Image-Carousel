@@ -335,7 +335,7 @@ carousel.carouselListener = object : CarouselListener {
         // ...
     }
     
-    override fun onClick(position: Int, carouselItem: CarouselItem) {
+    override fun onClick(position: Int, carouselItem: CarouselItem, bitmap: Bitmap) {
         // ...
     }
 
@@ -467,7 +467,7 @@ carousel.setCarouselListener(new CarouselListener() {
     }
 
     @Override
-    public void onClick(int position, @NotNull CarouselItem carouselItem) {
+    public void onClick(int position, @NotNull CarouselItem carouselItem, @NotNull Bitmap bitmap) {
         // ...
     }
 });
