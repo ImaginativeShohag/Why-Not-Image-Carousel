@@ -100,3 +100,5 @@ lint/outputs/
 lint/tmp/
 # lint/reports/
 
+# IntelliJ project icon
+!.idea/icon.svg

@@ -1,3 +1,7 @@
+/**
+ * Copyright © 2021 Md. Mahmudul Hasan Shohag. All rights reserved.
+ */
+
 package org.imaginativeworld.whynotimagecarousel.sample
 
 import android.content.Context
@@ -31,7 +35,6 @@ import org.imaginativeworld.whynotimagecarousel.utils.spToPx
 import kotlin.random.Random
 
 class KotlinActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityKotlinBinding
 
     private lateinit var context: Context
@@ -77,10 +80,11 @@ class KotlinActivity : AppCompatActivity() {
             imageScaleType = ImageView.ScaleType.CENTER_CROP
 
             carouselBackground = ColorDrawable(Color.parseColor("#333333"))
-            imagePlaceholder = ContextCompat.getDrawable(
-                this@KotlinActivity,
-                org.imaginativeworld.whynotimagecarousel.R.drawable.carousel_default_placeholder
-            )
+            imagePlaceholder =
+                ContextCompat.getDrawable(
+                    this@KotlinActivity,
+                    org.imaginativeworld.whynotimagecarousel.R.drawable.carousel_default_placeholder,
+                )
 
             carouselPadding = 0.dpToPx(context)
             carouselPaddingStart = 0.dpToPx(context)
@@ -111,25 +115,32 @@ class KotlinActivity : AppCompatActivity() {
             infiniteCarousel = true
             touchToPause = true
 
-            carouselListener = object : CarouselListener {
-                override fun onClick(position: Int, carouselItem: CarouselItem) {
-                    Toast.makeText(
-                        this@KotlinActivity,
-                        "You clicked at position ${position + 1}.",
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
-                }
+            carouselListener =
+                object : CarouselListener {
+                    override fun onClick(
+                        position: Int,
+                        carouselItem: CarouselItem,
+                    ) {
+                        Toast.makeText(
+                            this@KotlinActivity,
+                            "You clicked at position ${position + 1}.",
+                            Toast.LENGTH_SHORT,
+                        )
+                            .show()
+                    }
 
-                override fun onLongClick(position: Int, carouselItem: CarouselItem) {
-                    Toast.makeText(
-                        this@KotlinActivity,
-                        "You long clicked at position ${position + 1}.",
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
+                    override fun onLongClick(
+                        position: Int,
+                        carouselItem: CarouselItem,
+                    ) {
+                        Toast.makeText(
+                            this@KotlinActivity,
+                            "You long clicked at position ${position + 1}.",
+                            Toast.LENGTH_SHORT,
+                        )
+                            .show()
+                    }
                 }
-            }
         }
 
         // Dummy header
@@ -143,8 +154,8 @@ class KotlinActivity : AppCompatActivity() {
                 CarouselItem(
                     imageUrl = item,
                     caption = "Image ${index + 1} of ${DataSet.one.size}",
-                    headers = headers
-                )
+                    headers = headers,
+                ),
             )
         }
 
@@ -157,36 +168,37 @@ class KotlinActivity : AppCompatActivity() {
         binding.carousel2.registerLifecycle(lifecycle)
 
         // Custom view
-        binding.carousel2.carouselListener = object : CarouselListener {
-            override fun onCreateViewHolder(
-                layoutInflater: LayoutInflater,
-                parent: ViewGroup
-            ): ViewBinding {
-                return ItemCustomFixedSizeLayout5Binding.inflate(layoutInflater, parent, false)
-            }
+        binding.carousel2.carouselListener =
+            object : CarouselListener {
+                override fun onCreateViewHolder(
+                    layoutInflater: LayoutInflater,
+                    parent: ViewGroup,
+                ): ViewBinding {
+                    return ItemCustomFixedSizeLayout5Binding.inflate(layoutInflater, parent, false)
+                }
 
-            override fun onBindViewHolder(
-                binding: ViewBinding,
-                item: CarouselItem,
-                position: Int
-            ) {
-                val currentBinding = binding as ItemCustomFixedSizeLayout5Binding
+                override fun onBindViewHolder(
+                    binding: ViewBinding,
+                    item: CarouselItem,
+                    position: Int,
+                ) {
+                    val currentBinding = binding as ItemCustomFixedSizeLayout5Binding
 
-                currentBinding.imageView.apply {
-                    scaleType = ImageView.ScaleType.CENTER_CROP
+                    currentBinding.imageView.apply {
+                        scaleType = ImageView.ScaleType.CENTER_CROP
 
-                    setImage(item, R.drawable.ic_wb_cloudy_with_padding)
+                        setImage(item, R.drawable.ic_wb_cloudy_with_padding)
+                    }
                 }
             }
-        }
 
         val listTwo = mutableListOf<CarouselItem>()
 
         for (item in DataSet.two) {
             listTwo.add(
                 CarouselItem(
-                    imageUrl = item
-                )
+                    imageUrl = item,
+                ),
             )
         }
 
@@ -199,30 +211,31 @@ class KotlinActivity : AppCompatActivity() {
         binding.carousel3.registerLifecycle(lifecycle)
 
         // Custom view
-        binding.carousel3.carouselListener = object : CarouselListener {
-            override fun onCreateViewHolder(
-                layoutInflater: LayoutInflater,
-                parent: ViewGroup
-            ): ViewBinding {
-                return ItemCustomFixedSizeLayout1Binding.inflate(layoutInflater, parent, false)
-            }
+        binding.carousel3.carouselListener =
+            object : CarouselListener {
+                override fun onCreateViewHolder(
+                    layoutInflater: LayoutInflater,
+                    parent: ViewGroup,
+                ): ViewBinding {
+                    return ItemCustomFixedSizeLayout1Binding.inflate(layoutInflater, parent, false)
+                }
 
-            override fun onBindViewHolder(
-                binding: ViewBinding,
-                item: CarouselItem,
-                position: Int
-            ) {
-                val currentBinding = binding as ItemCustomFixedSizeLayout1Binding
+                override fun onBindViewHolder(
+                    binding: ViewBinding,
+                    item: CarouselItem,
+                    position: Int,
+                ) {
+                    val currentBinding = binding as ItemCustomFixedSizeLayout1Binding
 
-                currentBinding.imageView.apply {
-                    scaleType = ImageView.ScaleType.CENTER_CROP
+                    currentBinding.imageView.apply {
+                        scaleType = ImageView.ScaleType.CENTER_CROP
 
-                    // carousel_default_placeholder is the default placeholder comes with
-                    // the library.
-                    setImage(item, R.drawable.carousel_default_placeholder)
+                        // carousel_default_placeholder is the default placeholder comes with
+                        // the library.
+                        setImage(item, R.drawable.carousel_default_placeholder)
+                    }
                 }
             }
-        }
 
         val listThree = mutableListOf<CarouselItem>()
 
@@ -230,8 +243,8 @@ class KotlinActivity : AppCompatActivity() {
             listThree.add(
                 CarouselItem(
                     imageUrl = item.first,
-                    caption = item.second
-                )
+                    caption = item.second,
+                ),
             )
         }
 
@@ -239,31 +252,31 @@ class KotlinActivity : AppCompatActivity() {
 
         binding.customCaption.isSelected = true
 
-        binding.carousel3.onScrollListener = object : CarouselOnScrollListener {
-
-            override fun onScrollStateChanged(
-                recyclerView: RecyclerView,
-                newState: Int,
-                position: Int,
-                carouselItem: CarouselItem?
-            ) {
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    carouselItem?.apply {
-                        binding.customCaption.text = caption
+        binding.carousel3.onScrollListener =
+            object : CarouselOnScrollListener {
+                override fun onScrollStateChanged(
+                    recyclerView: RecyclerView,
+                    newState: Int,
+                    position: Int,
+                    carouselItem: CarouselItem?,
+                ) {
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                        carouselItem?.apply {
+                            binding.customCaption.text = caption
+                        }
                     }
                 }
-            }
 
-            override fun onScrolled(
-                recyclerView: RecyclerView,
-                dx: Int,
-                dy: Int,
-                position: Int,
-                carouselItem: CarouselItem?
-            ) {
-                // ...
+                override fun onScrolled(
+                    recyclerView: RecyclerView,
+                    dx: Int,
+                    dy: Int,
+                    position: Int,
+                    carouselItem: CarouselItem?,
+                ) {
+                    // ...
+                }
             }
-        }
 
         // Custom navigation
         binding.btnGotoPrevious.setOnClickListener {
@@ -281,40 +294,41 @@ class KotlinActivity : AppCompatActivity() {
         binding.carousel4.registerLifecycle(lifecycle)
 
         // Custom view
-        binding.carousel4.carouselListener = object : CarouselListener {
-            override fun onCreateViewHolder(
-                layoutInflater: LayoutInflater,
-                parent: ViewGroup
-            ): ViewBinding {
-                return ItemCustomFixedSizeLayout3Binding.inflate(
-                    layoutInflater,
-                    parent,
-                    false
-                )
-            }
+        binding.carousel4.carouselListener =
+            object : CarouselListener {
+                override fun onCreateViewHolder(
+                    layoutInflater: LayoutInflater,
+                    parent: ViewGroup,
+                ): ViewBinding {
+                    return ItemCustomFixedSizeLayout3Binding.inflate(
+                        layoutInflater,
+                        parent,
+                        false,
+                    )
+                }
 
-            override fun onBindViewHolder(
-                binding: ViewBinding,
-                item: CarouselItem,
-                position: Int
-            ) {
-                val currentBinding = binding as ItemCustomFixedSizeLayout3Binding
+                override fun onBindViewHolder(
+                    binding: ViewBinding,
+                    item: CarouselItem,
+                    position: Int,
+                ) {
+                    val currentBinding = binding as ItemCustomFixedSizeLayout3Binding
 
-                currentBinding.imageView.apply {
-                    scaleType = ImageView.ScaleType.CENTER_CROP
+                    currentBinding.imageView.apply {
+                        scaleType = ImageView.ScaleType.CENTER_CROP
 
-                    setImage(item, R.drawable.ic_wb_cloudy_with_padding)
+                        setImage(item, R.drawable.ic_wb_cloudy_with_padding)
+                    }
                 }
             }
-        }
 
         val listFour = mutableListOf<CarouselItem>()
 
         for (item in DataSet.four) {
             listFour.add(
                 CarouselItem(
-                    imageUrl = item
-                )
+                    imageUrl = item,
+                ),
             )
         }
 
@@ -330,37 +344,38 @@ class KotlinActivity : AppCompatActivity() {
         binding.carousel5.registerLifecycle(lifecycle)
 
         // Custom view
-        binding.carousel5.carouselListener = object : CarouselListener {
-            override fun onCreateViewHolder(
-                layoutInflater: LayoutInflater,
-                parent: ViewGroup
-            ): ViewBinding {
-                return ItemCustomFixedSizeLayout2Binding.inflate(
-                    layoutInflater,
-                    parent,
-                    false
-                )
-            }
-
-            override fun onBindViewHolder(
-                binding: ViewBinding,
-                item: CarouselItem,
-                position: Int
-            ) {
-                val currentBinding = binding as ItemCustomFixedSizeLayout2Binding
-
-                currentBinding.textView.text = item.caption ?: ""
-
-                currentBinding.imageView.apply {
-                    scaleType = ImageView.ScaleType.CENTER_CROP
-
-                    setImage(item, R.drawable.ic_wb_cloudy_with_padding)
+        binding.carousel5.carouselListener =
+            object : CarouselListener {
+                override fun onCreateViewHolder(
+                    layoutInflater: LayoutInflater,
+                    parent: ViewGroup,
+                ): ViewBinding {
+                    return ItemCustomFixedSizeLayout2Binding.inflate(
+                        layoutInflater,
+                        parent,
+                        false,
+                    )
                 }
 
-                currentBinding.tvRating.text =
-                    "%.1f (%d)".format(Random.nextDouble(2.0, 5.0), Random.nextInt(500))
+                override fun onBindViewHolder(
+                    binding: ViewBinding,
+                    item: CarouselItem,
+                    position: Int,
+                ) {
+                    val currentBinding = binding as ItemCustomFixedSizeLayout2Binding
+
+                    currentBinding.textView.text = item.caption ?: ""
+
+                    currentBinding.imageView.apply {
+                        scaleType = ImageView.ScaleType.CENTER_CROP
+
+                        setImage(item, R.drawable.ic_wb_cloudy_with_padding)
+                    }
+
+                    currentBinding.tvRating.text =
+                        "%.1f (%d)".format(Random.nextDouble(2.0, 5.0), Random.nextInt(500))
+                }
             }
-        }
 
         val listFive = mutableListOf<CarouselItem>()
 
@@ -368,8 +383,8 @@ class KotlinActivity : AppCompatActivity() {
             listFive.add(
                 CarouselItem(
                     imageDrawable = item.first,
-                    caption = item.second
-                )
+                    caption = item.second,
+                ),
             )
         }
 
@@ -381,44 +396,46 @@ class KotlinActivity : AppCompatActivity() {
 
         binding.carousel6.registerLifecycle(lifecycle)
 
-        val colorsForSix = listOf(
-            R.color.flat_awesome_green_1,
-            R.color.flat_green_1,
-            R.color.flat_blue_1,
-            R.color.flat_pink_1,
-            R.color.flat_yellow_1,
-            R.color.flat_orange_1
-        )
+        val colorsForSix =
+            listOf(
+                R.color.flat_awesome_green_1,
+                R.color.flat_green_1,
+                R.color.flat_blue_1,
+                R.color.flat_pink_1,
+                R.color.flat_yellow_1,
+                R.color.flat_orange_1,
+            )
 
         // Custom view
-        binding.carousel6.carouselListener = object : CarouselListener {
-            override fun onCreateViewHolder(
-                layoutInflater: LayoutInflater,
-                parent: ViewGroup
-            ): ViewBinding {
-                return ItemCustomFixedSizeLayout4Binding.inflate(
-                    layoutInflater,
-                    parent,
-                    false
-                )
+        binding.carousel6.carouselListener =
+            object : CarouselListener {
+                override fun onCreateViewHolder(
+                    layoutInflater: LayoutInflater,
+                    parent: ViewGroup,
+                ): ViewBinding {
+                    return ItemCustomFixedSizeLayout4Binding.inflate(
+                        layoutInflater,
+                        parent,
+                        false,
+                    )
+                }
+
+                override fun onBindViewHolder(
+                    binding: ViewBinding,
+                    item: CarouselItem,
+                    position: Int,
+                ) {
+                    val currentBinding = binding as ItemCustomFixedSizeLayout4Binding
+
+                    val currentColor =
+                        ResourcesCompat.getColor(resources, colorsForSix[position], null)
+
+                    currentBinding.card.setCardBackgroundColor(currentColor)
+
+                    currentBinding.tvCaption.text = "— ${DataSet.six[position].first}"
+                    currentBinding.tvBody.text = DataSet.six[position].second
+                }
             }
-
-            override fun onBindViewHolder(
-                binding: ViewBinding,
-                item: CarouselItem,
-                position: Int
-            ) {
-                val currentBinding = binding as ItemCustomFixedSizeLayout4Binding
-
-                val currentColor =
-                    ResourcesCompat.getColor(resources, colorsForSix[position], null)
-
-                currentBinding.card.setCardBackgroundColor(currentColor)
-
-                currentBinding.tvCaption.text = "— ${DataSet.six[position].first}"
-                currentBinding.tvBody.text = DataSet.six[position].second
-            }
-        }
 
         val listSix = mutableListOf<CarouselItem>()
 

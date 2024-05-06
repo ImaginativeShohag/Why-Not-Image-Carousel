@@ -54,7 +54,7 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.core:core-ktx:1.13.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     // Why Not! Image Carousel! Library
@@ -63,7 +63,7 @@ dependencies {
     // implementation "org.imaginativeworld.whynotimagecarousel:whynotimagecarousel:x.x.x"
 
     // Material Components
-    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'com.google.android.material:material:1.12.0'
 
     // Circle Indicator
     implementation 'me.relex:circleindicator:2.1.6'
@@ -72,8 +72,8 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.16.0'
 
     // Fragment
-    implementation "androidx.fragment:fragment-ktx:1.6.2"
+    implementation "androidx.fragment:fragment-ktx:1.7.0"
 
     // debugImplementation because LeakCanary should only run in debug builds.
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.13'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.14'
 }

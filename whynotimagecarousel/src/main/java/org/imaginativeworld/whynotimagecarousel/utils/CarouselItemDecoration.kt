@@ -1,3 +1,7 @@
+/**
+ * Copyright © 2021 Md. Mahmudul Hasan Shohag. All rights reserved.
+ */
+
 package org.imaginativeworld.whynotimagecarousel.utils
 
 import android.graphics.Rect
@@ -6,14 +10,13 @@ import androidx.recyclerview.widget.RecyclerView
 
 class CarouselItemDecoration(
     private val width: Int,
-    private val spacing: Int
+    private val spacing: Int,
 ) : RecyclerView.ItemDecoration() {
-
     override fun getItemOffsets(
         outRect: Rect,
         view: View,
         parent: RecyclerView,
-        state: RecyclerView.State
+        state: RecyclerView.State,
     ) {
         super.getItemOffsets(outRect, view, parent, state)
 

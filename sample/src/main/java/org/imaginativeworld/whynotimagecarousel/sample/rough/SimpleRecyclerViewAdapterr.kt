@@ -1,3 +1,7 @@
+/**
+ * Copyright © 2021 Md. Mahmudul Hasan Shohag. All rights reserved.
+ */
+
 package org.imaginativeworld.whynotimagecarousel.sample.rough
 
 import android.view.LayoutInflater
@@ -12,45 +16,56 @@ import org.imaginativeworld.whynotimagecarousel.sample.databinding.SimpleRecycle
 
 enum class RVItemType {
     WITH_CAROUSEL,
-    NO_CAROUSEL
+    NO_CAROUSEL,
 }
 
 data class RVItem(
     val id: Int,
     val type: RVItemType,
-    val list: List<CarouselItem>
+    val list: List<CarouselItem>,
 )
 
 class RVItemListAdapter(
-    private val lifecycle: Lifecycle
+    private val lifecycle: Lifecycle,
 ) : ListAdapter<RVItem, RVItemListAdapter.ListViewHolder>(DIFF_CALLBACK) {
-
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<RVItem>() {
-            override fun areItemsTheSame(oldItem: RVItem, newItem: RVItem): Boolean {
-                return oldItem.id == newItem.id
-            }
+        private val DIFF_CALLBACK =
+            object : DiffUtil.ItemCallback<RVItem>() {
+                override fun areItemsTheSame(
+                    oldItem: RVItem,
+                    newItem: RVItem,
+                ): Boolean {
+                    return oldItem.id == newItem.id
+                }
 
-            override fun areContentsTheSame(oldItem: RVItem, newItem: RVItem): Boolean {
-                return oldItem == newItem
+                override fun areContentsTheSame(
+                    oldItem: RVItem,
+                    newItem: RVItem,
+                ): Boolean {
+                    return oldItem == newItem
+                }
             }
-        }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): ListViewHolder {
         return ListViewHolder.from(parent, lifecycle)
     }
 
-    override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: ListViewHolder,
+        position: Int,
+    ) {
         val item = getItem(position)
         holder.bind(item)
     }
 
     class ListViewHolder private constructor(
         private val binding: SimpleRecyclerViewItemBinding,
-        private val lifecycle: Lifecycle
+        private val lifecycle: Lifecycle,
     ) : RecyclerView.ViewHolder(binding.root) {
-
         fun bind(item: RVItem) {
             binding.carousel.registerLifecycle(lifecycle)
 
@@ -71,7 +86,7 @@ class RVItemListAdapter(
         companion object {
             fun from(
                 parent: ViewGroup,
-                lifecycle: Lifecycle
+                lifecycle: Lifecycle,
             ): ListViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = SimpleRecyclerViewItemBinding.inflate(layoutInflater, parent, false)
