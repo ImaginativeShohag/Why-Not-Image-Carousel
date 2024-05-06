@@ -110,3 +110,6 @@ docs/api
 docs-gen
 site
 *.bak
+
+# Python
+venv/*
