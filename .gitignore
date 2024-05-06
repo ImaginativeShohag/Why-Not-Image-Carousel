@@ -102,3 +102,11 @@ lint/tmp/
 
 # IntelliJ project icon
 !.idea/icon.svg
+
+# Temporary API docs
+docs/api
+
+# Mkdocs temporary serving folder
+docs-gen
+site
+*.bak

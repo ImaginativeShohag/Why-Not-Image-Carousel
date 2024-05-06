@@ -1,3 +1,5 @@
+import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
@@ -15,6 +17,7 @@ plugins {
     id 'org.jetbrains.kotlin.android' version "$kotlin_version" apply false
     id 'com.google.devtools.ksp' version '1.9.23-1.0.20' apply false
     id 'com.diffplug.spotless' version '6.25.0'
+    id "org.jetbrains.dokka" version "1.9.20"
 }
 
 subprojects {
@@ -44,4 +47,9 @@ subprojects {
             licenseHeaderFile rootProject.file('spotless/copyright.xml'), '(<[^!?])'
         }
     }
+}
+
+tasks.withType(DokkaMultiModuleTask).configureEach {
+    outputDirectory = rootProject.file('docs/api')
+    failOnWarning = true
 }
