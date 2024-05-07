@@ -46,6 +46,13 @@ import org.imaginativeworld.whynotimagecarousel.utils.dpToPx
 import org.imaginativeworld.whynotimagecarousel.utils.getSnapPosition
 import org.imaginativeworld.whynotimagecarousel.utils.spToPx
 
+/**
+ * Image carousel user interface component.
+ *
+ * @param context The Context the Button is running in, through which it can
+ *        access the current theme, resources, etc.
+ * @param attributeSet The attributes of the XML Button tag being used to inflate the view.
+ */
 class ImageCarousel(
     context: Context,
     private var attributeSet: AttributeSet?,
@@ -890,7 +897,13 @@ class ImageCarousel(
                     }
 
                     // Invoke the listener
-                    onScrollListener?.onScrolled(recyclerView, dx, dy, currentRealPosition, dataItem)
+                    onScrollListener?.onScrolled(
+                        recyclerView,
+                        dx,
+                        dy,
+                        currentRealPosition,
+                        dataItem,
+                    )
                 }
 
                 override fun onScrollStateChanged(
