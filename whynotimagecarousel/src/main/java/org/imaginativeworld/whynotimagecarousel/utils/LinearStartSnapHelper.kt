@@ -1,3 +1,7 @@
+/**
+ * Copyright © 2021 Md. Mahmudul Hasan Shohag. All rights reserved.
+ */
+
 package org.imaginativeworld.whynotimagecarousel.utils
 
 import android.view.View
@@ -10,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
  * Linear horizontal start snap helper.
  */
 class LinearStartSnapHelper : LinearSnapHelper() {
-
     private var mHorizontalHelper: OrientationHelper? = null
 
     override fun findSnapView(layoutManager: RecyclerView.LayoutManager): View? {
@@ -19,14 +22,17 @@ class LinearStartSnapHelper : LinearSnapHelper() {
 
     override fun calculateDistanceToFinalSnap(
         layoutManager: RecyclerView.LayoutManager,
-        targetView: View
+        targetView: View,
     ): IntArray {
         val out = IntArray(2)
         out[0] = distanceToStart(targetView, getHorizontalHelper(layoutManager))
         return out
     }
 
-    private fun distanceToStart(targetView: View, helper: OrientationHelper?): Int {
+    private fun distanceToStart(
+        targetView: View,
+        helper: OrientationHelper?,
+    ): Int {
         val childStart = helper!!.getDecoratedStart(targetView)
         val containerStart = helper.startAfterPadding
 
@@ -46,7 +52,7 @@ class LinearStartSnapHelper : LinearSnapHelper() {
 
     private fun findFirstView(
         layoutManager: RecyclerView.LayoutManager?,
-        helper: OrientationHelper?
+        helper: OrientationHelper?,
     ): View? {
         if (layoutManager == null || helper == null) return null
 

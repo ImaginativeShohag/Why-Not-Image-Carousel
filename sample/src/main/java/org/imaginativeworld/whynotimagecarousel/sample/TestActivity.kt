@@ -1,3 +1,7 @@
+/**
+ * Copyright © 2021 Md. Mahmudul Hasan Shohag. All rights reserved.
+ */
+
 package org.imaginativeworld.whynotimagecarousel.sample
 
 import android.os.Bundle
@@ -14,7 +18,6 @@ import org.imaginativeworld.whynotimagecarousel.sample.databinding.ItemCustomFix
 import org.imaginativeworld.whynotimagecarousel.utils.setImage
 
 class TestActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityTestBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +34,7 @@ class TestActivity : AppCompatActivity() {
                 CarouselItem(
                     imageUrl = item,
                     caption = "Image ${index + 1} of ${DataSet.one.size}",
-                )
+                ),
             )
         }
 
@@ -44,38 +47,39 @@ class TestActivity : AppCompatActivity() {
                 CarouselItem(
                     imageUrl = item,
                     caption = "Image ${index + 1} of ${DataSet.one.size}",
-                )
+                ),
             )
         }
 
         // --------------------------------
 
-        binding.carousel3.carouselListener = object : CarouselListener {
-            override fun onCreateViewHolder(
-                layoutInflater: LayoutInflater,
-                parent: ViewGroup
-            ): ViewBinding {
-                return ItemCustomFixedSizeLayout3Binding.inflate(
-                    layoutInflater,
-                    parent,
-                    false
-                )
-            }
+        binding.carousel3.carouselListener =
+            object : CarouselListener {
+                override fun onCreateViewHolder(
+                    layoutInflater: LayoutInflater,
+                    parent: ViewGroup,
+                ): ViewBinding {
+                    return ItemCustomFixedSizeLayout3Binding.inflate(
+                        layoutInflater,
+                        parent,
+                        false,
+                    )
+                }
 
-            override fun onBindViewHolder(
-                binding: ViewBinding,
-                item: CarouselItem,
-                position: Int
-            ) {
-                val currentBinding = binding as ItemCustomFixedSizeLayout3Binding
+                override fun onBindViewHolder(
+                    binding: ViewBinding,
+                    item: CarouselItem,
+                    position: Int,
+                ) {
+                    val currentBinding = binding as ItemCustomFixedSizeLayout3Binding
 
-                currentBinding.imageView.apply {
-                    scaleType = ImageView.ScaleType.CENTER_CROP
+                    currentBinding.imageView.apply {
+                        scaleType = ImageView.ScaleType.CENTER_CROP
 
-                    setImage(item, R.drawable.ic_wb_cloudy_with_padding)
+                        setImage(item, R.drawable.ic_wb_cloudy_with_padding)
+                    }
                 }
             }
-        }
 
         val listThree = mutableListOf<CarouselItem>()
 
@@ -84,38 +88,39 @@ class TestActivity : AppCompatActivity() {
                 CarouselItem(
                     imageUrl = item,
                     caption = "Image ${index + 1} of ${DataSet.one.size}",
-                )
+                ),
             )
         }
 
         // --------------------------------
 
-        binding.carousel4.carouselListener = object : CarouselListener {
-            override fun onCreateViewHolder(
-                layoutInflater: LayoutInflater,
-                parent: ViewGroup
-            ): ViewBinding {
-                return ItemCustomFixedSizeLayout3Binding.inflate(
-                    layoutInflater,
-                    parent,
-                    false
-                )
-            }
+        binding.carousel4.carouselListener =
+            object : CarouselListener {
+                override fun onCreateViewHolder(
+                    layoutInflater: LayoutInflater,
+                    parent: ViewGroup,
+                ): ViewBinding {
+                    return ItemCustomFixedSizeLayout3Binding.inflate(
+                        layoutInflater,
+                        parent,
+                        false,
+                    )
+                }
 
-            override fun onBindViewHolder(
-                binding: ViewBinding,
-                item: CarouselItem,
-                position: Int
-            ) {
-                val currentBinding = binding as ItemCustomFixedSizeLayout3Binding
+                override fun onBindViewHolder(
+                    binding: ViewBinding,
+                    item: CarouselItem,
+                    position: Int,
+                ) {
+                    val currentBinding = binding as ItemCustomFixedSizeLayout3Binding
 
-                currentBinding.imageView.apply {
-                    scaleType = ImageView.ScaleType.CENTER_CROP
+                    currentBinding.imageView.apply {
+                        scaleType = ImageView.ScaleType.CENTER_CROP
 
-                    setImage(item, R.drawable.ic_wb_cloudy_with_padding)
+                        setImage(item, R.drawable.ic_wb_cloudy_with_padding)
+                    }
                 }
             }
-        }
 
         val listFour = mutableListOf<CarouselItem>()
 
@@ -124,7 +129,7 @@ class TestActivity : AppCompatActivity() {
                 CarouselItem(
                     imageUrl = item,
                     caption = "Image ${index + 1} of ${DataSet.one.size}",
-                )
+                ),
             )
         }
 
@@ -147,10 +152,11 @@ class TestActivity : AppCompatActivity() {
         // --------------------------------
 
         binding.btnSingleAppend.setOnClickListener {
-            val item = CarouselItem(
-                imageUrl = DataSet.three[1].first,
-                caption = DataSet.three[1].second,
-            )
+            val item =
+                CarouselItem(
+                    imageUrl = DataSet.three[1].first,
+                    caption = DataSet.three[1].second,
+                )
 
             binding.carousel1.addData(item)
             binding.carousel2.addData(item)

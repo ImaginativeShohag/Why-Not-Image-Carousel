@@ -1,3 +1,7 @@
+/**
+ * Copyright © 2021 Md. Mahmudul Hasan Shohag. All rights reserved.
+ */
+
 package org.imaginativeworld.whynotimagecarousel.adapter
 
 import android.annotation.SuppressLint
@@ -22,23 +26,26 @@ open class FiniteCarouselAdapter(
     private val carouselGravity: CarouselGravity,
     private val autoWidthFixing: Boolean,
     private val imageScaleType: ImageView.ScaleType,
-    private val imagePlaceholder: Drawable?
+    private val imagePlaceholder: Drawable?,
 ) : RecyclerView.Adapter<FiniteCarouselAdapter.MyViewHolder>() {
-
     var listener: CarouselListener? = null
 
     class MyViewHolder(val binding: ViewBinding) : RecyclerView.ViewHolder(binding.root)
 
     protected val dataList: MutableList<CarouselItem> = mutableListOf()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val binding = listener?.onCreateViewHolder(
-            LayoutInflater.from(parent.context),
-            parent
-        )
-            ?: return MyViewHolder(
-                ItemCarouselBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): MyViewHolder {
+        val binding =
+            listener?.onCreateViewHolder(
+                LayoutInflater.from(parent.context),
+                parent,
             )
+                ?: return MyViewHolder(
+                    ItemCarouselBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+                )
 
         return MyViewHolder(binding)
     }
@@ -51,7 +58,10 @@ open class FiniteCarouselAdapter(
         return position
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: MyViewHolder,
+        position: Int,
+    ) {
         val realItemPosition = getRealDataPosition(position)
         val item = getItem(realItemPosition) ?: return
 
@@ -95,14 +105,13 @@ open class FiniteCarouselAdapter(
         listener?.onBindViewHolder(
             holder.binding,
             item,
-            realItemPosition
+            realItemPosition,
         )
 
         // Init start and end offsets
         if (carouselType == CarouselType.SHOWCASE) {
             holder.itemView.viewTreeObserver.addOnGlobalLayoutListener(
                 object : ViewTreeObserver.OnGlobalLayoutListener {
-
                     override fun onGlobalLayout() {
                         if (recyclerView.itemDecorationCount > 0) {
                             recyclerView.removeItemDecorationAt(0)
@@ -112,23 +121,23 @@ open class FiniteCarouselAdapter(
                             recyclerView.addItemDecoration(
                                 CarouselItemDecoration(
                                     0,
-                                    0
+                                    0,
                                 ),
-                                0
+                                0,
                             )
                         } else {
                             recyclerView.addItemDecoration(
                                 CarouselItemDecoration(
                                     holder.itemView.width,
-                                    0
+                                    0,
                                 ),
-                                0
+                                0,
                             )
                         }
 
                         holder.itemView.viewTreeObserver.removeOnGlobalLayoutListener(this)
                     }
-                }
+                },
             )
         }
     }

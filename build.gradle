@@ -1,26 +1,71 @@
+import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
+import org.jetbrains.dokka.gradle.DokkaTask
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.8.21'
-    repositories {
-        google()
-        mavenCentral()
-    }
+    ext.kotlin_version = '1.9.23'
+    ext.dokka_version = '1.9.20'
+
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.4.2'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath("org.jetbrains.dokka:dokka-base:$dokka_version")
     }
-}
 
-allprojects {
     repositories {
         google()
         mavenCentral()
+        gradlePluginPortal()
     }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+plugins {
+    id 'com.android.application' version '8.4.0' apply false
+    id 'com.android.library' version '8.4.0' apply false
+    id 'org.jetbrains.kotlin.android' version "$kotlin_version" apply false
+    id 'com.google.devtools.ksp' version '1.9.23-1.0.20' apply false
+    id 'com.diffplug.spotless' version '6.25.0'
+    id "org.jetbrains.dokka" version "$dokka_version"
+}
+
+subprojects {
+    apply plugin: 'com.diffplug.spotless'
+
+    spotless {
+        kotlin {
+            target '**/*.kt'
+            targetExclude "${layout.buildDirectory}/**/*.kt"
+            targetExclude 'bin/**/*.kt'
+
+            ktlint()
+            licenseHeaderFile rootProject.file('spotless/copyright.kt')
+        }
+
+        format('kts') {
+            target '**/*.kts'
+            targetExclude '**/build/**/*.kts'
+            // Look for the first line that doesn't have a block comment (assumed to be the license)
+            licenseHeaderFile rootProject.file('spotless/copyright.kts'), '(^(?![\\/ ]\\*).*$)'
+        }
+
+        format('xml') {
+            target '**/*.xml'
+            targetExclude '**/build/**/*.xml'
+            // Look for the first XML tag that isn't a comment (<!--) or the xml declaration (<?xml)
+            licenseHeaderFile rootProject.file('spotless/copyright.xml'), '(<[^!?])'
+        }
+    }
+}
+
+tasks.withType(DokkaMultiModuleTask).configureEach {
+    moduleName = "Why Not! Image Carousel!"
+    outputDirectory = rootProject.file('docs/api')
+    failOnWarning = true
+
+    pluginsMapConfiguration.set(
+            [
+                    "org.jetbrains.dokka.base.DokkaBase": """{
+                      "footerMessage": "Copyright © 2021 Md. Mahmudul Hasan Shohag"
+                    }"""
+            ]
+    )
 }

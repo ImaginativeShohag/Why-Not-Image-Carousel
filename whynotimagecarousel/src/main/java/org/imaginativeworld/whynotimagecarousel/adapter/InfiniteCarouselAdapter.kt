@@ -1,3 +1,7 @@
+/**
+ * Copyright © 2021 Md. Mahmudul Hasan Shohag. All rights reserved.
+ */
+
 package org.imaginativeworld.whynotimagecarousel.adapter
 
 import android.graphics.drawable.Drawable
@@ -14,15 +18,15 @@ class InfiniteCarouselAdapter(
     carouselGravity: CarouselGravity,
     autoWidthFixing: Boolean,
     imageScaleType: ImageView.ScaleType,
-    imagePlaceholder: Drawable?
+    imagePlaceholder: Drawable?,
 ) : FiniteCarouselAdapter(
-    recyclerView,
-    carouselType,
-    carouselGravity,
-    autoWidthFixing,
-    imageScaleType,
-    imagePlaceholder
-) {
+        recyclerView,
+        carouselType,
+        carouselGravity,
+        autoWidthFixing,
+        imageScaleType,
+        imagePlaceholder,
+    ) {
     override fun getItemCount(): Int {
         return if (dataList.isEmpty()) 0 else Integer.MAX_VALUE
     }

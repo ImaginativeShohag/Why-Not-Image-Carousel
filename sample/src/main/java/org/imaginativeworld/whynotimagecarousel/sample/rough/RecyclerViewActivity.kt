@@ -1,3 +1,7 @@
+/**
+ * Copyright © 2021 Md. Mahmudul Hasan Shohag. All rights reserved.
+ */
+
 package org.imaginativeworld.whynotimagecarousel.sample.rough
 
 import android.os.Bundle
@@ -34,8 +38,8 @@ class RecyclerViewActivity : AppCompatActivity() {
             imageCarouselList.add(
                 CarouselItem(
                     imageUrl = item,
-                    caption = "Image ${index + 1} of ${DataSet.one.size}"
-                )
+                    caption = "Image ${index + 1} of ${DataSet.one.size}",
+                ),
             )
         }
 

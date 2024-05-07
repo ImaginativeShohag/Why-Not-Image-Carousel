@@ -1,3 +1,7 @@
+/**
+ * Copyright © 2021 Md. Mahmudul Hasan Shohag. All rights reserved.
+ */
+
 package org.imaginativeworld.whynotimagecarousel.model
 
 import androidx.annotation.DrawableRes
@@ -6,7 +10,7 @@ data class CarouselItem constructor(
     val imageUrl: String? = null,
     @DrawableRes val imageDrawable: Int? = null,
     val caption: String? = null,
-    val headers: Map<String, String>?
+    val headers: Map<String, String>?,
 ) {
     constructor() : this(null, null, null, null)
 
@@ -14,45 +18,50 @@ data class CarouselItem constructor(
         imageUrl,
         null,
         null,
-        null
+        null,
     )
 
     constructor(imageUrl: String? = null, headers: Map<String, String>? = null) : this(
         imageUrl,
         null,
         null,
-        headers
+        headers,
     )
 
-    constructor(@DrawableRes imageDrawable: Int? = null) : this(
+    constructor(
+        @DrawableRes imageDrawable: Int? = null,
+    ) : this(
         null,
         imageDrawable,
         null,
-        null
+        null,
     )
 
     constructor(imageUrl: String? = null, caption: String? = null) : this(
         imageUrl,
         null,
         caption,
-        null
+        null,
     )
 
     constructor(
         imageUrl: String? = null,
         caption: String? = null,
-        headers: Map<String, String>? = null
+        headers: Map<String, String>? = null,
     ) : this(
         imageUrl,
         null,
         caption,
-        headers
+        headers,
     )
 
-    constructor(@DrawableRes imageDrawable: Int? = null, caption: String? = null) : this(
+    constructor(
+        @DrawableRes imageDrawable: Int? = null,
+        caption: String? = null,
+    ) : this(
         null,
         imageDrawable,
         caption,
-        null
+        null,
     )
 }
