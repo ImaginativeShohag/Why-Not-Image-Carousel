@@ -1,0 +1,1555 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="An easy, super simple and customizable image carousel view for Android.">
+      
+      
+        <meta name="author" content="Md. Mahmudul Hasan Shohag">
+      
+      
+        <link rel="canonical" href="https://ImaginativeShohag.github.io/Why-Not-Image-Carousel/">
+      
+      
+      
+        <link rel="next" href="changelog/">
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.21">
+    
+    
+      
+        <title>Why Not! Image Carousel!</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.66ac8b77.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#why-not-image-carousel" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="Why Not! Image Carousel!" class="md-header__button md-logo" aria-label="Why Not! Image Carousel!" data-md-component="logo">
+      
+  <img src="images/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Why Not! Image Carousel!
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Overview
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="lime"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ImaginativeShohag/Why-Not-Image-Carousel" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Why-Not-Image-Carousel
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Why Not! Image Carousel!" class="md-nav__button md-logo" aria-label="Why Not! Image Carousel!" data-md-component="logo">
+      
+  <img src="images/logo.svg" alt="logo">
+
+    </a>
+    Why Not! Image Carousel!
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ImaginativeShohag/Why-Not-Image-Carousel" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Why-Not-Image-Carousel
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#preview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dependency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dependency
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dependency">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-the-followings-to-your-project-level-buildgradle-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add the followings to your project level build.gradle file.
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requirements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finally" class="md-nav__link">
+    <span class="md-ellipsis">
+      Finally
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#imagecarousel-xml-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      ImageCarousel XML attributes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#imagecarousel-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      ImageCarousel methods
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ImageCarousel methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kotlin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kotlin
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#java" class="md-nav__link">
+    <span class="md-ellipsis">
+      Java
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#register-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Register Lifecycle
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#infinite-carousel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Infinite Carousel
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#indicator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Indicator
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom View
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#carousel-type-carouseltype" class="md-nav__link">
+    <span class="md-ellipsis">
+      Carousel Type (carouselType)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Carousel Type (carouselType)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-carouseltypeblock" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. CarouselType.BLOCK
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-carouseltypeshowcase" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. CarouselType.SHOWCASE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scale-item-view-on-scroll-scaleonscroll" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scale Item View On Scroll (scaleOnScroll)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#carousel-gravity-carouselgravity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Carousel Gravity (carouselGravity)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Carousel Gravity (carouselGravity)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-carouselgravitycenter" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. CarouselGravity.CENTER
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-carouselgravitystart" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. CarouselGravity.START
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#credits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Credits
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#change-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      Change Log
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    <span class="md-ellipsis">
+      License
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/whynotimagecarousel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="changelog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Change Log
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#preview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dependency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dependency
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dependency">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-the-followings-to-your-project-level-buildgradle-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add the followings to your project level build.gradle file.
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requirements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finally" class="md-nav__link">
+    <span class="md-ellipsis">
+      Finally
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#imagecarousel-xml-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      ImageCarousel XML attributes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#imagecarousel-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      ImageCarousel methods
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ImageCarousel methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kotlin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kotlin
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#java" class="md-nav__link">
+    <span class="md-ellipsis">
+      Java
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#register-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Register Lifecycle
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#infinite-carousel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Infinite Carousel
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#indicator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Indicator
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom View
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#carousel-type-carouseltype" class="md-nav__link">
+    <span class="md-ellipsis">
+      Carousel Type (carouselType)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Carousel Type (carouselType)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-carouseltypeblock" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. CarouselType.BLOCK
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-carouseltypeshowcase" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. CarouselType.SHOWCASE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scale-item-view-on-scroll-scaleonscroll" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scale Item View On Scroll (scaleOnScroll)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#carousel-gravity-carouselgravity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Carousel Gravity (carouselGravity)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Carousel Gravity (carouselGravity)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-carouselgravitycenter" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. CarouselGravity.CENTER
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-carouselgravitystart" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. CarouselGravity.START
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#credits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Credits
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#change-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      Change Log
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    <span class="md-ellipsis">
+      License
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<p><img alt="Why Not! Image Carousel! Logo" src="images/logo.svg" /></p>
+<h1 id="why-not-image-carousel">Why Not! Image Carousel!<a class="headerlink" href="#why-not-image-carousel" title="Permanent link">&para;</a></h1>
+<p>An easy, super simple and customizable image carousel view for Android.</p>
+<p><a href="https://github.com/ImaginativeShohag"><img alt="Developer" src="https://img.shields.io/badge/Maintainer-ImaginativeShohag-green" /></a>
+<a href="https://github.com/ImaginativeShohag/Why-Not-Image-Carousel/releases"><img alt="GitHub release" src="https://img.shields.io/github/release/ImaginativeShohag/Why-Not-Image-Carousel.svg" /></a>
+<a href="https://android-arsenal.com/details/1/8053"><img alt="Android Arsenal" src="https://img.shields.io/badge/Android%20Arsenal-Why%20Not!%20Image%20Carousel!-green.svg?style=flat" /></a>
+<a href="https://android-arsenal.com/api?level=21"><img alt="API" src="https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat" /></a></p>
+<h2 id="preview">Preview<a class="headerlink" href="#preview" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><img alt="Screenshot" src="images/preview_1.gif" /></th>
+<th style="text-align: center;"><img alt="Preview" src="images/preview_2.gif" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><img alt="Screenshot" src="images/preview_3.gif" /></td>
+<td style="text-align: center;"><img alt="Screenshot" src="images/preview_4.gif" /></td>
+</tr>
+</tbody>
+</table>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<h3 id="dependency">Dependency<a class="headerlink" href="#dependency" title="Permanent link">&para;</a></h3>
+<h4 id="add-the-followings-to-your-project-level-buildgradle-file">Add the followings to your project level <code>build.gradle</code> file.<a class="headerlink" href="#add-the-followings-to-your-project-level-buildgradle-file" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">dependencies</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="c1">// Material Components for Android. Replace the version with the latest version of Material Components library.</span>
+<span class="w">    </span><span class="n">implementation</span><span class="w"> </span><span class="s1">&#39;com.google.android.material:material:1.5.0&#39;</span>
+
+<span class="w">    </span><span class="c1">// Circle Indicator (To fix the xml preview &quot;Missing classes&quot; error)</span>
+<span class="w">    </span><span class="n">implementation</span><span class="w"> </span><span class="s1">&#39;me.relex:circleindicator:2.1.6&#39;</span>
+
+<span class="w">    </span><span class="n">implementation</span><span class="w"> </span><span class="s1">&#39;org.imaginativeworld.whynotimagecarousel:whynotimagecarousel:2.1.0&#39;</span>
+<span class="o">}</span>
+</code></pre></div>
+<h3 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h3>
+<p><strong>0.</strong> Minimum SDK for this library is <strong>API 21</strong> (Android 5.0 Lollipop).</p>
+<p><strong>1.</strong> Your application have to use <strong>AndroidX</strong> to use this library.</p>
+<p><strong>2.</strong> Your have to use <strong>*.MaterialComponents.*</strong> in you styles.</p>
+<h3 id="finally">Finally<a class="headerlink" href="#finally" title="Permanent link">&para;</a></h3>
+<p>Add the view <code>org.imaginativeworld.whynotimagecarousel.ImageCarousel</code> in your layout:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;org.imaginativeworld.whynotimagecarousel.ImageCarousel</span>
+<span class="w">    </span><span class="na">android:id=</span><span class="s">&quot;@+id/carousel&quot;</span>
+<span class="w">    </span><span class="na">android:layout_width=</span><span class="s">&quot;match_parent&quot;</span>
+<span class="w">    </span><span class="na">android:layout_height=</span><span class="s">&quot;256dp&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</code></pre></div>
+<p>Use the <code>CarouselItem</code> class for data item. Initialize the <code>ImageCarousel</code> with data using <code>setData()</code> function:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Kotlin</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">carousel</span><span class="p">:</span><span class="w"> </span><span class="n">ImageCarousel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">findViewById</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">carousel</span><span class="p">)</span>
+
+<span class="c1">// Register lifecycle. For activity this will be lifecycle/getLifecycle() and for fragment it will be viewLifecycleOwner/getViewLifecycleOwner().</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">registerLifecycle</span><span class="p">(</span><span class="n">lifecycle</span><span class="p">)</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="nv">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mutableListOf</span><span class="o">&lt;</span><span class="n">CarouselItem</span><span class="o">&gt;</span><span class="p">()</span>
+
+<span class="c1">// Image URL with caption</span>
+<span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span>
+<span class="w">    </span><span class="n">CarouselItem</span><span class="p">(</span>
+<span class="w">        </span><span class="n">imageUrl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;https://images.unsplash.com/photo-1532581291347-9c39cf10a73c?w=1080&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">caption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Photo by Aaron Wu on Unsplash&quot;</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1">// Just image URL</span>
+<span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span>
+<span class="w">    </span><span class="n">CarouselItem</span><span class="p">(</span>
+<span class="w">        </span><span class="n">imageUrl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1080&quot;</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1">// Image URL with header</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">headers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mutableMapOf</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="kt">String</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="n">headers</span><span class="o">[</span><span class="s">&quot;header_key&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;header_value&quot;</span>
+
+<span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span>
+<span class="w">    </span><span class="n">CarouselItem</span><span class="p">(</span>
+<span class="w">        </span><span class="n">imageUrl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1080&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">headers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">headers</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1">// Image drawable with caption</span>
+<span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span>
+<span class="w">    </span><span class="n">CarouselItem</span><span class="p">(</span>
+<span class="w">        </span><span class="n">imageDrawable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R</span><span class="p">.</span><span class="na">drawable</span><span class="p">.</span><span class="na">image_1</span><span class="p">,</span>
+<span class="w">        </span><span class="n">caption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Photo by Kimiya Oveisi on Unsplash&quot;</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1">// Just image drawable</span>
+<span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span>
+<span class="w">    </span><span class="n">CarouselItem</span><span class="p">(</span>
+<span class="w">        </span><span class="n">imageDrawable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R</span><span class="p">.</span><span class="na">drawable</span><span class="p">.</span><span class="na">image_2</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1">// ...</span>
+
+<span class="n">carousel</span><span class="p">.</span><span class="na">setData</span><span class="p">(</span><span class="n">list</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// Java</span>
+<span class="n">ImageCarousel</span><span class="w"> </span><span class="n">carousel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">findViewById</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">carousel</span><span class="p">);</span>
+
+<span class="c1">// Register lifecycle. For activity this will be lifecycle/getLifecycle() and for fragments it will be viewLifecycleOwner/getViewLifecycleOwner().</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">registerLifecycle</span><span class="p">(</span><span class="n">getLifecycle</span><span class="p">());</span>
+
+<span class="n">List</span><span class="o">&lt;</span><span class="n">CarouselItem</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+<span class="c1">// Image URL with caption</span>
+<span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">CarouselItem</span><span class="p">(</span>
+<span class="w">        </span><span class="s">&quot;https://images.unsplash.com/photo-1532581291347-9c39cf10a73c?w=1080&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;Photo by Aaron Wu on Unsplash&quot;</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">// Just image URL</span>
+<span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">CarouselItem</span><span class="p">(</span>
+<span class="w">        </span><span class="s">&quot;https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1080&quot;</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">// Image URL with header</span>
+<span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">headers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="n">headers</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;header_key&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;header_value&quot;</span><span class="p">);</span>
+
+<span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">CarouselItem</span><span class="p">(</span>
+<span class="w">        </span><span class="s">&quot;https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1080&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">headers</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">// Image drawable with caption</span>
+<span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">CarouselItem</span><span class="p">(</span>
+<span class="w">        </span><span class="n">R</span><span class="p">.</span><span class="na">drawable</span><span class="p">.</span><span class="na">image_1</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;Photo by Kimiya Oveisi on Unsplash&quot;</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">// Just image drawable</span>
+<span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">CarouselItem</span><span class="p">(</span>
+<span class="w">        </span><span class="n">R</span><span class="p">.</span><span class="na">drawable</span><span class="p">.</span><span class="na">image_2</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">// ...</span>
+
+<span class="n">carousel</span><span class="p">.</span><span class="na">setData</span><span class="p">(</span><span class="n">list</span><span class="p">);</span>
+</code></pre></div>
+<p>That's all you need to use the library! :)</p>
+<p>Detail examples can be found <a href="/sample">here</a>.</p>
+<h2 id="imagecarousel-xml-attributes"><code>ImageCarousel</code> XML attributes<a class="headerlink" href="#imagecarousel-xml-attributes" title="Permanent link">&para;</a></h2>
+<p>All the custom XML attributes for <code>ImageCarousel</code> view with default values are given below. All attributes are optional.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;org.imaginativeworld.whynotimagecarousel.ImageCarousel</span>
+<span class="w">    </span><span class="na">android:id=</span><span class="s">&quot;@+id/carousel&quot;</span>
+<span class="w">    </span><span class="na">android:layout_width=</span><span class="s">&quot;match_parent&quot;</span>
+<span class="w">    </span><span class="na">android:layout_height=</span><span class="s">&quot;match_parent&quot;</span>
+
+<span class="w">    </span><span class="na">app:showTopShadow=</span><span class="s">&quot;true&quot;</span>
+<span class="w">    </span><span class="na">app:topShadowAlpha=</span><span class="s">&quot;0.6&quot;</span>
+<span class="w">    </span><span class="na">app:topShadowHeight=</span><span class="s">&quot;32dp&quot;</span>
+
+<span class="w">    </span><span class="na">app:showBottomShadow=</span><span class="s">&quot;true&quot;</span>
+<span class="w">    </span><span class="na">app:bottomShadowAlpha=</span><span class="s">&quot;0.6&quot;</span>
+<span class="w">    </span><span class="na">app:bottomShadowHeight=</span><span class="s">&quot;64dp&quot;</span>
+
+<span class="w">    </span><span class="na">app:showCaption=</span><span class="s">&quot;true&quot;</span>
+<span class="w">    </span><span class="na">app:captionMargin=</span><span class="s">&quot;0dp&quot;</span>
+<span class="w">    </span><span class="na">app:captionTextSize=</span><span class="s">&quot;14sp&quot;</span>
+
+<span class="w">    </span><span class="na">app:showIndicator=</span><span class="s">&quot;true&quot;</span>
+<span class="w">    </span><span class="na">app:indicatorMargin=</span><span class="s">&quot;0dp&quot;</span>
+
+<span class="w">    </span><span class="na">app:imageScaleType=</span><span class="s">&quot;centerCrop&quot;</span>
+
+<span class="w">    </span><span class="na">app:carouselBackground=</span><span class="s">&quot;#00000000&quot;</span>
+<span class="w">    </span><span class="na">app:imagePlaceholder=</span><span class="s">&quot;@drawable/ic_picture&quot;</span>
+
+<span class="w">    </span><span class="na">app:carouselPadding=</span><span class="s">&quot;0dp&quot;</span>
+<span class="w">    </span><span class="na">app:carouselPaddingBottom=</span><span class="s">&quot;0dp&quot;</span>
+<span class="w">    </span><span class="na">app:carouselPaddingEnd=</span><span class="s">&quot;0dp&quot;</span>
+<span class="w">    </span><span class="na">app:carouselPaddingStart=</span><span class="s">&quot;0dp&quot;</span>
+<span class="w">    </span><span class="na">app:carouselPaddingTop=</span><span class="s">&quot;0dp&quot;</span>
+
+<span class="w">    </span><span class="na">app:showNavigationButtons=</span><span class="s">&quot;true&quot;</span>
+<span class="w">    </span><span class="na">app:previousButtonLayout=</span><span class="s">&quot;@layout/previous_button_layout&quot;</span>
+<span class="w">    </span><span class="na">app:previousButtonId=</span><span class="s">&quot;@id/btn_previous&quot;</span>
+<span class="w">    </span><span class="na">app:previousButtonMargin=</span><span class="s">&quot;4dp&quot;</span>
+<span class="w">    </span><span class="na">app:nextButtonLayout=</span><span class="s">&quot;@layout/next_button_layout&quot;</span>
+<span class="w">    </span><span class="na">app:nextButtonId=</span><span class="s">&quot;@id/btn_next&quot;</span>
+<span class="w">    </span><span class="na">app:nextButtonMargin=</span><span class="s">&quot;4dp&quot;</span>
+
+<span class="w">    </span><span class="na">app:carouselType=</span><span class="s">&quot;BLOCK&quot;</span>
+<span class="w">    </span><span class="na">app:carouselGravity=</span><span class="s">&quot;CENTER&quot;</span>
+
+<span class="w">    </span><span class="na">app:scaleOnScroll=</span><span class="s">&quot;false&quot;</span>
+<span class="w">    </span><span class="na">app:scalingFactor=</span><span class="s">&quot;0.15&quot;</span>
+<span class="w">    </span><span class="na">app:autoWidthFixing=</span><span class="s">&quot;true&quot;</span>
+<span class="w">    </span><span class="na">app:autoPlay=</span><span class="s">&quot;false&quot;</span>
+<span class="w">    </span><span class="na">app:autoPlayDelay=</span><span class="s">&quot;3000&quot;</span>
+<span class="w">    </span><span class="na">app:infiniteCarousel=</span><span class="s">&quot;true&quot;</span>
+<span class="w">    </span><span class="na">app:touchToPause=</span><span class="s">&quot;true&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</code></pre></div>
+<h2 id="imagecarousel-methods"><code>ImageCarousel</code> methods<a class="headerlink" href="#imagecarousel-methods" title="Permanent link">&para;</a></h2>
+<p>You can also set all the attributes programmatically. All the methods and their usages given below.</p>
+<h3 id="kotlin">Kotlin<a class="headerlink" href="#kotlin" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">carousel</span><span class="p">:</span><span class="w"> </span><span class="n">ImageCarousel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">findViewById</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">carousel</span><span class="p">)</span>
+
+<span class="c1">// Attributes</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">carouselPadding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.</span><span class="n">dpToPx</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">carouselPaddingStart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.</span><span class="n">dpToPx</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">carouselPaddingTop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.</span><span class="n">dpToPx</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">carouselPaddingEnd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.</span><span class="n">dpToPx</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">carouselPaddingBottom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.</span><span class="n">dpToPx</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+
+<span class="n">carousel</span><span class="p">.</span><span class="na">showTopShadow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">topShadowAlpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.6f</span><span class="w"> </span><span class="c1">// 0 to 1, 1 means 100%</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">topShadowHeight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">32.</span><span class="n">dpToPx</span><span class="p">(</span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="c1">// px value of dp</span>
+
+<span class="n">carousel</span><span class="p">.</span><span class="na">showBottomShadow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">bottomShadowAlpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.6f</span><span class="w"> </span><span class="c1">// 0 to 1, 1 means 100%</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">bottomShadowHeight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">64.</span><span class="n">dpToPx</span><span class="p">(</span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="c1">// px value of dp</span>
+
+<span class="n">carousel</span><span class="p">.</span><span class="na">showCaption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">captionMargin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.</span><span class="n">dpToPx</span><span class="p">(</span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="c1">// px value of dp</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">captionTextSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">14.</span><span class="n">spToPx</span><span class="p">(</span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="c1">// px value of sp</span>
+
+<span class="n">carousel</span><span class="p">.</span><span class="na">showIndicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">indicatorMargin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.</span><span class="n">dpToPx</span><span class="p">(</span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="c1">// px value of dp</span>
+
+<span class="n">carousel</span><span class="p">.</span><span class="na">showNavigationButtons</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">imageScaleType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ImageView</span><span class="p">.</span><span class="na">ScaleType</span><span class="p">.</span><span class="na">CENTER_CROP</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">carouselBackground</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ColorDrawable</span><span class="p">(</span><span class="n">Color</span><span class="p">.</span><span class="na">parseColor</span><span class="p">(</span><span class="s">&quot;#333333&quot;</span><span class="p">))</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">imagePlaceholder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ContextCompat</span><span class="p">.</span><span class="na">getDrawable</span><span class="p">(</span>
+<span class="w">    </span><span class="n">context</span><span class="p">,</span>
+<span class="w">    </span><span class="n">R</span><span class="p">.</span><span class="na">drawable</span><span class="p">.</span><span class="na">ic_picture</span>
+<span class="p">)</span>
+
+<span class="c1">// For custom previous or next button layout,</span>
+<span class="c1">// set the layout using &quot;previousButtonLayout&quot; attribute and</span>
+<span class="c1">// give the View/Button id in &quot;previousButtonId&quot; attribute.</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">previousButtonLayout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">previous_button_layout</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">previousButtonId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">btn_previous</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">previousButtonMargin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4.</span><span class="n">dpToPx</span><span class="p">(</span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="c1">// px value of dp</span>
+
+<span class="n">carousel</span><span class="p">.</span><span class="na">nextButtonLayout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">next_button_layout</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">nextButtonId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">btn_next</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">nextButtonMargin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4.</span><span class="n">dpToPx</span><span class="p">(</span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="c1">// px value of dp</span>
+
+<span class="n">carousel</span><span class="p">.</span><span class="na">carouselType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CarouselType</span><span class="p">.</span><span class="na">BLOCK</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">scaleOnScroll</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">scalingFactor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">.</span><span class="m">15f</span><span class="w"> </span><span class="c1">// 0 to 1; 1 means 100</span>
+
+<span class="c1">// If the width of a single item in ImageCarousel is not greater then</span>
+<span class="c1">// half of the whole ImageCarousel view width, then the ImageCarousel</span>
+<span class="c1">// will not work as expected, So it is recommended to set this value</span>
+<span class="c1">// true all the time. So, the carousel will automatically increase the</span>
+<span class="c1">// width of the items if necessary.</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">autoWidthFixing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+
+<span class="c1">// If you want auto slide, turn this feature on.</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">autoPlay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">autoPlayDelay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3000</span><span class="w"> </span><span class="c1">// Milliseconds</span>
+
+<span class="c1">// Touch to pause autoPlay.</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">touchToPause</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+
+<span class="c1">// Infinite scroll for the carousel.</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">infiniteCarousel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+
+<span class="c1">// Scroll listener</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">onScrollListener</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">object</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">CarouselOnScrollListener</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onScrollStateChanged</span><span class="p">(</span>
+<span class="w">        </span><span class="n">recyclerView</span><span class="p">:</span><span class="w"> </span><span class="n">RecyclerView</span><span class="p">,</span>
+<span class="w">        </span><span class="n">newState</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span>
+<span class="w">        </span><span class="n">position</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span>
+<span class="w">        </span><span class="n">carouselItem</span><span class="p">:</span><span class="w"> </span><span class="n">CarouselItem?</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onScrolled</span><span class="p">(</span>
+<span class="w">        </span><span class="n">recyclerView</span><span class="p">:</span><span class="w"> </span><span class="n">RecyclerView</span><span class="p">,</span><span class="w"> </span>
+<span class="w">        </span><span class="n">dx</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span>
+<span class="w">        </span><span class="n">dy</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span>
+<span class="w">        </span><span class="n">position</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span>
+<span class="w">        </span><span class="n">carouselItem</span><span class="p">:</span><span class="w"> </span><span class="n">CarouselItem?</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Carousel listener</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">carouselListener</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">object</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">CarouselListener</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onCreateViewHolder</span><span class="p">(</span>
+<span class="w">        </span><span class="n">layoutInflater</span><span class="p">:</span><span class="w"> </span><span class="n">LayoutInflater</span><span class="p">,</span>
+<span class="w">        </span><span class="n">parent</span><span class="p">:</span><span class="w"> </span><span class="n">ViewGroup</span>
+<span class="w">    </span><span class="p">):</span><span class="w"> </span><span class="n">ViewBinding? </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onBindViewHolder</span><span class="p">(</span>
+<span class="w">        </span><span class="n">binding</span><span class="p">:</span><span class="w"> </span><span class="n">ViewBinding</span><span class="p">,</span>
+<span class="w">        </span><span class="n">imageScaleType</span><span class="p">:</span><span class="w"> </span><span class="n">ImageView</span><span class="p">.</span><span class="na">ScaleType</span><span class="p">,</span>
+<span class="w">        </span><span class="n">item</span><span class="p">:</span><span class="w"> </span><span class="n">CarouselItem</span><span class="p">,</span>
+<span class="w">        </span><span class="n">position</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onClick</span><span class="p">(</span><span class="n">position</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">carouselItem</span><span class="p">:</span><span class="w"> </span><span class="n">CarouselItem</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onLongClick</span><span class="p">(</span><span class="n">position</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">dataObject</span><span class="p">:</span><span class="w"> </span><span class="n">CarouselItem</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="c1">// Goto next slide/item</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">next</span><span class="p">()</span>
+
+<span class="c1">// Goto previous slide/item</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">previous</span><span class="p">()</span>
+
+<span class="c1">// Start auto play</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">start</span><span class="p">()</span>
+
+<span class="c1">// Stop auto play</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">stop</span><span class="p">()</span>
+
+<span class="c1">// If you need custom indicator, use the CircleIndicator2 from CircleIndicator (https://github.com/ongakuer/CircleIndicator).</span>
+<span class="c1">// Then pass the view to the ImageCarousel.</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">customIndicator</span><span class="p">:</span><span class="w"> </span><span class="n">CircleIndicator2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">findViewById</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">custom_indicator</span><span class="p">)</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">setIndicator</span><span class="p">(</span><span class="n">customIndicator</span><span class="p">)</span>
+
+<span class="c1">// For activity this will be lifecycle/getLifecycle() and for fragment it will be viewLifecycleOwner/getViewLifecycleOwner().</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">registerLifecycle</span><span class="p">(</span><span class="n">lifecycle</span><span class="p">)</span>
+
+<span class="c1">// ...</span>
+
+<span class="c1">// You can use the following methods to add CarouselItem data to the carousel:</span>
+<span class="c1">// 1. setData(data: List&lt;CarouselItem&gt;): Set a list of CarouselItem. This will remove previous data from the carousel.</span>
+<span class="c1">// 2. addData(data: List&lt;CarouselItem&gt;): Append list of CarouselItem with existing data.</span>
+<span class="c1">// 3. addData(item: CarouselItem): Append a CarouselItem with existing data.</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">setData</span><span class="p">(</span><span class="n">list</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="java">Java<a class="headerlink" href="#java" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">ImageCarousel</span><span class="w"> </span><span class="n">carousel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">findViewById</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">carousel</span><span class="p">);</span>
+
+<span class="c1">// Attributes</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">setCarouselPadding</span><span class="p">(</span><span class="n">Utils</span><span class="p">.</span><span class="na">dpToPx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">context</span><span class="p">));</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">setCarouselPaddingStart</span><span class="p">(</span><span class="n">Utils</span><span class="p">.</span><span class="na">dpToPx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">context</span><span class="p">));</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">setCarouselPaddingTop</span><span class="p">(</span><span class="n">Utils</span><span class="p">.</span><span class="na">dpToPx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">context</span><span class="p">));</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">setCarouselPaddingEnd</span><span class="p">(</span><span class="n">Utils</span><span class="p">.</span><span class="na">dpToPx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">context</span><span class="p">));</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">setCarouselPaddingBottom</span><span class="p">(</span><span class="n">Utils</span><span class="p">.</span><span class="na">dpToPx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">context</span><span class="p">));</span>
+
+<span class="n">carousel</span><span class="p">.</span><span class="na">setShowTopShadow</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">setTopShadowAlpha</span><span class="p">(</span><span class="mf">0.6f</span><span class="p">);</span><span class="w"> </span><span class="c1">// 0 to 1, 1 means 100%</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">setTopShadowHeight</span><span class="p">(</span><span class="n">Utils</span><span class="p">.</span><span class="na">dpToPx</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="n">context</span><span class="p">));</span><span class="w"> </span><span class="c1">// px value of dp</span>
+
+<span class="n">carousel</span><span class="p">.</span><span class="na">setShowBottomShadow</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">setBottomShadowAlpha</span><span class="p">(</span><span class="mf">0.6f</span><span class="p">);</span><span class="w"> </span><span class="c1">// 0 to 1, 1 means 100%</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">setBottomShadowHeight</span><span class="p">(</span><span class="n">Utils</span><span class="p">.</span><span class="na">dpToPx</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span><span class="w"> </span><span class="n">context</span><span class="p">));</span><span class="w"> </span><span class="c1">// px value of dp</span>
+
+<span class="n">carousel</span><span class="p">.</span><span class="na">setShowCaption</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">setCaptionMargin</span><span class="p">(</span><span class="n">Utils</span><span class="p">.</span><span class="na">dpToPx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">context</span><span class="p">));</span><span class="w"> </span><span class="c1">// px value of dp</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">setCaptionTextSize</span><span class="p">(</span><span class="n">Utils</span><span class="p">.</span><span class="na">spToPx</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="n">context</span><span class="p">));</span><span class="w"> </span><span class="c1">// px value of sp</span>
+
+<span class="n">carousel</span><span class="p">.</span><span class="na">setShowIndicator</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">setIndicatorMargin</span><span class="p">(</span><span class="n">Utils</span><span class="p">.</span><span class="na">dpToPx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">context</span><span class="p">));</span><span class="w"> </span><span class="c1">// px value of dp</span>
+
+<span class="n">carousel</span><span class="p">.</span><span class="na">setShowNavigationButtons</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">setImageScaleType</span><span class="p">(</span><span class="n">ImageView</span><span class="p">.</span><span class="na">ScaleType</span><span class="p">.</span><span class="na">CENTER</span><span class="p">);</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">setCarouselBackground</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ColorDrawable</span><span class="p">(</span><span class="n">Color</span><span class="p">.</span><span class="na">parseColor</span><span class="p">(</span><span class="s">&quot;#333333&quot;</span><span class="p">)));</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">setImagePlaceholder</span><span class="p">(</span><span class="n">ContextCompat</span><span class="p">.</span><span class="na">getDrawable</span><span class="p">(</span>
+<span class="w">        </span><span class="n">context</span><span class="p">,</span>
+<span class="w">        </span><span class="n">R</span><span class="p">.</span><span class="na">drawable</span><span class="p">.</span><span class="na">ic_picture</span>
+<span class="p">));</span>
+
+<span class="c1">// See kotlin code for details.</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">setPreviousButtonLayout</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">previous_button_layout</span><span class="p">);</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">setPreviousButtonId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">btn_previous</span><span class="p">);</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">setPreviousButtonMargin</span><span class="p">(</span><span class="n">Utils</span><span class="p">.</span><span class="na">dpToPx</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">context</span><span class="p">));</span><span class="w"> </span><span class="c1">// px value of dp</span>
+
+<span class="n">carousel</span><span class="p">.</span><span class="na">setNextButtonLayout</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">next_button_layout</span><span class="p">);</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">setNextButtonId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">btn_next</span><span class="p">);</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">setNextButtonMargin</span><span class="p">(</span><span class="n">Utils</span><span class="p">.</span><span class="na">dpToPx</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">context</span><span class="p">));</span><span class="w"> </span><span class="c1">// px value of dp</span>
+
+<span class="n">carousel</span><span class="p">.</span><span class="na">setCarouselType</span><span class="p">(</span><span class="n">CarouselType</span><span class="p">.</span><span class="na">BLOCK</span><span class="p">);</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">setScaleOnScroll</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">setScalingFactor</span><span class="p">(</span><span class="mf">.15f</span><span class="p">);</span>
+
+<span class="c1">// See kotlin code for details.</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">setAutoWidthFixing</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+
+<span class="c1">// See kotlin code for details.</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">setAutoPlay</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">setAutoPlayDelay</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span><span class="w"> </span><span class="c1">// Milliseconds</span>
+
+<span class="c1">// Touch to pause autoPlay.</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">setTouchToPause</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+
+<span class="c1">// Infinite scroll for the carousel.</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">setInfiniteCarousel</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+
+<span class="c1">// Scroll listener</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">setOnScrollListener</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">CarouselOnScrollListener</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onScrolled</span><span class="p">(</span><span class="nd">@NotNull</span><span class="w"> </span><span class="n">RecyclerView</span><span class="w"> </span><span class="n">recyclerView</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">dx</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">dy</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">position</span><span class="p">,</span><span class="w"> </span><span class="nd">@Nullable</span><span class="w"> </span><span class="n">CarouselItem</span><span class="w"> </span><span class="n">carouselItem</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onScrollStateChanged</span><span class="p">(</span><span class="nd">@NotNull</span><span class="w"> </span><span class="n">RecyclerView</span><span class="w"> </span><span class="n">recyclerView</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">newState</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">position</span><span class="p">,</span><span class="w"> </span><span class="nd">@Nullable</span><span class="w"> </span><span class="n">CarouselItem</span><span class="w"> </span><span class="n">carouselItem</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+
+<span class="c1">// Carousel listener</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">setCarouselListener</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">CarouselListener</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Nullable</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ViewBinding</span><span class="w"> </span><span class="nf">onCreateViewHolder</span><span class="p">(</span><span class="nd">@NotNull</span><span class="w"> </span><span class="n">LayoutInflater</span><span class="w"> </span><span class="n">layoutInflater</span><span class="p">,</span><span class="w"> </span><span class="nd">@NotNull</span><span class="w"> </span><span class="n">ViewGroup</span><span class="w"> </span><span class="n">parent</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onBindViewHolder</span><span class="p">(</span><span class="nd">@NotNull</span><span class="w"> </span><span class="n">ViewBinding</span><span class="w"> </span><span class="n">binding</span><span class="p">,</span><span class="w"> </span><span class="nd">@NotNull</span><span class="w"> </span><span class="n">ImageView</span><span class="p">.</span><span class="na">ScaleType</span><span class="w"> </span><span class="n">imageScaleType</span><span class="p">,</span><span class="w"> </span><span class="nd">@NotNull</span><span class="w"> </span><span class="n">CarouselItem</span><span class="w"> </span><span class="n">item</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">position</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onLongClick</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">position</span><span class="p">,</span><span class="w"> </span><span class="nd">@NotNull</span><span class="w"> </span><span class="n">CarouselItem</span><span class="w"> </span><span class="n">dataObject</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onClick</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">position</span><span class="p">,</span><span class="w"> </span><span class="nd">@NotNull</span><span class="w"> </span><span class="n">CarouselItem</span><span class="w"> </span><span class="n">carouselItem</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+
+<span class="c1">// Goto next slide/item</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">next</span><span class="p">()</span>
+
+<span class="c1">// Goto previous slide/item</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">previous</span><span class="p">()</span>
+
+<span class="c1">// Start auto play</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">start</span><span class="p">()</span>
+
+<span class="c1">// Stop auto play</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">stop</span><span class="p">()</span>
+
+<span class="c1">// See kotlin code for details.</span>
+<span class="n">CircleIndicator2</span><span class="w"> </span><span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">findViewById</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">custom_indicator</span><span class="p">);</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">setIndicator</span><span class="p">(</span><span class="n">indicator</span><span class="p">);</span>
+
+<span class="c1">// See kotlin code for details.</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">registerLifecycle</span><span class="p">(</span><span class="n">lifecycle</span><span class="p">)</span>
+
+<span class="c1">// ...</span>
+
+<span class="c1">// See kotlin code for details.</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">setData</span><span class="p">(</span><span class="n">list</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="register-lifecycle">Register Lifecycle<a class="headerlink" href="#register-lifecycle" title="Permanent link">&para;</a></h2>
+<p><code>ImageCarousel</code> is a <a href="https://developer.android.com/topic/libraries/architecture/lifecycle">lifecycle-aware component</a>. You can use the <code>registerLifecycle()</code> method to register a lifecycle. For activity the parameter will be <code>lifecycle</code>/<code>getLifecycle()</code> and for fragment it will be <code>viewLifecycleOwner</code>/<code>getViewLifecycleOwner()</code>.</p>
+<p>It is recommended to register <code>ImageCarousel</code> to a lifecycle, so that the auto-play/scroll will pause when the app is in the background and resume when the app is resumed.</p>
+<p>It is also used to correctly initialize the infinite carousel when the app is in the background.</p>
+<p>So it is recommended if you enabled <code>autoPlay</code> &amp; <code>infiniteCarousel</code>.</p>
+<h2 id="infinite-carousel">Infinite Carousel<a class="headerlink" href="#infinite-carousel" title="Permanent link">&para;</a></h2>
+<p><img alt="Infinite Carousel" src="images/infinite_carousel.gif" /></p>
+<p>The library now supports an infinite carousel, which means that the item view is looped infinitely. This feature is enabled by default, but you can disable it by setting the <code>infiniteCarousel</code> property to <code>false</code>.</p>
+<h2 id="indicator">Indicator<a class="headerlink" href="#indicator" title="Permanent link">&para;</a></h2>
+<p>The carousel is bundled with a default indicator. We used the <a href="https://github.com/ongakuer/CircleIndicator">CircleIndicator</a> library for the indicator. You can use all the customization supported by the library in our carousel. You can get the default indicator by the <code>getIndicator()</code> method. If you wish to add your custom indicator, then just use the <code>CircleIndicator2</code> from the <a href="https://github.com/ongakuer/CircleIndicator">CircleIndicator</a> library and set the view using the <code>setIndicator(indicator)</code> method. For details usage see the <a href="/sample">sample</a>.</p>
+<h2 id="custom-view">Custom View<a class="headerlink" href="#custom-view" title="Permanent link">&para;</a></h2>
+<p>The carousel supports the view-binding for the custom view. <code>CarouselListener</code> has two methods <code>onCreateViewHolder()</code> and <code>onBindViewHolder()</code> for adding a custom view to the carousel. If you use the <code>RecyclerView.Adapter</code> then you should remember the names of the methods. Both are mapped with the same methods in the <code>RecyclerView.Adapter</code>.</p>
+<p>Adding a custom view is straightforward. An example is given below:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Kotlin</span>
+<span class="n">carousel</span><span class="p">.</span><span class="na">carouselListener</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">object</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">CarouselListener</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onCreateViewHolder</span><span class="p">(</span>
+<span class="w">        </span><span class="n">layoutInflater</span><span class="p">:</span><span class="w"> </span><span class="n">LayoutInflater</span><span class="p">,</span>
+<span class="w">        </span><span class="n">parent</span><span class="p">:</span><span class="w"> </span><span class="n">ViewGroup</span>
+<span class="w">    </span><span class="p">):</span><span class="w"> </span><span class="n">ViewBinding</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Here, our XML layout file name is custom_item_layout.xml. So our view binding generated class name is CustomItemLayoutBinding.</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">CustomItemLayoutBinding</span><span class="p">.</span><span class="na">inflate</span><span class="p">(</span><span class="n">layoutInflater</span><span class="p">,</span><span class="w"> </span><span class="n">parent</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onBindViewHolder</span><span class="p">(</span>
+<span class="w">        </span><span class="n">binding</span><span class="p">:</span><span class="w"> </span><span class="n">ViewBinding</span><span class="p">,</span>
+<span class="w">        </span><span class="n">imageScaleType</span><span class="p">:</span><span class="w"> </span><span class="n">ImageView</span><span class="p">.</span><span class="na">ScaleType</span><span class="p">,</span>
+<span class="w">        </span><span class="n">item</span><span class="p">:</span><span class="w"> </span><span class="n">CarouselItem</span><span class="p">,</span>
+<span class="w">        </span><span class="n">position</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Cast the binding to the returned view binding class of the onCreateViewHolder() method.</span>
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">currentBinding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">binding</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">CustomItemLayoutBinding</span>
+
+<span class="w">        </span><span class="c1">// Do the bindings...</span>
+<span class="w">        </span><span class="n">currentBinding</span><span class="p">.</span><span class="na">imageView</span><span class="p">.</span><span class="na">apply</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">scaleType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">imageScaleType</span>
+
+<span class="w">            </span><span class="c1">// setImage() is an extension function to load image to an ImageView using CarouselItem object. We need to provide current CarouselItem data and the place holder Drawable or drawable resource id to the function. placeholder parameter is optional.</span>
+<span class="w">            </span><span class="n">setImage</span><span class="p">(</span><span class="n">item</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="p">.</span><span class="na">drawable</span><span class="p">.</span><span class="na">ic_wb_cloudy_with_padding</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// Java</span>
+<span class="n">binding</span><span class="p">.</span><span class="na">carousel</span><span class="p">.</span><span class="na">setCarouselListener</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">CarouselListener</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Nullable</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ViewBinding</span><span class="w"> </span><span class="nf">onCreateViewHolder</span><span class="p">(</span><span class="nd">@NotNull</span><span class="w"> </span><span class="n">LayoutInflater</span><span class="w"> </span><span class="n">layoutInflater</span><span class="p">,</span><span class="w"> </span><span class="nd">@NotNull</span><span class="w"> </span><span class="n">ViewGroup</span><span class="w"> </span><span class="n">parent</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Here, our XML layout file name is custom_item_layout.xml. So our view binding generated class name is CustomItemLayoutBinding.</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ItemCustomFixedSizeLayout1Binding</span><span class="p">.</span><span class="na">inflate</span><span class="p">(</span><span class="n">layoutInflater</span><span class="p">,</span><span class="w"> </span><span class="n">parent</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onBindViewHolder</span><span class="p">(</span><span class="nd">@NotNull</span><span class="w"> </span><span class="n">ViewBinding</span><span class="w"> </span><span class="n">binding</span><span class="p">,</span><span class="w"> </span><span class="nd">@NotNull</span><span class="w"> </span><span class="n">ImageView</span><span class="p">.</span><span class="na">ScaleType</span><span class="w"> </span><span class="n">imageScaleType</span><span class="p">,</span><span class="w"> </span><span class="nd">@NotNull</span><span class="w"> </span><span class="n">CarouselItem</span><span class="w"> </span><span class="n">item</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">position</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="c1">// Cast the binding to the returned view binding class of the onCreateViewHolder() method.</span>
+<span class="w">        </span><span class="n">ItemCustomFixedSizeLayout1Binding</span><span class="w"> </span><span class="n">currentBinding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">ItemCustomFixedSizeLayout1Binding</span><span class="p">)</span><span class="w"> </span><span class="n">binding</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// Do the bindings...</span>
+<span class="w">        </span><span class="n">currentBinding</span><span class="p">.</span><span class="na">imageView</span><span class="p">.</span><span class="na">setScaleType</span><span class="p">(</span><span class="n">imageScaleType</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// setImage() is an extension function to load image to an ImageView using CarouselItem object. We need to provide current CarouselItem data and the place holder Drawable or drawable resource id to the function. placeholder parameter is optional.</span>
+<span class="w">        </span><span class="n">Utils</span><span class="p">.</span><span class="na">setImage</span><span class="p">(</span><span class="n">currentBinding</span><span class="p">.</span><span class="na">imageView</span><span class="p">,</span><span class="w"> </span><span class="n">item</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="p">.</span><span class="na">drawable</span><span class="p">.</span><span class="na">ic_wb_cloudy_with_padding</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+<p><strong>Using custom view, you can create any type of carousel, even a carousel without any image!</strong> See the <a href="/sample">sample</a> app for some example.</p>
+<h2 id="carousel-type-carouseltype">Carousel Type (<code>carouselType</code>)<a class="headerlink" href="#carousel-type-carouseltype" title="Permanent link">&para;</a></h2>
+<p><img alt="Carousel type preview" src="images/carousel_type.png" /></p>
+<p><code>ImageCarousel</code> has following types:</p>
+<h4 id="1-carouseltypeblock">1. <code>CarouselType.BLOCK</code><a class="headerlink" href="#1-carouseltypeblock" title="Permanent link">&para;</a></h4>
+<p>If you need one item view at a time, then use this carousel type.</p>
+<h4 id="2-carouseltypeshowcase">2. <code>CarouselType.SHOWCASE</code><a class="headerlink" href="#2-carouseltypeshowcase" title="Permanent link">&para;</a></h4>
+<p>If you need multiple item view at a time, use this carousel type.</p>
+<p>You can also use the <code>scaleOnScroll</code> and <code>scalingFactor</code> attributes with this carousel type.</p>
+<h3 id="scale-item-view-on-scroll-scaleonscroll">Scale Item View On Scroll (<code>scaleOnScroll</code>)<a class="headerlink" href="#scale-item-view-on-scroll-scaleonscroll" title="Permanent link">&para;</a></h3>
+<p><img alt="Scale-on-scroll preview" src="images/scale_on_scroll.png" /></p>
+<p>You can use <code>scaleOnScroll</code> attribute to scaling down the adjacent views like above. Use <code>scalingFactor</code> to define scale down percentage. Value should be 0.0 to 1.0.</p>
+<h2 id="carousel-gravity-carouselgravity">Carousel Gravity (<code>carouselGravity</code>)<a class="headerlink" href="#carousel-gravity-carouselgravity" title="Permanent link">&para;</a></h2>
+<p><img alt="Carousel gravity preview" src="images/carousel_gravity.png" /></p>
+<p>For <code>CarouselType.SHOWCASE</code>, you can set carousel gravity. Supported gravities ase:</p>
+<h4 id="1-carouselgravitycenter">1. <code>CarouselGravity.CENTER</code><a class="headerlink" href="#1-carouselgravitycenter" title="Permanent link">&para;</a></h4>
+<p>Current selected item will be at the center of the view.</p>
+<h4 id="2-carouselgravitystart">2. <code>CarouselGravity.START</code><a class="headerlink" href="#2-carouselgravitystart" title="Permanent link">&para;</a></h4>
+<p>Current selected item will be at the start of the view.</p>
+<h2 id="credits">Credits<a class="headerlink" href="#credits" title="Permanent link">&para;</a></h2>
+<p>This library is using the <a href="https://github.com/ongakuer/CircleIndicator">CircleIndicator</a> library for the indicator.
+Inspired by <a href="https://github.com/jama5262/CarouselView">CarouselView</a> library.
+All the images from <a href="https://unsplash.com">Unsplash</a>.</p>
+<h2 id="change-log">Change Log<a class="headerlink" href="#change-log" title="Permanent link">&para;</a></h2>
+<p>See the change log <a href="changelog">here</a>.</p>
+<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>Copyright 2021 Md. Mahmudul Hasan Shohag
+
+Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2023 <a href="https://github.com/ImaginativeShohag" target="_blank" rel="noopener">James Willett</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/ImaginativeShohag" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/shohag_iw" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/mahmudulhasanshohag/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.a7c05c9e.min.js"></script>
+      
+    
+  </body>
+</html>

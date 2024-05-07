@@ -1,0 +1,9 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+
+module:whynotimagecarousel
+org.imaginativeworld.whynotimagecarousel
+org.imaginativeworld.whynotimagecarousel.adapter
+org.imaginativeworld.whynotimagecarousel.listener
+org.imaginativeworld.whynotimagecarousel.model
+org.imaginativeworld.whynotimagecarousel.utils

@@ -1,0 +1,1 @@
+sourceset_dependencies = '{":whynotimagecarousel:dokkaHtmlPartial/debug":[],":whynotimagecarousel:dokkaHtmlPartial/main":[],":whynotimagecarousel:dokkaHtmlPartial/release":[]}'
