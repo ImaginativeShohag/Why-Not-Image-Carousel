@@ -1,3 +1,7 @@
+/**
+ * Copyright © 2021 Md. Mahmudul Hasan Shohag. All rights reserved.
+ */
+
 package org.imaginativeworld.whynotimagecarousel.listener
 
 import android.view.LayoutInflater
@@ -14,7 +18,10 @@ interface CarouselListener {
      * @param parent the parent of the generated hierarchy.
      * @return ViewBinding of the custom view.
      */
-    fun onCreateViewHolder(layoutInflater: LayoutInflater, parent: ViewGroup): ViewBinding? = null
+    fun onCreateViewHolder(
+        layoutInflater: LayoutInflater,
+        parent: ViewGroup,
+    ): ViewBinding? = null
 
     /**
      * Bind view with data.
@@ -24,7 +31,11 @@ interface CarouselListener {
      * @param item current CarouselItem item for bind.
      * @param position current data position.
      */
-    fun onBindViewHolder(binding: ViewBinding, item: CarouselItem, position: Int) {}
+    fun onBindViewHolder(
+        binding: ViewBinding,
+        item: CarouselItem,
+        position: Int,
+    ) {}
 
     /**
      * When an item view is clicked it will be invoked.
@@ -34,7 +45,10 @@ interface CarouselListener {
      * @param position Data item position.
      * @param carouselItem Data item of the clicked view.
      */
-    fun onClick(position: Int, carouselItem: CarouselItem) {}
+    fun onClick(
+        position: Int,
+        carouselItem: CarouselItem,
+    ) {}
 
     /**
      * When an item view is long clicked it will be invoked.
@@ -44,5 +58,8 @@ interface CarouselListener {
      * @param position Data item position.
      * @param carouselItem Data item of the long clicked view.
      */
-    fun onLongClick(position: Int, carouselItem: CarouselItem) {}
+    fun onLongClick(
+        position: Int,
+        carouselItem: CarouselItem,
+    ) {}
 }

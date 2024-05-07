@@ -1,5 +1,5 @@
 *.iml
-.idea
+.idea/*
 .gradle
 /local.properties
 /.idea/caches
@@ -100,3 +100,16 @@ lint/outputs/
 lint/tmp/
 # lint/reports/
 
+# IntelliJ project icon
+!.idea/icon.svg
+
+# Temporary API docs
+docs/api
+
+# Mkdocs temporary serving folder
+docs-gen
+site
+*.bak
+
+# Python
+venv/*

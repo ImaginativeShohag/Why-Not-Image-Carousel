@@ -1,3 +1,7 @@
+/**
+ * Copyright © 2021 Md. Mahmudul Hasan Shohag. All rights reserved.
+ */
+
 package org.imaginativeworld.whynotimagecarousel.sample
 
 import android.view.View
@@ -237,8 +241,13 @@ class InstrumentedTestForTestActivity {
 fun waitFor(delay: Long): ViewAction {
     return object : ViewAction {
         override fun getConstraints(): Matcher<View> = isRoot()
+
         override fun getDescription(): String = "wait for $delay milliseconds"
-        override fun perform(uiController: UiController, v: View?) {
+
+        override fun perform(
+            uiController: UiController,
+            v: View?,
+        ) {
             uiController.loopMainThreadForAtLeast(delay)
         }
     }
@@ -257,7 +266,10 @@ fun forceClick(): ViewAction {
             return "force click"
         }
 
-        override fun perform(uiController: UiController?, view: View?) {
+        override fun perform(
+            uiController: UiController?,
+            view: View?,
+        ) {
             view?.performClick()
             uiController?.loopMainThreadUntilIdle()
         }
@@ -266,14 +278,20 @@ fun forceClick(): ViewAction {
 
 // ====================================================================
 
-fun clickCarouselView(carouselId: Int, viewId: Int) {
+fun clickCarouselView(
+    carouselId: Int,
+    viewId: Int,
+) {
     onView(allOf(withId(viewId), isDescendantOfA(withId(carouselId))))
         .perform(click())
 }
 
 // ====================================================================
 
-fun checkPositionX(btnId: Int, x: Int) {
+fun checkPositionX(
+    btnId: Int,
+    x: Int,
+) {
     onView(withId(btnId)).perform(click())
 
     // Check the caption
@@ -293,14 +311,20 @@ fun checkPositionX(btnId: Int, x: Int) {
 
 // ====================================================================
 
-fun checkCaption(carouselId: Int, expectedCaption: String) {
+fun checkCaption(
+    carouselId: Int,
+    expectedCaption: String,
+) {
     onView(allOf(withId(R.id.tv_caption), isDescendantOfA(withId(carouselId))))
         .check(matches(withText(expectedCaption)))
 }
 
 // ====================================================================
 
-fun checkAdapterPosition(carouselId: Int, expectedPosition: Int) {
+fun checkAdapterPosition(
+    carouselId: Int,
+    expectedPosition: Int,
+) {
     val action = CarouselCurrentItemCheckAction()
     onView(withId(carouselId)).perform(action)
     val carouselCurrentPosition = action.returnValue
@@ -318,7 +342,10 @@ class CarouselCurrentItemCheckAction : ViewAction {
         return "Get current position of the Image Carousel."
     }
 
-    override fun perform(uiController: UiController?, view: View?) {
+    override fun perform(
+        uiController: UiController?,
+        view: View?,
+    ) {
         val carousel = view as ImageCarousel
         returnValue = carousel.currentPosition
     }
@@ -326,7 +353,10 @@ class CarouselCurrentItemCheckAction : ViewAction {
 
 // ====================================================================
 
-fun checkAdapterItemSize(carouselId: Int, expectedItemSize: Int) {
+fun checkAdapterItemSize(
+    carouselId: Int,
+    expectedItemSize: Int,
+) {
     val action = CarouselTotalItemCountAction()
     onView(withId(carouselId)).perform(action)
     val carouselCurrentItemSize = action.returnValue
@@ -344,7 +374,10 @@ class CarouselTotalItemCountAction : ViewAction {
         return "Get current item size of the Image Carousel."
     }
 
-    override fun perform(uiController: UiController?, view: View?) {
+    override fun perform(
+        uiController: UiController?,
+        view: View?,
+    ) {
         val carousel = view as ImageCarousel
         returnValue = carousel.getData()?.size ?: -1
     }

@@ -1,3 +1,7 @@
+/**
+ * Copyright © 2021 Md. Mahmudul Hasan Shohag. All rights reserved.
+ */
+
 @file:JvmName("Utils")
 
 package org.imaginativeworld.whynotimagecarousel.utils
@@ -29,7 +33,7 @@ fun Int.dpToPx(context: Context): Int {
     return TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP,
         this.toFloat(),
-        context.resources.displayMetrics
+        context.resources.displayMetrics,
     ).toInt()
 }
 
@@ -40,7 +44,7 @@ fun Int.spToPx(context: Context): Int {
     return TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_SP,
         this.toFloat(),
-        context.resources.displayMetrics
+        context.resources.displayMetrics,
     ).toInt()
 }
 
@@ -79,7 +83,7 @@ fun ImageView.setImage(item: CarouselItem) {
  */
 fun ImageView.setImage(
     item: CarouselItem,
-    @DrawableRes placeholderDrawableResourceId: Int
+    @DrawableRes placeholderDrawableResourceId: Int,
 ) {
     this.setImage(
         item = item,
@@ -115,31 +119,37 @@ fun ImageView.setImage(
 private fun ImageView.setImage(
     item: CarouselItem,
     placeholderDrawable: Drawable? = null,
-    @DrawableRes placeholderDrawableResourceId: Int? = null
+    @DrawableRes placeholderDrawableResourceId: Int? = null,
 ) {
     val glide = Glide.with(context.applicationContext)
 
-    var requestBuilder = when {
-        item.imageUrl != null && item.headers == null -> {
-            glide.load(item.imageUrl)
-        }
-        item.headers != null -> {
-            glide.load(GlideUrl(item.imageUrl.toString()) { item.headers })
-        }
-        else -> {
-            glide.load(item.imageDrawable)
-        }
-    }
+    var requestBuilder =
+        when {
+            item.imageUrl != null && item.headers == null -> {
+                glide.load(item.imageUrl)
+            }
 
-    requestBuilder = when {
-        placeholderDrawable != null -> {
-            requestBuilder.placeholder(placeholderDrawable)
+            item.headers != null -> {
+                glide.load(GlideUrl(item.imageUrl.toString()) { item.headers })
+            }
+
+            else -> {
+                glide.load(item.imageDrawable)
+            }
         }
-        placeholderDrawableResourceId != null -> {
-            requestBuilder.placeholder(placeholderDrawableResourceId)
+
+    requestBuilder =
+        when {
+            placeholderDrawable != null -> {
+                requestBuilder.placeholder(placeholderDrawable)
+            }
+
+            placeholderDrawableResourceId != null -> {
+                requestBuilder.placeholder(placeholderDrawableResourceId)
+            }
+
+            else -> requestBuilder
         }
-        else -> requestBuilder
-    }
 
     requestBuilder.into(this)
 }

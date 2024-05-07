@@ -1,3 +1,7 @@
+/**
+ * Copyright © 2021 Md. Mahmudul Hasan Shohag. All rights reserved.
+ */
+
 package org.imaginativeworld.whynotimagecarousel.listener
 
 import androidx.recyclerview.widget.RecyclerView
@@ -20,7 +24,7 @@ interface CarouselOnScrollListener {
         recyclerView: RecyclerView,
         newState: Int,
         position: Int,
-        carouselItem: CarouselItem?
+        carouselItem: CarouselItem?,
     ) {
     }
 
@@ -42,7 +46,7 @@ interface CarouselOnScrollListener {
         dx: Int,
         dy: Int,
         position: Int,
-        carouselItem: CarouselItem?
+        carouselItem: CarouselItem?,
     ) {
     }
 }

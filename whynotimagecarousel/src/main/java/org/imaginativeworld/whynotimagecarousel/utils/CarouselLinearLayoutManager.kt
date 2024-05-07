@@ -1,3 +1,7 @@
+/**
+ * Copyright © 2021 Md. Mahmudul Hasan Shohag. All rights reserved.
+ */
+
 package org.imaginativeworld.whynotimagecarousel.utils
 
 import android.content.Context
@@ -9,14 +13,16 @@ import kotlin.math.min
 class CarouselLinearLayoutManager(
     context: Context,
     orientation: Int,
-    reverseLayout: Boolean
+    reverseLayout: Boolean,
 ) : LinearLayoutManager(context, orientation, reverseLayout) {
-
     var isOffsetStart = false
     var scaleOnScroll = false
     var scalingFactor = 0f
 
-    override fun onLayoutChildren(recycler: RecyclerView.Recycler?, state: RecyclerView.State?) {
+    override fun onLayoutChildren(
+        recycler: RecyclerView.Recycler?,
+        state: RecyclerView.State?,
+    ) {
         super.onLayoutChildren(recycler, state)
         scrollHorizontallyBy(0, recycler, state)
     }
@@ -24,13 +30,12 @@ class CarouselLinearLayoutManager(
     override fun scrollHorizontallyBy(
         dx: Int,
         recycler: RecyclerView.Recycler?,
-        state: RecyclerView.State?
+        state: RecyclerView.State?,
     ): Int {
         val scrolled = super.scrollHorizontallyBy(dx, recycler, state)
 
         // If scale on scroll enabled:
         return if (scaleOnScroll) {
-
             try {
                 for (i in 0 until childCount) {
                     getChildAt(i)?.let { child ->
