@@ -1,4 +1,4 @@
-![Why Not! Image Carousel! Logo](images/logo.svg)
+![Why Not! Image Carousel! Logo](docs/images/logo.svg)
 
 # Why Not! Image Carousel!
 
@@ -11,9 +11,9 @@ An easy, super simple and customizable image carousel view for Android.
 
 ## Preview
 
-| ![Screenshot](images/preview_1.gif) |  ![Preview](images/preview_2.gif)   |
+| ![Screenshot](docs/images/preview_1.gif) |  ![Preview](docs/images/preview_2.gif)   |
 | :---------------------------------: | :---------------------------------: |
-| ![Screenshot](images/preview_3.gif) | ![Screenshot](images/preview_4.gif) |
+| ![Screenshot](docs/images/preview_3.gif) | ![Screenshot](docs/images/preview_4.gif) |
 
 ## Usage
 
@@ -509,7 +509,7 @@ So it is recommended if you enabled `autoPlay` & `infiniteCarousel`.
 
 ## Infinite Carousel
 
-![Infinite Carousel](images/infinite_carousel.gif)
+![Infinite Carousel](docs/images/infinite_carousel.gif)
 
 The library now supports an infinite carousel, which means that the item view is looped infinitely. This feature is enabled by default, but you can disable it by setting the `infiniteCarousel` property to `false`.
 
@@ -582,7 +582,7 @@ binding.carousel.setCarouselListener(new CarouselListener() {
 
 ## Carousel Type (`carouselType`)
 
-![Carousel type preview](images/carousel_type.png)
+![Carousel type preview](docs/images/carousel_type.png)
 
 `ImageCarousel` has following types:
 
@@ -598,13 +598,13 @@ You can also use the `scaleOnScroll` and `scalingFactor` attributes with this ca
 
 ### Scale Item View On Scroll (`scaleOnScroll`)
 
-![Scale-on-scroll preview](images/scale_on_scroll.png)
+![Scale-on-scroll preview](docs/images/scale_on_scroll.png)
 
 You can use `scaleOnScroll` attribute to scaling down the adjacent views like above. Use `scalingFactor` to define scale down percentage. Value should be 0.0 to 1.0.
 
 ## Carousel Gravity (`carouselGravity`)
 
-![Carousel gravity preview](images/carousel_gravity.png)
+![Carousel gravity preview](docs/images/carousel_gravity.png)
 
 For `CarouselType.SHOWCASE`, you can set carousel gravity. Supported gravities ase:
 
@@ -624,7 +624,7 @@ All the images from [Unsplash](https://unsplash.com).
 
 ## Change Log
 
-See the change log [here](https://github.com/ImaginativeShohag/Why-Not-Image-Carousel/blob/master/CHANGELOG.md).
+See the change log [here](CHANGELOG.md).
 
 ## License
 

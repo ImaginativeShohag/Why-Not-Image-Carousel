@@ -1,0 +1,71 @@
+# Project information
+site_name: 'Why Not! Image Carousel!'
+site_description: 'An easy, super simple and customizable image carousel view for Android.'
+site_author: 'Md. Mahmudul Hasan Shohag'
+site_url: 'https://ImaginativeShohag.github.io/Why-Not-Image-Carousel/'
+edit_uri: 'tree/main/docs/'
+remote_branch: gh-pages
+
+docs_dir: docs-gen
+
+# Repository
+repo_name: 'Why-Not-Image-Carousel'
+repo_url: 'https://github.com/ImaginativeShohag/Why-Not-Image-Carousel'
+
+# Navigation
+nav:
+  - 'Overview': index.md
+  - 'API': api/whynotimagecarousel/
+  - 'Change Log': changelog.md
+
+# Configuration
+theme:
+  name: 'material'
+  features:
+    - content.code.copy
+  language: 'en'
+  logo: images/logo.svg
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+      primary: teal
+      accent: purple
+    - scheme: slate
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+      primary: teal
+      accent: lime
+  font:
+    text: 'Roboto'
+    code: 'JetBrains Mono'
+
+# Extra
+extra:
+  social:
+    - icon: fontawesome/brands/github-alt
+      link: https://github.com/ImaginativeShohag
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/shohag_iw
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/mahmudulhasanshohag/
+
+# Extensions
+markdown_extensions:
+  - admonition
+  - attr_list
+  - codehilite:
+      guess_lang: false
+  - footnotes
+  - toc:
+      permalink: true
+  - pymdownx.betterem
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.details
+
+copyright: |
+  &copy; 2023 <a href="https://github.com/ImaginativeShohag" target="_blank" rel="noopener">James Willett</a>

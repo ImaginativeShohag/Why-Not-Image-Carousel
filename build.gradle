@@ -1,9 +1,16 @@
 import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
+import org.jetbrains.dokka.gradle.DokkaTask
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
     ext.kotlin_version = '1.9.23'
+    ext.dokka_version = '1.9.20'
+
+    dependencies {
+        classpath("org.jetbrains.dokka:dokka-base:$dokka_version")
+    }
+
     repositories {
         google()
         mavenCentral()
@@ -17,7 +24,7 @@ plugins {
     id 'org.jetbrains.kotlin.android' version "$kotlin_version" apply false
     id 'com.google.devtools.ksp' version '1.9.23-1.0.20' apply false
     id 'com.diffplug.spotless' version '6.25.0'
-    id "org.jetbrains.dokka" version "1.9.20"
+    id "org.jetbrains.dokka" version "$dokka_version"
 }
 
 subprojects {
@@ -50,6 +57,15 @@ subprojects {
 }
 
 tasks.withType(DokkaMultiModuleTask).configureEach {
+    moduleName = "Why Not! Image Carousel!"
     outputDirectory = rootProject.file('docs/api')
     failOnWarning = true
+
+    pluginsMapConfiguration.set(
+            [
+                    "org.jetbrains.dokka.base.DokkaBase": """{
+                      "footerMessage": "Copyright © 2021 Md. Mahmudul Hasan Shohag"
+                    }"""
+            ]
+    )
 }

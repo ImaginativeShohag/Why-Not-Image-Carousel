@@ -31,12 +31,14 @@ mkdir $DOCS_ROOT
 cp -a docs/* $DOCS_ROOT
 
 cp README.md $DOCS_ROOT/index.md
+cp CHANGELOG.md $DOCS_ROOT/changelog.md
 
-sed -i.bak 's/README.md//' $DOCS_ROOT/index.md
-sed -i.bak 's/docs\/header.png/header.png/' $DOCS_ROOT/index.md
+sed -i.bak 's/README.md//g' $DOCS_ROOT/index.md
+sed -i.bak 's/CHANGELOG.md/changelog/' $DOCS_ROOT/index.md
+sed -i.bak 's/docs\/images\//images\//g' $DOCS_ROOT/index.md
 
 # Convert docs/xxx.md links to just xxx/
-sed -i.bak 's/docs\/\([a-zA-Z-]*\).md/\1/' $DOCS_ROOT/index.md
+sed -i.bak 's/docs\/\([a-zA-Z-]*\).md/\1/g' $DOCS_ROOT/index.md
 
 # Finally delete all of the backup files
 find . -name '*.bak' -delete
