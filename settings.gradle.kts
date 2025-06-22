@@ -1,3 +1,8 @@
+/**
+ * Copyright © 2025 Md. Mahmudul Hasan Shohag. All rights reserved.
+ */
+
+
 pluginManagement {
     repositories {
         google {
@@ -19,5 +24,5 @@ dependencyResolutionManagement {
         gradlePluginPortal()
     }
 }
-include ':whynotimagecarousel', ':sample'
-rootProject.name = 'Why Not! Image Carousel!'
+include(":whynotimagecarousel", ":sample")
+rootProject.name = "Why Not! Image Carousel!"
