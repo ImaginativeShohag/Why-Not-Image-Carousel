@@ -44,7 +44,7 @@ class LinearStartSnapHelper : LinearSnapHelper() {
             recyclerView.layoutManager != null &&
             !recyclerView.layoutManager!!.canScrollHorizontally()
         ) {
-            throw Exception("This only works with linear layout manager with horizontal scroll!")
+            throw IllegalStateException("This only works with linear layout manager with horizontal scroll!")
         }
 
         super.attachToRecyclerView(recyclerView)
