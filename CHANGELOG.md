@@ -1,7 +1,11 @@
 Change Log
 ==========
 
-## Version 2.1.0 *(2022-03-01)* 🚀
+## Version 2.1.1 *(2025-06-22)* 🚀
+
+* Upgrade dependencies to the latest version.
+
+## Version 2.1.0 *(2022-03-01)*
 
 * 🐞 Fixed [#74](https://github.com/ImaginativeShohag/Why-Not-Image-Carousel/issues/74):
   Changing `infiniteCarousel` attribute now will call `initAdapter()`.
