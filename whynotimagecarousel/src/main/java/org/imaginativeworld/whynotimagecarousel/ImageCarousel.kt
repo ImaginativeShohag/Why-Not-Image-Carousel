@@ -56,7 +56,8 @@ import org.imaginativeworld.whynotimagecarousel.utils.spToPx
 class ImageCarousel(
     context: Context,
     private var attributeSet: AttributeSet?,
-) : ConstraintLayout(context, attributeSet), DefaultLifecycleObserver {
+) : ConstraintLayout(context, attributeSet),
+    DefaultLifecycleObserver {
     companion object {
         const val TAG = "ImageCarousel"
         const val NO_POSITION = RecyclerView.NO_POSITION
@@ -601,228 +602,229 @@ class ImageCarousel(
     }
 
     private fun initAttributes() {
-        context.theme.obtainStyledAttributes(
-            attributeSet,
-            R.styleable.ImageCarousel,
-            0,
-            0,
-        ).apply {
-            try {
-                showTopShadow =
-                    getBoolean(
-                        R.styleable.ImageCarousel_showTopShadow,
-                        true,
-                    )
+        context.theme
+            .obtainStyledAttributes(
+                attributeSet,
+                R.styleable.ImageCarousel,
+                0,
+                0,
+            ).apply {
+                try {
+                    showTopShadow =
+                        getBoolean(
+                            R.styleable.ImageCarousel_showTopShadow,
+                            true,
+                        )
 
-                topShadowAlpha =
-                    getFloat(
-                        R.styleable.ImageCarousel_topShadowAlpha,
-                        0.6f,
-                    )
+                    topShadowAlpha =
+                        getFloat(
+                            R.styleable.ImageCarousel_topShadowAlpha,
+                            0.6f,
+                        )
 
-                topShadowHeight =
-                    getDimension(
-                        R.styleable.ImageCarousel_topShadowHeight,
-                        32.dpToPx(context).toFloat(),
-                    ).toInt()
+                    topShadowHeight =
+                        getDimension(
+                            R.styleable.ImageCarousel_topShadowHeight,
+                            32.dpToPx(context).toFloat(),
+                        ).toInt()
 
-                showBottomShadow =
-                    getBoolean(
-                        R.styleable.ImageCarousel_showBottomShadow,
-                        true,
-                    )
+                    showBottomShadow =
+                        getBoolean(
+                            R.styleable.ImageCarousel_showBottomShadow,
+                            true,
+                        )
 
-                bottomShadowAlpha =
-                    getFloat(
-                        R.styleable.ImageCarousel_bottomShadowAlpha,
-                        0.6f,
-                    )
+                    bottomShadowAlpha =
+                        getFloat(
+                            R.styleable.ImageCarousel_bottomShadowAlpha,
+                            0.6f,
+                        )
 
-                bottomShadowHeight =
-                    getDimension(
-                        R.styleable.ImageCarousel_bottomShadowHeight,
-                        64.dpToPx(context).toFloat(),
-                    ).toInt()
+                    bottomShadowHeight =
+                        getDimension(
+                            R.styleable.ImageCarousel_bottomShadowHeight,
+                            64.dpToPx(context).toFloat(),
+                        ).toInt()
 
-                showCaption =
-                    getBoolean(
-                        R.styleable.ImageCarousel_showCaption,
-                        true,
-                    )
+                    showCaption =
+                        getBoolean(
+                            R.styleable.ImageCarousel_showCaption,
+                            true,
+                        )
 
-                captionMargin =
-                    getDimension(
-                        R.styleable.ImageCarousel_captionMargin,
-                        0.dpToPx(context).toFloat(),
-                    ).toInt()
+                    captionMargin =
+                        getDimension(
+                            R.styleable.ImageCarousel_captionMargin,
+                            0.dpToPx(context).toFloat(),
+                        ).toInt()
 
-                captionTextSize =
-                    getDimension(
-                        R.styleable.ImageCarousel_captionTextSize,
-                        14.spToPx(context).toFloat(),
-                    ).toInt()
+                    captionTextSize =
+                        getDimension(
+                            R.styleable.ImageCarousel_captionTextSize,
+                            14.spToPx(context).toFloat(),
+                        ).toInt()
 
-                carouselType =
-                    carouselTypeArray[
-                        getInteger(
-                            R.styleable.ImageCarousel_carouselType,
-                            CarouselType.BLOCK.ordinal,
-                        ),
-                    ]
+                    carouselType =
+                        carouselTypeArray[
+                            getInteger(
+                                R.styleable.ImageCarousel_carouselType,
+                                CarouselType.BLOCK.ordinal,
+                            ),
+                        ]
 
-                carouselGravity =
-                    carouselGravityArray[
-                        getInteger(
-                            R.styleable.ImageCarousel_carouselGravity,
-                            CarouselGravity.CENTER.ordinal,
-                        ),
-                    ]
+                    carouselGravity =
+                        carouselGravityArray[
+                            getInteger(
+                                R.styleable.ImageCarousel_carouselGravity,
+                                CarouselGravity.CENTER.ordinal,
+                            ),
+                        ]
 
-                showIndicator =
-                    getBoolean(
-                        R.styleable.ImageCarousel_showIndicator,
-                        true,
-                    )
+                    showIndicator =
+                        getBoolean(
+                            R.styleable.ImageCarousel_showIndicator,
+                            true,
+                        )
 
-                indicatorMargin =
-                    getDimension(
-                        R.styleable.ImageCarousel_indicatorMargin,
-                        0F,
-                    ).toInt()
+                    indicatorMargin =
+                        getDimension(
+                            R.styleable.ImageCarousel_indicatorMargin,
+                            0F,
+                        ).toInt()
 
-                imageScaleType =
-                    scaleTypeArray[
-                        getInteger(
-                            R.styleable.ImageCarousel_imageScaleType,
-                            ImageView.ScaleType.CENTER_CROP.ordinal,
-                        ),
-                    ]
+                    imageScaleType =
+                        scaleTypeArray[
+                            getInteger(
+                                R.styleable.ImageCarousel_imageScaleType,
+                                ImageView.ScaleType.CENTER_CROP.ordinal,
+                            ),
+                        ]
 
-                carouselBackground = getDrawable(
-                    R.styleable.ImageCarousel_carouselBackground,
-                ) ?: ColorDrawable(Color.parseColor("#00000000"))
+                    carouselBackground = getDrawable(
+                        R.styleable.ImageCarousel_carouselBackground,
+                    ) ?: ColorDrawable(Color.parseColor("#00000000"))
 
-                imagePlaceholder = getDrawable(
-                    R.styleable.ImageCarousel_imagePlaceholder,
-                ) ?: ContextCompat.getDrawable(context, R.drawable.carousel_default_placeholder)
+                    imagePlaceholder = getDrawable(
+                        R.styleable.ImageCarousel_imagePlaceholder,
+                    ) ?: ContextCompat.getDrawable(context, R.drawable.carousel_default_placeholder)
 
-                carouselPadding =
-                    getDimension(
-                        R.styleable.ImageCarousel_carouselPadding,
-                        0F,
-                    ).toInt()
+                    carouselPadding =
+                        getDimension(
+                            R.styleable.ImageCarousel_carouselPadding,
+                            0F,
+                        ).toInt()
 
-                carouselPaddingStart =
-                    getDimension(
-                        R.styleable.ImageCarousel_carouselPaddingStart,
-                        0F,
-                    ).toInt()
+                    carouselPaddingStart =
+                        getDimension(
+                            R.styleable.ImageCarousel_carouselPaddingStart,
+                            0F,
+                        ).toInt()
 
-                carouselPaddingTop =
-                    getDimension(
-                        R.styleable.ImageCarousel_carouselPaddingTop,
-                        0F,
-                    ).toInt()
+                    carouselPaddingTop =
+                        getDimension(
+                            R.styleable.ImageCarousel_carouselPaddingTop,
+                            0F,
+                        ).toInt()
 
-                carouselPaddingEnd =
-                    getDimension(
-                        R.styleable.ImageCarousel_carouselPaddingEnd,
-                        0F,
-                    ).toInt()
+                    carouselPaddingEnd =
+                        getDimension(
+                            R.styleable.ImageCarousel_carouselPaddingEnd,
+                            0F,
+                        ).toInt()
 
-                carouselPaddingBottom =
-                    getDimension(
-                        R.styleable.ImageCarousel_carouselPaddingBottom,
-                        0F,
-                    ).toInt()
+                    carouselPaddingBottom =
+                        getDimension(
+                            R.styleable.ImageCarousel_carouselPaddingBottom,
+                            0F,
+                        ).toInt()
 
-                previousButtonLayout =
-                    getResourceId(
-                        R.styleable.ImageCarousel_previousButtonLayout,
-                        R.layout.previous_button_layout,
-                    )
+                    previousButtonLayout =
+                        getResourceId(
+                            R.styleable.ImageCarousel_previousButtonLayout,
+                            R.layout.previous_button_layout,
+                        )
 
-                previousButtonId =
-                    getResourceId(
-                        R.styleable.ImageCarousel_previousButtonId,
-                        R.id.btn_previous,
-                    )
+                    previousButtonId =
+                        getResourceId(
+                            R.styleable.ImageCarousel_previousButtonId,
+                            R.id.btn_previous,
+                        )
 
-                previousButtonMargin =
-                    getDimension(
-                        R.styleable.ImageCarousel_previousButtonMargin,
-                        4.dpToPx(context).toFloat(),
-                    ).toInt()
+                    previousButtonMargin =
+                        getDimension(
+                            R.styleable.ImageCarousel_previousButtonMargin,
+                            4.dpToPx(context).toFloat(),
+                        ).toInt()
 
-                nextButtonLayout =
-                    getResourceId(
-                        R.styleable.ImageCarousel_nextButtonLayout,
-                        R.layout.next_button_layout,
-                    )
+                    nextButtonLayout =
+                        getResourceId(
+                            R.styleable.ImageCarousel_nextButtonLayout,
+                            R.layout.next_button_layout,
+                        )
 
-                nextButtonId =
-                    getResourceId(
-                        R.styleable.ImageCarousel_nextButtonId,
-                        R.id.btn_next,
-                    )
+                    nextButtonId =
+                        getResourceId(
+                            R.styleable.ImageCarousel_nextButtonId,
+                            R.id.btn_next,
+                        )
 
-                nextButtonMargin =
-                    getDimension(
-                        R.styleable.ImageCarousel_nextButtonMargin,
-                        4.dpToPx(context).toFloat(),
-                    ).toInt()
+                    nextButtonMargin =
+                        getDimension(
+                            R.styleable.ImageCarousel_nextButtonMargin,
+                            4.dpToPx(context).toFloat(),
+                        ).toInt()
 
-                showNavigationButtons =
-                    getBoolean(
-                        R.styleable.ImageCarousel_showNavigationButtons,
-                        true,
-                    )
+                    showNavigationButtons =
+                        getBoolean(
+                            R.styleable.ImageCarousel_showNavigationButtons,
+                            true,
+                        )
 
-                scaleOnScroll =
-                    getBoolean(
-                        R.styleable.ImageCarousel_scaleOnScroll,
-                        false,
-                    )
+                    scaleOnScroll =
+                        getBoolean(
+                            R.styleable.ImageCarousel_scaleOnScroll,
+                            false,
+                        )
 
-                scalingFactor =
-                    getFloat(
-                        R.styleable.ImageCarousel_scalingFactor,
-                        .15F,
-                    )
+                    scalingFactor =
+                        getFloat(
+                            R.styleable.ImageCarousel_scalingFactor,
+                            .15F,
+                        )
 
-                autoWidthFixing =
-                    getBoolean(
-                        R.styleable.ImageCarousel_autoWidthFixing,
-                        true,
-                    )
+                    autoWidthFixing =
+                        getBoolean(
+                            R.styleable.ImageCarousel_autoWidthFixing,
+                            true,
+                        )
 
-                autoPlay =
-                    getBoolean(
-                        R.styleable.ImageCarousel_autoPlay,
-                        false,
-                    )
+                    autoPlay =
+                        getBoolean(
+                            R.styleable.ImageCarousel_autoPlay,
+                            false,
+                        )
 
-                autoPlayDelay =
-                    getInt(
-                        R.styleable.ImageCarousel_autoPlayDelay,
-                        3000,
-                    )
+                    autoPlayDelay =
+                        getInt(
+                            R.styleable.ImageCarousel_autoPlayDelay,
+                            3000,
+                        )
 
-                infiniteCarousel =
-                    getBoolean(
-                        R.styleable.ImageCarousel_infiniteCarousel,
-                        true,
-                    )
+                    infiniteCarousel =
+                        getBoolean(
+                            R.styleable.ImageCarousel_infiniteCarousel,
+                            true,
+                        )
 
-                touchToPause =
-                    getBoolean(
-                        R.styleable.ImageCarousel_touchToPause,
-                        true,
-                    )
-            } finally {
-                recycle()
+                    touchToPause =
+                        getBoolean(
+                            R.styleable.ImageCarousel_touchToPause,
+                            true,
+                        )
+                } finally {
+                    recycle()
+                }
             }
-        }
     }
 
     private fun initAdapter() {
@@ -986,8 +988,8 @@ class ImageCarousel(
         }
     }
 
-    private fun getValueFromZeroToOne(value: Float): Float {
-        return when {
+    private fun getValueFromZeroToOne(value: Float): Float =
+        when {
             value < 0 -> {
                 0f
             }
@@ -1000,7 +1002,6 @@ class ImageCarousel(
                 value
             }
         }
-    }
 
     /**
      * This is called because when data added/updated the ScrollListener is not invoked as expected.
@@ -1062,9 +1063,7 @@ class ImageCarousel(
      *
      * @return Return [CarouselItem]s or null if no item added yet.
      */
-    fun getData(): List<CarouselItem>? {
-        return data
-    }
+    fun getData(): List<CarouselItem>? = data
 
     /**
      * Set new data to the carousel. It removes all previous data.
@@ -1149,9 +1148,7 @@ class ImageCarousel(
     /**
      * @return Current indicator or null.
      */
-    fun getIndicator(): CircleIndicator2? {
-        return indicator
-    }
+    fun getIndicator(): CircleIndicator2? = indicator
 
     /**
      * Set custom indicator.

@@ -121,24 +121,24 @@ class KotlinActivity : AppCompatActivity() {
                         position: Int,
                         carouselItem: CarouselItem,
                     ) {
-                        Toast.makeText(
-                            this@KotlinActivity,
-                            "You clicked at position ${position + 1}.",
-                            Toast.LENGTH_SHORT,
-                        )
-                            .show()
+                        Toast
+                            .makeText(
+                                this@KotlinActivity,
+                                "You clicked at position ${position + 1}.",
+                                Toast.LENGTH_SHORT,
+                            ).show()
                     }
 
                     override fun onLongClick(
                         position: Int,
                         carouselItem: CarouselItem,
                     ) {
-                        Toast.makeText(
-                            this@KotlinActivity,
-                            "You long clicked at position ${position + 1}.",
-                            Toast.LENGTH_SHORT,
-                        )
-                            .show()
+                        Toast
+                            .makeText(
+                                this@KotlinActivity,
+                                "You long clicked at position ${position + 1}.",
+                                Toast.LENGTH_SHORT,
+                            ).show()
                     }
                 }
         }
@@ -173,9 +173,7 @@ class KotlinActivity : AppCompatActivity() {
                 override fun onCreateViewHolder(
                     layoutInflater: LayoutInflater,
                     parent: ViewGroup,
-                ): ViewBinding {
-                    return ItemCustomFixedSizeLayout5Binding.inflate(layoutInflater, parent, false)
-                }
+                ): ViewBinding = ItemCustomFixedSizeLayout5Binding.inflate(layoutInflater, parent, false)
 
                 override fun onBindViewHolder(
                     binding: ViewBinding,
@@ -216,9 +214,7 @@ class KotlinActivity : AppCompatActivity() {
                 override fun onCreateViewHolder(
                     layoutInflater: LayoutInflater,
                     parent: ViewGroup,
-                ): ViewBinding {
-                    return ItemCustomFixedSizeLayout1Binding.inflate(layoutInflater, parent, false)
-                }
+                ): ViewBinding = ItemCustomFixedSizeLayout1Binding.inflate(layoutInflater, parent, false)
 
                 override fun onBindViewHolder(
                     binding: ViewBinding,
@@ -299,13 +295,12 @@ class KotlinActivity : AppCompatActivity() {
                 override fun onCreateViewHolder(
                     layoutInflater: LayoutInflater,
                     parent: ViewGroup,
-                ): ViewBinding {
-                    return ItemCustomFixedSizeLayout3Binding.inflate(
+                ): ViewBinding =
+                    ItemCustomFixedSizeLayout3Binding.inflate(
                         layoutInflater,
                         parent,
                         false,
                     )
-                }
 
                 override fun onBindViewHolder(
                     binding: ViewBinding,
@@ -349,13 +344,12 @@ class KotlinActivity : AppCompatActivity() {
                 override fun onCreateViewHolder(
                     layoutInflater: LayoutInflater,
                     parent: ViewGroup,
-                ): ViewBinding {
-                    return ItemCustomFixedSizeLayout2Binding.inflate(
+                ): ViewBinding =
+                    ItemCustomFixedSizeLayout2Binding.inflate(
                         layoutInflater,
                         parent,
                         false,
                     )
-                }
 
                 override fun onBindViewHolder(
                     binding: ViewBinding,
@@ -412,13 +406,12 @@ class KotlinActivity : AppCompatActivity() {
                 override fun onCreateViewHolder(
                     layoutInflater: LayoutInflater,
                     parent: ViewGroup,
-                ): ViewBinding {
-                    return ItemCustomFixedSizeLayout4Binding.inflate(
+                ): ViewBinding =
+                    ItemCustomFixedSizeLayout4Binding.inflate(
                         layoutInflater,
                         parent,
                         false,
                     )
-                }
 
                 override fun onBindViewHolder(
                     binding: ViewBinding,

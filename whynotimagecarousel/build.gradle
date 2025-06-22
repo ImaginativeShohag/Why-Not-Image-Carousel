@@ -1,3 +1,5 @@
+import com.vanniktech.maven.publish.SonatypeHost
+
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
@@ -53,11 +55,51 @@ dependencies {
     implementation 'me.relex:circleindicator:2.1.6'
 }
 
+mavenPublishing {
+    // Configure Maven Central
+
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, true)
+    signAllPublications()
+
+    // Configure the POM
+
+    coordinates("org.imaginativeworld.whynotimagecarousel", "whynotimagecarousel", "2.1.1")
+
+    pom {
+        name = "Why Not! Image Carousel!"
+        description = "An easy, super simple and customizable image carousel view for Android."
+        inceptionYear = "2020"
+        url = "https://github.com/ImaginativeShohag/Why-Not-Image-Carousel"
+
+        licenses {
+            license {
+                name = "The Apache Software License, Version 2.0"
+                url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+                distribution = "repo"
+            }
+        }
+
+        developers {
+            developer {
+                id = "ImaginativeShohag"
+                name = "Md. Mahmudul Hasan Shohag"
+                url = "https://github.com/ImaginativeShohag"
+            }
+        }
+
+        scm {
+            url = "https://github.com/ImaginativeShohag/Why-Not-Image-Carousel"
+            connection = "scm:git:git://github.com/ImaginativeShohag/Why-Not-Image-Carousel.git"
+            developerConnection = "scm:git:ssh://git@github.com/ImaginativeShohag/Why-Not-Image-Carousel.git"
+        }
+    }
+}
+
 dokkaHtmlPartial {
     pluginsMapConfiguration.set(
             [
                     "org.jetbrains.dokka.base.DokkaBase": """{
-                      "footerMessage": "Copyright © 2021 Md. Mahmudul Hasan Shohag"
+                      "footerMessage": "Copyright © 2020 Md. Mahmudul Hasan Shohag"
                     }"""
             ]
     )

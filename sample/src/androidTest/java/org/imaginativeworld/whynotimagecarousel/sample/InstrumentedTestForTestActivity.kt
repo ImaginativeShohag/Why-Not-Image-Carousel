@@ -238,8 +238,8 @@ class InstrumentedTestForTestActivity {
  * Example:
  * onView(isRoot()).perform(waitFor(5000))
  */
-fun waitFor(delay: Long): ViewAction {
-    return object : ViewAction {
+fun waitFor(delay: Long): ViewAction =
+    object : ViewAction {
         override fun getConstraints(): Matcher<View> = isRoot()
 
         override fun getDescription(): String = "wait for $delay milliseconds"
@@ -251,20 +251,15 @@ fun waitFor(delay: Long): ViewAction {
             uiController.loopMainThreadForAtLeast(delay)
         }
     }
-}
 
 /**
  * Invoke click and wait for UI gets idle.
  */
-fun forceClick(): ViewAction {
-    return object : ViewAction {
-        override fun getConstraints(): Matcher<View> {
-            return allOf(isClickable(), isEnabled())
-        }
+fun forceClick(): ViewAction =
+    object : ViewAction {
+        override fun getConstraints(): Matcher<View> = allOf(isClickable(), isEnabled())
 
-        override fun getDescription(): String {
-            return "force click"
-        }
+        override fun getDescription(): String = "force click"
 
         override fun perform(
             uiController: UiController?,
@@ -274,7 +269,6 @@ fun forceClick(): ViewAction {
             uiController?.loopMainThreadUntilIdle()
         }
     }
-}
 
 // ====================================================================
 
@@ -334,13 +328,9 @@ fun checkAdapterPosition(
 class CarouselCurrentItemCheckAction : ViewAction {
     var returnValue: Int = -1
 
-    override fun getConstraints(): Matcher<View> {
-        return isAssignableFrom(ImageCarousel::class.java)
-    }
+    override fun getConstraints(): Matcher<View> = isAssignableFrom(ImageCarousel::class.java)
 
-    override fun getDescription(): String {
-        return "Get current position of the Image Carousel."
-    }
+    override fun getDescription(): String = "Get current position of the Image Carousel."
 
     override fun perform(
         uiController: UiController?,
@@ -366,13 +356,9 @@ fun checkAdapterItemSize(
 class CarouselTotalItemCountAction : ViewAction {
     var returnValue: Int = -1
 
-    override fun getConstraints(): Matcher<View> {
-        return isAssignableFrom(ImageCarousel::class.java)
-    }
+    override fun getConstraints(): Matcher<View> = isAssignableFrom(ImageCarousel::class.java)
 
-    override fun getDescription(): String {
-        return "Get current item size of the Image Carousel."
-    }
+    override fun getDescription(): String = "Get current item size of the Image Carousel."
 
     override fun perform(
         uiController: UiController?,

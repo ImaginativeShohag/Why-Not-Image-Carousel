@@ -34,25 +34,19 @@ class RVItemListAdapter(
                 override fun areItemsTheSame(
                     oldItem: RVItem,
                     newItem: RVItem,
-                ): Boolean {
-                    return oldItem.id == newItem.id
-                }
+                ): Boolean = oldItem.id == newItem.id
 
                 override fun areContentsTheSame(
                     oldItem: RVItem,
                     newItem: RVItem,
-                ): Boolean {
-                    return oldItem == newItem
-                }
+                ): Boolean = oldItem == newItem
             }
     }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): ListViewHolder {
-        return ListViewHolder.from(parent, lifecycle)
-    }
+    ): ListViewHolder = ListViewHolder.from(parent, lifecycle)
 
     override fun onBindViewHolder(
         holder: ListViewHolder,
