@@ -62,11 +62,16 @@ object DataSet {
 
     val six =
         listOf(
-            "Lorem ipsum" to "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices gravida dictum fusce ut placerat.",
+            "Lorem ipsum" to
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices gravida dictum fusce ut placerat.",
             "Cum sociis" to "Cum sociis natoque penatibus et. Phasellus egestas tellus rutrum tellus pellentesque eu.",
-            "Euismod lacinia" to "Euismod lacinia at quis risus. Eu facilisis sed odio morbi quis commodo odio aenean. Morbi tristique senectus et netus et malesuada.",
-            "Tincidunt ornare" to "Tincidunt ornare massa eget egestas. Magna ac placerat vestibulum lectus. A lacus vestibulum sed arcu non odio euismod lacinia at.",
-            "Pellentesque elit" to "Pellentesque elit ullamcorper dignissim cras. Ut enim blandit volutpat maecenas volutpat. Porta lorem mollis aliquam ut porttitor leo a.",
-            "Semper eget" to "Semper eget duis at tellus at urna. Tortor aliquam nulla facilisi cras. Id porta nibh venenatis cras. Quam vulputate dignissim suspendisse in est. ",
+            "Euismod lacinia" to
+                "Euismod lacinia at quis risus. Eu facilisis sed odio morbi quis commodo odio aenean. Morbi tristique senectus et netus et malesuada.",
+            "Tincidunt ornare" to
+                "Tincidunt ornare massa eget egestas. Magna ac placerat vestibulum lectus. A lacus vestibulum sed arcu non odio euismod lacinia at.",
+            "Pellentesque elit" to
+                "Pellentesque elit ullamcorper dignissim cras. Ut enim blandit volutpat maecenas volutpat. Porta lorem mollis aliquam ut porttitor leo a.",
+            "Semper eget" to
+                "Semper eget duis at tellus at urna. Tortor aliquam nulla facilisi cras. Id porta nibh venenatis cras. Quam vulputate dignissim suspendisse in est. ",
         )
 }

@@ -58,13 +58,12 @@ class TestActivity : AppCompatActivity() {
                 override fun onCreateViewHolder(
                     layoutInflater: LayoutInflater,
                     parent: ViewGroup,
-                ): ViewBinding {
-                    return ItemCustomFixedSizeLayout3Binding.inflate(
+                ): ViewBinding =
+                    ItemCustomFixedSizeLayout3Binding.inflate(
                         layoutInflater,
                         parent,
                         false,
                     )
-                }
 
                 override fun onBindViewHolder(
                     binding: ViewBinding,
@@ -99,13 +98,12 @@ class TestActivity : AppCompatActivity() {
                 override fun onCreateViewHolder(
                     layoutInflater: LayoutInflater,
                     parent: ViewGroup,
-                ): ViewBinding {
-                    return ItemCustomFixedSizeLayout3Binding.inflate(
+                ): ViewBinding =
+                    ItemCustomFixedSizeLayout3Binding.inflate(
                         layoutInflater,
                         parent,
                         false,
                     )
-                }
 
                 override fun onBindViewHolder(
                     binding: ViewBinding,

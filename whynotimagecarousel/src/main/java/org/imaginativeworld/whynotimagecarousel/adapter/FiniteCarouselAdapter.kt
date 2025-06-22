@@ -30,7 +30,9 @@ open class FiniteCarouselAdapter(
 ) : RecyclerView.Adapter<FiniteCarouselAdapter.MyViewHolder>() {
     var listener: CarouselListener? = null
 
-    class MyViewHolder(val binding: ViewBinding) : RecyclerView.ViewHolder(binding.root)
+    class MyViewHolder(
+        val binding: ViewBinding,
+    ) : RecyclerView.ViewHolder(binding.root)
 
     protected val dataList: MutableList<CarouselItem> = mutableListOf()
 
@@ -50,13 +52,9 @@ open class FiniteCarouselAdapter(
         return MyViewHolder(binding)
     }
 
-    override fun getItemCount(): Int {
-        return dataList.size
-    }
+    override fun getItemCount(): Int = dataList.size
 
-    open fun getRealDataPosition(position: Int): Int {
-        return position
-    }
+    open fun getRealDataPosition(position: Int): Int = position
 
     override fun onBindViewHolder(
         holder: MyViewHolder,
@@ -142,13 +140,12 @@ open class FiniteCarouselAdapter(
         }
     }
 
-    open fun getItem(position: Int): CarouselItem? {
-        return if (position < dataList.size) {
+    open fun getItem(position: Int): CarouselItem? =
+        if (position < dataList.size) {
             dataList[position]
         } else {
             null
         }
-    }
 
     /**
      * Clear previous items and add all given carousel items.
