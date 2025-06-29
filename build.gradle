@@ -63,7 +63,7 @@ tasks.withType(DokkaMultiModuleTask).configureEach {
     pluginsMapConfiguration.set(
             [
                     "org.jetbrains.dokka.base.DokkaBase": """{
-                      "footerMessage": "Copyright © 2021 Md. Mahmudul Hasan Shohag"
+                      "footerMessage": "Copyright © 2020 Md. Mahmudul Hasan Shohag"
                     }"""
             ]
     )
