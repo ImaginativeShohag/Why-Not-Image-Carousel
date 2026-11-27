@@ -988,20 +988,19 @@ class ImageCarousel(
         }
     }
 
-    private fun getValueFromZeroToOne(value: Float): Float =
-        when {
-            value < 0 -> {
-                0f
-            }
-
-            value > 1 -> {
-                1f
-            }
-
-            else -> {
-                value
-            }
+    private fun getValueFromZeroToOne(value: Float): Float = when {
+        value < 0 -> {
+            0f
         }
+
+        value > 1 -> {
+            1f
+        }
+
+        else -> {
+            value
+        }
+    }
 
     /**
      * This is called because when data added/updated the ScrollListener is not invoked as expected.

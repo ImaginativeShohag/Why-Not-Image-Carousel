@@ -1,28 +1,17 @@
-import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
-
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '2.1.21'
-    ext.dokka_version = '2.0.0'
-
-    dependencies {
-        classpath("org.jetbrains.dokka:dokka-base:$dokka_version")
-    }
-
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
+    ext.kotlin_version = '2.4.21'
+    ext.dokka_version = '2.3.0'
 }
 
 plugins {
-    id 'com.android.application' version '8.10.1' apply false
-    id 'com.android.library' version '8.10.1' apply false
+    id 'com.android.application' version '9.5.3' apply false
+    id 'com.android.library' version '9.5.3' apply false
+    // AGP 9 has built-in Kotlin; declaring KGP here only upgrades the bundled version.
     id 'org.jetbrains.kotlin.android' version "$kotlin_version" apply false
-    id 'com.google.devtools.ksp' version '2.1.21-2.0.2' apply false
-    id 'com.diffplug.spotless' version '7.0.4'
+    id 'com.google.devtools.ksp' version '2.3.14' apply false
+    id 'com.diffplug.spotless' version '8.12.0'
     id "org.jetbrains.dokka" version "$dokka_version"
 }
 
@@ -35,7 +24,8 @@ subprojects {
             targetExclude "${layout.buildDirectory}/**/*.kt"
             targetExclude 'bin/**/*.kt'
 
-            ktlint()
+            // The license header is a top-level `/** */` block, which ktlint 1.x flags as a dangling KDoc.
+            ktlint().editorConfigOverride(['ktlint_standard_kdoc': 'disabled'])
             licenseHeaderFile rootProject.file('spotless/copyright.kt')
         }
 
@@ -55,16 +45,19 @@ subprojects {
     }
 }
 
-tasks.withType(DokkaMultiModuleTask).configureEach {
-    moduleName = "Why Not! Image Carousel!"
-    outputDirectory = rootProject.file('docs/api')
-    failOnWarning = true
+dependencies {
+    dokka(project(':whynotimagecarousel'))
+}
 
-    pluginsMapConfiguration.set(
-            [
-                    "org.jetbrains.dokka.base.DokkaBase": """{
-                      "footerMessage": "Copyright © 2021 Md. Mahmudul Hasan Shohag"
-                    }"""
-            ]
-    )
+dokka {
+    moduleName.set("Why Not! Image Carousel!")
+
+    dokkaPublications.html {
+        outputDirectory.set(rootProject.file('docs/api'))
+        failOnWarning.set(true)
+    }
+
+    pluginsConfiguration.html {
+        footerMessage.set("Copyright © 2020 Md. Mahmudul Hasan Shohag")
+    }
 }
