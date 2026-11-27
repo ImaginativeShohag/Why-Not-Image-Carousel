@@ -1,19 +1,16 @@
-import com.vanniktech.maven.publish.SonatypeHost
-
 plugins {
     id 'com.android.library'
-    id 'kotlin-android'
-    id "com.vanniktech.maven.publish" version "0.32.0"
+    id "com.vanniktech.maven.publish" version "0.37.0"
     id "org.jetbrains.dokka" version "$dokka_version"
 }
 
 android {
     namespace 'org.imaginativeworld.whynotimagecarousel'
-    compileSdk 36
+    compileSdk 37
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 36
+        minSdkVersion 23
+        targetSdkVersion 37
     }
 
     buildTypes {
@@ -28,10 +25,6 @@ android {
         targetCompatibility JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
-    }
-
     buildFeatures {
         viewBinding true
     }
@@ -41,15 +34,15 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.7.1'
-    implementation 'androidx.core:core-ktx:1.16.0'
+    implementation 'androidx.appcompat:appcompat:1.8.0'
+    implementation 'androidx.core:core-ktx:1.19.1'
 
-    implementation 'com.google.android.material:material:1.12.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
+    implementation 'com.google.android.material:material:1.14.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.2'
     implementation 'androidx.recyclerview:recyclerview:1.4.0'
 
     // Glide
-    implementation 'com.github.bumptech.glide:glide:4.16.0'
+    implementation 'com.github.bumptech.glide:glide:5.0.10'
 
     // Circle Indicator
     implementation 'me.relex:circleindicator:2.1.6'
@@ -58,12 +51,12 @@ dependencies {
 mavenPublishing {
     // Configure Maven Central
 
-    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, true)
+    publishToMavenCentral(true)
     signAllPublications()
 
     // Configure the POM
 
-    coordinates("org.imaginativeworld.whynotimagecarousel", "whynotimagecarousel", "2.1.1")
+    coordinates("org.imaginativeworld.whynotimagecarousel", "whynotimagecarousel", "2.2.0")
 
     pom {
         name = "Why Not! Image Carousel!"
@@ -95,12 +88,8 @@ mavenPublishing {
     }
 }
 
-dokkaHtmlPartial {
-    pluginsMapConfiguration.set(
-            [
-                    "org.jetbrains.dokka.base.DokkaBase": """{
-                      "footerMessage": "Copyright © 2020 Md. Mahmudul Hasan Shohag"
-                    }"""
-            ]
-    )
+dokka {
+    pluginsConfiguration.html {
+        footerMessage.set("Copyright © 2020 Md. Mahmudul Hasan Shohag")
+    }
 }

@@ -1,6 +1,17 @@
 Change Log
 ==========
 
+## Version 2.2.0 *(2026-11-27)* 🚀
+
+* ⚠️ **Breaking:** Minimum SDK raised from API 21 to **API 23** (Android 6.0 Marshmallow). The
+  latest AndroidX, Material Components and Glide releases require API 23.
+* ⚠️ Apps using the library must now compile against **API 37** (`compileSdk 37`), as required
+  by the latest AndroidX and Glide releases.
+* ⬆ Glide upgraded to 5.0.10 (from 4.16.0).
+* ⬆ Android Gradle Plugin 9.5.3 (with built-in Kotlin), Kotlin 2.4.21 and Gradle 9.9.2.
+* ⬆ AndroidX, Material Components and other dependencies upgraded to the latest version.
+* 🔧 Migrated to Dokka Gradle Plugin v2; API docs are now generated with `./gradlew :dokkaGenerate`.
+
 ## Version 2.1.1 *(2025-06-22)* 🚀
 
 * Upgrade dependencies to the latest version.

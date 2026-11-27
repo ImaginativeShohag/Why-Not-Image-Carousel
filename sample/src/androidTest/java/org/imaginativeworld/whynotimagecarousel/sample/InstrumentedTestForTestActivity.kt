@@ -238,37 +238,35 @@ class InstrumentedTestForTestActivity {
  * Example:
  * onView(isRoot()).perform(waitFor(5000))
  */
-fun waitFor(delay: Long): ViewAction =
-    object : ViewAction {
-        override fun getConstraints(): Matcher<View> = isRoot()
+fun waitFor(delay: Long): ViewAction = object : ViewAction {
+    override fun getConstraints(): Matcher<View> = isRoot()
 
-        override fun getDescription(): String = "wait for $delay milliseconds"
+    override fun getDescription(): String = "wait for $delay milliseconds"
 
-        override fun perform(
-            uiController: UiController,
-            v: View?,
-        ) {
-            uiController.loopMainThreadForAtLeast(delay)
-        }
+    override fun perform(
+        uiController: UiController,
+        v: View?,
+    ) {
+        uiController.loopMainThreadForAtLeast(delay)
     }
+}
 
 /**
  * Invoke click and wait for UI gets idle.
  */
-fun forceClick(): ViewAction =
-    object : ViewAction {
-        override fun getConstraints(): Matcher<View> = allOf(isClickable(), isEnabled())
+fun forceClick(): ViewAction = object : ViewAction {
+    override fun getConstraints(): Matcher<View> = allOf(isClickable(), isEnabled())
 
-        override fun getDescription(): String = "force click"
+    override fun getDescription(): String = "force click"
 
-        override fun perform(
-            uiController: UiController?,
-            view: View?,
-        ) {
-            view?.performClick()
-            uiController?.loopMainThreadUntilIdle()
-        }
+    override fun perform(
+        uiController: UiController?,
+        view: View?,
+    ) {
+        view?.performClick()
+        uiController?.loopMainThreadUntilIdle()
     }
+}
 
 // ====================================================================
 

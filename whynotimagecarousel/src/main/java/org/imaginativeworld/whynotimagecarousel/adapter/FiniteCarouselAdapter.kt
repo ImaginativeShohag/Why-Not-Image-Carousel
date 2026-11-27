@@ -140,12 +140,11 @@ open class FiniteCarouselAdapter(
         }
     }
 
-    open fun getItem(position: Int): CarouselItem? =
-        if (position < dataList.size) {
-            dataList[position]
-        } else {
-            null
-        }
+    open fun getItem(position: Int): CarouselItem? = if (position < dataList.size) {
+        dataList[position]
+    } else {
+        null
+    }
 
     /**
      * Clear previous items and add all given carousel items.

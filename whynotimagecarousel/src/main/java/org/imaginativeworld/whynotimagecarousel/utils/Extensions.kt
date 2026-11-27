@@ -22,35 +22,32 @@ import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 /**
  * This method converts device specific pixels to density independent pixels.
  */
-fun Int.pxToDp(context: Context): Int =
-    (
-        this / (
-            context.resources.displayMetrics.densityDpi
-                .toFloat() / DisplayMetrics.DENSITY_DEFAULT
+fun Int.pxToDp(context: Context): Int = (
+    this / (
+        context.resources.displayMetrics.densityDpi
+            .toFloat() / DisplayMetrics.DENSITY_DEFAULT
         )
     ).toInt()
 
 /**
  * This method converts dp unit to equivalent pixels, depending on device density.
  */
-fun Int.dpToPx(context: Context): Int =
-    TypedValue
-        .applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            this.toFloat(),
-            context.resources.displayMetrics,
-        ).toInt()
+fun Int.dpToPx(context: Context): Int = TypedValue
+    .applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP,
+        this.toFloat(),
+        context.resources.displayMetrics,
+    ).toInt()
 
 /**
  * This method converts sp unit to equivalent pixels, depending on device density.
  */
-fun Int.spToPx(context: Context): Int =
-    TypedValue
-        .applyDimension(
-            TypedValue.COMPLEX_UNIT_SP,
-            this.toFloat(),
-            context.resources.displayMetrics,
-        ).toInt()
+fun Int.spToPx(context: Context): Int = TypedValue
+    .applyDimension(
+        TypedValue.COMPLEX_UNIT_SP,
+        this.toFloat(),
+        context.resources.displayMetrics,
+    ).toInt()
 
 /**
  * Get current snap item position of a recyclerView.

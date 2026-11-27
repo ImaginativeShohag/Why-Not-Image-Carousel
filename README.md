@@ -7,7 +7,7 @@ An easy, super simple and customizable image carousel view for Android.
 [![Developer](https://img.shields.io/badge/Maintainer-ImaginativeShohag-green)](https://github.com/ImaginativeShohag)
 [![GitHub release](https://img.shields.io/github/release/ImaginativeShohag/Why-Not-Image-Carousel.svg)](https://github.com/ImaginativeShohag/Why-Not-Image-Carousel/releases)
 [![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-Why%20Not!%20Image%20Carousel!-green.svg?style=flat )]( https://android-arsenal.com/details/1/8053)
-[![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=21)
+[![API](https://img.shields.io/badge/API-23%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=23)
 
 ## Preview
 
@@ -29,13 +29,13 @@ dependencies {
     // Circle Indicator (To fix the xml preview "Missing classes" error)
     implementation 'me.relex:circleindicator:2.1.6'
 
-    implementation 'org.imaginativeworld.whynotimagecarousel:whynotimagecarousel:2.1.1'
+    implementation 'org.imaginativeworld.whynotimagecarousel:whynotimagecarousel:2.2.0'
 }
 ```
 
 ### Requirements
 
-**0.** Minimum SDK for this library is **API 21** (Android 5.0 Lollipop).
+**0.** Minimum SDK for this library is **API 23** (Android 6.0 Marshmallow).
 
 **1.** Your application have to use **AndroidX** to use this library.
 

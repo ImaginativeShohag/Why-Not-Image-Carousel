@@ -295,12 +295,11 @@ class KotlinActivity : AppCompatActivity() {
                 override fun onCreateViewHolder(
                     layoutInflater: LayoutInflater,
                     parent: ViewGroup,
-                ): ViewBinding =
-                    ItemCustomFixedSizeLayout3Binding.inflate(
-                        layoutInflater,
-                        parent,
-                        false,
-                    )
+                ): ViewBinding = ItemCustomFixedSizeLayout3Binding.inflate(
+                    layoutInflater,
+                    parent,
+                    false,
+                )
 
                 override fun onBindViewHolder(
                     binding: ViewBinding,
@@ -344,12 +343,11 @@ class KotlinActivity : AppCompatActivity() {
                 override fun onCreateViewHolder(
                     layoutInflater: LayoutInflater,
                     parent: ViewGroup,
-                ): ViewBinding =
-                    ItemCustomFixedSizeLayout2Binding.inflate(
-                        layoutInflater,
-                        parent,
-                        false,
-                    )
+                ): ViewBinding = ItemCustomFixedSizeLayout2Binding.inflate(
+                    layoutInflater,
+                    parent,
+                    false,
+                )
 
                 override fun onBindViewHolder(
                     binding: ViewBinding,
@@ -406,12 +404,11 @@ class KotlinActivity : AppCompatActivity() {
                 override fun onCreateViewHolder(
                     layoutInflater: LayoutInflater,
                     parent: ViewGroup,
-                ): ViewBinding =
-                    ItemCustomFixedSizeLayout4Binding.inflate(
-                        layoutInflater,
-                        parent,
-                        false,
-                    )
+                ): ViewBinding = ItemCustomFixedSizeLayout4Binding.inflate(
+                    layoutInflater,
+                    parent,
+                    false,
+                )
 
                 override fun onBindViewHolder(
                     binding: ViewBinding,

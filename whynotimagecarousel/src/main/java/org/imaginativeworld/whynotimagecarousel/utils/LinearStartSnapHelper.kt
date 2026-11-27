@@ -16,8 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 class LinearStartSnapHelper : LinearSnapHelper() {
     private var mHorizontalHelper: OrientationHelper? = null
 
-    override fun findSnapView(layoutManager: RecyclerView.LayoutManager): View? =
-        findFirstView(layoutManager, getHorizontalHelper(layoutManager))
+    override fun findSnapView(layoutManager: RecyclerView.LayoutManager): View? = findFirstView(layoutManager, getHorizontalHelper(layoutManager))
 
     override fun calculateDistanceToFinalSnap(
         layoutManager: RecyclerView.LayoutManager,
